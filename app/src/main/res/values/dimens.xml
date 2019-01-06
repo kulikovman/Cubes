@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Кубики -->
+    <dimen name="cube_size">100dp</dimen>
+    <dimen name="shadow_size">105dp</dimen>
+
+    <!-- Прочее -->
+    <dimen name="indent_from_screen_edge">8dp</dimen>
+
+</resources>
