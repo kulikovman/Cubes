@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
+import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.model.Cube;
+import ru.kulikovman.cubes.model.RollArea;
+import ru.kulikovman.cubes.view.CubeView;
 
 
 public class CubesOnBoardFragment extends Fragment {
@@ -25,6 +29,8 @@ public class CubesOnBoardFragment extends Fragment {
     private Context context;
 
     private int numberOfCubes;
+    private RollArea rollArea;
+    private Skin skin;
 
     @Nullable
     @Override
@@ -41,8 +47,12 @@ public class CubesOnBoardFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // Хардкод - количество кубиков
-        numberOfCubes = 4;
+        // Хардкод (это должно приходить с базы данных - настройки приложения)
+        numberOfCubes = 4; // количество кубиков
+        skin = Skin.WHITE; // белый
+
+        // Зона возможного расположения кубика
+        rollArea = getRollArea();
 
 
         // Обновление переменной в макете
@@ -51,6 +61,17 @@ public class CubesOnBoardFragment extends Fragment {
 
     public void openSetting(View view){
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
+    }
+
+    private RollArea getRollArea() {
+        // Базовые размеры
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int screenWidth = (int) (displayMetrics.widthPixels / displayMetrics.density);
+        int screenHeight = (int) (displayMetrics.heightPixels / displayMetrics.density);
+        int offset = (int) (getResources().getDimension(R.dimen.indent_from_screen_edge) / displayMetrics.density);
+        int cubeSize = (int) (getResources().getDimension(R.dimen.shadow_size) / displayMetrics.density);
+
+        return new RollArea(offset, screenWidth - offset - cubeSize, offset, screenHeight - offset - cubeSize);
     }
 
     public void rollCubes(View view){
@@ -64,7 +85,8 @@ public class CubesOnBoardFragment extends Fragment {
         viewList.add(binding.buttonSetting);
 
         while (viewList.size() < numberOfCubes + 1) {
-            Cube cube = new Cube();
+            Cube cube = new Cube(skin, rollArea);
+            CubeView cubeView = new CubeView(context);
 
 
 

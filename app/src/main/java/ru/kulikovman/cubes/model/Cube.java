@@ -1,9 +1,5 @@
 package ru.kulikovman.cubes.model;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
-
 import java.util.Random;
 
 import ru.kulikovman.cubes.data.Skin;
@@ -16,9 +12,7 @@ public class Cube {
     private int x;
     private int y;
 
-    public Cube(Skin skin, int x1, int x2, int y1, int y2) {
-
-
+    public Cube(Skin skin, RollArea rollArea) {
         // Генератор случайных чисел
         Random random = new Random();
 
@@ -37,16 +31,47 @@ public class Cube {
         angle = random.nextInt(360); // от 0 до 359
 
         // Расположение на экране
+        x = rollArea.getMinX() + random.nextInt(rollArea.getMaxX() + 1);
+        y = rollArea.getMinY() + random.nextInt(rollArea.getMaxY() + 1);
+    }
 
+    public Skin getSkin() {
+        return skin;
+    }
 
+    public void setSkin(Skin skin) {
+        this.skin = skin;
+    }
 
+    public int getValue() {
+        return value;
+    }
 
-        /*DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int diceSize = convertDpToPx(140);
-        int buttonPanelHeight = convertDpToPx(90);
-        mWidth = displayMetrics.widthPixels - diceSize;
-        mHeight = displayMetrics.heightPixels - diceSize - buttonPanelHeight - getStatusBarHeight();*/
+    public void setValue(int value) {
+        this.value = value;
+    }
 
+    public int getAngle() {
+        return angle;
+    }
+
+    public void setAngle(int angle) {
+        this.angle = angle;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
