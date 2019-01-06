@@ -48,7 +48,7 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Хардкод (это должно приходить с базы данных - настройки приложения)
-        numberOfCubes = 4; // количество кубиков
+        numberOfCubes = 6; // количество кубиков
         skin = Skin.WHITE; // белый
 
         // Зона возможного расположения кубика
@@ -66,17 +66,17 @@ public class CubesOnBoardFragment extends Fragment {
     private RollArea getRollArea() {
         // Базовые размеры
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int screenWidth = (int) (displayMetrics.widthPixels / displayMetrics.density);
-        int screenHeight = (int) (displayMetrics.heightPixels / displayMetrics.density);
-        int offset = (int) (getResources().getDimension(R.dimen.indent_from_screen_edge) / displayMetrics.density);
-        int cubeSize = (int) (getResources().getDimension(R.dimen.shadow_size) / displayMetrics.density);
+        int screenWidth = displayMetrics.widthPixels;
+        int screenHeight = displayMetrics.heightPixels;
+        int offset = (int) getResources().getDimension(R.dimen.indent_from_screen_edge);
+        int cubeSize = (int) getResources().getDimension(R.dimen.shadow_size);
 
         return new RollArea(offset, screenWidth - offset - cubeSize, offset, screenHeight - offset - cubeSize);
     }
 
     public void rollCubes(View view){
-        // Удаляем старые элементы с экрана
-
+        // Удаляем старые кубики с экрана
+        binding.board.removeAllViews();
 
         // Генирируем новые кубики
 
@@ -87,10 +87,13 @@ public class CubesOnBoardFragment extends Fragment {
         while (viewList.size() < numberOfCubes + 1) {
             Cube cube = new Cube(skin, rollArea);
             CubeView cubeView = new CubeView(context);
+            cubeView.setCube(cube);
+            binding.board.addView(cubeView);
 
-
-
+            viewList.add(cubeView);
         }
+
+
 
 
     }

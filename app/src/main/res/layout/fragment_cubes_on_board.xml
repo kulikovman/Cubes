@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="ru.kulikovman.cubes.CubesOnBoardFragment">
 
@@ -17,6 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <FrameLayout
+            android:id="@+id/board"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
         <ImageView
             android:id="@+id/button_setting"
             android:layout_width="wrap_content"
@@ -26,13 +30,6 @@
             android:onClick="@{model::openSetting}"
             android:src="@drawable/ic_settings_gray"/>
 
-        <ru.kulikovman.cubes.view.CubeView
-            android:id="@+id/cube_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:angle="21"
-            app:skin="white"
-            app:value="5"/>
 
         <ImageView
             android:id="@+id/button_roll"
