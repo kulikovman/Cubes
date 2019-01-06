@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cube_view_container"
-        tools:context="ru.kulikovman.view.CubeView">
+        tools:context="ru.kulikovman.cubes.view.CubeView">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content">
+    <data>
+
+        <variable
+            name="model"
+            type="ru.kulikovman.cubes.view.CubeView"/>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/shadow"
             android:layout_width="@dimen/shadow_size"
             android:layout_height="@dimen/shadow_size"
             android:layout_gravity="center"
+            android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/white_shadow"/>
 
@@ -23,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:rotation="@{model.angle}"
             app:srcCompat="@drawable/white_cube"/>
 
         <ImageView
@@ -30,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/white_dot_6"/>
+            android:rotation="@{model.angle}"
+            app:srcCompat="@drawable/white_dot_1"/>
 
     </FrameLayout>
 

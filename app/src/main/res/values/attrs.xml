@@ -5,7 +5,7 @@
         <attr name="value" format="integer"/>
         <attr name="angle" format="integer"/>
 
-        <attr name="color" format="enum">
+        <attr name="skin" format="enum">
             <enum name="white" value="0"/>
             <enum name="black" value="1"/>
         </attr>

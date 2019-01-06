@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import ru.kulikovman.cubes.R;
-import ru.kulikovman.cubes.data.Color;
+import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.ViewCubeBinding;
 
 
@@ -20,8 +20,8 @@ public class CubeView extends FrameLayout {
     private Context context;
 
     private int value;
-    private int angle;
-    private Color color;
+    public int angle;
+    private Skin skin;
 
     public CubeView(@NonNull Context context) {
         super(context);
@@ -48,40 +48,35 @@ public class CubeView extends FrameLayout {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CubeView, defStyleAttr, defStyleRes);
         value = a.getInt(R.styleable.CubeView_value, 1);
         angle = a.getInt(R.styleable.CubeView_angle, 0);
-        color = Color.values()[a.getInt(R.styleable.CubeView_angle, 0)];
+        skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 0)];
         a.recycle();
 
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.view_cube, this);
 
         if (!isInEditMode()) {
+            this.context = context;
+
             // Подключение биндинга
             binding = DataBindingUtil.bind((findViewById(R.id.cube_view_container)));
 
-            // Прочие настройки
-            this.context = context;
-
+            // Отрисовка кубика
             initCube();
+
+            // Обновление переменной в макете
+            binding.setModel(this);
         }
     }
 
     private void initCube() {
-        // Установка картинки для выбранных параметров
-        String cubeResourceName = color.name().toLowerCase() + "_cube";
-        int cubeResourceId = getResources().getIdentifier(cubeResourceName, "drawable", context.getPackageName());
-        binding.cube.setImageResource(cubeResourceId);
-
-        String shadowResourceName = color.name().toLowerCase() + "_shadow";
-        int shadowResourceId = getResources().getIdentifier(shadowResourceName, "drawable", context.getPackageName());
-        binding.shadow.setImageResource(shadowResourceId);
-
-        String dotsResourceName = color.name().toLowerCase() + "_dot_" + String.valueOf(value);
-        int dotsResourceId = getResources().getIdentifier(dotsResourceName, "drawable", context.getPackageName());
-        binding.dots.setImageResource(dotsResourceId);
-
-        // Поворот
-
-
+        // Установка картинок для выбранных параметров
+        String skinName = skin.name().toLowerCase();
+        binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
+        binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
+        binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
     }
 
+    private int getDrawableIdByName(String resourceName) {
+        return getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
+    }
 }

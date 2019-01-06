@@ -1,6 +1,6 @@
 package ru.kulikovman.cubes.data;
 
-public enum Color {
+public enum Skin {
     WHITE,
     BLACK
 }
