@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 
 
@@ -35,5 +36,9 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+    }
+
+    public void openSetting(View view){
+        NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 }
