@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
+import java.util.Random;
+
 import ru.kulikovman.cubes.R;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.ViewCubeBinding;
@@ -48,7 +50,7 @@ public class CubeView extends FrameLayout {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CubeView, defStyleAttr, defStyleRes);
         value = a.getInt(R.styleable.CubeView_value, 1);
         angle = a.getInt(R.styleable.CubeView_angle, 0);
-        skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 0)];
+        skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 1)];
         a.recycle();
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -69,8 +71,17 @@ public class CubeView extends FrameLayout {
     }
 
     private void initCube() {
-        // Установка картинок для выбранных параметров
-        String skinName = skin.name().toLowerCase();
+        // Выбор цвета кубика
+        String skinName;
+        if (skin == Skin.RANDOM) {
+            Random random = new Random();
+            int skinIndex = 1 + random.nextInt(Skin.values().length); // случайный цвет
+            skinName = String.valueOf(skinIndex);
+        } else {
+            skinName = skin.name().toLowerCase();
+        }
+
+        // Назначение картинок в соответствии с цветом
         binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
         binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
         binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));

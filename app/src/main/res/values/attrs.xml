@@ -6,8 +6,9 @@
         <attr name="angle" format="integer"/>
 
         <attr name="skin" format="enum">
-            <enum name="white" value="0"/>
-            <enum name="black" value="1"/>
+            <enum name="random" value="0"/>
+            <enum name="white" value="1"/>
+            <enum name="black" value="2"/>
         </attr>
     </declare-styleable>
 
