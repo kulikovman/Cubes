@@ -36,9 +36,16 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+
+        // Обновление переменной в макете
+        binding.setModel(this);
     }
 
     public void openSetting(View view){
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
+    }
+
+    public void rollCubes(View view){
+
     }
 }
