@@ -24,7 +24,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:onClick="@{model::openSetting}"
-            android:src="@drawable/ic_settings_gray_30dp"/>
+            android:src="@drawable/ic_settings_gray"/>
 
         <ru.kulikovman.cubes.view.CubeView
             android:id="@+id/cube_1"
