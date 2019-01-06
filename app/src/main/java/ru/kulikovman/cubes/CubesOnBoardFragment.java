@@ -10,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
+import ru.kulikovman.cubes.model.Cube;
 
 
 public class CubesOnBoardFragment extends Fragment {
@@ -19,6 +23,8 @@ public class CubesOnBoardFragment extends Fragment {
     private FragmentCubesOnBoardBinding binding;
 
     private Context context;
+
+    private int numberOfCubes;
 
     @Nullable
     @Override
@@ -35,6 +41,8 @@ public class CubesOnBoardFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        // Хардкод - количество кубиков
+        numberOfCubes = 4;
 
 
         // Обновление переменной в макете
@@ -46,6 +54,22 @@ public class CubesOnBoardFragment extends Fragment {
     }
 
     public void rollCubes(View view){
+        // Удаляем старые элементы с экрана
+
+
+        // Генирируем новые кубики
+
+
+        List<View> viewList = new ArrayList<>();
+        viewList.add(binding.buttonSetting);
+
+        while (viewList.size() < numberOfCubes + 1) {
+            Cube cube = new Cube();
+
+
+
+        }
+
 
     }
 }
