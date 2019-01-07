@@ -85,15 +85,25 @@ public class CubesOnBoardFragment extends Fragment {
         viewList.add(binding.buttonSetting);
 
         while (viewList.size() < numberOfCubes + 1) {
-            Cube cube = new Cube(skin, rollArea);
-            CubeView cubeView = new CubeView(context);
-            cubeView.setCube(cube);
-            binding.board.addView(cubeView);
+            //Cube cube = new Cube(skin, rollArea);
+            CubeView cubeView = new CubeView(context, skin, rollArea);
+            //cubeView.setCube(cube);
+
 
             viewList.add(cubeView);
         }
 
+        // Кидаем кубики на экран
+        for (View v : viewList) {
+            if (v instanceof CubeView) {
+                binding.board.addView(v);
+            }
+        }
 
+        // Воспроизводим звук броска
+
+
+        // Сохраняем асинхронно текущий бросок в базу
 
 
     }

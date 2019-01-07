@@ -1,7 +1,5 @@
 package ru.kulikovman.cubes.model;
 
-import java.util.Random;
-
 import ru.kulikovman.cubes.data.Skin;
 
 public class Cube {
@@ -9,30 +7,15 @@ public class Cube {
     private Skin skin;
     private int value;
     private int angle;
-    private int x;
-    private int y;
+    private int marginStart;
+    private int marginTop;
 
-    public Cube(Skin skin, RollArea rollArea) {
-        // Генератор случайных чисел
-        Random random = new Random();
-
-        // Цвет кубика
-        if (skin == Skin.RANDOM) {
-            int skinIndex = 1 + random.nextInt(Skin.values().length); // случайный цвет
-            this.skin = Skin.values()[skinIndex];
-        } else {
-            this.skin = skin;
-        }
-
-        // Количество точек
-        value = 1 + random.nextInt(6); // от 1 до 6
-
-        // Угол поворота
-        angle = random.nextInt(360); // от 0 до 359
-
-        // Расположение на экране
-        x = rollArea.getMinX() + random.nextInt(rollArea.getMaxX() + 1);
-        y = rollArea.getMinY() + random.nextInt(rollArea.getMaxY() + 1);
+    public Cube(Skin skin, int value, int angle, int marginStart, int marginTop) {
+        this.skin = skin;
+        this.value = value;
+        this.angle = angle;
+        this.marginStart = marginStart;
+        this.marginTop = marginTop;
     }
 
     public Skin getSkin() {
@@ -59,19 +42,19 @@ public class Cube {
         this.angle = angle;
     }
 
-    public int getX() {
-        return x;
+    public int getMarginStart() {
+        return marginStart;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setMarginStart(int marginStart) {
+        this.marginStart = marginStart;
     }
 
-    public int getY() {
-        return y;
+    public int getMarginTop() {
+        return marginTop;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setMarginTop(int marginTop) {
+        this.marginTop = marginTop;
     }
 }

@@ -7,11 +7,8 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
 import java.util.Random;
@@ -20,6 +17,7 @@ import ru.kulikovman.cubes.R;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.ViewCubeBinding;
 import ru.kulikovman.cubes.model.Cube;
+import ru.kulikovman.cubes.model.RollArea;
 
 
 public class CubeView extends FrameLayout {
@@ -30,37 +28,41 @@ public class CubeView extends FrameLayout {
     private Skin skin;
     private int value;
     public int angle;
-    public int marginStart = 0;
-    public int marginTop = 0;
+    public int marginStart;
+    public int marginTop;
 
     public CubeView(@NonNull Context context) {
         super(context);
-        init(context, null, 0, 0);
+        init(context);
+        initWithAttribute(null, 0, 0);
     }
 
     public CubeView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0, 0);
+        init(context);
+        initWithAttribute(attrs, 0, 0);
     }
 
     public CubeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs, defStyleAttr, 0);
+        init(context);
+        initWithAttribute(attrs, defStyleAttr, 0);
     }
 
     public CubeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, defStyleAttr, defStyleRes);
+        init(context);
+        initWithAttribute(attrs, defStyleAttr, defStyleRes);
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        // Получение значений из аттрибутов вью
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CubeView, defStyleAttr, defStyleRes);
-        value = a.getInt(R.styleable.CubeView_value, 1);
-        angle = a.getInt(R.styleable.CubeView_angle, 0);
-        skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 1)];
-        a.recycle();
+    // Конструктор для генерации кубика через код
+    public CubeView(@NonNull Context context, Skin skin, RollArea rollArea) {
+        super(context);
+        init(context);
+        initWithData(skin, rollArea);
+    }
 
+    private void init(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.view_cube, this);
 
@@ -69,24 +71,54 @@ public class CubeView extends FrameLayout {
 
             // Подключение биндинга
             binding = DataBindingUtil.bind((findViewById(R.id.cube_view_container)));
-
-            // Отрисовка кубика
-            initCube();
         }
     }
 
-    private void initCube() {
-        // Выбор цвета кубика
-        String skinName;
-        if (skin == Skin.RANDOM) {
-            Random random = new Random();
-            int skinIndex = 1 + random.nextInt(Skin.values().length); // случайный цвет
-            skinName = String.valueOf(skinIndex);
-        } else {
-            skinName = skin.name().toLowerCase();
-        }
+    private void initWithAttribute(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        // Получение значений из аттрибутов вью
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CubeView, defStyleAttr, defStyleRes);
+        value = a.getInt(R.styleable.CubeView_value, 1);
+        angle = a.getInt(R.styleable.CubeView_angle, 0);
+        skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 1)];
+        a.recycle();
 
+        if (!isInEditMode()) {
+            // Отрисовка кубика
+            createCube();
+        }
+    }
+
+    private void initWithData(Skin skin, RollArea rollArea) {
+        if (!isInEditMode()) {
+            // Генератор случайных чисел
+            Random random = new Random();
+
+            // Цвет кубика
+            if (skin == Skin.RANDOM) {
+                int skinIndex = 1 + random.nextInt(Skin.values().length); // случайный цвет
+                this.skin = Skin.values()[skinIndex];
+            } else {
+                this.skin = skin;
+            }
+
+            // Количество точек
+            value = 1 + random.nextInt(6); // от 1 до 6
+
+            // Угол поворота
+            angle = random.nextInt(360); // от 0 до 359
+
+            // Расположение на экране
+            marginStart = rollArea.getMinX() + random.nextInt(rollArea.getMaxX() + 1);
+            marginTop = rollArea.getMinY() + random.nextInt(rollArea.getMaxY() + 1);
+
+            // Отрисовка кубика
+            createCube();
+        }
+    }
+
+    private void createCube() {
         // Назначение картинок в соответствии с цветом
+        String skinName = skin.name().toLowerCase();
         binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
         binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
         binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
@@ -103,10 +135,15 @@ public class CubeView extends FrameLayout {
         skin = cube.getSkin();
         value = cube.getValue();
         angle = cube.getAngle();
-        marginStart = cube.getX();
-        marginTop = cube.getY();
+        marginStart = cube.getMarginStart();
+        marginTop = cube.getMarginTop();
 
-        initCube();
+        // Отрисовка кубика
+        createCube();
+    }
+
+    public Cube getCube() {
+        return new Cube(skin, value, angle, marginStart, marginTop);
     }
 
     @BindingAdapter({"android:layout_marginStart"})
