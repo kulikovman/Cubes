@@ -17,7 +17,6 @@ import java.util.List;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
-import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.RollArea;
 import ru.kulikovman.cubes.view.CubeView;
 
@@ -79,26 +78,24 @@ public class CubesOnBoardFragment extends Fragment {
         binding.board.removeAllViews();
 
         // Генирируем новые кубики
+        List<CubeView> cubeViewList = new ArrayList<>();
 
-
-        List<View> viewList = new ArrayList<>();
-        viewList.add(binding.buttonSetting);
-
-        while (viewList.size() < numberOfCubes + 1) {
-            //Cube cube = new Cube(skin, rollArea);
+        while (cubeViewList.size() < numberOfCubes) {
             CubeView cubeView = new CubeView(context, skin, rollArea);
-            //cubeView.setCube(cube);
 
+            // Проверка пересечения с другими вью
+            // ...
 
-            viewList.add(cubeView);
+            cubeViewList.add(cubeView);
         }
+
 
         // Кидаем кубики на экран
-        for (View v : viewList) {
-            if (v instanceof CubeView) {
-                binding.board.addView(v);
-            }
+        for (CubeView cubeView : cubeViewList) {
+            binding.board.addView(cubeView);
         }
+
+
 
         // Воспроизводим звук броска
 

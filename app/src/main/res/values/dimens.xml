@@ -7,5 +7,6 @@
     <!-- Прочее -->
     <dimen name="indent_from_screen_edge">8dp</dimen>
     <dimen name="button_setting_size">30dp</dimen>
+    <dimen name="button_setting_padding">10dp</dimen>
 
 </resources>
