@@ -16,8 +16,8 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@{model.marginStart}"
-        android:layout_marginTop="@{model.marginTop}">
+        android:layout_marginStart="@{model.point.x}"
+        android:layout_marginTop="@{model.point.y}">
 
         <ImageView
             android:id="@+id/shadow"

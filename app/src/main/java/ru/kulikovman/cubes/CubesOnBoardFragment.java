@@ -17,6 +17,8 @@ import java.util.List;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
+import ru.kulikovman.cubes.model.Point;
+import ru.kulikovman.cubes.model.Rectangle;
 import ru.kulikovman.cubes.model.RollArea;
 import ru.kulikovman.cubes.view.CubeView;
 
@@ -30,6 +32,8 @@ public class CubesOnBoardFragment extends Fragment {
     private int numberOfCubes;
     private RollArea rollArea;
     private Skin skin;
+    private int screenWidth;
+    private int screenHeight;
 
     @Nullable
     @Override
@@ -50,6 +54,11 @@ public class CubesOnBoardFragment extends Fragment {
         numberOfCubes = 6; // количество кубиков
         skin = Skin.WHITE; // белый
 
+        // Получение размеров экрана
+        initScreenSizes();
+
+        putSettingButtonOnField();
+
         // Зона возможного расположения кубика
         rollArea = getRollArea();
 
@@ -58,22 +67,74 @@ public class CubesOnBoardFragment extends Fragment {
         binding.setModel(this);
     }
 
-    public void openSetting(View view){
+    private void putSettingButtonOnField() {
+        int settingSize = (int) getResources().getDimension(R.dimen.button_setting_size);
+        int settingPadding = (int) getResources().getDimension(R.dimen.button_setting_padding);
+        int settingMarginTop = (int) getResources().getDimension(R.dimen.button_setting_marginTop);
+
+        int x = screenWidth / 2;
+        int y = settingSize / 2 + settingPadding + settingMarginTop;
+
+        // Создаем объект описывающий кнопку настроек
+        Rectangle rectangle = new Rectangle(new Point(x, y), settingSize, 0);
+
+
+
+
+
+
+        // Поворот точки вокруг другой точки
+        // x0/y0 - точка вокруг которой происходит вращение
+        /*int x1 = x0 + (x - x0) * cos(45) - (y - y0) * sin(45);
+        int y1 = y0 + (y - y0) * cos(45) + (x - x0) * sin(45);
+
+        // 500/500 - точка вокруг которой происходит вращение
+        double xt = 500 + (x1 - 500.00) * cos(0.05) + (500.00 - y1) * sin(0.05);
+        double yt = 500 + (x1 - 500.00) * sin(0.05) + (y1 - 500.00) * cos(0.05);
+        x1 = xt;
+        y1 = yt;*/
+
+
+    }
+
+    /*private boolean isIntersection(List<Dice> coordinates) {
+        // Расстояние между центрами кубиков
+        int dist = convertDpToPx(110);
+
+        // Проверка пересечений
+        for (Dice d1 : coordinates) {
+            for (Dice d2 : coordinates) {
+                if (!d1.equals(d2)) {
+                    int dX = Math.abs(d1.getX() - d2.getX());
+                    int dY = Math.abs(d1.getY() - d2.getY());
+                    if (dX < dist && dY < dist) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }*/
+
+    public void openSetting(View view) {
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
-    private RollArea getRollArea() {
-        // Базовые размеры
+    private void initScreenSizes() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-        int offset = (int) getResources().getDimension(R.dimen.indent_from_screen_edge);
-        int cubeSize = (int) getResources().getDimension(R.dimen.shadow_size);
-
-        return new RollArea(offset, screenWidth - offset - cubeSize, offset, screenHeight - offset - cubeSize);
+        screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
     }
 
-    public void rollCubes(View view){
+    private RollArea getRollArea() {
+        int screenOffset = (int) getResources().getDimension(R.dimen.indent_from_screen_edge);
+        int cubeSize = (int) getResources().getDimension(R.dimen.shadow_size);
+
+        return new RollArea(screenOffset, screenWidth - screenOffset - cubeSize, screenOffset, screenHeight - screenOffset - cubeSize);
+    }
+
+
+    public void rollCubes(View view) {
         // Удаляем старые кубики с экрана
         binding.board.removeAllViews();
 
@@ -94,7 +155,6 @@ public class CubesOnBoardFragment extends Fragment {
         for (CubeView cubeView : cubeViewList) {
             binding.board.addView(cubeView);
         }
-
 
 
         // Воспроизводим звук броска

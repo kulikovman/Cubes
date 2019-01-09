@@ -17,6 +17,7 @@ import ru.kulikovman.cubes.R;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.ViewCubeBinding;
 import ru.kulikovman.cubes.model.Cube;
+import ru.kulikovman.cubes.model.Point;
 import ru.kulikovman.cubes.model.RollArea;
 
 
@@ -28,8 +29,8 @@ public class CubeView extends FrameLayout {
     private Skin skin;
     private int value;
     public int angle;
-    public int marginStart;
-    public int marginTop;
+
+    public Point point = new Point();
 
     public CubeView(@NonNull Context context) {
         super(context);
@@ -108,8 +109,8 @@ public class CubeView extends FrameLayout {
             angle = random.nextInt(360); // от 0 до 359
 
             // Расположение на экране
-            marginStart = rollArea.getMinX() + random.nextInt(rollArea.getMaxX() + 1);
-            marginTop = rollArea.getMinY() + random.nextInt(rollArea.getMaxY() + 1);
+            point.x = rollArea.getMinX() + random.nextInt(rollArea.getMaxX() + 1);
+            point.y = rollArea.getMinY() + random.nextInt(rollArea.getMaxY() + 1);
 
             // Отрисовка кубика
             createCube();
@@ -135,15 +136,14 @@ public class CubeView extends FrameLayout {
         skin = cube.getSkin();
         value = cube.getValue();
         angle = cube.getAngle();
-        marginStart = cube.getMarginStart();
-        marginTop = cube.getMarginTop();
+        point = cube.getPoint();
 
         // Отрисовка кубика
         createCube();
     }
 
     public Cube getCube() {
-        return new Cube(skin, value, angle, marginStart, marginTop);
+        return new Cube(skin, value, angle, point);
     }
 
     @BindingAdapter({"android:layout_marginStart"})

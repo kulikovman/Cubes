@@ -7,15 +7,15 @@ public class Cube {
     private Skin skin;
     private int value;
     private int angle;
-    private int marginStart;
-    private int marginTop;
 
-    public Cube(Skin skin, int value, int angle, int marginStart, int marginTop) {
+    // Верхняя левая точка
+    private Point point;
+
+    public Cube(Skin skin, int value, int angle, Point point) {
         this.skin = skin;
         this.value = value;
         this.angle = angle;
-        this.marginStart = marginStart;
-        this.marginTop = marginTop;
+        this.point = point;
     }
 
     public Skin getSkin() {
@@ -42,19 +42,11 @@ public class Cube {
         this.angle = angle;
     }
 
-    public int getMarginStart() {
-        return marginStart;
+    public Point getPoint() {
+        return point;
     }
 
-    public void setMarginStart(int marginStart) {
-        this.marginStart = marginStart;
-    }
-
-    public int getMarginTop() {
-        return marginTop;
-    }
-
-    public void setMarginTop(int marginTop) {
-        this.marginTop = marginTop;
+    public void setPoint(Point point) {
+        this.point = point;
     }
 }
