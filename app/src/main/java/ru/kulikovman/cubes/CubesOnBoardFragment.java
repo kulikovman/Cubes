@@ -76,45 +76,14 @@ public class CubesOnBoardFragment extends Fragment {
         int y = settingSize / 2 + settingPadding + settingMarginTop;
 
         // Создаем объект описывающий кнопку настроек
-        Rectangle rectangle = new Rectangle(new Point(x, y), settingSize, 0);
+        Rectangle rectangle = new Rectangle(new Point(x, y), settingSize, 180);
 
 
 
 
-
-
-        // Поворот точки вокруг другой точки
-        // x0/y0 - точка вокруг которой происходит вращение
-        /*int x1 = x0 + (x - x0) * cos(45) - (y - y0) * sin(45);
-        int y1 = y0 + (y - y0) * cos(45) + (x - x0) * sin(45);
-
-        // 500/500 - точка вокруг которой происходит вращение
-        double xt = 500 + (x1 - 500.00) * cos(0.05) + (500.00 - y1) * sin(0.05);
-        double yt = 500 + (x1 - 500.00) * sin(0.05) + (y1 - 500.00) * cos(0.05);
-        x1 = xt;
-        y1 = yt;*/
 
 
     }
-
-    /*private boolean isIntersection(List<Dice> coordinates) {
-        // Расстояние между центрами кубиков
-        int dist = convertDpToPx(110);
-
-        // Проверка пересечений
-        for (Dice d1 : coordinates) {
-            for (Dice d2 : coordinates) {
-                if (!d1.equals(d2)) {
-                    int dX = Math.abs(d1.getX() - d2.getX());
-                    int dY = Math.abs(d1.getY() - d2.getY());
-                    if (dX < dist && dY < dist) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }*/
 
     public void openSetting(View view) {
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
