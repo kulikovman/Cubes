@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Кубики -->
-    <dimen name="cube_size">100dp</dimen>
-    <dimen name="shadow_size">105dp</dimen>
+    <dimen name="white_size">100dp</dimen>
 
     <!-- Прочее -->
-    <dimen name="indent_from_screen_edge">8dp</dimen>
+    <dimen name="screen_offset">8dp</dimen>
     <dimen name="button_setting_size">30dp</dimen>
     <dimen name="button_setting_padding">10dp</dimen>
     <dimen name="button_setting_marginTop">10dp</dimen>

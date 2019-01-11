@@ -96,7 +96,7 @@ public class CubesOnBoardFragment extends Fragment {
     }
 
     private RollArea getRollArea() {
-        int screenOffset = (int) getResources().getDimension(R.dimen.indent_from_screen_edge);
+        int screenOffset = (int) getResources().getDimension(R.dimen.screen_offset);
         int cubeSize = (int) getResources().getDimension(R.dimen.shadow_size);
 
         return new RollArea(screenOffset, screenWidth - screenOffset - cubeSize, screenOffset, screenHeight - screenOffset - cubeSize);

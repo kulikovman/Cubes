@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    // Аттрибуты для CubeView
+    // Аттрибуты для CubeView (не используются)
     <declare-styleable name="CubeView">
         <attr name="value" format="integer"/>
         <attr name="angle" format="integer"/>
