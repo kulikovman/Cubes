@@ -24,7 +24,6 @@ public class CubeView extends FrameLayout {
     private Skin skin;
     private int value;
     public int angle;
-    public int size;
     public int marginStart;
     public int marginTop;
 
@@ -69,7 +68,6 @@ public class CubeView extends FrameLayout {
         skin = cube.getSkin();
         value = cube.getValue();
         angle = cube.getAngle();
-        size = cube.getSize();
         marginStart = cube.getMarginStart();
         marginTop = cube.getMarginTop();
 

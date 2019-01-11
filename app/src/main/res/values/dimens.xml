@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Кубики -->
-    <dimen name="white_size">100dp</dimen>
+    <dimen name="cube_size">100dp</dimen>
 
     <!-- Прочее -->
     <dimen name="screen_offset">8dp</dimen>

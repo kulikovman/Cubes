@@ -96,12 +96,12 @@ public class CubesOnBoardFragment extends Fragment {
     }
 
     private RollArea getRollArea() {
-        int screenOffset = (int) getResources().getDimension(R.dimen.screen_offset);
-        int cubeSize = (int) getResources().getDimension(R.dimen.shadow_size);
-
-        return new RollArea(screenOffset, screenWidth - screenOffset - cubeSize, screenOffset, screenHeight - screenOffset - cubeSize);
+        int offset = (int) getResources().getDimension(R.dimen.screen_offset);
+        int size = (int) getResources().getDimension(R.dimen.cube_size);
+        int halfSize = size / 2;
+        return new RollArea(offset + halfSize / 2, screenWidth - offset - halfSize,
+                offset + halfSize, screenHeight - offset - halfSize);
     }
-
 
     public void rollCubes(View view) {
         // Удаляем старые кубики с экрана

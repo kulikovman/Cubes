@@ -21,14 +21,12 @@
 
         <ImageView
             android:id="@+id/shadow"
-            android:layout_width="@{model.size}"
-            android:layout_height="@{model.size}"
+            android:layout_width="@dimen/cube_size"
+            android:layout_height="@dimen/cube_size"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/white_shadow"
-            tools:layout_height="100dp"
-            tools:layout_width="100dp"/>
+            app:srcCompat="@drawable/white_shadow"/>
 
         <ImageView
             android:id="@+id/cube"
