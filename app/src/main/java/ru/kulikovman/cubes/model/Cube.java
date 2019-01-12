@@ -6,6 +6,10 @@ import ru.kulikovman.cubes.data.Skin;
 
 public class Cube {
 
+    // Базовые значения
+    private Calculation calculation;
+    private final Random random;
+
     // Параметры для вью
     private Skin skin;
     private int value;
@@ -19,21 +23,17 @@ public class Cube {
     private int size;
     private double radians;
 
-    // Расстояние от центра до вершины
-    private int radius;
-
     // Вершины прямоугольника
     private int x1, y1; // верхняя левая
     private int x2, y2; // верхняя правая
     private int x3, y3; // нижняя правая
     private int x4, y4; // нижняя левая
 
-    public Cube(Skin skin, RollArea rollArea, int size) {
+    public Cube(Calculation calculation, Skin skin) {
+        this.calculation = calculation;
         this.skin = skin;
-        this.size = size;
-
-        // Генератор случайных чисел
-        Random random = new Random();
+        this.size = calculation.getSize();
+        this.random = calculation.getRandom();
 
         // Цвет кубика
         if (skin == Skin.RANDOM) {
@@ -46,22 +46,26 @@ public class Cube {
         // Количество точек
         value = 1 + random.nextInt(6); // от 1 до 6
 
-        // Угол поворота
+        // Угол поворота в градусах и радианах
         degrees = random.nextInt(360); // от 0 до 359
-
-        // Перевод угла из градусов в радианы
         radians = degrees * Math.PI / 180;
 
-        // Расположение на экране
-        x = rollArea.getMinX() + random.nextInt(rollArea.getMaxX() + 1);
-        y = rollArea.getMinY() + random.nextInt(rollArea.getMaxY() + 1);
+        // Расположение кубика на экране
+        boolean isCorrectPosition = false;
+        while (!isCorrectPosition) {
+            getScreenPosition();
+            isCorrectPosition = checkPosition();
+        }
 
         // Макс./мин. координаты вершин
-        int halfSize = size / 2;
-        int minX = x - halfSize;
-        int maxX = x + halfSize;
-        int minY = y - halfSize;
-        int maxY = y + halfSize;
+        int minX = x - calculation.getHalfSize();
+        int maxX = x + calculation.getHalfSize();
+        int minY = y - calculation.getHalfSize();
+        int maxY = y + calculation.getHalfSize();
+
+        // Подсчет отступов
+        marginStart = minX;
+        marginTop = minY;
 
         // Положение вершин до поворота
         x1 = minX;
@@ -74,14 +78,6 @@ public class Cube {
         y4 = maxY;
 
         // Расчет положения вершин после поворота
-        // Поворот точки вокруг другой точки
-        // x/y - точка, которую вращаем
-        // x0/y0 - точка вокруг которой происходит вращение
-        // а - угол поворота в радианах (отрицательный угол вращает против часовой)
-        // x1/y1 - новые координаты
-        // -------------------
-        // x1 = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
-        // y1 = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
         x1 = getXRotation(x1, y1);
         y1 = getYRotation(x1, y1);
         x2 = getXRotation(x2, y2);
@@ -95,9 +91,21 @@ public class Cube {
         // только потом сохранять новые координаты, иначе У будет повернут исходя из
         // новых координат Х
 
-        // Расчет радиуса
-        // r = (x1 - x2)^2 + (y1 - y2)^2
-        radius = (int) Math.sqrt((Math.pow(Math.abs(x - x1), 2) + Math.pow(Math.abs(y - y1), 2)));
+
+    }
+
+    private boolean checkPosition() {
+        // Расчет расстояния от центра кнопки настроек до центра кубика
+        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - calculation.getSx()), 2) +
+                Math.pow(Math.abs(y - calculation.getSy()), 2)));
+
+        // Должно быть больше, чем сумма радиусов
+        return distance > calculation.getCubeRadius() + calculation.getSettingRadius();
+    }
+
+    private void getScreenPosition() {
+        x = calculation.getRollArea().getMinX() + random.nextInt(calculation.getRollArea().getMaxX() + 1);
+        y = calculation.getRollArea().getMinY() + random.nextInt(calculation.getRollArea().getMaxY() + 1);
     }
 
     private int getXRotation(int px, int py) {
