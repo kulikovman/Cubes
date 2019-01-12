@@ -67,7 +67,7 @@ public class CubeView extends FrameLayout {
     public void setCube(Cube cube) {
         skin = cube.getSkin();
         value = cube.getValue();
-        angle = cube.getAngle();
+        angle = cube.getDegrees();
         marginStart = cube.getMarginStart();
         marginTop = cube.getMarginTop();
 

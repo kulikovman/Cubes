@@ -20,7 +20,7 @@ public class Cube {
     private int x, y;
 
     // Размер и угол поворота
-    private int size;
+    //private int size;
     private double radians;
 
     // Вершины прямоугольника
@@ -32,7 +32,7 @@ public class Cube {
     public Cube(Calculation calculation, Skin skin) {
         this.calculation = calculation;
         this.skin = skin;
-        this.size = calculation.getSize();
+        //this.size = calculation.getSize();
         this.random = calculation.getRandom();
 
         // Цвет кубика
@@ -53,7 +53,7 @@ public class Cube {
         // Расположение кубика на экране
         boolean isCorrectPosition = false;
         while (!isCorrectPosition) {
-            getScreenPosition();
+            setNewCubePosition();
             isCorrectPosition = checkPosition();
         }
 
@@ -78,20 +78,24 @@ public class Cube {
         y4 = maxY;
 
         // Расчет положения вершин после поворота
-        x1 = getXRotation(x1, y1);
-        y1 = getYRotation(x1, y1);
-        x2 = getXRotation(x2, y2);
-        y2 = getYRotation(x1, y1);
-        x3 = getXRotation(x1, y1);
-        y3 = getYRotation(x1, y1);
-        x4 = getXRotation(x1, y1);
-        y4 = getYRotation(x1, y1);
+        int tx1 = getXRotation(x1, y1);
+        int ty1 = getYRotation(x1, y1);
+        int tx2 = getXRotation(x2, y2);
+        int ty2 = getYRotation(x1, y1);
+        int tx3 = getXRotation(x1, y1);
+        int ty3 = getYRotation(x1, y1);
+        int tx4 = getXRotation(x1, y1);
+        int ty4 = getYRotation(x1, y1);
 
-        // !!!! Нихуя не правильно! Нужно сразу две точки поворачивать и уже
-        // только потом сохранять новые координаты, иначе У будет повернут исходя из
-        // новых координат Х
-
-
+        // Сохраняем новые координаты
+        x1 = tx1;
+        y1 = ty1;
+        x2 = tx2;
+        y2 = ty2;
+        x3 = tx3;
+        y3 = ty3;
+        x4 = tx4;
+        y4 = ty4;
     }
 
     private boolean checkPosition() {
@@ -103,9 +107,13 @@ public class Cube {
         return distance > calculation.getCubeRadius() + calculation.getSettingRadius();
     }
 
-    private void getScreenPosition() {
+    private void setNewCubePosition() {
         x = calculation.getRollArea().getMinX() + random.nextInt(calculation.getRollArea().getMaxX() + 1);
         y = calculation.getRollArea().getMinY() + random.nextInt(calculation.getRollArea().getMaxY() + 1);
+    }
+
+    public void moveCube() {
+        setNewCubePosition();
     }
 
     private int getXRotation(int px, int py) {
@@ -116,12 +124,25 @@ public class Cube {
         return (int) (y + (py - y) * Math.cos(radians) + (px - x) * Math.sin(radians));
     }
 
-    public boolean intersection (Rectangle rectangle) {
+    public boolean intersection (Cube cube) {
+        // ЭТАП 1: предварительная упрощенная проверка
+        // Расстояние между центрами кубиков
+        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) +
+                Math.pow(Math.abs(y - cube.getY()), 2)));
 
+        // Должно быть больше, чем сумма радиусов
+        if (distance > calculation.getCubeRadius() * 2) {
+            return false;
+        }
 
+        // ЭТАП 2: проверка положения всех точек
+        // ...
+
+        // заглушка
         return true;
     }
 
+    // Старый вариант проверки пересечения
     /*private boolean isIntersection(List<Dice> coordinates) {
         // Расстояние между центрами кубиков
         int dist = convertDpToPx(110);
@@ -140,4 +161,64 @@ public class Cube {
         }
         return false;
     }*/
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public int getDegrees() {
+        return degrees;
+    }
+
+    public int getMarginStart() {
+        return marginStart;
+    }
+
+    public int getMarginTop() {
+        return marginTop;
+    }
+
+    public int getX1() {
+        return x1;
+    }
+
+    public int getY1() {
+        return y1;
+    }
+
+    public int getX2() {
+        return x2;
+    }
+
+    public int getY2() {
+        return y2;
+    }
+
+    public int getX3() {
+        return x3;
+    }
+
+    public int getY3() {
+        return y3;
+    }
+
+    public int getX4() {
+        return x4;
+    }
+
+    public int getY4() {
+        return y4;
+    }
 }

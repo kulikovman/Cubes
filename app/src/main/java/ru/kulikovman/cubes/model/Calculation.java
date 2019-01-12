@@ -24,8 +24,18 @@ public class Calculation {
     // Зона возможного расположения кубика
     private RollArea rollArea;
 
-    public Calculation() {
-        random = new Random();
+    public Calculation(int screenWidth, int screenHeight, int size, int halfSize, int sx, int sy, int cubeRadius, int settingRadius, RollArea rollArea) {
+        this.random = new Random();
+
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
+        this.size = size;
+        this.halfSize = halfSize;
+        this.sx = sx;
+        this.sy = sy;
+        this.cubeRadius = cubeRadius;
+        this.settingRadius = settingRadius;
+        this.rollArea = rollArea;
     }
 
     public int getScreenWidth() {

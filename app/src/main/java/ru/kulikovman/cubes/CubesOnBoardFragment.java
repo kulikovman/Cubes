@@ -91,11 +91,8 @@ public class CubesOnBoardFragment extends Fragment {
         RollArea rollArea = new RollArea(cubeRadius, screenWidth - cubeRadius,
                 cubeRadius, screenHeight - cubeRadius);
 
-
-
-
         // Сохраняем все полученные размеры
-        calculation = new Calculation();
+        calculation = new Calculation(screenWidth, screenHeight, size, halfSize, sx, sy, cubeRadius, settingRadius, rollArea);
     }
 
     public void openSetting(View view) {
