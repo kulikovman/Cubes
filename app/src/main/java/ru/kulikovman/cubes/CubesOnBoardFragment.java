@@ -17,6 +17,7 @@ import java.util.List;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
+import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Point;
 import ru.kulikovman.cubes.model.Rectangle;
 import ru.kulikovman.cubes.model.RollArea;
@@ -26,14 +27,14 @@ import ru.kulikovman.cubes.view.CubeView;
 public class CubesOnBoardFragment extends Fragment {
 
     private FragmentCubesOnBoardBinding binding;
-
     private Context context;
 
-    private int numberOfCubes;
+    private Calculation calculation;
     private RollArea rollArea;
+
     private Skin skin;
-    private int screenWidth;
-    private int screenHeight;
+    private int numberOfCubes;
+
 
     @Nullable
     @Override
@@ -54,45 +55,48 @@ public class CubesOnBoardFragment extends Fragment {
         numberOfCubes = 6; // количество кубиков
         skin = Skin.WHITE; // белый
 
-        // Получение размеров экрана
-        initScreenSizes();
-
-        putSettingButtonOnField();
+        // Предварительные расчеты
+        // все что можно подсчитать заранее
+        calculation = getCalculation();
 
         // Зона возможного расположения кубика
         rollArea = getRollArea();
-
 
         // Обновление переменной в макете
         binding.setModel(this);
     }
 
-    private void putSettingButtonOnField() {
+    private Calculation getCalculation() {
+        Calculation c = new Calculation();
+
+        // Размеры экрана
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        c.screenWidth = displayMetrics.widthPixels;
+        c.screenHeight = displayMetrics.heightPixels;
+
+        // Координаты кнопки настроек
         int settingSize = (int) getResources().getDimension(R.dimen.button_setting_size);
         int settingPadding = (int) getResources().getDimension(R.dimen.button_setting_padding);
         int settingMarginTop = (int) getResources().getDimension(R.dimen.button_setting_marginTop);
 
-        int x = screenWidth / 2;
-        int y = settingSize / 2 + settingPadding + settingMarginTop;
+        c.sx = c.screenWidth / 2;
+        c.sy = settingSize / 2 + settingPadding + settingMarginTop;
 
-        // Создаем объект описывающий кнопку настроек
-        Rectangle rectangle = new Rectangle(new Point(x, y), settingSize, 180);
+        // Радиус кнопки настроек
+        c.settingRadius = settingSize / 2 + settingPadding;
 
-
-
-
+        // Радиус кубика
 
 
+
+
+
+
+        return c;
     }
 
     public void openSetting(View view) {
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
-    }
-
-    private void initScreenSizes() {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        screenWidth = displayMetrics.widthPixels;
-        screenHeight = displayMetrics.heightPixels;
     }
 
     private RollArea getRollArea() {
