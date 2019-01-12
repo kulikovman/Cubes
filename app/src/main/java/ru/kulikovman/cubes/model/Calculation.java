@@ -7,6 +7,7 @@ public class Calculation {
 
     public int size;
     public int halfSize;
+    public int offset;
 
     public int sx, sy; // центр кнопки настроек
 
