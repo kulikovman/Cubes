@@ -112,7 +112,7 @@ public class CubesOnBoardFragment extends Fragment {
 
     public void rollCubes(View view) {
         // Удаляем старые кубики с доски
-        binding.board.removeAllViews();
+        binding.topBoard.removeAllViews();
         cubeViews.clear();
         cubes.clear();
 
@@ -141,7 +141,7 @@ public class CubesOnBoardFragment extends Fragment {
 
         // Размещаем созданные вью на экране
         for (CubeView cubeView : cubeViews) {
-            binding.board.addView(cubeView);
+            binding.topBoard.addView(cubeView);
         }
 
         // Воспроизводим звук броска

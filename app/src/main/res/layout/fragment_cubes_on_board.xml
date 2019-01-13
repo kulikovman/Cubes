@@ -17,7 +17,12 @@
         android:layout_height="match_parent">
 
         <FrameLayout
-            android:id="@+id/board"
+            android:id="@+id/bottom_board"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <FrameLayout
+            android:id="@+id/top_board"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
