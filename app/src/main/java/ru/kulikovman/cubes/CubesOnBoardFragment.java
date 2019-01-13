@@ -81,7 +81,7 @@ public class CubesOnBoardFragment extends Fragment {
         int sy = settingSize / 2 + settingPadding + settingMarginTop;
 
         // Размеры кубика
-        int size = (int) getResources().getDimension(R.dimen.white_cube_size);
+        int size = (int) getResources().getDimension(R.dimen.white_cube_view_size);
         int halfSize = size / 2;
 
         // Радиусы кнопки настроек и кубика
