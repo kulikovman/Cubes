@@ -17,18 +17,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@{model.marginStart}"
-        android:layout_marginTop="@{model.marginTop}"
-        tools:layout_marginStart="100dp"
-        tools:layout_marginTop="100dp">
+        android:layout_marginTop="@{model.marginTop}">
 
 
         <ImageView
             android:id="@+id/shadow"
-            android:layout_width="@dimen/cube_size"
-            android:layout_height="@dimen/cube_size"
+            android:layout_width="@dimen/white_shadow_size"
+            android:layout_height="@dimen/white_shadow_size"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
-            tools:rotation="45"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/white_shadow"/>
 
@@ -38,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
-            tools:rotation="45"
             app:srcCompat="@drawable/white_cube"/>
 
         <ImageView
@@ -47,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
-            tools:rotation="45"
             app:srcCompat="@drawable/white_dot_1"/>
 
     </FrameLayout>
