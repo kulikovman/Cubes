@@ -1,5 +1,7 @@
 package ru.kulikovman.cubes.model;
 
+import android.util.Log;
+
 import java.util.Random;
 
 import ru.kulikovman.cubes.data.Skin;
@@ -13,14 +15,13 @@ public class Cube {
     // Параметры для вью
     private Skin skin;
     private int value;
-    private int degrees;
     private int marginStart, marginTop;
 
     // Центр кубика
     private int x, y;
 
-    // Размер и угол поворота
-    //private int size;
+    // Угол поворота
+    private int degrees;
     private double radians;
 
     // Вершины прямоугольника
@@ -32,7 +33,6 @@ public class Cube {
     public Cube(Calculation calculation, Skin skin) {
         this.calculation = calculation;
         this.skin = skin;
-        //this.size = calculation.getSize();
         this.random = calculation.getRandom();
 
         // Цвет кубика
@@ -52,9 +52,12 @@ public class Cube {
 
         // Расположение кубика на экране
         boolean isCorrectPosition = false;
+        int count1 = 1;
         while (!isCorrectPosition) {
+            Log.d("myLog", "Start position: " + count1);
             setNewCubePosition();
             isCorrectPosition = checkPosition();
+            count1++;
         }
 
         // Макс./мин. координаты вершин
@@ -108,8 +111,13 @@ public class Cube {
     }
 
     private void setNewCubePosition() {
-        x = calculation.getRollArea().getMinX() + random.nextInt(calculation.getRollArea().getMaxX() + 1);
-        y = calculation.getRollArea().getMinY() + random.nextInt(calculation.getRollArea().getMaxY() + 1);
+        int minX = calculation.getRollArea().getMinX();
+        int maxX = calculation.getRollArea().getMaxX();
+        int minY = calculation.getRollArea().getMinY();
+        int maxY = calculation.getRollArea().getMaxY();
+
+        x = minX + random.nextInt(maxX - minX);
+        y = minY + random.nextInt(maxY - minY);
     }
 
     public void moveCube() {
