@@ -80,13 +80,17 @@ public class CubesOnBoardFragment extends Fragment {
         int sx = screenWidth / 2;
         int sy = settingSize / 2 + settingPadding + settingMarginTop;
 
-        // Размеры кубика
-        int size = (int) getResources().getDimension(R.dimen.white_cube_view_size);
+        // Размеры вью кубика
+        int viewSize = (int) getResources().getDimension(R.dimen.white_cube_view_size);
+        int halfViewSize = viewSize / 2;
+
+        // Размер кубика
+        int size = (int) Math.sqrt((Math.pow(halfViewSize, 2) + Math.pow(halfViewSize, 2)));
         int halfSize = size / 2;
 
         // Радиусы кнопки настроек и кубика
         int settingRadius = settingSize / 2 + settingPadding;
-        int cubeRadius = (int) Math.sqrt((Math.pow(halfSize, 2) + Math.pow(halfSize, 2)));
+        int cubeRadius = halfViewSize;
 
         // Зона возможного расположения кубика
         RollArea rollArea = new RollArea(cubeRadius, screenWidth - cubeRadius,
@@ -96,6 +100,8 @@ public class CubesOnBoardFragment extends Fragment {
         Log.d("myLog", "screenHeight = " + screenHeight);
         Log.d("myLog", "settingSize = " + settingSize);
         Log.d("myLog", "settingPadding = " + settingPadding);
+        Log.d("myLog", "viewSize = " + viewSize);
+        Log.d("myLog", "halfViewSize = " + halfViewSize);
         Log.d("myLog", "size = " + size);
         Log.d("myLog", "halfSize = " + halfSize);
         Log.d("myLog", "settingRadius = " + settingRadius);
@@ -103,7 +109,7 @@ public class CubesOnBoardFragment extends Fragment {
         Log.d("myLog", "rollArea = " + rollArea.getMinX() + " - " + rollArea.getMaxX() + " | " + rollArea.getMinY() + " - " + rollArea.getMaxY());
 
         // Сохраняем все полученные размеры
-        calculation = new Calculation(screenWidth, screenHeight, size, halfSize, sx, sy, cubeRadius, settingRadius, rollArea);
+        calculation = new Calculation(screenWidth, screenHeight, viewSize, halfViewSize, size, halfSize, sx, sy, cubeRadius, settingRadius, rollArea);
     }
 
     public void openSetting(View view) {

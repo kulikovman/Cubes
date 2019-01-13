@@ -10,6 +10,10 @@ public class Calculation {
     private int screenWidth;
     private int screenHeight;
 
+    // Размер вью кубика
+    private int viewSize;
+    private int halfViewSize;
+
     // Размер кубика
     private int size;
     private int halfSize;
@@ -24,13 +28,13 @@ public class Calculation {
     // Зона возможного расположения кубика
     private RollArea rollArea;
 
-    public Calculation(int screenWidth, int screenHeight, int size, int halfSize, int sx, int sy, int cubeRadius, int settingRadius, RollArea rollArea) {
+    public Calculation(int screenWidth, int screenHeight, int viewSize, int halfViewSize, int size, int halfSize, int sx, int sy, int cubeRadius, int settingRadius, RollArea rollArea) {
         this.random = new Random();
 
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        this.size = size;
-        this.halfSize = halfSize;
+        this.viewSize = viewSize;
+        this.halfViewSize = halfViewSize;
         this.sx = sx;
         this.sy = sy;
         this.cubeRadius = cubeRadius;
@@ -46,12 +50,12 @@ public class Calculation {
         return screenHeight;
     }
 
-    public int getSize() {
-        return size;
+    public int getViewSize() {
+        return viewSize;
     }
 
-    public int getHalfSize() {
-        return halfSize;
+    public int getHalfViewSize() {
+        return halfViewSize;
     }
 
     public int getSx() {

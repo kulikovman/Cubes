@@ -79,7 +79,7 @@ public class CubeView extends FrameLayout {
         // Назначение картинок в соответствии с цветом
         String skinName = skin.name().toLowerCase();
         binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
-        binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
+        //binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
         binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
 
         // Обновление переменной в макете

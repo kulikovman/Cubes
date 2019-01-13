@@ -61,10 +61,10 @@ public class Cube {
         }
 
         // Макс./мин. координаты вершин
-        int minX = x - calculation.getHalfSize();
-        int maxX = x + calculation.getHalfSize();
-        int minY = y - calculation.getHalfSize();
-        int maxY = y + calculation.getHalfSize();
+        int minX = x - calculation.getHalfViewSize();
+        int maxX = x + calculation.getHalfViewSize();
+        int minY = y - calculation.getHalfViewSize();
+        int maxY = y + calculation.getHalfViewSize();
 
         // Подсчет отступов
         marginStart = minX;
