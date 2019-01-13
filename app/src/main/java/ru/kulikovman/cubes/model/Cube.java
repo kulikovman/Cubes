@@ -60,15 +60,15 @@ public class Cube {
             count1++;
         }
 
-        // Макс./мин. координаты вершин
-        int minX = x - calculation.getHalfViewSize();
-        int maxX = x + calculation.getHalfViewSize();
-        int minY = y - calculation.getHalfViewSize();
-        int maxY = y + calculation.getHalfViewSize();
-
         // Подсчет отступов
-        marginStart = minX;
-        marginTop = minY;
+        marginStart = x - calculation.getHalfViewSize();
+        marginTop = y - calculation.getHalfViewSize();
+
+        // Макс./мин. координаты вершин
+        int minX = x - calculation.getHalfSize();
+        int maxX = x + calculation.getHalfSize();
+        int minY = y - calculation.getHalfSize();
+        int maxY = y + calculation.getHalfSize();
 
         // Положение вершин до поворота
         x1 = minX;

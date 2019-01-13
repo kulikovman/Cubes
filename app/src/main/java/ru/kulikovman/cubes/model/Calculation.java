@@ -58,6 +58,14 @@ public class Calculation {
         return halfViewSize;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public int getHalfSize() {
+        return halfSize;
+    }
+
     public int getSx() {
         return sx;
     }
