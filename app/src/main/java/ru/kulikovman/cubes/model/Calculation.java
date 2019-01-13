@@ -18,6 +18,10 @@ public class Calculation {
     private int size;
     private int halfSize;
 
+    // Размер тени
+    private int shadowSize;
+    private int halfShadowSize;
+
     // Центр кнопки настроек
     private int sx, sy;
 
@@ -28,7 +32,7 @@ public class Calculation {
     // Зона возможного расположения кубика
     private RollArea rollArea;
 
-    public Calculation(int screenWidth, int screenHeight, int viewSize, int halfViewSize, int size, int halfSize, int sx, int sy, int cubeRadius, int settingRadius, RollArea rollArea) {
+    public Calculation(int screenWidth, int screenHeight, int viewSize, int halfViewSize, int size, int halfSize, int shadowSize, int halfShadowSize, int sx, int sy, int cubeRadius, int settingRadius, RollArea rollArea) {
         this.random = new Random();
 
         this.screenWidth = screenWidth;
@@ -64,6 +68,14 @@ public class Calculation {
 
     public int getHalfSize() {
         return halfSize;
+    }
+
+    public int getShadowSize() {
+        return shadowSize;
+    }
+
+    public int getHalfShadowSize() {
+        return halfShadowSize;
     }
 
     public int getSx() {

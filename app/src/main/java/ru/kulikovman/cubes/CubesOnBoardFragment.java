@@ -22,6 +22,7 @@ import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.RollArea;
 import ru.kulikovman.cubes.view.CubeView;
+import ru.kulikovman.cubes.view.ShadowView;
 
 
 public class CubesOnBoardFragment extends Fragment {
@@ -35,6 +36,7 @@ public class CubesOnBoardFragment extends Fragment {
     private int numberOfCubes;
     private List<Cube> cubes;
     private List<CubeView> cubeViews;
+    private List<ShadowView> shadowViews;
 
 
     @Nullable
@@ -62,6 +64,7 @@ public class CubesOnBoardFragment extends Fragment {
         // Инициализация списков
         cubes = new ArrayList<>();
         cubeViews = new ArrayList<>();
+        shadowViews = new ArrayList<>();
 
         // Обновление переменной в макете
         binding.setModel(this);
@@ -88,6 +91,10 @@ public class CubesOnBoardFragment extends Fragment {
         int size = (int) Math.sqrt((Math.pow(halfViewSize, 2) + Math.pow(halfViewSize, 2)));
         int halfSize = size / 2;
 
+        // Размер тени кубика
+        int shadowSize = (int) getResources().getDimension(R.dimen.white_shadow_view_size);
+        int halfShadowSize = shadowSize / 2;
+
         // Радиусы кнопки настроек и кубика
         int settingRadius = settingSize / 2 + settingPadding;
         int cubeRadius = halfViewSize;
@@ -109,7 +116,7 @@ public class CubesOnBoardFragment extends Fragment {
         Log.d("myLog", "rollArea = " + rollArea.getMinX() + " - " + rollArea.getMaxX() + " | " + rollArea.getMinY() + " - " + rollArea.getMaxY());
 
         // Сохраняем все полученные размеры
-        calculation = new Calculation(screenWidth, screenHeight, viewSize, halfViewSize, size, halfSize, sx, sy, cubeRadius, settingRadius, rollArea);
+        calculation = new Calculation(screenWidth, screenHeight, viewSize, halfViewSize, size, halfSize, shadowSize, halfShadowSize, sx, sy, cubeRadius, settingRadius, rollArea);
     }
 
     public void openSetting(View view) {
@@ -119,6 +126,8 @@ public class CubesOnBoardFragment extends Fragment {
     public void rollCubes(View view) {
         // Удаляем старые кубики с доски
         binding.topBoard.removeAllViews();
+        binding.bottomBoard.removeAllViews();
+        shadowViews.clear();
         cubeViews.clear();
         cubes.clear();
 
@@ -141,13 +150,19 @@ public class CubesOnBoardFragment extends Fragment {
 
             // Создаем вью из кубика
             CubeView cubeView = new CubeView(context, cube);
+            ShadowView shadowView = new ShadowView(context, cube);
 
             cubeViews.add(cubeView);
+            shadowViews.add(shadowView);
         }
 
         // Размещаем созданные вью на экране
         for (CubeView cubeView : cubeViews) {
             binding.topBoard.addView(cubeView);
+        }
+
+        for (ShadowView shadowView : shadowViews) {
+            binding.bottomBoard.addView(shadowView);
         }
 
         // Воспроизводим звук броска

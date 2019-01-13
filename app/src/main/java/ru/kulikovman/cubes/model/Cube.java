@@ -15,7 +15,6 @@ public class Cube {
     // Параметры для вью
     private Skin skin;
     private int value;
-    private int marginStart, marginTop;
 
     // Центр кубика
     private int x, y;
@@ -59,10 +58,6 @@ public class Cube {
             isCorrectPosition = checkPosition();
             count1++;
         }
-
-        // Подсчет отступов
-        marginStart = x - calculation.getHalfViewSize();
-        marginTop = y - calculation.getHalfViewSize();
 
         // Макс./мин. координаты вершин
         int minX = x - calculation.getHalfSize();
@@ -170,6 +165,10 @@ public class Cube {
         return false;
     }*/
 
+    public Calculation getCalculation() {
+        return calculation;
+    }
+
     public int getX() {
         return x;
     }
@@ -188,14 +187,6 @@ public class Cube {
 
     public int getDegrees() {
         return degrees;
-    }
-
-    public int getMarginStart() {
-        return marginStart;
-    }
-
-    public int getMarginTop() {
-        return marginTop;
     }
 
     public int getX1() {

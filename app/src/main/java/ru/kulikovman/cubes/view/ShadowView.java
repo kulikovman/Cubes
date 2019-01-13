@@ -12,39 +12,37 @@ import android.widget.FrameLayout;
 
 import ru.kulikovman.cubes.R;
 import ru.kulikovman.cubes.data.Skin;
-import ru.kulikovman.cubes.databinding.ViewCubeBinding;
+import ru.kulikovman.cubes.databinding.ViewShadowBinding;
 import ru.kulikovman.cubes.model.Cube;
 
+public class ShadowView  extends FrameLayout {
 
-public class CubeView extends FrameLayout {
-
-    private ViewCubeBinding binding;
+    private ViewShadowBinding binding;
     private Context context;
 
     private Skin skin;
-    private int value;
     public int angle;
     public int marginStart;
     public int marginTop;
 
-    public CubeView(@NonNull Context context) {
+    public ShadowView(@NonNull Context context) {
         super(context);
     }
 
-    public CubeView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public ShadowView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CubeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ShadowView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public CubeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ShadowView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     // Конструктор для генерации кубика через код
-    public CubeView(@NonNull Context context, Cube cube) {
+    public ShadowView(@NonNull Context context, Cube cube) {
         super(context);
         init(context, cube);
     }
@@ -53,11 +51,11 @@ public class CubeView extends FrameLayout {
         this.context = context;
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.view_cube, this);
+        inflater.inflate(R.layout.view_shadow, this);
 
         if (!isInEditMode()) {
             // Подключение биндинга
-            binding = DataBindingUtil.bind((findViewById(R.id.cube_view_container)));
+            binding = DataBindingUtil.bind((findViewById(R.id.shadow_view_container)));
 
             // Ставим значения
             setCube(cube);
@@ -66,20 +64,18 @@ public class CubeView extends FrameLayout {
 
     public void setCube(Cube cube) {
         skin = cube.getSkin();
-        value = cube.getValue();
         angle = cube.getDegrees();
-        marginStart = cube.getX() - cube.getCalculation().getHalfViewSize();
-        marginTop = cube.getY() - cube.getCalculation().getHalfViewSize();
+        marginStart = cube.getX() - cube.getCalculation().getHalfShadowSize();
+        marginTop = cube.getY() - cube.getCalculation().getHalfShadowSize();
 
         // Отрисовка кубика
-        drawCube();
+        drawShadow();
     }
 
-    private void drawCube() {
-        // Назначение картинок в соответствии с цветом
+    private void drawShadow() {
+        // Назначение тени в соответствии с цветом
         String skinName = skin.name().toLowerCase();
-        binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
-        binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
+        binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
 
         // Обновление переменной в макете
         binding.setModel(this);
