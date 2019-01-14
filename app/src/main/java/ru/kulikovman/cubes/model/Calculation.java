@@ -11,16 +11,16 @@ public class Calculation {
     private int screenHeight;
 
     // Размер вью кубика
-    private int viewSize;
-    private int halfViewSize;
+    private int cubeViewSize;
+    private int cubeHalfViewSize;
 
     // Размер кубика
-    private int size;
-    private int halfSize;
+    private int cubeSize;
+    private int cubeHalfSize;
 
     // Размер тени
-    private int shadowSize;
-    private int halfShadowSize;
+    private int shadowViewSize;
+    private int shadowHalfViewSize;
 
     // Центр кнопки настроек
     private int sx, sy;
@@ -28,21 +28,29 @@ public class Calculation {
     // Базовые радиусы
     private int cubeRadius;
     private int settingRadius;
+    private int shadowRadius;
 
     // Зона возможного расположения кубика
     private RollArea rollArea;
 
-    public Calculation(int screenWidth, int screenHeight, int viewSize, int halfViewSize, int size, int halfSize, int shadowSize, int halfShadowSize, int sx, int sy, int cubeRadius, int settingRadius, RollArea rollArea) {
+    public Calculation(int screenWidth, int screenHeight, int cubeViewSize, int cubeHalfViewSize, int cubeSize, int cubeHalfSize,
+                       int shadowViewSize, int shadowHalfViewSize, int sx, int sy, int cubeRadius, int settingRadius, int shadowRadius, RollArea rollArea) {
+
         this.random = new Random();
 
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        this.viewSize = viewSize;
-        this.halfViewSize = halfViewSize;
+        this.cubeViewSize = cubeViewSize;
+        this.cubeHalfViewSize = cubeHalfViewSize;
+        this.cubeSize = cubeSize;
+        this.cubeHalfSize = cubeHalfSize;
+        this.shadowViewSize = shadowViewSize;
+        this.shadowHalfViewSize = shadowHalfViewSize;
         this.sx = sx;
         this.sy = sy;
         this.cubeRadius = cubeRadius;
         this.settingRadius = settingRadius;
+        this.shadowRadius = shadowRadius;
         this.rollArea = rollArea;
     }
 
@@ -54,28 +62,28 @@ public class Calculation {
         return screenHeight;
     }
 
-    public int getViewSize() {
-        return viewSize;
+    public int getCubeViewSize() {
+        return cubeViewSize;
     }
 
-    public int getHalfViewSize() {
-        return halfViewSize;
+    public int getCubeHalfViewSize() {
+        return cubeHalfViewSize;
     }
 
-    public int getSize() {
-        return size;
+    public int getCubeSize() {
+        return cubeSize;
     }
 
-    public int getHalfSize() {
-        return halfSize;
+    public int getCubeHalfSize() {
+        return cubeHalfSize;
     }
 
-    public int getShadowSize() {
-        return shadowSize;
+    public int getShadowViewSize() {
+        return shadowViewSize;
     }
 
-    public int getHalfShadowSize() {
-        return halfShadowSize;
+    public int getShadowHalfViewSize() {
+        return shadowHalfViewSize;
     }
 
     public int getSx() {

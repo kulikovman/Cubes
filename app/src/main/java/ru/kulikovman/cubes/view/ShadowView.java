@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -65,8 +66,9 @@ public class ShadowView  extends FrameLayout {
     public void setCube(Cube cube) {
         skin = cube.getSkin();
         angle = cube.getDegrees();
-        marginStart = cube.getX() - cube.getCalculation().getHalfShadowSize();
-        marginTop = cube.getY() - cube.getCalculation().getHalfShadowSize();
+        marginStart = cube.getShadowMarginStart();
+        marginTop = cube.getShadowMarginTop();
+        Log.d("myLog", "Shadow margin: " + marginStart + ", " + marginTop);
 
         // Отрисовка кубика
         drawShadow();

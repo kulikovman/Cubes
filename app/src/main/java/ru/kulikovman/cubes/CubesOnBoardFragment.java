@@ -77,46 +77,50 @@ public class CubesOnBoardFragment extends Fragment {
         int screenHeight = displayMetrics.heightPixels;
 
         // Координаты кнопки настроек
-        int settingSize = (int) getResources().getDimension(R.dimen.button_setting_size);
-        int settingPadding = (int) getResources().getDimension(R.dimen.button_setting_padding);
-        int settingMarginTop = (int) getResources().getDimension(R.dimen.button_setting_marginTop);
+        int settingSize = getResources().getDimensionPixelSize(R.dimen.button_setting_size);
+        int settingPadding = getResources().getDimensionPixelSize(R.dimen.button_setting_padding);
+        int settingMarginTop = getResources().getDimensionPixelSize(R.dimen.button_setting_marginTop);
         int sx = screenWidth / 2;
         int sy = settingSize / 2 + settingPadding + settingMarginTop;
 
         // Размеры вью кубика
-        int viewSize = (int) getResources().getDimension(R.dimen.white_cube_view_size);
-        int halfViewSize = viewSize / 2;
+        int cubeViewSize = getResources().getDimensionPixelSize(R.dimen.white_cube_view_size);
+        int cubeHalfViewSize = cubeViewSize / 2;
 
         // Размер кубика
-        int size = (int) Math.sqrt((Math.pow(halfViewSize, 2) + Math.pow(halfViewSize, 2)));
-        int halfSize = size / 2;
+        int cubeSize = (int) Math.sqrt((Math.pow(cubeHalfViewSize, 2) + Math.pow(cubeHalfViewSize, 2)));
+        int cubeHalfSize = cubeSize / 2;
 
         // Размер тени кубика
-        int shadowSize = (int) getResources().getDimension(R.dimen.white_shadow_view_size);
-        int halfShadowSize = shadowSize / 2;
+        int shadowViewSize = getResources().getDimensionPixelSize(R.dimen.white_shadow_view_size);
+        int shadowHalfViewSize = shadowViewSize / 2;
 
         // Радиусы кнопки настроек и кубика
         int settingRadius = settingSize / 2 + settingPadding;
-        int cubeRadius = halfViewSize;
+        int cubeRadius = cubeHalfViewSize;
+        int shadowRadius = (int) Math.sqrt((Math.pow(shadowHalfViewSize, 2) + Math.pow(shadowHalfViewSize, 2)));
 
         // Зона возможного расположения кубика
-        RollArea rollArea = new RollArea(cubeRadius, screenWidth - cubeRadius,
-                cubeRadius, screenHeight - cubeRadius);
+        RollArea rollArea = new RollArea(shadowRadius, screenWidth - shadowRadius,
+                shadowRadius, screenHeight - shadowRadius);
 
         Log.d("myLog", "screenWidth = " + screenWidth);
         Log.d("myLog", "screenHeight = " + screenHeight);
         Log.d("myLog", "settingSize = " + settingSize);
         Log.d("myLog", "settingPadding = " + settingPadding);
-        Log.d("myLog", "viewSize = " + viewSize);
-        Log.d("myLog", "halfViewSize = " + halfViewSize);
-        Log.d("myLog", "size = " + size);
-        Log.d("myLog", "halfSize = " + halfSize);
+        Log.d("myLog", "cubeViewSize = " + cubeViewSize);
+        Log.d("myLog", "cubeHalfViewSize = " + cubeHalfViewSize);
+        Log.d("myLog", "cubeSize = " + cubeSize);
+        Log.d("myLog", "cubeHalfSize = " + cubeHalfSize);
+        Log.d("myLog", "shadowViewSize = " + shadowViewSize);
+        Log.d("myLog", "shadowHalfViewSize = " + shadowHalfViewSize);
         Log.d("myLog", "settingRadius = " + settingRadius);
         Log.d("myLog", "cubeRadius = " + cubeRadius);
         Log.d("myLog", "rollArea = " + rollArea.getMinX() + " - " + rollArea.getMaxX() + " | " + rollArea.getMinY() + " - " + rollArea.getMaxY());
 
         // Сохраняем все полученные размеры
-        calculation = new Calculation(screenWidth, screenHeight, viewSize, halfViewSize, size, halfSize, shadowSize, halfShadowSize, sx, sy, cubeRadius, settingRadius, rollArea);
+        calculation = new Calculation(screenWidth, screenHeight, cubeViewSize, cubeHalfViewSize, cubeSize, cubeHalfSize,
+                shadowViewSize, shadowHalfViewSize, sx, sy, cubeRadius, settingRadius, shadowRadius, rollArea);
     }
 
     public void openSetting(View view) {

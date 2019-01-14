@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
             tools:rotation="45"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/white_shadow"/>
 
     </FrameLayout>

@@ -16,6 +16,12 @@ public class Cube {
     private Skin skin;
     private int value;
 
+    // Отступы
+    private int cubeMarginStart;
+    private int cubeMarginTop;
+    private int shadowMarginStart;
+    private int shadowMarginTop;
+
     // Центр кубика
     private int x, y;
 
@@ -53,17 +59,23 @@ public class Cube {
         boolean isCorrectPosition = false;
         int count1 = 1;
         while (!isCorrectPosition) {
-            Log.d("myLog", "Start position: " + count1);
+            //Log.d("myLog", "Start position: " + count1);
             setNewCubePosition();
             isCorrectPosition = checkPosition();
             count1++;
         }
 
+        // Расчет отступов
+        cubeMarginStart = x - calculation.getCubeHalfViewSize();
+        cubeMarginTop = y - calculation.getCubeHalfViewSize();
+        shadowMarginStart = x - calculation.getShadowHalfViewSize();
+        shadowMarginTop = y - calculation.getShadowHalfViewSize();
+
         // Макс./мин. координаты вершин
-        int minX = x - calculation.getHalfSize();
-        int maxX = x + calculation.getHalfSize();
-        int minY = y - calculation.getHalfSize();
-        int maxY = y + calculation.getHalfSize();
+        int minX = x - calculation.getCubeHalfSize();
+        int maxX = x + calculation.getCubeHalfSize();
+        int minY = y - calculation.getCubeHalfSize();
+        int maxY = y + calculation.getCubeHalfSize();
 
         // Положение вершин до поворота
         x1 = minX;
@@ -113,6 +125,7 @@ public class Cube {
 
         x = minX + random.nextInt(maxX - minX);
         y = minY + random.nextInt(maxY - minY);
+        Log.d("myLog", "setNewCubePosition: " + x + ", " + y);
     }
 
     public void moveCube() {
@@ -183,6 +196,22 @@ public class Cube {
 
     public int getValue() {
         return value;
+    }
+
+    public int getCubeMarginStart() {
+        return cubeMarginStart;
+    }
+
+    public int getCubeMarginTop() {
+        return cubeMarginTop;
+    }
+
+    public int getShadowMarginStart() {
+        return shadowMarginStart;
+    }
+
+    public int getShadowMarginTop() {
+        return shadowMarginTop;
     }
 
     public int getDegrees() {

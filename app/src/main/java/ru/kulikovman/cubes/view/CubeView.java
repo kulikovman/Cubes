@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -68,8 +69,9 @@ public class CubeView extends FrameLayout {
         skin = cube.getSkin();
         value = cube.getValue();
         angle = cube.getDegrees();
-        marginStart = cube.getX() - cube.getCalculation().getHalfViewSize();
-        marginTop = cube.getY() - cube.getCalculation().getHalfViewSize();
+        marginStart = cube.getCubeMarginStart();
+        marginTop = cube.getCubeMarginTop();
+        Log.d("myLog", "Cube margin: " + marginStart + ", " + marginTop);
 
         // Отрисовка кубика
         drawCube();
