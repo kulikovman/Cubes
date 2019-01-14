@@ -57,12 +57,9 @@ public class Cube {
 
         // Расположение кубика на экране
         boolean isCorrectPosition = false;
-        int count1 = 1;
         while (!isCorrectPosition) {
-            //Log.d("myLog", "Start position: " + count1);
             setNewCubePosition();
             isCorrectPosition = checkPosition();
-            count1++;
         }
 
         // Расчет отступов
@@ -146,6 +143,7 @@ public class Cube {
         int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) +
                 Math.pow(Math.abs(y - cube.getY()), 2)));
 
+        Log.d("myLog", "distance = " + distance);
         // Должно быть больше, чем сумма радиусов
         if (distance > calculation.getCubeRadius() * 2) {
             return false;

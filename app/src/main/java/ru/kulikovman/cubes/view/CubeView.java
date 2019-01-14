@@ -71,7 +71,6 @@ public class CubeView extends FrameLayout {
         angle = cube.getDegrees();
         marginStart = cube.getCubeMarginStart();
         marginTop = cube.getCubeMarginTop();
-        Log.d("myLog", "Cube margin: " + marginStart + ", " + marginTop);
 
         // Отрисовка кубика
         drawCube();

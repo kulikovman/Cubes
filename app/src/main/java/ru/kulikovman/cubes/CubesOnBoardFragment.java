@@ -140,17 +140,30 @@ public class CubesOnBoardFragment extends Fragment {
             // Создаем кубик
             Cube cube = new Cube(calculation, skin);
 
-            /*if (cubes.isEmpty()) {
+            if (cubes.isEmpty()) {
                 cubes.add(cube);
             } else {
                 // Проверяем пересечение с другими кубиками
                 boolean intersection = true;
+                int countIntersection = 1;
                 while (intersection) {
+                    Log.d("myLog", "countIntersection = " + countIntersection);
                     for (Cube c : cubes) {
+                        if (cube.intersection(c)) {
+                            intersection = true;
+                            break;
+                        } else {
+                            intersection = false;
+                        }
+                    }
 
+                    // Если пересечение, то двигаем
+                    if (intersection) {
+                        cube.moveCube();
+                        countIntersection++;
                     }
                 }
-            } */
+            }
 
             // Создаем вью из кубика
             CubeView cubeView = new CubeView(context, cube);
