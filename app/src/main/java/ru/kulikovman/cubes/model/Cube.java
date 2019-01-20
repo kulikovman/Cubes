@@ -145,25 +145,28 @@ public class Cube {
         return (int) (y + (py - y) * Math.cos(radians) + (px - x) * Math.sin(radians));
     }
 
-    public boolean intersection (Cube cube) {
-        // ЭТАП 1: предварительная упрощенная проверка
-        // Расстояние между центрами кубиков
+    public boolean intersection(Cube cube) {
+        // Расчет растояния между центрами кубиков
         int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
-
         Log.d("myLog", "Distance: " + x + ", " + y + " | " + cube.getX() + ", " + cube.getY() + " ---> " + distance);
-        // Если расстояние больше, чем сумма внешних радиусов, то все ок
+
+        // ЭТАП 1: предварительная упрощенная проверка
+        // Если больше двойного внешнего радиуса, то все ок
         if (distance > calculation.getCubeDoubleOuterRadius()) {
             return false;
         }
 
-        // ЭТАП 2: проверка минимально допустимого радиуса
+        // ЭТАП 2: проверка минимально допустимого расстояния
         if (distance < calculation.getCubeDoubleInnerRadius()) {
             return true;
         }
 
-        // ЭТАП 3: проверка положения всех точек
+        // ЭТАП 3: проверка расположения вершин кубиков
+        // Если точки одного кубика находятся за пределами второго и наоборот, то все ок
         if (!pointInsideCube(cube.getX1(), cube.getY1()) && !pointInsideCube(cube.getX2(), cube.getY2()) &&
-                !pointInsideCube(cube.getX3(), cube.getY3()) && !pointInsideCube(cube.getX4(), cube.getY4())) {
+                !pointInsideCube(cube.getX3(), cube.getY3()) && !pointInsideCube(cube.getX4(), cube.getY4()) &&
+                !cube.pointInsideCube(x1, y1) && !cube.pointInsideCube(x2, y2) &&
+                !cube.pointInsideCube(x3, y3) && !cube.pointInsideCube(x4, y4)) {
             return false;
         }
 
@@ -171,16 +174,16 @@ public class Cube {
         return true;
     }
 
-    private boolean pointInsideCube(int px, int py) {
-        // Делим куб на два треугольника и проверяем
-        // принадлежность точки к полученным треугольникам
+    public boolean pointInsideCube(int px, int py) {
+        // Делим куб на два треугольника и проверяем принадлежность
+        // точек одного куба к треугольникам другого
 
-        // Условное обозначение точек
+        // Обозначение вершин куба
         // a - b
         // | \ |
         // d - c
 
-        // Проверка первой части (треугольник ABC)
+        // Треугольник ABC
         int ab = (x1 - px) * (y2 - y1) - (x2 - x1) * (y1 - py);
         int bc = (x2 - px) * (y3 - y2) - (x3 - x2) * (y2 - py);
         int ca = (x3 - px) * (y1 - y3) - (x1 - x3) * (y3 - py);
@@ -190,7 +193,7 @@ public class Cube {
             return true;
         }
 
-        // Проверка второй части (треугольник ACD)
+        // Треугольник ACD
         int ac = (x1 - px) * (y3 - y1) - (x3 - x1) * (y1 - py);
         int cd = (x3 - px) * (y4 - y3) - (x4 - x3) * (y3 - py);
         int da = (x4 - px) * (y1 - y4) - (x1 - x4) * (y4 - py);
@@ -201,30 +204,7 @@ public class Cube {
         }
 
         // Точка находится вне куба
-        Log.d("myLog", "Точка за пределами куба");
         return false;
-    }
-
-    /*
-    int a = (x[1] - x[0]) * (y[2] - y[1]) - (x[2] - x[1]) * (y[1] - y[0]);
-    int b = (x[2] - x[0]) * (y[3] - y[2]) - (x[3] - x[2]) * (y[2] - y[0]);
-    int c = (x[3] - x[0]) * (y[1] - y[3]) - (x[1] - x[3]) * (y[3] - y[0]);
-
-            if ((a >= 0 && b >= 0 && c >= 0) || (a <= 0 && b <= 0 && c <= 0))
-    {
-        Console.WriteLine("Принадлежит треугольнику");
-    }
-            else
-    {
-        Console.WriteLine("Не принадлежит треугольнике");
-    }*/
-
-    /*int a = (P1.X - PTest.X) * (P2.Y - P1.Y) - (P2.X - P1.X) * (P1.Y - PTest.Y);
-    int b = (P2.X - PTest.X) * (P3.Y - P2.Y) - (P3.X - P2.X) * (P2.Y - PTest.Y);
-    int c = (P3.X - PTest.X) * (P1.Y - P3.Y) - (P1.X - P3.X) * (P3.Y - PTest.Y);*/
-
-    public Calculation getCalculation() {
-        return calculation;
     }
 
     public int getX() {
