@@ -117,6 +117,7 @@ public class CubesOnBoardFragment extends Fragment {
         Log.d("myLog", "settingRadius = " + settingRadius);
         Log.d("myLog", "cubeRadius = " + cubeRadius);
         Log.d("myLog", "rollArea = " + rollArea.getMinX() + " - " + rollArea.getMaxX() + " | " + rollArea.getMinY() + " - " + rollArea.getMaxY());
+        Log.d("myLog", "---------------------------");
 
         // Сохраняем все полученные размеры
         calculation = new Calculation(screenWidth, screenHeight, cubeViewSize, cubeHalfViewSize, cubeSize, cubeHalfSize,
@@ -139,9 +140,11 @@ public class CubesOnBoardFragment extends Fragment {
         while (cubes.size() < numberOfCubes) {
             // Создаем кубик
             Cube cube = new Cube(calculation, skin);
+            Log.d("myLog", "New cube " + (cubes.size() + 1) + ": " + cube.getX() + ", " + cube.getY());
 
             if (cubes.isEmpty()) {
                 cubes.add(cube);
+                Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
             } else {
                 // Проверяем пересечение с другими кубиками
                 boolean intersection = true;
@@ -160,6 +163,7 @@ public class CubesOnBoardFragment extends Fragment {
                         cube.moveCube();
                     } else {
                         cubes.add(cube);
+                        Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
                     }
                 }
             }
@@ -186,6 +190,6 @@ public class CubesOnBoardFragment extends Fragment {
 
         // Сохраняем результаты текущего броска в базу
 
-
+        Log.d("myLog", "---------------------------");
     }
 }

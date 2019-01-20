@@ -62,12 +62,6 @@ public class Cube {
             isCorrectPosition = checkPosition();
         }
 
-        // Расчет отступов
-        cubeMarginStart = x - calculation.getCubeHalfViewSize();
-        cubeMarginTop = y - calculation.getCubeHalfViewSize();
-        shadowMarginStart = x - calculation.getShadowHalfViewSize();
-        shadowMarginTop = y - calculation.getShadowHalfViewSize();
-
         // Макс./мин. координаты вершин
         int minX = x - calculation.getCubeHalfSize();
         int maxX = x + calculation.getCubeHalfSize();
@@ -122,7 +116,16 @@ public class Cube {
 
         x = minX + random.nextInt(maxX - minX);
         y = minY + random.nextInt(maxY - minY);
-        Log.d("myLog", "setNewCubePosition: " + x + ", " + y);
+
+        // Расчет отступов
+        calculateMargins();
+    }
+
+    private void calculateMargins() {
+        cubeMarginStart = x - calculation.getCubeHalfViewSize();
+        cubeMarginTop = y - calculation.getCubeHalfViewSize();
+        shadowMarginStart = x - calculation.getShadowHalfViewSize();
+        shadowMarginTop = y - calculation.getShadowHalfViewSize();
     }
 
     public void moveCube() {
@@ -142,7 +145,7 @@ public class Cube {
         // Расстояние между центрами кубиков
         int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
 
-        Log.d("myLog", "distance = " + distance);
+        Log.d("myLog", "Distance: " + x + ", " + y + " | " + cube.getX() + ", " + cube.getY() + " ---> " + distance);
         // Должно быть больше, чем сумма радиусов
         if (distance > calculation.getCubeRadius() * 2) {
             return false;
@@ -155,25 +158,7 @@ public class Cube {
         return true;
     }
 
-    // Старый вариант проверки пересечения
-    /*private boolean isIntersection(List<Dice> coordinates) {
-        // Расстояние между центрами кубиков
-        int dist = convertDpToPx(110);
 
-        // Проверка пересечений
-        for (Dice d1 : coordinates) {
-            for (Dice d2 : coordinates) {
-                if (!d1.equals(d2)) {
-                    int dX = Math.abs(d1.getX() - d2.getX());
-                    int dY = Math.abs(d1.getY() - d2.getY());
-                    if (dX < dist && dY < dist) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }*/
 
     public Calculation getCalculation() {
         return calculation;
