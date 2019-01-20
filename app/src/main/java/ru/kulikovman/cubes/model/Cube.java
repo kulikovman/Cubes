@@ -61,7 +61,45 @@ public class Cube {
             setNewCubePosition();
             isCorrectPosition = checkPosition();
         }
+    }
 
+    private boolean checkPosition() {
+        // Расчет расстояния от центра кнопки настроек до центра кубика
+        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - calculation.getSx()), 2) +
+                Math.pow(Math.abs(y - calculation.getSy()), 2)));
+
+        // Должно быть больше, чем сумма радиусов
+        return distance > calculation.getCubeOuterRadius() + calculation.getSettingRadius();
+    }
+
+    public void moveCube() {
+        setNewCubePosition();
+    }
+
+    private void setNewCubePosition() {
+        int minX = calculation.getRollArea().getMinX();
+        int maxX = calculation.getRollArea().getMaxX();
+        int minY = calculation.getRollArea().getMinY();
+        int maxY = calculation.getRollArea().getMaxY();
+
+        x = minX + random.nextInt(maxX - minX);
+        y = minY + random.nextInt(maxY - minY);
+
+        // Расчет отступов
+        calculateMargins();
+
+        // Расет положения вершин после поворота
+        calculatePointLocations();
+    }
+
+    private void calculateMargins() {
+        cubeMarginStart = x - calculation.getCubeHalfViewSize();
+        cubeMarginTop = y - calculation.getCubeHalfViewSize();
+        shadowMarginStart = x - calculation.getShadowHalfViewSize();
+        shadowMarginTop = y - calculation.getShadowHalfViewSize();
+    }
+
+    private void calculatePointLocations() {
         // Макс./мин. координаты вершин
         int minX = x - calculation.getCubeHalfSize();
         int maxX = x + calculation.getCubeHalfSize();
@@ -82,11 +120,11 @@ public class Cube {
         int tx1 = getXRotation(x1, y1);
         int ty1 = getYRotation(x1, y1);
         int tx2 = getXRotation(x2, y2);
-        int ty2 = getYRotation(x1, y1);
-        int tx3 = getXRotation(x1, y1);
-        int ty3 = getYRotation(x1, y1);
-        int tx4 = getXRotation(x1, y1);
-        int ty4 = getYRotation(x1, y1);
+        int ty2 = getYRotation(x2, y2);
+        int tx3 = getXRotation(x3, y3);
+        int ty3 = getYRotation(x3, y3);
+        int tx4 = getXRotation(x4, y4);
+        int ty4 = getYRotation(x4, y4);
 
         // Сохраняем новые координаты
         x1 = tx1;
@@ -97,39 +135,6 @@ public class Cube {
         y3 = ty3;
         x4 = tx4;
         y4 = ty4;
-    }
-
-    private boolean checkPosition() {
-        // Расчет расстояния от центра кнопки настроек до центра кубика
-        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - calculation.getSx()), 2) +
-                Math.pow(Math.abs(y - calculation.getSy()), 2)));
-
-        // Должно быть больше, чем сумма радиусов
-        return distance > calculation.getCubeOuterRadius() + calculation.getSettingRadius();
-    }
-
-    private void setNewCubePosition() {
-        int minX = calculation.getRollArea().getMinX();
-        int maxX = calculation.getRollArea().getMaxX();
-        int minY = calculation.getRollArea().getMinY();
-        int maxY = calculation.getRollArea().getMaxY();
-
-        x = minX + random.nextInt(maxX - minX);
-        y = minY + random.nextInt(maxY - minY);
-
-        // Расчет отступов
-        calculateMargins();
-    }
-
-    private void calculateMargins() {
-        cubeMarginStart = x - calculation.getCubeHalfViewSize();
-        cubeMarginTop = y - calculation.getCubeHalfViewSize();
-        shadowMarginStart = x - calculation.getShadowHalfViewSize();
-        shadowMarginTop = y - calculation.getShadowHalfViewSize();
-    }
-
-    public void moveCube() {
-        setNewCubePosition();
     }
 
     private int getXRotation(int px, int py) {
@@ -153,48 +158,55 @@ public class Cube {
 
         // ЭТАП 2: проверка минимально допустимого радиуса
         if (distance < calculation.getCubeDoubleInnerRadius()) {
+            return true;
+        }
+
+        // ЭТАП 3: проверка положения всех точек
+        if (!pointInsideCube(cube.getX1(), cube.getY1()) && !pointInsideCube(cube.getX2(), cube.getY2()) &&
+                !pointInsideCube(cube.getX3(), cube.getY3()) && !pointInsideCube(cube.getX4(), cube.getY4())) {
             return false;
         }
-        // ЭТАП 3: проверка положения всех точек
-        pointBelongsToCube(cube.getX1(), cube.getY1());
 
-
-        // заглушка
+        // Одна или несколько точек пересекаются с кубом
         return true;
     }
 
-    private boolean pointBelongsToCube(int px, int py) {
+    private boolean pointInsideCube(int px, int py) {
         // Делим куб на два треугольника и проверяем
         // принадлежность точки к полученным треугольникам
 
         // Условное обозначение точек
         // a - b
-        // |   |
+        // | \ |
         // d - c
 
-        // Проверка первой части (треугольник abc)
+        // Проверка первой части (треугольник ABC)
         int ab = (x1 - px) * (y2 - y1) - (x2 - x1) * (y1 - py);
         int bc = (x2 - px) * (y3 - y2) - (x3 - x2) * (y2 - py);
         int ca = (x3 - px) * (y1 - y3) - (x1 - x3) * (y3 - py);
 
         if ((ab >= 0 && bc >= 0 && ca >= 0) || (ab <= 0 && bc <= 0 && ca <= 0)) {
+            Log.d("myLog", "Точка внутри ABC!");
             return true;
         }
 
-        // Проверка второй части (треугольник acd)
+        // Проверка второй части (треугольник ACD)
         int ac = (x1 - px) * (y3 - y1) - (x3 - x1) * (y1 - py);
         int cd = (x3 - px) * (y4 - y3) - (x4 - x3) * (y3 - py);
         int da = (x4 - px) * (y1 - y4) - (x1 - x4) * (y4 - py);
 
         if ((ac >= 0 && cd >= 0 && da >= 0) || (ac <= 0 && cd <= 0 && da <= 0)) {
+            Log.d("myLog", "Точка внутри ACD!");
             return true;
         }
 
         // Точка находится вне куба
+        Log.d("myLog", "Точка за пределами куба");
         return false;
     }
 
-    /*int a = (x[1] - x[0]) * (y[2] - y[1]) - (x[2] - x[1]) * (y[1] - y[0]);
+    /*
+    int a = (x[1] - x[0]) * (y[2] - y[1]) - (x[2] - x[1]) * (y[1] - y[0]);
     int b = (x[2] - x[0]) * (y[3] - y[2]) - (x[3] - x[2]) * (y[2] - y[0]);
     int c = (x[3] - x[0]) * (y[1] - y[3]) - (x[1] - x[3]) * (y[3] - y[0]);
 

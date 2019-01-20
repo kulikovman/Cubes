@@ -55,6 +55,9 @@ public class Calculation {
         this.settingRadius = settingRadius;
         this.shadowRadius = shadowRadius;
         this.rollArea = rollArea;
+
+        cubeDoubleInnerRadius = cubeSize;
+        cubeDoubleOuterRadius = cubeViewSize;
     }
 
     public int getScreenWidth() {
