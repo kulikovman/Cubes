@@ -55,7 +55,7 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Хардкод (это должно приходить с базы данных - настройки приложения)
-        numberOfCubes = 6; // количество кубиков
+        numberOfCubes = 2; // количество кубиков
         skin = Skin.WHITE; // белый
 
         // Предварительные расчеты всего, что можно подсчитать заранее
@@ -102,7 +102,7 @@ public class CubesOnBoardFragment extends Fragment {
 
         // Зона возможного расположения кубика
         RollArea rollArea = new RollArea(shadowRadius, screenWidth - shadowRadius,
-                shadowRadius, screenHeight - shadowRadius);
+                shadowRadius, screenHeight - shadowRadius - 1000);
 
         Log.d("myLog", "screenWidth = " + screenWidth);
         Log.d("myLog", "screenHeight = " + screenHeight);
@@ -136,7 +136,7 @@ public class CubesOnBoardFragment extends Fragment {
         cubes.clear();
 
         // Генирируем новые кубики
-        while (cubeViews.size() < numberOfCubes) {
+        while (cubes.size() < numberOfCubes) {
             // Создаем кубик
             Cube cube = new Cube(calculation, skin);
 
@@ -145,9 +145,7 @@ public class CubesOnBoardFragment extends Fragment {
             } else {
                 // Проверяем пересечение с другими кубиками
                 boolean intersection = true;
-                int countIntersection = 1;
                 while (intersection) {
-                    Log.d("myLog", "countIntersection = " + countIntersection);
                     for (Cube c : cubes) {
                         if (cube.intersection(c)) {
                             intersection = true;
@@ -160,7 +158,8 @@ public class CubesOnBoardFragment extends Fragment {
                     // Если пересечение, то двигаем
                     if (intersection) {
                         cube.moveCube();
-                        countIntersection++;
+                    } else {
+                        cubes.add(cube);
                     }
                 }
             }

@@ -140,8 +140,7 @@ public class Cube {
     public boolean intersection (Cube cube) {
         // ЭТАП 1: предварительная упрощенная проверка
         // Расстояние между центрами кубиков
-        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) +
-                Math.pow(Math.abs(y - cube.getY()), 2)));
+        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
 
         Log.d("myLog", "distance = " + distance);
         // Должно быть больше, чем сумма радиусов
