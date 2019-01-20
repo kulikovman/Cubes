@@ -105,7 +105,7 @@ public class Cube {
                 Math.pow(Math.abs(y - calculation.getSy()), 2)));
 
         // Должно быть больше, чем сумма радиусов
-        return distance > calculation.getCubeRadius() + calculation.getSettingRadius();
+        return distance > calculation.getCubeOuterRadius() + calculation.getSettingRadius();
     }
 
     private void setNewCubePosition() {
@@ -146,19 +146,70 @@ public class Cube {
         int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
 
         Log.d("myLog", "Distance: " + x + ", " + y + " | " + cube.getX() + ", " + cube.getY() + " ---> " + distance);
-        // Должно быть больше, чем сумма радиусов
-        if (distance > calculation.getCubeRadius() * 2) {
+        // Если расстояние больше, чем сумма внешних радиусов, то все ок
+        if (distance > calculation.getCubeDoubleOuterRadius()) {
             return false;
         }
 
-        // ЭТАП 2: проверка положения всех точек
-        // ...
+        // ЭТАП 2: проверка минимально допустимого радиуса
+        if (distance < calculation.getCubeDoubleInnerRadius()) {
+            return false;
+        }
+        // ЭТАП 3: проверка положения всех точек
+        pointBelongsToCube(cube.getX1(), cube.getY1());
+
 
         // заглушка
         return true;
     }
 
+    private boolean pointBelongsToCube(int px, int py) {
+        // Делим куб на два треугольника и проверяем
+        // принадлежность точки к полученным треугольникам
 
+        // Условное обозначение точек
+        // a - b
+        // |   |
+        // d - c
+
+        // Проверка первой части (треугольник abc)
+        int ab = (x1 - px) * (y2 - y1) - (x2 - x1) * (y1 - py);
+        int bc = (x2 - px) * (y3 - y2) - (x3 - x2) * (y2 - py);
+        int ca = (x3 - px) * (y1 - y3) - (x1 - x3) * (y3 - py);
+
+        if ((ab >= 0 && bc >= 0 && ca >= 0) || (ab <= 0 && bc <= 0 && ca <= 0)) {
+            return true;
+        }
+
+        // Проверка второй части (треугольник acd)
+        int ac = (x1 - px) * (y3 - y1) - (x3 - x1) * (y1 - py);
+        int cd = (x3 - px) * (y4 - y3) - (x4 - x3) * (y3 - py);
+        int da = (x4 - px) * (y1 - y4) - (x1 - x4) * (y4 - py);
+
+        if ((ac >= 0 && cd >= 0 && da >= 0) || (ac <= 0 && cd <= 0 && da <= 0)) {
+            return true;
+        }
+
+        // Точка находится вне куба
+        return false;
+    }
+
+    /*int a = (x[1] - x[0]) * (y[2] - y[1]) - (x[2] - x[1]) * (y[1] - y[0]);
+    int b = (x[2] - x[0]) * (y[3] - y[2]) - (x[3] - x[2]) * (y[2] - y[0]);
+    int c = (x[3] - x[0]) * (y[1] - y[3]) - (x[1] - x[3]) * (y[3] - y[0]);
+
+            if ((a >= 0 && b >= 0 && c >= 0) || (a <= 0 && b <= 0 && c <= 0))
+    {
+        Console.WriteLine("Принадлежит треугольнику");
+    }
+            else
+    {
+        Console.WriteLine("Не принадлежит треугольнике");
+    }*/
+
+    /*int a = (P1.X - PTest.X) * (P2.Y - P1.Y) - (P2.X - P1.X) * (P1.Y - PTest.Y);
+    int b = (P2.X - PTest.X) * (P3.Y - P2.Y) - (P3.X - P2.X) * (P2.Y - PTest.Y);
+    int c = (P3.X - PTest.X) * (P1.Y - P3.Y) - (P1.X - P3.X) * (P3.Y - PTest.Y);*/
 
     public Calculation getCalculation() {
         return calculation;

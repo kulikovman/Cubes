@@ -26,7 +26,10 @@ public class Calculation {
     private int sx, sy;
 
     // Базовые радиусы
-    private int cubeRadius;
+    private int cubeInnerRadius;
+    private int cubeDoubleInnerRadius;
+    private int cubeOuterRadius;
+    private int cubeDoubleOuterRadius;
     private int settingRadius;
     private int shadowRadius;
 
@@ -34,7 +37,7 @@ public class Calculation {
     private RollArea rollArea;
 
     public Calculation(int screenWidth, int screenHeight, int cubeViewSize, int cubeHalfViewSize, int cubeSize, int cubeHalfSize,
-                       int shadowViewSize, int shadowHalfViewSize, int sx, int sy, int cubeRadius, int settingRadius, int shadowRadius, RollArea rollArea) {
+                       int shadowViewSize, int shadowHalfViewSize, int sx, int sy, int cubeOuterRadius, int settingRadius, int shadowRadius, RollArea rollArea) {
 
         this.random = new Random();
 
@@ -48,7 +51,7 @@ public class Calculation {
         this.shadowHalfViewSize = shadowHalfViewSize;
         this.sx = sx;
         this.sy = sy;
-        this.cubeRadius = cubeRadius;
+        this.cubeOuterRadius = cubeOuterRadius;
         this.settingRadius = settingRadius;
         this.shadowRadius = shadowRadius;
         this.rollArea = rollArea;
@@ -94,8 +97,20 @@ public class Calculation {
         return sy;
     }
 
-    public int getCubeRadius() {
-        return cubeRadius;
+    public int getCubeInnerRadius() {
+        return cubeInnerRadius;
+    }
+
+    public int getCubeDoubleInnerRadius() {
+        return cubeDoubleInnerRadius;
+    }
+
+    public int getCubeDoubleOuterRadius() {
+        return cubeDoubleOuterRadius;
+    }
+
+    public int getCubeOuterRadius() {
+        return cubeOuterRadius;
     }
 
     public int getSettingRadius() {

@@ -55,7 +55,7 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Хардкод (это должно приходить с базы данных - настройки приложения)
-        numberOfCubes = 2; // количество кубиков
+        numberOfCubes = 6; // количество кубиков
         skin = Skin.WHITE; // белый
 
         // Предварительные расчеты всего, что можно подсчитать заранее
@@ -102,7 +102,7 @@ public class CubesOnBoardFragment extends Fragment {
 
         // Зона возможного расположения кубика
         RollArea rollArea = new RollArea(shadowRadius, screenWidth - shadowRadius,
-                shadowRadius, screenHeight - shadowRadius - 1000);
+                shadowRadius, screenHeight - shadowRadius);
 
         Log.d("myLog", "screenWidth = " + screenWidth);
         Log.d("myLog", "screenHeight = " + screenHeight);
