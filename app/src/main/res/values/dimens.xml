@@ -2,6 +2,9 @@
 <resources>
     <!-- Кубики -->
     <dimen name="white_cube_view_size">100dp</dimen>
+    <dimen name="black_cube_view_size">100dp</dimen>
+    <dimen name="red_cube_view_size">100dp</dimen>
+
     <dimen name="white_shadow_view_size">130dp</dimen>
 
     <!-- Прочее -->

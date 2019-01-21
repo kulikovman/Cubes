@@ -11,6 +11,7 @@ public class Cube {
     // Базовые значения
     private Calculation calculation;
     private final Random random;
+    private Sizes sizes;
 
     // Параметры для вью
     private Skin skin;
@@ -40,6 +41,9 @@ public class Cube {
         this.skin = skin;
         this.random = calculation.getRandom();
 
+        // Получение нужного комплекта размеров
+        sizes = calculation.getSizes(skin);
+
         // Цвет кубика
         if (skin == Skin.RANDOM) {
             int skinIndex = 1 + random.nextInt(Skin.values().length); // случайный цвет
@@ -59,17 +63,16 @@ public class Cube {
         boolean isCorrectPosition = false;
         while (!isCorrectPosition) {
             setNewCubePosition();
-            isCorrectPosition = checkPosition();
+            isCorrectPosition = checkStartPosition();
         }
     }
 
-    private boolean checkPosition() {
+    private boolean checkStartPosition() {
         // Расчет расстояния от центра кнопки настроек до центра кубика
         int distance = (int) Math.sqrt((Math.pow(Math.abs(x - calculation.getSx()), 2) +
                 Math.pow(Math.abs(y - calculation.getSy()), 2)));
 
-        // Должно быть больше, чем сумма радиусов
-        return distance > calculation.getCubeOuterRadius() + calculation.getSettingRadius();
+        return distance > sizes.getCubeOuterRadius() + calculation.getSettingButtonRadius();
     }
 
     public void moveCube() {
@@ -77,10 +80,10 @@ public class Cube {
     }
 
     private void setNewCubePosition() {
-        int minX = calculation.getRollArea().getMinX();
-        int maxX = calculation.getRollArea().getMaxX();
-        int minY = calculation.getRollArea().getMinY();
-        int maxY = calculation.getRollArea().getMaxY();
+        int minX = sizes.getRollArea().getMinX();
+        int maxX = sizes.getRollArea().getMaxX();
+        int minY = sizes.getRollArea().getMinY();
+        int maxY = sizes.getRollArea().getMaxY();
 
         x = minX + random.nextInt(maxX - minX);
         y = minY + random.nextInt(maxY - minY);
@@ -93,18 +96,19 @@ public class Cube {
     }
 
     private void calculateMargins() {
-        cubeMarginStart = x - calculation.getCubeHalfViewSize();
-        cubeMarginTop = y - calculation.getCubeHalfViewSize();
-        shadowMarginStart = x - calculation.getShadowHalfViewSize();
-        shadowMarginTop = y - calculation.getShadowHalfViewSize();
+        cubeMarginStart = x - sizes.getCubeViewHalfSize();
+        cubeMarginTop = y - sizes.getCubeViewHalfSize();
+
+        shadowMarginStart = x - sizes.getShadowViewHalfSize();
+        shadowMarginTop = y - sizes.getShadowViewHalfSize();
     }
 
     private void calculatePointLocations() {
         // Макс./мин. координаты вершин
-        int minX = x - calculation.getCubeHalfSize();
-        int maxX = x + calculation.getCubeHalfSize();
-        int minY = y - calculation.getCubeHalfSize();
-        int maxY = y + calculation.getCubeHalfSize();
+        int minX = x - sizes.getCubeHalfSize();
+        int maxX = x + sizes.getCubeHalfSize();
+        int minY = y - sizes.getCubeHalfSize();
+        int maxY = y + sizes.getCubeHalfSize();
 
         // Положение вершин до поворота
         x1 = minX;
@@ -151,13 +155,13 @@ public class Cube {
         Log.d("myLog", "Distance: " + x + ", " + y + " | " + cube.getX() + ", " + cube.getY() + " ---> " + distance);
 
         // ЭТАП 1: предварительная упрощенная проверка
-        // Если больше двойного внешнего радиуса, то все ок
-        if (distance > calculation.getCubeDoubleOuterRadius()) {
+        // Если больше суммы внешних радиусов, то все ок
+        if (distance > sizes.getCubeOuterRadius() + cube.getCubeOuterRadius()) {
             return false;
         }
 
         // ЭТАП 2: проверка минимально допустимого расстояния
-        if (distance < calculation.getCubeDoubleInnerRadius()) {
+        if (distance < sizes.getCubeInnerRadius() + cube.getCubeInnerRadius()) {
             return true;
         }
 
@@ -273,5 +277,13 @@ public class Cube {
 
     public int getY4() {
         return y4;
+    }
+
+    public int getCubeInnerRadius() {
+        return sizes.getCubeInnerRadius();
+    }
+
+    public int getCubeOuterRadius() {
+        return sizes.getCubeOuterRadius();
     }
 }
