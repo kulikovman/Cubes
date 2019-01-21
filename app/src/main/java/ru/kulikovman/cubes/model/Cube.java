@@ -41,9 +41,6 @@ public class Cube {
         this.skin = skin;
         this.random = calculation.getRandom();
 
-        // Получение нужного комплекта размеров
-        sizes = calculation.getSizes(skin);
-
         // Цвет кубика
         if (skin == Skin.RANDOM) {
             int skinIndex = 1 + random.nextInt(Skin.values().length); // случайный цвет
@@ -51,6 +48,10 @@ public class Cube {
         } else {
             this.skin = skin;
         }
+
+        // Получение нужного комплекта размеров
+        // только после получения цвета/скина!
+        sizes = calculation.getSizes(this.skin);
 
         // Количество точек
         value = 1 + random.nextInt(6); // от 1 до 6

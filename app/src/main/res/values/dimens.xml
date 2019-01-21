@@ -6,6 +6,8 @@
     <dimen name="red_cube_view_size">100dp</dimen>
 
     <dimen name="white_shadow_view_size">130dp</dimen>
+    <dimen name="black_shadow_view_size">130dp</dimen>
+    <dimen name="red_shadow_view_size">130dp</dimen>
 
     <!-- Прочее -->
     <dimen name="screen_offset">8dp</dimen>

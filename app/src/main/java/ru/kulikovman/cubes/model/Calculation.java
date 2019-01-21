@@ -17,26 +17,19 @@ public class Calculation {
     private int screenWidth;
     private int screenHeight;
 
-    // Центр кнопки настроек
+    // Кнопка настроек
     private int sx, sy;
-
-
-
-
+    private int settingButtonRadius;
 
     // Размеры кубиков и теней
     private int whiteCubeHalfSize, blackCubeHalfSize, redCubeHalfSize;
     private int whiteCubeViewHalfSize, blackCubeViewHalfSize, redCubeViewHalfSize;
     private int whiteShadowViewHalfSize, blackShadowViewHalfSize, redShadowViewHalfSize;
 
-
     // Радиусы кубиков и теней
     private int whiteCubeInnerRadius, blackCubeInnerRadius, redCubeInnerRadius ;
     private int whiteCubeOuterRadius, blackCubeOuterRadius, redCubeOuterRadius;
     private int whiteShadowRadius, blackShadowRadius, redShadowRadius;
-
-    // Прочие размеры
-    private int settingButtonRadius;
 
     public Calculation(Resources resources) {
         random = new Random();
@@ -53,33 +46,63 @@ public class Calculation {
         sx = screenWidth / 2;
         sy = settingSize / 2 + settingPadding + settingMarginTop;
 
-        // Размеры вью кубика
-        // Размер вью кубика
-        int cubeViewSize = resources.getDimensionPixelSize(R.dimen.white_cube_view_size);
-        whiteCubeViewHalfSize = cubeViewSize / 2;
-
-        // Размеры кубика с учетом буферного расстояния (+3% от ширины кубика)
-        int cubeSize = (int) (Math.sqrt((Math.pow(whiteCubeViewHalfSize, 2) + Math.pow(whiteCubeViewHalfSize, 2))) * 0.03);
-        whiteCubeHalfSize = cubeSize / 2;
-
-        // Размер тени кубика
-        // Размер тени
-        int shadowViewSize = resources.getDimensionPixelSize(R.dimen.white_shadow_view_size);
-        whiteShadowViewHalfSize = shadowViewSize / 2;
-
-        // Базовые радиусы
+        // Радиус кнопки настроек
         settingButtonRadius = settingSize / 2 + settingPadding;
-        whiteCubeInnerRadius = cubeSize;
+
+        // Размеры вью кубиков
+        int whiteCubeViewSize = resources.getDimensionPixelSize(R.dimen.white_cube_view_size);
+        int blackCubeViewSize = resources.getDimensionPixelSize(R.dimen.black_cube_view_size);
+        int redCubeViewSize = resources.getDimensionPixelSize(R.dimen.red_cube_view_size);
+
+        // Полуразмеры вью кубиков
+        whiteCubeViewHalfSize = whiteCubeViewSize / 2;
+        blackCubeViewHalfSize = blackCubeViewSize / 2;
+        redCubeViewHalfSize = redCubeViewSize / 2;
+
+        // Размеры кубиков с учетом буферного расстояния (+3% от ширины кубика)
+        int whiteCubeSize = (int) (Math.sqrt((Math.pow(whiteCubeViewHalfSize, 2) + Math.pow(whiteCubeViewHalfSize, 2))) * 0.03);
+        int blackCubeSize = (int) (Math.sqrt((Math.pow(blackCubeViewHalfSize, 2) + Math.pow(blackCubeViewHalfSize, 2))) * 0.03);
+        int redCubeSize = (int) (Math.sqrt((Math.pow(redCubeViewHalfSize, 2) + Math.pow(redCubeViewHalfSize, 2))) * 0.03);
+
+        // Полуразмеры кубиков
+        whiteCubeHalfSize = whiteCubeSize / 2;
+        blackCubeHalfSize = blackCubeSize / 2;
+        redCubeHalfSize = redCubeSize / 2;
+
+        // Размер вью теней
+        int whiteShadowViewSize = resources.getDimensionPixelSize(R.dimen.white_shadow_view_size);
+        int blackShadowViewSize = resources.getDimensionPixelSize(R.dimen.black_shadow_view_size);
+        int redShadowViewSize = resources.getDimensionPixelSize(R.dimen.red_shadow_view_size);
+
+        // Полуразмеры вью теней
+        whiteShadowViewHalfSize = whiteShadowViewSize / 2;
+        blackShadowViewHalfSize = blackShadowViewSize / 2;
+        redShadowViewHalfSize = redShadowViewSize / 2;
+
+        // Внутренние радиусы кубиков
+        whiteCubeInnerRadius = whiteCubeSize;
+        blackCubeInnerRadius = blackCubeSize;
+        redCubeInnerRadius = redCubeSize;
+
+        // Внешние радиусы кубиков
         whiteCubeOuterRadius = whiteCubeViewHalfSize;
+        blackCubeOuterRadius = blackCubeViewHalfSize;
+        redCubeOuterRadius = redCubeViewHalfSize;
+
+        // Радиусы теней
         whiteShadowRadius = (int) Math.sqrt((Math.pow(whiteShadowViewHalfSize, 2) + Math.pow(whiteShadowViewHalfSize, 2)));
-
-
+        blackShadowRadius = (int) Math.sqrt((Math.pow(blackShadowViewHalfSize, 2) + Math.pow(blackShadowViewHalfSize, 2)));
+        redShadowRadius = (int) Math.sqrt((Math.pow(redShadowViewHalfSize, 2) + Math.pow(redShadowViewHalfSize, 2)));
 
 
 
         Log.d("myLog", "screenWidth = " + screenWidth);
         Log.d("myLog", "screenHeight = " + screenHeight);
         Log.d("myLog", "---------------------------");
+    }
+
+    public Random getRandom() {
+        return random;
     }
 
     public int getSx() {
@@ -90,30 +113,25 @@ public class Calculation {
         return sy;
     }
 
-    public Random getRandom() {
-        return random;
-    }
-
     public int getSettingButtonRadius() {
         return settingButtonRadius;
     }
-
-
-
-
 
     public Sizes getSizes(Skin skin) {
         // Возвращает комплект размеров
         // в соответствии с цветом/скином кубика
         switch (skin) {
             case WHITE:
-                return new Sizes(screenWidth, screenHeight, whiteShadowRadius, whiteCubeHalfSize, whiteCubeViewHalfSize, whiteShadowViewHalfSize, whiteCubeInnerRadius, whiteCubeOuterRadius);
+                return new Sizes(screenWidth, screenHeight, whiteShadowRadius,
+                        whiteCubeHalfSize, whiteCubeViewHalfSize, whiteShadowViewHalfSize, whiteCubeInnerRadius, whiteCubeOuterRadius);
             case BLACK:
-                return new Sizes();
+                return new Sizes(screenWidth, screenHeight, blackShadowRadius,
+                        blackCubeHalfSize, blackCubeViewHalfSize, blackShadowViewHalfSize, blackCubeInnerRadius, blackCubeOuterRadius);
             case RED:
-                return new Sizes();
-            default:
-                return new Sizes();
+                return new Sizes(screenWidth, screenHeight, redShadowRadius,
+                        redCubeHalfSize, redCubeViewHalfSize, redShadowViewHalfSize, redCubeInnerRadius, redCubeOuterRadius);
         }
+
+        return null;
     }
 }
