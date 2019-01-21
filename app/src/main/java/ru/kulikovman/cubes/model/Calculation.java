@@ -33,6 +33,8 @@ public class Calculation {
     private int settingRadius;
     private int shadowRadius;
 
+    private int buffer;
+
     // Зона возможного расположения кубика
     private RollArea rollArea;
 
@@ -45,8 +47,8 @@ public class Calculation {
         this.screenHeight = screenHeight;
         this.cubeViewSize = cubeViewSize;
         this.cubeHalfViewSize = cubeHalfViewSize;
-        this.cubeSize = cubeSize;
-        this.cubeHalfSize = cubeHalfSize;
+        //this.cubeSize = cubeSize;
+        //this.cubeHalfSize = cubeHalfSize;
         this.shadowViewSize = shadowViewSize;
         this.shadowHalfViewSize = shadowHalfViewSize;
         this.sx = sx;
@@ -58,6 +60,10 @@ public class Calculation {
 
         cubeDoubleInnerRadius = cubeSize;
         cubeDoubleOuterRadius = cubeViewSize;
+
+        buffer = (int) (cubeSize * 0.03); // 3% от ширины кубика
+        this.cubeSize = cubeSize + buffer;
+        this.cubeHalfSize = cubeHalfSize + buffer / 2;
     }
 
     public int getScreenWidth() {
