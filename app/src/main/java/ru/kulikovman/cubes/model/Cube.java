@@ -100,8 +100,8 @@ public class Cube {
         cubeMarginStart = x - sizes.getCubeViewHalfSize();
         cubeMarginTop = y - sizes.getCubeViewHalfSize();
 
-        shadowMarginStart = x - sizes.getShadowViewHalfSize();
-        shadowMarginTop = y - sizes.getShadowViewHalfSize();
+        shadowMarginStart = x - sizes.getShadowHalfSize();
+        shadowMarginTop = y - sizes.getShadowHalfSize();
     }
 
     private void calculatePointLocations() {
@@ -158,11 +158,13 @@ public class Cube {
         // ЭТАП 1: предварительная упрощенная проверка
         // Если больше суммы внешних радиусов, то все ок
         if (distance > sizes.getCubeOuterRadius() + cube.getCubeOuterRadius()) {
+            Log.d("myLog", "Stage 1: " + distance + " > " + sizes.getCubeOuterRadius() + " + " + cube.getCubeOuterRadius());
             return false;
         }
 
         // ЭТАП 2: проверка минимально допустимого расстояния
         if (distance < sizes.getCubeInnerRadius() + cube.getCubeInnerRadius()) {
+            Log.d("myLog", "Stage 2: " + distance + " < " + sizes.getCubeInnerRadius() + " + " + cube.getCubeInnerRadius());
             return true;
         }
 

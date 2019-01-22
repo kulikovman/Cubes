@@ -12,6 +12,7 @@ import ru.kulikovman.cubes.data.Skin;
 public class Calculation {
 
     private final Random random;
+    private final double BUFFER = 0.01; // 1% от ширины кубика
 
     // Размер экрана
     private int screenWidth;
@@ -24,7 +25,7 @@ public class Calculation {
     // Размеры кубиков и теней
     private int whiteCubeHalfSize, blackCubeHalfSize, redCubeHalfSize;
     private int whiteCubeViewHalfSize, blackCubeViewHalfSize, redCubeViewHalfSize;
-    private int whiteShadowViewHalfSize, blackShadowViewHalfSize, redShadowViewHalfSize;
+    private int whiteShadowHalfSize, blackShadowHalfSize, redShadowHalfSize;
 
     // Радиусы кубиков и теней
     private int whiteCubeInnerRadius, blackCubeInnerRadius, redCubeInnerRadius ;
@@ -59,10 +60,15 @@ public class Calculation {
         blackCubeViewHalfSize = blackCubeViewSize / 2;
         redCubeViewHalfSize = redCubeViewSize / 2;
 
-        // Размеры кубиков с учетом буферного расстояния (+3% от ширины кубика)
-        int whiteCubeSize = (int) (Math.sqrt((Math.pow(whiteCubeViewHalfSize, 2) + Math.pow(whiteCubeViewHalfSize, 2))) * 0.03);
-        int blackCubeSize = (int) (Math.sqrt((Math.pow(blackCubeViewHalfSize, 2) + Math.pow(blackCubeViewHalfSize, 2))) * 0.03);
-        int redCubeSize = (int) (Math.sqrt((Math.pow(redCubeViewHalfSize, 2) + Math.pow(redCubeViewHalfSize, 2))) * 0.03);
+        // Размеры кубиков
+        int whiteCubeSize = (int) Math.sqrt((Math.pow(whiteCubeViewHalfSize, 2) + Math.pow(whiteCubeViewHalfSize, 2)));
+        int blackCubeSize = (int) Math.sqrt((Math.pow(blackCubeViewHalfSize, 2) + Math.pow(blackCubeViewHalfSize, 2)));
+        int redCubeSize = (int) Math.sqrt((Math.pow(redCubeViewHalfSize, 2) + Math.pow(redCubeViewHalfSize, 2)));
+
+        // Размеры кубиков с учетом буферного расстояния
+        whiteCubeSize = (int) (whiteCubeSize + whiteCubeSize * BUFFER);
+        blackCubeSize = (int) (blackCubeSize + blackCubeSize * BUFFER);
+        redCubeSize = (int) (redCubeSize + redCubeSize * BUFFER);
 
         // Полуразмеры кубиков
         whiteCubeHalfSize = whiteCubeSize / 2;
@@ -70,14 +76,14 @@ public class Calculation {
         redCubeHalfSize = redCubeSize / 2;
 
         // Размер вью теней
-        int whiteShadowViewSize = resources.getDimensionPixelSize(R.dimen.white_shadow_view_size);
-        int blackShadowViewSize = resources.getDimensionPixelSize(R.dimen.black_shadow_view_size);
-        int redShadowViewSize = resources.getDimensionPixelSize(R.dimen.red_shadow_view_size);
+        int whiteShadowSize = resources.getDimensionPixelSize(R.dimen.white_shadow_view_size);
+        int blackShadowSize = resources.getDimensionPixelSize(R.dimen.black_shadow_view_size);
+        int redShadowSize = resources.getDimensionPixelSize(R.dimen.red_shadow_view_size);
 
         // Полуразмеры вью теней
-        whiteShadowViewHalfSize = whiteShadowViewSize / 2;
-        blackShadowViewHalfSize = blackShadowViewSize / 2;
-        redShadowViewHalfSize = redShadowViewSize / 2;
+        whiteShadowHalfSize = whiteShadowSize / 2;
+        blackShadowHalfSize = blackShadowSize / 2;
+        redShadowHalfSize = redShadowSize / 2;
 
         // Внутренние радиусы кубиков
         whiteCubeInnerRadius = whiteCubeSize;
@@ -90,15 +96,21 @@ public class Calculation {
         redCubeOuterRadius = redCubeViewHalfSize;
 
         // Радиусы теней
-        whiteShadowRadius = (int) Math.sqrt((Math.pow(whiteShadowViewHalfSize, 2) + Math.pow(whiteShadowViewHalfSize, 2)));
-        blackShadowRadius = (int) Math.sqrt((Math.pow(blackShadowViewHalfSize, 2) + Math.pow(blackShadowViewHalfSize, 2)));
-        redShadowRadius = (int) Math.sqrt((Math.pow(redShadowViewHalfSize, 2) + Math.pow(redShadowViewHalfSize, 2)));
+        whiteShadowRadius = (int) Math.sqrt((Math.pow(whiteShadowHalfSize, 2) + Math.pow(whiteShadowHalfSize, 2)));
+        blackShadowRadius = (int) Math.sqrt((Math.pow(blackShadowHalfSize, 2) + Math.pow(blackShadowHalfSize, 2)));
+        redShadowRadius = (int) Math.sqrt((Math.pow(redShadowHalfSize, 2) + Math.pow(redShadowHalfSize, 2)));
 
-
-
+        Log.d("myLog", "-------------Calculation--------------");
         Log.d("myLog", "screenWidth = " + screenWidth);
         Log.d("myLog", "screenHeight = " + screenHeight);
-        Log.d("myLog", "---------------------------");
+        Log.d("myLog", "whiteCubeSize = " + whiteCubeSize);
+        Log.d("myLog", "whiteCubeHalfSize = " + whiteCubeHalfSize);
+        Log.d("myLog", "whiteCubeViewHalfSize = " + whiteCubeViewHalfSize);
+        Log.d("myLog", "whiteShadowHalfSize = " + whiteShadowHalfSize);
+        Log.d("myLog", "whiteCubeInnerRadius = " + whiteCubeInnerRadius);
+        Log.d("myLog", "whiteCubeOuterRadius = " + whiteCubeOuterRadius);
+        Log.d("myLog", "whiteShadowRadius = " + whiteShadowRadius);
+        Log.d("myLog", "-------------Calculation--------------");
     }
 
     public Random getRandom() {
@@ -123,15 +135,16 @@ public class Calculation {
         switch (skin) {
             case WHITE:
                 return new Sizes(screenWidth, screenHeight, whiteShadowRadius,
-                        whiteCubeHalfSize, whiteCubeViewHalfSize, whiteShadowViewHalfSize, whiteCubeInnerRadius, whiteCubeOuterRadius);
+                        whiteCubeHalfSize, whiteCubeViewHalfSize, whiteShadowHalfSize, whiteCubeInnerRadius, whiteCubeOuterRadius);
             case BLACK:
                 return new Sizes(screenWidth, screenHeight, blackShadowRadius,
-                        blackCubeHalfSize, blackCubeViewHalfSize, blackShadowViewHalfSize, blackCubeInnerRadius, blackCubeOuterRadius);
+                        blackCubeHalfSize, blackCubeViewHalfSize, blackShadowHalfSize, blackCubeInnerRadius, blackCubeOuterRadius);
             case RED:
                 return new Sizes(screenWidth, screenHeight, redShadowRadius,
-                        redCubeHalfSize, redCubeViewHalfSize, redShadowViewHalfSize, redCubeInnerRadius, redCubeOuterRadius);
+                        redCubeHalfSize, redCubeViewHalfSize, redShadowHalfSize, redCubeInnerRadius, redCubeOuterRadius);
         }
 
+        // null никогда не должен возвращаеться!
         return null;
     }
 }

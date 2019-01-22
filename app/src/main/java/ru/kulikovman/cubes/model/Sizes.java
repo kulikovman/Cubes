@@ -5,7 +5,7 @@ public class Sizes {
     // Размеры
     private int cubeHalfSize;
     private int cubeViewHalfSize;
-    private int shadowViewHalfSize;
+    private int shadowHalfSize;
 
     // Радиусы
     private int cubeInnerRadius;
@@ -14,10 +14,10 @@ public class Sizes {
     // Зона возможного расположения кубика
     private RollArea rollArea;
 
-    public Sizes(int screenWidth, int screenHeight, int shadowRadius, int cubeHalfSize, int cubeViewHalfSize, int shadowViewHalfSize, int cubeInnerRadius, int cubeOuterRadius) {
+    public Sizes(int screenWidth, int screenHeight, int shadowRadius, int cubeHalfSize, int cubeViewHalfSize, int shadowHalfSize, int cubeInnerRadius, int cubeOuterRadius) {
         this.cubeHalfSize = cubeHalfSize;
         this.cubeViewHalfSize = cubeViewHalfSize;
-        this.shadowViewHalfSize = shadowViewHalfSize;
+        this.shadowHalfSize = shadowHalfSize;
         this.cubeInnerRadius = cubeInnerRadius;
         this.cubeOuterRadius = cubeOuterRadius;
 
@@ -36,8 +36,8 @@ public class Sizes {
         return cubeViewHalfSize;
     }
 
-    public int getShadowViewHalfSize() {
-        return shadowViewHalfSize;
+    public int getShadowHalfSize() {
+        return shadowHalfSize;
     }
 
     public int getCubeInnerRadius() {
