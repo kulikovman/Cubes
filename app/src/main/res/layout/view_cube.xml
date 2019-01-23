@@ -23,21 +23,23 @@
 
         <ImageView
             android:id="@+id/cube"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/red_cube_view_size"
+            android:layout_height="@dimen/red_cube_view_size"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
-            tools:rotation="45"
-            app:srcCompat="@drawable/white_cube"/>
+            tools:rotation="0"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/red_cube"/>
 
         <ImageView
             android:id="@+id/dots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/red_cube_view_size"
+            android:layout_height="@dimen/red_cube_view_size"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
-            tools:rotation="45"
-            app:srcCompat="@drawable/white_dot_5"/>
+            tools:rotation="0"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/red_dot_6"/>
 
     </FrameLayout>
 

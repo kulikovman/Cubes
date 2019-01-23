@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@{model.marginStart}"
         android:layout_marginTop="@{model.marginTop}"
-        tools:layout_marginStart="50dp"
-        tools:layout_marginTop="50dp">
+        tools:layout_marginStart="35dp"
+        tools:layout_marginTop="35dp">
 
         <ImageView
             android:id="@+id/shadow"
@@ -27,7 +27,7 @@
             android:layout_height="@dimen/white_shadow_view_size"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
-            tools:rotation="45"
+            tools:rotation="0"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/white_shadow"/>
 

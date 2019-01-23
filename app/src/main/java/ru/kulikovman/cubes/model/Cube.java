@@ -38,7 +38,6 @@ public class Cube {
 
     public Cube(Calculation calculation, Skin skin) {
         this.calculation = calculation;
-        this.skin = skin;
         this.random = calculation.getRandom();
 
         // Цвет кубика
