@@ -12,7 +12,7 @@ import ru.kulikovman.cubes.data.Skin;
 public class Calculation {
 
     private final Random random;
-    private final double BUFFER = 0.01; // 1% от ширины кубика
+    private final double BUFFER = 0.02; // 2% от ширины кубика
 
     // Размер экрана
     private int screenWidth;

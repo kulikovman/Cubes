@@ -39,7 +39,7 @@
             android:rotation="@{model.angle}"
             tools:rotation="0"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/red_dot_6"/>
+            app:srcCompat="@drawable/red_dot_5"/>
 
     </FrameLayout>
 
