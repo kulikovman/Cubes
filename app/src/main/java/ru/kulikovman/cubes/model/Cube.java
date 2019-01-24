@@ -42,7 +42,7 @@ public class Cube {
 
         // Цвет кубика
         if (skin == Skin.RANDOM) {
-            int skinIndex = 1 + random.nextInt(Skin.values().length); // случайный цвет
+            int skinIndex = 1 + random.nextInt(Skin.values().length - 1); // случайный цвет
             this.skin = Skin.values()[skinIndex];
         } else {
             this.skin = skin;
