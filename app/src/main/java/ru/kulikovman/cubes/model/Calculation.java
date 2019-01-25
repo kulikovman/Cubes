@@ -136,9 +136,9 @@ public class Calculation {
             case WHITE:
                 return new Sizes(screenWidth, screenHeight, whiteShadowRadius,
                         whiteCubeHalfSize, whiteCubeViewHalfSize, whiteShadowHalfSize, whiteCubeInnerRadius, whiteCubeOuterRadius);
-            /*case BLACK:
+            case BLACK:
                 return new Sizes(screenWidth, screenHeight, blackShadowRadius,
-                        blackCubeHalfSize, blackCubeViewHalfSize, blackShadowHalfSize, blackCubeInnerRadius, blackCubeOuterRadius);*/
+                        blackCubeHalfSize, blackCubeViewHalfSize, blackShadowHalfSize, blackCubeInnerRadius, blackCubeOuterRadius);
             case RED:
                 return new Sizes(screenWidth, screenHeight, redShadowRadius,
                         redCubeHalfSize, redCubeViewHalfSize, redShadowHalfSize, redCubeInnerRadius, redCubeOuterRadius);
