@@ -48,22 +48,7 @@ public class Cube {
         radians = degrees * Math.PI / 180;
 
         // Расположение кубика на экране
-        boolean isCorrectStartPosition = false;
-        while (!isCorrectStartPosition) {
-            setNewCubePosition();
-            isCorrectStartPosition = checkStartPosition();
-        }
-    }
-
-    private boolean checkStartPosition() {
-        // Расчет расстояния от центра кнопки настроек до центра кубика
-        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - calculation.getSx()), 2) +
-                Math.pow(Math.abs(y - calculation.getSy()), 2)));
-        Log.d("myLog", "cube to setting distance = " + distance + " | cubeOuterRadius + settingRadius = " +
-                calculation.getCubeOuterRadius() + " + " + calculation.getSettingRadius() + " = " +
-                calculation.getCubeOuterRadius() + calculation.getSettingRadius());
-
-        return distance > calculation.getCubeOuterRadius() + calculation.getSettingRadius();
+        setNewCubePosition();
     }
 
     public void moveCube() {
@@ -141,24 +126,33 @@ public class Cube {
     }
 
     public boolean intersection(Cube cube) {
-        // Расчет растояния между центрами кубиков
-        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
-        Log.d("myLog", "Distance: " + x + ", " + y + " | " + cube.getX() + ", " + cube.getY() + " ---> " + distance);
-
-        // ЭТАП 1: предварительная упрощенная проверка
-        // Если больше суммы внешних радиусов, то все ок
-        if (distance > calculation.getCubeOuterRadius() + cube.getCubeOuterRadius()) {
-            Log.d("myLog", "Stage 1: " + distance + " > " + calculation.getCubeOuterRadius() + " + " + cube.getCubeOuterRadius());
-            return false;
-        }
-
-        // ЭТАП 2: проверка минимально допустимого расстояния
-        if (distance < calculation.getCubeInnerRadius() + cube.getCubeInnerRadius()) {
-            Log.d("myLog", "Stage 2: " + distance + " < " + calculation.getCubeInnerRadius() + " + " + cube.getCubeInnerRadius());
+        // ЭТАП 1: проверка расстояния до кнопки настроек
+        // Если меньше суммы радиусов, то пересекается
+        int settingDistance = (int) Math.sqrt((Math.pow(Math.abs(x - calculation.getSx()), 2) + Math.pow(Math.abs(y - calculation.getSy()), 2)));
+        if (settingDistance < calculation.getCubeOuterRadius() + calculation.getSettingRadius()) {
+            //Log.d("myLog", "Stage 1: " + settingDistance + " < " + calculation.getCubeOuterRadius() + calculation.getSettingRadius());
             return true;
         }
 
-        // ЭТАП 3: проверка расположения вершин кубиков
+        // Расчет растояния между центрами кубиков
+        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
+        //Log.d("myLog", "Cube distance: " + x + ", " + y + " | " + cube.getX() + ", " + cube.getY() + " ---> " + distance);
+
+        // ЭТАП 2: упрощенная проверка пересечения
+        // Если больше суммы внешних радиусов, то все ок
+        if (distance > calculation.getCubeOuterRadius() + cube.getCubeOuterRadius()) {
+            //Log.d("myLog", "Stage 2: " + distance + " > " + calculation.getCubeOuterRadius() + " + " + cube.getCubeOuterRadius());
+            return false;
+        }
+
+        // ЭТАП 3: проверка минимально допустимого расстояния
+        // Если меньше, то кубики не могут не пересекаться
+        if (distance < calculation.getCubeInnerRadius() + cube.getCubeInnerRadius()) {
+            //Log.d("myLog", "Stage 3: " + distance + " < " + calculation.getCubeInnerRadius() + " + " + cube.getCubeInnerRadius());
+            return true;
+        }
+
+        // ЭТАП 4: проверка расположения вершин кубиков
         // Если точки одного кубика находятся за пределами второго и наоборот, то все ок
         if (!pointInsideCube(cube.getX1(), cube.getY1()) && !pointInsideCube(cube.getX2(), cube.getY2()) &&
                 !pointInsideCube(cube.getX3(), cube.getY3()) && !pointInsideCube(cube.getX4(), cube.getY4()) &&
@@ -167,7 +161,7 @@ public class Cube {
             return false;
         }
 
-        // Одна или несколько точек пересекаются с кубом
+        // Одна или несколько точек пересекаются со вторым кубиком
         return true;
     }
 
@@ -186,7 +180,7 @@ public class Cube {
         int ca = (x3 - px) * (y1 - y3) - (x1 - x3) * (y3 - py);
 
         if ((ab >= 0 && bc >= 0 && ca >= 0) || (ab <= 0 && bc <= 0 && ca <= 0)) {
-            Log.d("myLog", "Точка внутри ABC!");
+            //Log.d("myLog", "Точка внутри ABC!");
             return true;
         }
 
@@ -196,7 +190,7 @@ public class Cube {
         int da = (x4 - px) * (y1 - y4) - (x1 - x4) * (y4 - py);
 
         if ((ac >= 0 && cd >= 0 && da >= 0) || (ac <= 0 && cd <= 0 && da <= 0)) {
-            Log.d("myLog", "Точка внутри ACD!");
+            //Log.d("myLog", "Точка внутри ACD!");
             return true;
         }
 

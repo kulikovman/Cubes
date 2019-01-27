@@ -45,7 +45,7 @@ public class Calculation {
         sy = settingSize / 2 + settingPadding + settingMarginTop;
 
         // Радиус кнопки настроек
-        settingRadius = settingSize / 2 + settingPadding;
+        settingRadius = settingSize / 2 + settingPadding + settingMarginTop;
 
         // Размер/полуразмер вью кубика
         int cubeViewSize = resources.getDimensionPixelSize(R.dimen.cube_view_size);
