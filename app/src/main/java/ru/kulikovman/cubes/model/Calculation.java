@@ -11,7 +11,6 @@ import ru.kulikovman.cubes.R;
 public class Calculation {
 
     private final Random random;
-    private final double BUFFER = 0.02; // 2% от ширины кубика
 
     // Положение кнопки настроек
     private int sx, sy;
@@ -49,38 +48,38 @@ public class Calculation {
         settingRadius = settingSize / 2 + settingPadding;
 
         // Размер/полуразмер вью кубика
-        int whiteCubeViewSize = resources.getDimensionPixelSize(R.dimen.cube_view_size);
-        cubeViewHalfSize = whiteCubeViewSize / 2;
+        int cubeViewSize = resources.getDimensionPixelSize(R.dimen.cube_view_size);
+        cubeViewHalfSize = cubeViewSize / 2;
 
-        // Размер/полуразмер кубика с учетом буферного расстояния
-        int whiteCubeSize = (int) Math.sqrt((Math.pow(cubeViewHalfSize, 2) + Math.pow(cubeViewHalfSize, 2)));
-        whiteCubeSize = (int) (whiteCubeSize + whiteCubeSize * BUFFER);
-        cubeHalfSize = whiteCubeSize / 2;
+        // Размер/полуразмер кубика
+        int cubeSize = resources.getDimensionPixelSize(R.dimen.cube_size);
+        cubeHalfSize = cubeSize / 2;
 
         // Размер/полуразмер вью тени
-        int whiteShadowSize = resources.getDimensionPixelSize(R.dimen.shadow_view_size);
-        shadowHalfSize = whiteShadowSize / 2;
+        int shadowSize = resources.getDimensionPixelSize(R.dimen.shadow_view_size);
+        shadowHalfSize = shadowSize / 2;
 
         // Радиусы кубика и тени
-        cubeInnerRadius = whiteCubeSize;
-        cubeOuterRadius = cubeViewHalfSize;
+        cubeInnerRadius = cubeHalfSize;
+        cubeOuterRadius = (int) Math.sqrt((Math.pow(cubeHalfSize, 2) + Math.pow(cubeHalfSize, 2)));
         int shadowRadius = (int) Math.sqrt((Math.pow(shadowHalfSize, 2) + Math.pow(shadowHalfSize, 2)));
 
         // Формирование области расположения кубика
         rollArea = new RollArea(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
 
-
-        Log.d("myLog", "-------------Calculation--------------");
+        // Контроль полученных размеров
+        Log.d("myLog", "----------------Screen----------------");
         Log.d("myLog", "screenWidth = " + screenWidth);
         Log.d("myLog", "screenHeight = " + screenHeight);
-        Log.d("myLog", "whiteCubeSize = " + whiteCubeSize);
-        Log.d("myLog", "cubeHalfSize = " + cubeHalfSize);
-        Log.d("myLog", "cubeViewHalfSize = " + cubeViewHalfSize);
-        Log.d("myLog", "shadowHalfSize = " + shadowHalfSize);
-        Log.d("myLog", "cubeInnerRadius = " + cubeInnerRadius);
-        Log.d("myLog", "cubeOuterRadius = " + cubeOuterRadius);
+        Log.d("myLog", "----------------Sizes-----------------");
+        Log.d("myLog", "cubeSize = " + cubeSize + " / 2 = " + cubeHalfSize);
+        Log.d("myLog", "cubeViewSize = " + cubeViewSize + " / 2 = " + cubeViewHalfSize);
+        Log.d("myLog", "shadowSize = " + shadowSize + " / 2 = " + shadowHalfSize);
+        Log.d("myLog", "----------------Radius----------------");
+        Log.d("myLog", "cubeRadius = " + cubeInnerRadius + " | " + cubeOuterRadius);
         Log.d("myLog", "shadowRadius = " + shadowRadius);
-        Log.d("myLog", "-------------Calculation--------------");
+        Log.d("myLog", "settingRadius = " + settingRadius);
+        Log.d("myLog", "--------------------------------------");
     }
 
     public Random getRandom() {
