@@ -56,7 +56,7 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Хардкод (это должно приходить с базы данных - настройки приложения)
-        numberOfCubes = 6; // количество кубиков
+        numberOfCubes = 7; // количество кубиков
         skin = Skin.WHITE; // белый
 
         // Предварительные расчеты всего, что можно подсчитать заранее
@@ -79,9 +79,7 @@ public class CubesOnBoardFragment extends Fragment {
         // Удаляем старые кубики с доски
         binding.topBoard.removeAllViews();
         binding.bottomBoard.removeAllViews();
-        shadowViews.clear();
-        cubeViews.clear();
-        cubes.clear();
+        clearLists();
 
         // Генирируем новые кубики
         while (cubes.size() < numberOfCubes) {
@@ -93,6 +91,7 @@ public class CubesOnBoardFragment extends Fragment {
                 Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
             } else {
                 // Проверяем пересечение с другими кубиками
+                int count = 0;
                 boolean intersection = true;
                 while (intersection) {
                     for (Cube c : cubes) {
@@ -104,9 +103,21 @@ public class CubesOnBoardFragment extends Fragment {
                         }
                     }
 
-                    // Если пересечение, то двигаем
+                    // Если есть пересечение
                     if (intersection) {
-                        cube.moveCube();
+                        count++;
+                        Log.d("myLog", "intersection count = " + count);
+                        if (count < 50) { // Защита от неудачного разброса кубиков
+                            // Двигаем кубик
+                            cube.moveCube();
+                        } else {
+                            // Очищаем списки и начинаем заново
+                            clearLists();
+                            intersection = false;
+
+                            cubes.add(cube);
+                            Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
+                        }
                     } else {
                         cubes.add(cube);
                         Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
@@ -137,5 +148,11 @@ public class CubesOnBoardFragment extends Fragment {
         // Сохраняем результаты текущего броска в базу
 
         Log.d("myLog", "---------------------------");
+    }
+
+    private void clearLists() {
+        shadowViews.clear();
+        cubeViews.clear();
+        cubes.clear();
     }
 }
