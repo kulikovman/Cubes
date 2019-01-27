@@ -107,10 +107,12 @@ public class CubesOnBoardFragment extends Fragment {
                     if (intersection) {
                         count++;
                         Log.d("myLog", "intersection count = " + count);
-                        if (count < 50) { // Защита от неудачного разброса кубиков
+                        if (count < 30) { // Защита от неудачного разброса кубиков
                             // Двигаем кубик
                             cube.moveCube();
                         } else {
+                            Log.d("myLog", "Сработала защита от неудачного разброса!");
+                            Log.d("myLog", "---------------------------");
                             // Очищаем списки и начинаем заново
                             clearLists();
                             intersection = false;
