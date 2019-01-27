@@ -29,7 +29,8 @@
             android:rotation="@{model.angle}"
             tools:rotation="0"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/red_cube"/>
+            android:visibility="visible"
+            app:srcCompat="@drawable/white_cube"/>
 
         <ImageView
             android:id="@+id/dots"
@@ -39,7 +40,7 @@
             android:rotation="@{model.angle}"
             tools:rotation="0"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/red_dot_5"/>
+            app:srcCompat="@drawable/white_dot_1"/>
 
     </FrameLayout>
 
