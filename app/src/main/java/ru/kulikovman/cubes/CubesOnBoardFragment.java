@@ -57,7 +57,7 @@ public class CubesOnBoardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Хардкод (это должно приходить с базы данных - настройки приложения)
         numberOfCubes = 6; // количество кубиков
-        skin = Skin.RANDOM; // белый
+        skin = Skin.BLACK; // белый
 
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
