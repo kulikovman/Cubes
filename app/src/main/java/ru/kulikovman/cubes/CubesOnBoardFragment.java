@@ -116,8 +116,6 @@ public class CubesOnBoardFragment extends Fragment {
 
     private void initSoundPool() {
         if (mSoundPool == null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                // Создаем SoundPool для Android API 21 и выше
                 AudioAttributes attributes = new AudioAttributes.Builder()
                         .setUsage(AudioAttributes.USAGE_GAME)
                         .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -126,10 +124,6 @@ public class CubesOnBoardFragment extends Fragment {
                 mSoundPool = new SoundPool.Builder()
                         .setAudioAttributes(attributes)
                         .build();
-            } else {
-                // Создаем SoundPool для старых версий Android
-                mSoundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-            }
 
             // Получаем id звуковых файлов
             mRollDiceSound = mSoundPool.load(context, R.raw.roll_dice, 1);
