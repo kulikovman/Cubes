@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
@@ -43,6 +45,9 @@ public class CubesOnBoardFragment extends Fragment {
     private List<CubeView> cubeViews;
     private List<ShadowView> shadowViews;
 
+    private float delayAfterRoll;
+    private boolean isReadyForRoll;
+
     private SoundPool mSoundPool;
     private int mRollDiceSound;
 
@@ -65,6 +70,8 @@ public class CubesOnBoardFragment extends Fragment {
         // Хардкод (это должно приходить с базы данных - настройки приложения)
         numberOfCubes = 6; // количество кубиков
         skin = Skin.WHITE; // белый
+        delayAfterRoll = 0.3f;
+        isReadyForRoll = true;
 
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
@@ -129,6 +136,11 @@ public class CubesOnBoardFragment extends Fragment {
     }
 
     public void rollCubes(View view) {
+        // Если время задержки не прошло, то выходим
+        if (!isReadyForRoll) {
+            return;
+        }
+
         // Удаляем старые кубики с доски
         binding.topBoard.removeAllViews();
         binding.bottomBoard.removeAllViews();
@@ -204,6 +216,16 @@ public class CubesOnBoardFragment extends Fragment {
         mSoundPool.play(mRollDiceSound, 1, 1, 1, 0, 1);
 
         // Сохраняем результаты текущего броска в базу
+
+
+        // Задержка после броска
+        isReadyForRoll = false;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                isReadyForRoll = true;
+            }
+        }, 300);
 
         Log.d("myLog", "---------------------------");
     }
