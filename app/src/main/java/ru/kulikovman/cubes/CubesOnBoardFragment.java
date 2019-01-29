@@ -1,8 +1,9 @@
 package ru.kulikovman.cubes;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -11,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +27,6 @@ import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
-import ru.kulikovman.cubes.model.RollArea;
 import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
 
@@ -50,6 +49,10 @@ public class CubesOnBoardFragment extends Fragment {
 
     private SoundPool mSoundPool;
     private int mRollDiceSound;
+
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
 
 
     @Nullable
@@ -81,8 +84,9 @@ public class CubesOnBoardFragment extends Fragment {
         cubeViews = new ArrayList<>();
         shadowViews = new ArrayList<>();
 
-        // Инициализация SoundPool
+        // Инициализация SoundPool и ShakeDetector
         initSoundPool();
+        initShakeDetector();
 
         // Обновление переменной в макете
         binding.setModel(this);
@@ -91,6 +95,9 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
 
         // Очищаем SoundPool
         clearSoundPool();
@@ -102,6 +109,9 @@ public class CubesOnBoardFragment extends Fragment {
 
         // Создаем SoundPool
         initSoundPool();
+
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
     private void initSoundPool() {
@@ -129,6 +139,24 @@ public class CubesOnBoardFragment extends Fragment {
     private void clearSoundPool() {
         mSoundPool.release();
         mSoundPool = null;
+    }
+
+    private void initShakeDetector() {
+        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        if (mSensorManager != null) {
+            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }
+
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+            @Override
+            public void onShake(int count) {
+                // Действие при встряхивании устройства
+                Log.d("log", "Обнаружена тряска - " + count);
+                rollCubes(null);
+            }
+        });
     }
 
     public void openSetting(View view) {
