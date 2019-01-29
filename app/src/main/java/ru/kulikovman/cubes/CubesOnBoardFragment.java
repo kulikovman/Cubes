@@ -3,6 +3,10 @@ package ru.kulikovman.cubes;
 import android.content.Context;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,6 +43,9 @@ public class CubesOnBoardFragment extends Fragment {
     private List<CubeView> cubeViews;
     private List<ShadowView> shadowViews;
 
+    private SoundPool mSoundPool;
+    private int mRollDiceSound;
+
 
     @Nullable
     @Override
@@ -56,7 +63,7 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Хардкод (это должно приходить с базы данных - настройки приложения)
-        numberOfCubes = 7; // количество кубиков
+        numberOfCubes = 6; // количество кубиков
         skin = Skin.WHITE; // белый
 
         // Предварительные расчеты всего, что можно подсчитать заранее
@@ -67,8 +74,54 @@ public class CubesOnBoardFragment extends Fragment {
         cubeViews = new ArrayList<>();
         shadowViews = new ArrayList<>();
 
+        // Инициализация SoundPool
+        initSoundPool();
+
         // Обновление переменной в макете
         binding.setModel(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // Очищаем SoundPool
+        clearSoundPool();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Создаем SoundPool
+        initSoundPool();
+    }
+
+    private void initSoundPool() {
+        if (mSoundPool == null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // Создаем SoundPool для Android API 21 и выше
+                AudioAttributes attributes = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_GAME)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build();
+
+                mSoundPool = new SoundPool.Builder()
+                        .setAudioAttributes(attributes)
+                        .build();
+            } else {
+                // Создаем SoundPool для старых версий Android
+                mSoundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+            }
+
+            // Получаем id звуковых файлов
+            mRollDiceSound = mSoundPool.load(context, R.raw.roll_dice, 1);
+        }
+    }
+
+    private void clearSoundPool() {
+        mSoundPool.release();
+        mSoundPool = null;
     }
 
     public void openSetting(View view) {
@@ -115,10 +168,9 @@ public class CubesOnBoardFragment extends Fragment {
                             Log.d("myLog", "---------------------------");
                             // Очищаем списки и начинаем заново
                             clearLists();
-                            intersection = false;
-
                             cubes.add(cube);
                             Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
+                            intersection = false;
                         }
                     } else {
                         cubes.add(cube);
@@ -145,7 +197,11 @@ public class CubesOnBoardFragment extends Fragment {
         }
 
         // Воспроизводим звук броска
+        if (mSoundPool == null) {
+            initSoundPool();
+        }
 
+        mSoundPool.play(mRollDiceSound, 1, 1, 1, 0, 1);
 
         // Сохраняем результаты текущего броска в базу
 
