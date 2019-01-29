@@ -1,13 +1,12 @@
 package ru.kulikovman.cubes;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,6 +28,7 @@ import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
+import ru.kulikovman.cubes.view.SoundManager;
 
 
 public class CubesOnBoardFragment extends Fragment {
@@ -47,6 +47,7 @@ public class CubesOnBoardFragment extends Fragment {
     private float delayAfterRoll;
     private boolean isReadyForRoll;
 
+    private SoundManager soundManager;
     private SoundPool mSoundPool;
     private int mRollDiceSound;
 
@@ -75,6 +76,15 @@ public class CubesOnBoardFragment extends Fragment {
         skin = Skin.WHITE; // белый
         delayAfterRoll = 0.3f;
         isReadyForRoll = true;
+
+        // Получение вью модел
+        // Возможно здесь лучше хранить лив дата объект с базой даных, чтобы получать через него параметры со станицы настроек
+        CubesViewModel model = ViewModelProviders.of((MainActivity) context).get(CubesViewModel.class);
+
+
+
+
+
 
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
@@ -116,14 +126,14 @@ public class CubesOnBoardFragment extends Fragment {
 
     private void initSoundPool() {
         if (mSoundPool == null) {
-                AudioAttributes attributes = new AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_GAME)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                        .build();
+            AudioAttributes attributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
 
-                mSoundPool = new SoundPool.Builder()
-                        .setAudioAttributes(attributes)
-                        .build();
+            mSoundPool = new SoundPool.Builder()
+                    .setAudioAttributes(attributes)
+                    .build();
 
             // Получаем id звуковых файлов
             mRollDiceSound = mSoundPool.load(context, R.raw.roll_dice, 1);
