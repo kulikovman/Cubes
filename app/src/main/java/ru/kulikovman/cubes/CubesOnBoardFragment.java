@@ -48,8 +48,7 @@ public class CubesOnBoardFragment extends Fragment {
     private boolean isReadyForRoll;
 
     private SoundManager soundManager;
-    private SoundPool mSoundPool;
-    private int mRollDiceSound;
+
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -79,12 +78,10 @@ public class CubesOnBoardFragment extends Fragment {
 
         // Получение вью модел
         // Возможно здесь лучше хранить лив дата объект с базой даных, чтобы получать через него параметры со станицы настроек
-        CubesViewModel model = ViewModelProviders.of((MainActivity) context).get(CubesViewModel.class);
+        CubesViewModel model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
 
-
-
-
-
+        // Получение звукового менеджера
+        soundManager = model.getSoundManager();
 
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
@@ -94,8 +91,7 @@ public class CubesOnBoardFragment extends Fragment {
         cubeViews = new ArrayList<>();
         shadowViews = new ArrayList<>();
 
-        // Инициализация SoundPool и ShakeDetector
-        initSoundPool();
+        // Инициализация ShakeDetector
         initShakeDetector();
 
         // Обновление переменной в макете
@@ -109,40 +105,15 @@ public class CubesOnBoardFragment extends Fragment {
         // Add the following line to unregister the Sensor Manager onPause
         mSensorManager.unregisterListener(mShakeDetector);
 
-        // Очищаем SoundPool
-        clearSoundPool();
+        soundManager.releaseSoundPool();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        // Создаем SoundPool
-        initSoundPool();
-
         // Add the following line to register the Session Manager Listener onResume
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
-    }
-
-    private void initSoundPool() {
-        if (mSoundPool == null) {
-            AudioAttributes attributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-
-            mSoundPool = new SoundPool.Builder()
-                    .setAudioAttributes(attributes)
-                    .build();
-
-            // Получаем id звуковых файлов
-            mRollDiceSound = mSoundPool.load(context, R.raw.roll_dice, 1);
-        }
-    }
-
-    private void clearSoundPool() {
-        mSoundPool.release();
-        mSoundPool = null;
     }
 
     private void initShakeDetector() {
@@ -164,6 +135,7 @@ public class CubesOnBoardFragment extends Fragment {
     }
 
     public void openSetting(View view) {
+        soundManager.playButtonSound();
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
@@ -241,11 +213,7 @@ public class CubesOnBoardFragment extends Fragment {
         }
 
         // Воспроизводим звук броска
-        if (mSoundPool == null) {
-            initSoundPool();
-        }
-
-        mSoundPool.play(mRollDiceSound, 1, 1, 1, 0, 1);
+        soundManager.playDropSound();
 
         // Сохраняем результаты текущего броска в базу
 
