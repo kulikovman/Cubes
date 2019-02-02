@@ -1,58 +1,48 @@
 package ru.kulikovman.cubes.view;
 
-import android.media.AudioAttributes;
+import android.content.Context;
 import android.media.SoundPool;
 
-import ru.kulikovman.cubes.App;
 import ru.kulikovman.cubes.R;
 
 public class SoundManager {
 
+    private static SoundManager ourInstance;
     private SoundPool soundPool;
 
-    private int dropSound;
-    private int buttonSound;
+    private int DROP_SOUND;
+    private int SETTING_BUTTON_SOUND;
 
-    public SoundManager() {
-        initSoundPool();
+    public static synchronized SoundManager getInstance(){
+        if(ourInstance == null){
+            ourInstance = new SoundManager();
+        }
+
+        return ourInstance;
     }
 
-    private void initSoundPool() {
-        // Инициализация SoundPool
-        AudioAttributes attributes = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build();
+    public static void initialize(Context context){
+        SoundManager soundManager = getInstance();
+        soundManager.loadSound(context);
+    }
 
-        soundPool = new SoundPool.Builder()
-                .setAudioAttributes(attributes)
-                .build();
+    private SoundManager() {
+        soundPool = (new SoundPool.Builder()).setMaxStreams(2).build();
+    }
 
+    private void loadSound(Context context){
         // Получаем id звуковых файлов
-        dropSound = soundPool.load(App.getContext(), R.raw.roll_dice, 1);
-        buttonSound = soundPool.load(App.getContext(), R.raw.button_click, 1);
+        DROP_SOUND = soundPool.load(context, R.raw.roll_dice, 1);
+        SETTING_BUTTON_SOUND = soundPool.load(context, R.raw.button_click, 1);
     }
 
     public void playDropSound() {
-        /*if (soundPool == null) {
-            initSoundPool();
-        }*/
-
         // Воспроизводим звук броска
-        soundPool.play(dropSound, 1, 1, 1, 0, 1);
+        soundPool.play(DROP_SOUND, 1, 1, 1, 0, 1);
     }
 
-    public void playButtonSound() {
-        /*if (soundPool == null) {
-            initSoundPool();
-        }*/
-
+    public void playSettingButtonSound() {
         // Воспроизводим звук нажатия кнопки
-        soundPool.play(buttonSound, 1, 1, 1, 0, 1);
-    }
-
-    public void releaseSoundPool() {
-        soundPool.release();
-        soundPool = null;
+        soundPool.play(SETTING_BUTTON_SOUND, 1, 1, 1, 0, 1);
     }
 }

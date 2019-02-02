@@ -7,15 +7,13 @@ import ru.kulikovman.cubes.view.SoundManager;
 
 public class CubesViewModel extends ViewModel {
 
-    private SoundManager soundManager;
+    /*private SoundManager soundManager;
 
-    public SoundManager getSoundManager() {
-        if (soundManager == null) {
-            soundManager = new SoundManager();
-        }
+    SoundManager getSoundManager() {
+        soundManager
 
         return soundManager;
-    }
+    }*/
 
 
     @Override

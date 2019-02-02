@@ -5,8 +5,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.media.AudioAttributes;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -47,12 +45,9 @@ public class CubesOnBoardFragment extends Fragment {
     private float delayAfterRoll;
     private boolean isReadyForRoll;
 
-    private SoundManager soundManager;
-
-
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-    private ShakeDetector mShakeDetector;
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private ShakeDetector shakeDetector;
 
 
     @Nullable
@@ -70,6 +65,7 @@ public class CubesOnBoardFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Log.d("myLog", "CubesOnBoardFragment --> onViewCreated");
         // Хардкод (это должно приходить с базы данных - настройки приложения)
         numberOfCubes = 6; // количество кубиков
         skin = Skin.WHITE; // белый
@@ -80,8 +76,8 @@ public class CubesOnBoardFragment extends Fragment {
         // Возможно здесь лучше хранить лив дата объект с базой даных, чтобы получать через него параметры со станицы настроек
         CubesViewModel model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
 
-        // Получение звукового менеджера
-        soundManager = model.getSoundManager();
+        // Подключение звука
+        SoundManager.initialize(context);
 
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
@@ -101,29 +97,27 @@ public class CubesOnBoardFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-
+        Log.d("myLog", "CubesOnBoardFragment --> onPause");
         // Add the following line to unregister the Sensor Manager onPause
-        mSensorManager.unregisterListener(mShakeDetector);
-
-        soundManager.releaseSoundPool();
+        sensorManager.unregisterListener(shakeDetector);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
+        Log.d("myLog", "CubesOnBoardFragment --> onResume");
         // Add the following line to register the Session Manager Listener onResume
-        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
     private void initShakeDetector() {
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        if (mSensorManager != null) {
-            mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager != null) {
+            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }
 
-        mShakeDetector = new ShakeDetector();
-        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+        shakeDetector = new ShakeDetector();
+        shakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
 
             @Override
             public void onShake(int count) {
@@ -135,7 +129,7 @@ public class CubesOnBoardFragment extends Fragment {
     }
 
     public void openSetting(View view) {
-        soundManager.playButtonSound();
+        SoundManager.getInstance().playSettingButtonSound();
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
@@ -213,7 +207,7 @@ public class CubesOnBoardFragment extends Fragment {
         }
 
         // Воспроизводим звук броска
-        soundManager.playDropSound();
+        SoundManager.getInstance().playDropSound();
 
         // Сохраняем результаты текущего броска в базу
 
