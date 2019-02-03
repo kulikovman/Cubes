@@ -39,13 +39,12 @@ public class Calculation {
 
         // Координаты кнопки настроек
         int settingSize = resources.getDimensionPixelSize(R.dimen.button_setting_size);
-        int settingPadding = resources.getDimensionPixelSize(R.dimen.button_setting_padding);
         int settingMarginTop = resources.getDimensionPixelSize(R.dimen.button_setting_marginTop);
         sx = screenWidth / 2;
-        sy = settingSize / 2 + settingPadding + settingMarginTop;
+        sy = settingSize / 2 + settingMarginTop;
 
         // Радиус кнопки настроек
-        settingRadius = settingSize / 2 + settingPadding + settingMarginTop;
+        settingRadius = settingSize / 2 + settingMarginTop;
 
         // Размер/полуразмер вью кубика
         int cubeViewSize = resources.getDimensionPixelSize(R.dimen.cube_view_size);

@@ -68,7 +68,7 @@ public class CubesOnBoardFragment extends Fragment {
         Log.d("myLog", "CubesOnBoardFragment --> onViewCreated");
         // Хардкод (это должно приходить с базы данных - настройки приложения)
         numberOfCubes = 6; // количество кубиков
-        skin = Skin.WHITE; // белый
+        skin = Skin.RED; // белый
         delayAfterRoll = 0.3f;
         isReadyForRoll = true;
 
