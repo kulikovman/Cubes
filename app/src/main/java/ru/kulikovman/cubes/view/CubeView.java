@@ -1,6 +1,7 @@
 package ru.kulikovman.cubes.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -32,16 +33,20 @@ public class CubeView extends FrameLayout {
         super(context);
     }
 
+    // Конструкторы для создания кубика через макет
     public CubeView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init(context, attrs, 0, 0);
     }
 
     public CubeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr, 0);
     }
 
     public CubeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs, defStyleAttr, defStyleRes);
     }
 
     // Конструктор для генерации кубика через код
@@ -50,11 +55,16 @@ public class CubeView extends FrameLayout {
         init(context, cube);
     }
 
-    private void init(Context context, Cube cube) {
+    private void init(Context context) {
         this.context = context;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.view_cube, this);
+    }
+
+    private void init(Context context, Cube cube) {
+        // Инициализация
+        init(context);
 
         if (!isInEditMode()) {
             // Подключение биндинга
@@ -62,6 +72,26 @@ public class CubeView extends FrameLayout {
 
             // Ставим значения
             setCube(cube);
+        }
+    }
+
+    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        // Инициализация
+        init(context);
+
+        // Получение значений из аттрибутов вью
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CubeView, defStyleAttr, defStyleRes);
+        value = a.getInt(R.styleable.CubeView_value, 1);
+        angle = a.getInt(R.styleable.CubeView_angle, 0);
+        skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 0)];
+        a.recycle();
+
+        if (!isInEditMode()) {
+            // Подключение биндинга
+            binding = DataBindingUtil.bind((findViewById(R.id.cube_view_container)));
+
+            // Отрисовка кубика
+            drawCube();
         }
     }
 

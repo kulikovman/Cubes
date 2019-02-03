@@ -7,7 +7,7 @@
 
     <!-- Прочее -->
     <dimen name="screen_offset">8dp</dimen>
-    <dimen name="button_setting_size">30dp</dimen>
+    <dimen name="button_title_size">30dp</dimen>
     <dimen name="button_setting_marginTop">20dp</dimen>
 
 </resources>
