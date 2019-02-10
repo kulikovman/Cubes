@@ -38,44 +38,64 @@
                     style="@style/TitleOption"
                     android:text="Количество кубиков"/>
 
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                <SeekBar
+                    android:id="@+id/seekBar1"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:max="5"
+                    android:progress="1"/>
+
+                <LinearLayout
+                    android:layout_width="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/radioButton1"
-                        style="@style/RadioButtonOptions"
-                        android:checked="true"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="1"/>
 
-                    <RadioButton
-                        android:id="@+id/radioButton2"
-                        style="@style/RadioButtonOptions"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="2"/>
 
-                    <RadioButton
-                        android:id="@+id/radioButton3"
-                        style="@style/RadioButtonOptions"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="3"/>
 
-                    <RadioButton
-                        android:id="@+id/radioButton4"
-                        style="@style/RadioButtonOptions"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="4"/>
 
-                    <RadioButton
-                        android:id="@+id/radioButton5"
-                        style="@style/RadioButtonOptions"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="5"/>
 
-                    <RadioButton
-                        android:id="@+id/radioButton6"
-                        style="@style/RadioButtonOptions"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="6"/>
 
-                </RadioGroup>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -96,49 +116,57 @@
                     style="@style/TitleOption"
                     android:text="Задержка после броска"/>
 
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:visibility="invisible">
-
-                    <RadioButton
-                        android:id="@+id/radioButton11"
-                        style="@style/RadioButtonOptions"
-                        android:checked="true"
-                        android:text="0.3"/>
-
-                    <RadioButton
-                        android:id="@+id/radioButton22"
-                        style="@style/RadioButtonOptions"
-                        android:text="0.5"/>
-
-                    <RadioButton
-                        android:id="@+id/radioButton33"
-                        style="@style/RadioButtonOptions"
-                        android:text="1"/>
-
-                    <RadioButton
-                        android:id="@+id/radioButton44"
-                        style="@style/RadioButtonOptions"
-                        android:text="5"/>
-
-                    <RadioButton
-                        android:id="@+id/radioButton55"
-                        style="@style/RadioButtonOptions"
-                        android:text="10"/>
-
-
-                </RadioGroup>
-
                 <SeekBar
                     android:id="@+id/seekBar3"
                     style="@style/Widget.AppCompat.SeekBar.Discrete"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:max="4"
                     android:progress="0"/>
+
+                <LinearLayout
+                    android:layout_width="210dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="0.3"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="0.5"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="1"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="5"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="10"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
