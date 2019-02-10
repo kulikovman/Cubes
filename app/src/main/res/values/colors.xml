@@ -27,5 +27,7 @@
     <color name="violet">#a95eff</color>
     <color name="pink">#ff5efa</color>
 
+    // Дополнительные цвета
+    <color name="blue_lite">#B3E5FC</color>
 
 </resources>

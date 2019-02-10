@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         tools:context="ru.kulikovman.cubes.SettingFragment">
 
     <ScrollView
@@ -27,6 +27,7 @@
                 android:layout_margin="@dimen/button_setting_marginTop"
                 android:src="@drawable/ic_arrow_back_gray"/>
 
+
             <!-- Количество кубиков -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,24 +35,191 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/TitleOption"
                     android:text="Количество кубиков"/>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:checked="true"
+                        android:fontFamily="sans-serif-light"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="1"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:fontFamily="sans-serif-light"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="2"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:fontFamily="sans-serif-light"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="3"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:fontFamily="sans-serif-light"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="4"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:fontFamily="sans-serif-light"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="5"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton6"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:fontFamily="sans-serif-light"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="6"/>
+
+                </RadioGroup>
 
             </LinearLayout>
 
+
+            <!-- Разделитель -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_2"/>
+
+
             <!-- Задержка после броска -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/TitleOption"
                     android:text="Задержка после броска"/>
 
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton11"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:checked="true"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_gravity="center"
+                        android:text="0.3"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton22"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_gravity="center"
+                        android:text="0.5"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton33"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_options"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_gravity="center"
+                        android:text="1"/>
+
+
+
+                </RadioGroup>
+
             </LinearLayout>
+
+
+            <!-- Разделитель -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_2"/>
+
+
+            <!-- Выключение экрана -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TitleOption"
+                    android:text="Выключение экрана"/>
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Блокировать переход в спящий режим"/>
+
+            </LinearLayout>
+
+
+            <!-- Разделитель -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_2"/>
+
 
             <!-- Выбор кубиков -->
             <LinearLayout
@@ -60,42 +228,40 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:singleLine="true"
-                    android:text="Выбор кубиков"
-                    android:textSize="18sp"/>
+                    style="@style/TitleOption"
+                    android:text="Выбор кубиков"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <ru.kulikovman.cubes.view.CubeView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:value="3"
                         app:shadow="true"
-                        app:skin="white"/>
+                        app:skin="white"
+                        app:value="3"/>
 
                     <ru.kulikovman.cubes.view.CubeView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:value="4"
                         app:shadow="true"
-                        app:skin="red"/>
+                        app:skin="red"
+                        app:value="4"/>
 
                     <ru.kulikovman.cubes.view.CubeView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:value="5"
                         app:shadow="true"
-                        app:skin="black"/>
+                        app:skin="black"
+                        app:value="5"/>
 
                 </LinearLayout>
 
             </LinearLayout>
+
 
             <!-- Кнопка -->
             <Button
