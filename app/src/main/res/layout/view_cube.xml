@@ -7,6 +7,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="model"
             type="ru.kulikovman.cubes.view.CubeView"/>
@@ -28,7 +30,7 @@
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:srcCompat="@drawable/black_shadow"/>
 
         <ImageView
@@ -51,6 +53,15 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/black_dot_5"
             tools:rotation="0"/>
+
+        <ImageView
+            android:id="@+id/selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="8dp"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_check_circle_blue"/>
 
         <!--
         Это вью нужно для визуального определения размера кубика.

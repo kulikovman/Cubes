@@ -5,6 +5,7 @@
         <attr name="value" format="integer"/>
         <attr name="angle" format="integer"/>
         <attr name="shadow" format="boolean"/>
+        <attr name="selected" format="boolean"/>
         <attr name="skin" format="enum">
             <enum name="white" value="0"/>
             <enum name="black" value="1"/>

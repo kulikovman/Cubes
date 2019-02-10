@@ -7,7 +7,6 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -26,7 +25,8 @@ public class CubeView extends FrameLayout {
     private Skin skin;
     private int value;
     public int angle;
-    public boolean shadow;
+    public boolean isShadow;
+    public boolean isSelected;
     public int marginStart;
     public int marginTop;
 
@@ -84,7 +84,8 @@ public class CubeView extends FrameLayout {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CubeView, defStyleAttr, defStyleRes);
         value = a.getInt(R.styleable.CubeView_value, 1);
         angle = a.getInt(R.styleable.CubeView_angle, 0);
-        shadow = a.getBoolean(R.styleable.CubeView_shadow, false);
+        isShadow = a.getBoolean(R.styleable.CubeView_shadow, false);
+        isSelected = a.getBoolean(R.styleable.CubeView_selected, false);
         skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 0)];
         a.recycle();
 
@@ -114,11 +115,14 @@ public class CubeView extends FrameLayout {
         binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
         binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
 
-        // Рисуем тень, если указана
-        if (shadow) {
+        // Показываем тень, если указана
+        if (isShadow) {
             binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
             binding.shadow.setVisibility(VISIBLE);
         }
+
+        // Показываем маркер, если есть
+        binding.selection.setVisibility(isSelected ? VISIBLE : INVISIBLE);
 
         // Обновление переменной в макете
         binding.setModel(this);
