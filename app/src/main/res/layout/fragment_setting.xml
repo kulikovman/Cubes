@@ -41,74 +41,38 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/radioButton1"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
+                        style="@style/RadioButtonOptions"
                         android:checked="true"
-                        android:fontFamily="sans-serif-light"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:layout_gravity="center"
                         android:text="1"/>
 
                     <RadioButton
                         android:id="@+id/radioButton2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
-                        android:fontFamily="sans-serif-light"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        style="@style/RadioButtonOptions"
                         android:text="2"/>
 
                     <RadioButton
                         android:id="@+id/radioButton3"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
-                        android:fontFamily="sans-serif-light"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        style="@style/RadioButtonOptions"
                         android:text="3"/>
 
                     <RadioButton
                         android:id="@+id/radioButton4"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
-                        android:fontFamily="sans-serif-light"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        style="@style/RadioButtonOptions"
                         android:text="4"/>
 
                     <RadioButton
                         android:id="@+id/radioButton5"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
-                        android:fontFamily="sans-serif-light"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        style="@style/RadioButtonOptions"
                         android:text="5"/>
 
                     <RadioButton
                         android:id="@+id/radioButton6"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
-                        android:fontFamily="sans-serif-light"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        style="@style/RadioButtonOptions"
                         android:text="6"/>
 
                 </RadioGroup>
@@ -118,11 +82,7 @@
 
             <!-- Разделитель -->
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/gray_2"/>
+                style="@style/Divider"/>
 
 
             <!-- Задержка после броска -->
@@ -139,57 +99,53 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal">
+                    android:visibility="invisible">
 
                     <RadioButton
                         android:id="@+id/radioButton11"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
+                        style="@style/RadioButtonOptions"
                         android:checked="true"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_gravity="center"
                         android:text="0.3"/>
 
                     <RadioButton
                         android:id="@+id/radioButton22"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_gravity="center"
+                        style="@style/RadioButtonOptions"
                         android:text="0.5"/>
 
                     <RadioButton
                         android:id="@+id/radioButton33"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_options"
-                        android:gravity="center"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_gravity="center"
+                        style="@style/RadioButtonOptions"
                         android:text="1"/>
 
+                    <RadioButton
+                        android:id="@+id/radioButton44"
+                        style="@style/RadioButtonOptions"
+                        android:text="5"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton55"
+                        style="@style/RadioButtonOptions"
+                        android:text="10"/>
 
 
                 </RadioGroup>
+
+                <SeekBar
+                    android:id="@+id/seekBar3"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:max="4"
+                    android:progress="0"/>
 
             </LinearLayout>
 
 
             <!-- Разделитель -->
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/gray_2"/>
+                style="@style/Divider"/>
 
 
             <!-- Выключение экрана -->
@@ -214,11 +170,7 @@
 
             <!-- Разделитель -->
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/gray_2"/>
+                style="@style/Divider"/>
 
 
             <!-- Выбор кубиков -->
