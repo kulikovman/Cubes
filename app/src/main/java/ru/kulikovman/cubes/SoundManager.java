@@ -1,9 +1,7 @@
-package ru.kulikovman.cubes.view;
+package ru.kulikovman.cubes;
 
 import android.content.Context;
 import android.media.SoundPool;
-
-import ru.kulikovman.cubes.R;
 
 public class SoundManager {
 

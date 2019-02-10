@@ -26,6 +26,7 @@ public class CubeView extends FrameLayout {
     private Skin skin;
     private int value;
     public int angle;
+    public boolean shadow;
     public int marginStart;
     public int marginTop;
 
@@ -83,6 +84,7 @@ public class CubeView extends FrameLayout {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CubeView, defStyleAttr, defStyleRes);
         value = a.getInt(R.styleable.CubeView_value, 1);
         angle = a.getInt(R.styleable.CubeView_angle, 0);
+        shadow = a.getBoolean(R.styleable.CubeView_shadow, false);
         skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 0)];
         a.recycle();
 
@@ -111,6 +113,12 @@ public class CubeView extends FrameLayout {
         String skinName = skin.name().toLowerCase();
         binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
         binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
+
+        // Рисуем тень, если указана
+        if (shadow) {
+            binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
+            binding.shadow.setVisibility(VISIBLE);
+        }
 
         // Обновление переменной в макете
         binding.setModel(this);

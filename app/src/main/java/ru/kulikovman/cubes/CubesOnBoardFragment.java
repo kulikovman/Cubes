@@ -26,7 +26,6 @@ import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
-import ru.kulikovman.cubes.view.SoundManager;
 
 
 public class CubesOnBoardFragment extends Fragment {
