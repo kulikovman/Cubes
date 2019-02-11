@@ -72,7 +72,6 @@ public class CubesOnBoardFragment extends Fragment {
         isReadyForRoll = true;
 
         // Получение вью модел
-        // Возможно здесь лучше хранить лив дата объект с базой даных, чтобы получать через него параметры со станицы настроек
         CubesViewModel model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
 
         // Подключение звука

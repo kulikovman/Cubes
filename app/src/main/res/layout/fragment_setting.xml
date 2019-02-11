@@ -4,6 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="ru.kulikovman.cubes.SettingFragment">
 
+    <data>
+
+        <variable
+            name="model"
+            type="ru.kulikovman.cubes.SettingFragment"/>
+
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -218,23 +226,29 @@
                     android:orientation="horizontal">
 
                     <ru.kulikovman.cubes.view.CubeView
+                        android:id="@+id/white_cube"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{model::chooseCube}"
                         app:selected="true"
                         app:shadow="true"
                         app:skin="white"
                         app:value="3"/>
 
                     <ru.kulikovman.cubes.view.CubeView
+                        android:id="@+id/red_cube"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{model::chooseCube}"
                         app:shadow="true"
                         app:skin="red"
                         app:value="4"/>
 
                     <ru.kulikovman.cubes.view.CubeView
+                        android:id="@+id/black_cube"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{model::chooseCube}"
                         app:shadow="true"
                         app:skin="black"
                         app:value="5"/>

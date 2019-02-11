@@ -2,8 +2,10 @@ package ru.kulikovman.cubes.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableBoolean;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -132,6 +134,14 @@ public class CubeView extends FrameLayout {
 
     private int getDrawableIdByName(String resourceName) {
         return getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
+    }
+
+    public void setChooseMarker(boolean isSelected) {
+        // Показываем маркер
+        this.isSelected = isSelected;
+
+        // Показываем маркер, если есть
+        binding.selection.setVisibility(isSelected ? VISIBLE : INVISIBLE);
     }
 
     @BindingAdapter({"android:layout_marginStart"})

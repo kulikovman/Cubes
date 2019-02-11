@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:srcCompat="@drawable/black_shadow"/>
 
         <ImageView

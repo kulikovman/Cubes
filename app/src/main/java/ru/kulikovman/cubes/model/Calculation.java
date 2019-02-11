@@ -47,7 +47,7 @@ public class Calculation {
         settingRadius = settingSize / 2 + settingMarginTop;
 
         // Размер/полуразмер вью кубика
-        int cubeViewSize = resources.getDimensionPixelSize(R.dimen.cube_view_size);
+        int cubeViewSize = resources.getDimensionPixelSize(R.dimen.shadow_view_size);
         cubeViewHalfSize = cubeViewSize / 2;
 
         // Размер/полуразмер кубика
