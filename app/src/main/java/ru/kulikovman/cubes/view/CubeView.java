@@ -116,6 +116,8 @@ public class CubeView extends FrameLayout {
         binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
 
         // Показываем тень, если указана
+        // Это собственная тень кубика, для отображения через макет
+        // Для кубиков на поле отображаться не должна, там свои тени в другом слое
         if (isShadow) {
             binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
             binding.shadow.setVisibility(VISIBLE);
