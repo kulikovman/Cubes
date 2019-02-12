@@ -43,7 +43,7 @@ public class CubesOnBoardFragment extends Fragment {
     private List<CubeView> cubeViews;
     private List<ShadowView> shadowViews;
 
-    private float delayAfterRoll;
+    private int delayAfterRoll;
     private boolean isReadyForRoll;
 
     private SensorManager sensorManager;
@@ -73,11 +73,11 @@ public class CubesOnBoardFragment extends Fragment {
         // Подключение звука
         SoundManager.initialize(context);
 
-        // Восстановление настроек
-        numberOfCubes = settings.getNumberOfCubes();
-        skin = Skin.valueOf(settings.getCubeColor());
-        delayAfterRoll = 0.3f;
-        isReadyForRoll = true;
+        // Инициализация ShakeDetector
+        initShakeDetector();
+
+        // Применение настроек
+        applySettings();
 
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
@@ -87,11 +87,20 @@ public class CubesOnBoardFragment extends Fragment {
         cubeViews = new ArrayList<>();
         shadowViews = new ArrayList<>();
 
-        // Инициализация ShakeDetector
-        initShakeDetector();
+        isReadyForRoll = true;
 
         // Обновление переменной в макете
         binding.setModel(this);
+    }
+
+    private void applySettings() {
+        // Количество кубиков и цвет
+        numberOfCubes = settings.getNumberOfCubes();
+        skin = Skin.valueOf(settings.getCubeColor());
+
+        // Задержка после броска
+        int[] delays = getResources().getIntArray(R.array.delay_after_roll);
+        delayAfterRoll = delays[settings.getDelayAfterRoll()];
     }
 
     @Override
@@ -219,7 +228,7 @@ public class CubesOnBoardFragment extends Fragment {
             public void run() {
                 isReadyForRoll = true;
             }
-        }, 300);
+        }, delayAfterRoll);
 
         Log.d("myLog", "---------------------------");
     }
