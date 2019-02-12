@@ -114,13 +114,13 @@ public class SettingFragment extends Fragment {
         });
     }
 
-    public void comeBack(View view) {
+    public void clickComeBackButton(View view) {
         SoundManager.getInstance().playSettingButtonSound();
 
         NavHostFragment.findNavController(this).popBackStack();
     }
 
-    public void chooseCube(View view) {
+    public void clickChooseCube(View view) {
         // Сначала снимаем все галки
         for (CubeView cubeView : cubeViews) {
             cubeView.setChooseMarker(false);
@@ -132,5 +132,23 @@ public class SettingFragment extends Fragment {
 
         // Сохраняем выбранный цвет
         settings.setCubeColor(cubeView.getCubeColor());
+    }
+
+    public void clickHelpButton(View view) {
+        // Показываем соответствующий диалог
+        switch (view.getId()) {
+            case R.id.help_number_of_cubes:
+
+                break;
+            case R.id.help_delay_after_roll:
+
+                break;
+            case R.id.help_block_screen:
+
+                break;
+            case R.id.help_choose_cube:
+
+                break;
+        }
     }
 }

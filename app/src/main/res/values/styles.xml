@@ -16,16 +16,25 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/gray_8</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginBottom">10dp</item>
     </style>
 
     // Разделитель в настройках
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:background">@color/gray_2</item>
+    </style>
+
+    // Кнопка вызова подсказки
+    <style name="ButtonHelp">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:src">@drawable/ic_help_gray_16dp</item>
     </style>
 
     // Кнопка перехода на другой экран
