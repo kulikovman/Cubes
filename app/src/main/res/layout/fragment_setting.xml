@@ -44,8 +44,8 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/TitleOption"
-                    android:text="Количество кубиков"/>
+                    style="@style/SettingTitles"
+                    android:text="@string/title_number_of_cubes"/>
 
                 <SeekBar
                     android:id="@+id/cubes"
@@ -67,63 +67,60 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="1"/>
+                        android:text="@string/one_cube"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="2"/>
+                        android:text="@string/two_cubes"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="3"/>
+                        android:text="@string/three_cubes"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="4"/>
+                        android:text="@string/four_cubes"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="5"/>
+                        android:text="@string/five_cubes"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="6"/>
+                        android:text="@string/six_cubes"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-
-            <!-- Разделитель -->
             <ImageView
                 style="@style/Divider"/>
 
 
             <!-- Задержка после броска -->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/TitleOption"
-                    android:text="Задержка после броска"/>
+                    style="@style/SettingTitles"
+                    android:text="@string/title_delay_after_roll"/>
 
                 <SeekBar
                     android:id="@+id/delay"
@@ -145,42 +142,40 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="0.3"/>
+                        android:text="@string/delay_0_3"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="0.5"/>
+                        android:text="@string/delay_0_5"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="1"/>
+                        android:text="@string/delay_1"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="5"/>
+                        android:text="@string/delay_5"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="10"/>
+                        android:text="@string/delay_10"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-
-            <!-- Разделитель -->
             <ImageView
                 style="@style/Divider"/>
 
@@ -192,20 +187,18 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/TitleOption"
-                    android:text="Выключение экрана"/>
+                    style="@style/SettingTitles"
+                    android:text="@string/title_screen_off"/>
 
                 <Switch
                     android:id="@+id/block_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Блокировать переход в спящий режим"/>
+                    android:text="@string/block_hibernation"/>
 
             </LinearLayout>
 
-
-            <!-- Разделитель -->
             <ImageView
                 style="@style/Divider"/>
 
@@ -217,8 +210,8 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/TitleOption"
-                    android:text="Выбор кубиков"/>
+                    style="@style/SettingTitles"
+                    android:text="@string/title_choice_of_cubes"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -262,7 +255,7 @@
             <Button
                 android:id="@+id/button_extended_version"
                 style="@style/ButtonNext"
-                android:text="Расширенная версия"/>
+                android:text="@string/button_extended_version"/>
 
         </LinearLayout>
 

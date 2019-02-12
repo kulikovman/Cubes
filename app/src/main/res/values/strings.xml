@@ -1,19 +1,29 @@
 <resources>
     <string name="app_name">Cubes</string>
 
+    // Заголовки настроек
+    <string name="title_number_of_cubes">Количество кубиков</string>
+    <string name="title_delay_after_roll">Задержка после броска</string>
+    <string name="title_screen_off">Выключение экрана</string>
+    <string name="title_choice_of_cubes">Выбор кубиков</string>
 
-    // Расчет радиуса (расстояние между двумя точками)
-    // r = (x1 - x2)^2 + (y1 - y2)^2
+    // Прочие тексты
+    <string name="block_hibernation">Блокировать переход в спящий режим</string>
+    <string name="button_extended_version">Расширенная версия</string>
 
+    // Количество кубиков
+    <string name="one_cube">1</string>
+    <string name="two_cubes">2</string>
+    <string name="three_cubes">3</string>
+    <string name="four_cubes">4</string>
+    <string name="five_cubes">5</string>
+    <string name="six_cubes">6</string>
 
-    // Расчет положения вершин после поворота
-    // Поворот точки вокруг другой точки
-    // x/y - точка, которую вращаем
-    // x0/y0 - точка вокруг которой происходит вращение
-    // а - угол поворота в радианах (отрицательный угол вращает против часовой)
-    // x1/y1 - новые координаты
-    // -------------------
-    // x1 = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
-    // y1 = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
+    // Задержка после броска
+    <string name="delay_0_3">0.3</string>
+    <string name="delay_0_5">0.5</string>
+    <string name="delay_1">1</string>
+    <string name="delay_5">5</string>
+    <string name="delay_10">10</string>
 
 </resources>
