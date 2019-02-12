@@ -24,6 +24,7 @@ import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
+import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
 
@@ -33,6 +34,7 @@ public class CubesOnBoardFragment extends Fragment {
     private FragmentCubesOnBoardBinding binding;
     private Context context;
 
+    private Settings settings;
     private Calculation calculation;
 
     private Skin skin;
@@ -64,18 +66,18 @@ public class CubesOnBoardFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d("myLog", "CubesOnBoardFragment --> onViewCreated");
-        // Хардкод (это должно приходить с базы данных - настройки приложения)
-        numberOfCubes = 6; // количество кубиков
-        skin = Skin.RED; // белый
-        delayAfterRoll = 0.3f;
-        isReadyForRoll = true;
-
         // Получение вью модел
         CubesViewModel model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
+        settings = model.getSettings();
 
         // Подключение звука
         SoundManager.initialize(context);
+
+        // Восстановление настроек
+        numberOfCubes = settings.getNumberOfCubes();
+        skin = Skin.valueOf(settings.getCubeColor());
+        delayAfterRoll = 0.3f;
+        isReadyForRoll = true;
 
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());

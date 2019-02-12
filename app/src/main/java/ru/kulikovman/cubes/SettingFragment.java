@@ -28,8 +28,8 @@ public class SettingFragment extends Fragment {
     private FragmentSettingBinding binding;
 
     private Context context;
-    private Settings settings;
 
+    private Settings settings;
     private List<CubeView> cubeViews;
 
     @Nullable
