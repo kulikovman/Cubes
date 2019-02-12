@@ -5,14 +5,14 @@ import ru.kulikovman.cubes.data.Skin;
 public class Settings {
 
     private int numberOfCubes;
-    private float delayAfterRoll;
+    private int delayAfterRoll;
     private boolean isBlockSleepingMode;
     private String cubeColor;
     private int numberOfRoll;
 
     public Settings() {
         numberOfCubes = 2;
-        delayAfterRoll = 0.3f;
+        delayAfterRoll = 0;
         isBlockSleepingMode = false;
         cubeColor = Skin.WHITE.name();
         numberOfRoll = 0;
@@ -26,11 +26,11 @@ public class Settings {
         this.numberOfCubes = numberOfCubes;
     }
 
-    public float getDelayAfterRoll() {
+    public int getDelayAfterRoll() {
         return delayAfterRoll;
     }
 
-    public void setDelayAfterRoll(float delayAfterRoll) {
+    public void setDelayAfterRoll(int delayAfterRoll) {
         this.delayAfterRoll = delayAfterRoll;
     }
 

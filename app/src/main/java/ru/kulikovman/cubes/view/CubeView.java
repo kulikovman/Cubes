@@ -144,6 +144,10 @@ public class CubeView extends FrameLayout {
         binding.selection.setVisibility(isSelected ? VISIBLE : INVISIBLE);
     }
 
+    public String getCubeColor() {
+        return skin.name();
+    }
+
     @BindingAdapter({"android:layout_marginStart"})
     public static void setMarginStart(View view, int margin) {
         MarginLayoutParams params = (MarginLayoutParams) view.getLayoutParams();

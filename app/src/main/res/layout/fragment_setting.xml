@@ -28,11 +28,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/button_setting"
+                android:id="@+id/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="@dimen/button_setting_marginTop"
+                android:onClick="@{model::comeBack}"
                 android:src="@drawable/ic_arrow_back_gray"/>
 
 
@@ -47,7 +48,7 @@
                     android:text="Количество кубиков"/>
 
                 <SeekBar
-                    android:id="@+id/seekBar1"
+                    android:id="@+id/cubes"
                     style="@style/Widget.AppCompat.SeekBar.Discrete"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
@@ -125,7 +126,7 @@
                     android:text="Задержка после броска"/>
 
                 <SeekBar
-                    android:id="@+id/seekBar3"
+                    android:id="@+id/delay"
                     style="@style/Widget.AppCompat.SeekBar.Discrete"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -195,7 +196,7 @@
                     android:text="Выключение экрана"/>
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/block_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
@@ -230,7 +231,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{model::chooseCube}"
-                        app:selected="true"
                         app:shadow="true"
                         app:skin="white"
                         app:value="3"/>
@@ -260,7 +260,7 @@
 
             <!-- Кнопка -->
             <Button
-                android:id="@+id/extended_version"
+                android:id="@+id/button_extended_version"
                 style="@style/ButtonNext"
                 android:text="Расширенная версия"/>
 
