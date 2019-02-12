@@ -79,6 +79,9 @@ public class CubesOnBoardFragment extends Fragment {
         // Применение настроек
         applySettings();
 
+        // Показ диалога с оценкой
+        showRateDialog();
+
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
 
@@ -101,6 +104,14 @@ public class CubesOnBoardFragment extends Fragment {
         // Задержка после броска
         int[] delays = getResources().getIntArray(R.array.delay_after_roll);
         delayAfterRoll = delays[settings.getDelayAfterRoll()];
+    }
+
+    private void showRateDialog() {
+        // Если диалог еще не показывался и было сделано достаточно бросков
+        if (!settings.isShowedRateDialog() && settings.getNumberOfRoll() > 1500) {
+            // Показываем диалог с просьбой оценить приложение
+
+        }
     }
 
     @Override
@@ -218,8 +229,11 @@ public class CubesOnBoardFragment extends Fragment {
         // Воспроизводим звук броска
         SoundManager.getInstance().playDropSound();
 
-        // Сохраняем результаты текущего броска в базу
+        // Сохраняем результаты текущего броска
 
+
+        // Засчитываем бросок
+        settings.setNumberOfRoll(settings.getNumberOfRoll() + 1);
 
         // Задержка после броска
         isReadyForRoll = false;

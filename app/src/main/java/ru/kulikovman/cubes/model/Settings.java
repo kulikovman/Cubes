@@ -8,7 +8,9 @@ public class Settings {
     private int delayAfterRoll;
     private boolean isBlockSleepingMode;
     private String cubeColor;
+
     private int numberOfRoll;
+    private boolean isShowedRateDialog;
 
     public Settings() {
         numberOfCubes = 2;
@@ -16,6 +18,7 @@ public class Settings {
         isBlockSleepingMode = false;
         cubeColor = Skin.WHITE.name();
         numberOfRoll = 0;
+        isShowedRateDialog = false;
     }
 
     public int getNumberOfCubes() {
@@ -56,5 +59,13 @@ public class Settings {
 
     public void setNumberOfRoll(int numberOfRoll) {
         this.numberOfRoll = numberOfRoll;
+    }
+
+    public boolean isShowedRateDialog() {
+        return isShowedRateDialog;
+    }
+
+    public void setShowedRateDialog(boolean showedRateDialog) {
+        isShowedRateDialog = showedRateDialog;
     }
 }
