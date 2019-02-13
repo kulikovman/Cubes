@@ -48,4 +48,18 @@
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
+    // Кнопка отмены
+    <style name="ButtonCancel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_cancel</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:paddingEnd">25dp</item>
+        <item name="android:paddingStart">25dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

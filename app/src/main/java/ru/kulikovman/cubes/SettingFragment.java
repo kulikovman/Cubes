@@ -113,10 +113,6 @@ public class SettingFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Сохраняем состояние
                 settings.setBlockSleepingMode(isChecked);
-
-                DialogFragment rateDialog = new RateDialog();
-                rateDialog.setCancelable(false);
-                rateDialog.show(getActivity().getSupportFragmentManager(), "rateDialog");
             }
         });
     }

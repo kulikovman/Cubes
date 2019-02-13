@@ -10,7 +10,7 @@ public class Settings {
     private String cubeColor;
 
     private int numberOfRoll;
-    private boolean isShowedRateDialog;
+    private boolean isRated;
 
     public Settings() {
         numberOfCubes = 2;
@@ -18,7 +18,7 @@ public class Settings {
         isBlockSleepingMode = false;
         cubeColor = Skin.WHITE.name();
         numberOfRoll = 0;
-        isShowedRateDialog = false;
+        isRated = false;
     }
 
     public int getNumberOfCubes() {
@@ -61,11 +61,11 @@ public class Settings {
         this.numberOfRoll = numberOfRoll;
     }
 
-    public boolean isShowedRateDialog() {
-        return isShowedRateDialog;
+    public boolean isRated() {
+        return isRated;
     }
 
-    public void setShowedRateDialog(boolean showedRateDialog) {
-        isShowedRateDialog = showedRateDialog;
+    public void setRated(boolean rated) {
+        isRated = rated;
     }
 }

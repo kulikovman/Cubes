@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import java.util.TimerTask;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
+import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.Settings;
@@ -108,11 +110,19 @@ public class CubesOnBoardFragment extends Fragment {
 
     private void showRateDialog() {
         // Если диалог еще не показывался и было сделано достаточно бросков
-        if (!settings.isShowedRateDialog() && settings.getNumberOfRoll() > 1500) {
+        if (!settings.isRated() && settings.getNumberOfRoll() > 5) { // Не забыть поменять на 1500
             // Показываем диалог с просьбой оценить приложение
-
+            DialogFragment rateDialog = new RateDialog();
+            rateDialog.setCancelable(false);
+            rateDialog.show(getActivity().getSupportFragmentManager(), "rateDialog");
         }
     }
+
+    // Здесь добавить колбеки от диалога оценить приложение
+    // Чтобы понимать было ли оно оценено
+    // Если да, то больше никогда не показываем
+    // Если нет, то сбрасываем счетчик бросков, для повторного показа, через какое-то время
+
 
     @Override
     public void onPause() {

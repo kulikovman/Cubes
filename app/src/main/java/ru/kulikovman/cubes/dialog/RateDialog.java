@@ -32,7 +32,10 @@ public class RateDialog extends DialogFragment {
         buttonRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Переадресация на страницу приложения в маркете
+                // Закрываем диалог
+                dismiss();
+
+                // Открываем страницу приложения в маркете
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://details?id=ru.kulikovman.dices"));
                 startActivity(intent);
