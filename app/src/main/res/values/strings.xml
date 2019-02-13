@@ -7,10 +7,6 @@
     <string name="title_screen_off">Выключение экрана</string>
     <string name="title_choice_of_cubes">Выбор кубиков</string>
 
-    // Прочие тексты
-    <string name="block_hibernation">Блокировать переход в спящий режим</string>
-    <string name="button_extended_version">Расширенная версия</string>
-
     // Количество кубиков
     <string name="one_cube">1</string>
     <string name="two_cubes">2</string>
@@ -25,5 +21,19 @@
     <string name="delay_1">1</string>
     <string name="delay_5">5</string>
     <string name="delay_10">10</string>
+
+    // Тексты подсказок
+    <string name="help_number_of_cubes">Это количество кубиков будет использовано для следующего броска.</string>
+    <string name="help_delay_after_roll">Помогает избежать случайного повторного броска и нечестной игры, когда повторный бросок выдают за случайный.</string>
+    <string name="help_block_screen">Не дает устройству уйти в спящий режим. Будьте внимательны, постоянно включенный экран, быстро расходует заряд аккумулятора.</string>
+    <string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска. Чтобы получить больше разных кубиков - установите расширенную версию приложения.</string>
+
+    // Тексты кнопок
+    <string name="button_ok">OK</string>
+    <string name="button_extended_version">Расширенная версия</string>
+
+    // Прочие тексты
+    <string name="block_hibernation">Блокировать переход в спящий режим</string>
+
 
 </resources>

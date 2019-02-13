@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
+import ru.kulikovman.cubes.dialog.HelpMessageDialog;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.view.CubeView;
@@ -135,20 +137,27 @@ public class SettingFragment extends Fragment {
     }
 
     public void clickHelpButton(View view) {
-        // Показываем соответствующий диалог
+        Bundle args = new Bundle();
+        DialogFragment helpMessageDialog = new HelpMessageDialog();
+
+        // Выбираем сообщение
         switch (view.getId()) {
             case R.id.help_number_of_cubes:
-
+                args.putString(HelpMessageDialog.KEY_MESSAGE, getString(R.string.help_number_of_cubes));
                 break;
             case R.id.help_delay_after_roll:
-
+                args.putString(HelpMessageDialog.KEY_MESSAGE, getString(R.string.help_delay_after_roll));
                 break;
             case R.id.help_block_screen:
-
+                args.putString(HelpMessageDialog.KEY_MESSAGE, getString(R.string.help_block_screen));
                 break;
             case R.id.help_choose_cube:
-
+                args.putString(HelpMessageDialog.KEY_MESSAGE, getString(R.string.help_choose_cube));
                 break;
         }
+
+        // Показываем диалог
+        helpMessageDialog.setArguments(args);
+        helpMessageDialog.show(getActivity().getSupportFragmentManager(), "helpMessageDialog");
     }
 }
