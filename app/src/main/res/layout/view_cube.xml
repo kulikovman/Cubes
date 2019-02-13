@@ -61,7 +61,7 @@
             android:layout_gravity="bottom"
             android:layout_margin="8dp"
             android:visibility="invisible"
-            app:srcCompat="@drawable/ic_check_circle_blue"/>
+            app:srcCompat="@drawable/ic_check_circle_blue_30dp"/>
 
         <!--
         Это вью нужно для визуального определения размера кубика.

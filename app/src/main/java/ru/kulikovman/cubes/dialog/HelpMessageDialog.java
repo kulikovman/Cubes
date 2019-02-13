@@ -15,11 +15,20 @@ public class HelpMessageDialog extends DialogFragment {
 
     public static final String KEY_MESSAGE = "message";
 
+    private String message;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Получаем сообщение
+        message = getArguments().getString(KEY_MESSAGE);
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        String message = getArguments().getString(KEY_MESSAGE);
-
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(message)
                 .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {

@@ -307,6 +307,8 @@
             <Button
                 android:id="@+id/button_extended_version"
                 style="@style/ButtonNext"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
                 android:text="@string/button_extended_version"/>
 
         </LinearLayout>

@@ -30,10 +30,13 @@
 
     // Тексты кнопок
     <string name="button_ok">OK</string>
+    <string name="button_rate">Оценить</string>
+    <string name="button_no_thanks">Нет, спасибо</string>
     <string name="button_extended_version">Расширенная версия</string>
 
     // Прочие тексты
     <string name="block_hibernation">Блокировать переход в спящий режим</string>
+    <string name="rate_message">Если вам понравилось приложение, пожалуйста оцените его в Google Play. Это сильно поможет в его дальнейшем развитии.</string>
 
 
 </resources>

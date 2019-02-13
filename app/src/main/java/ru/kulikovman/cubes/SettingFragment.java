@@ -20,6 +20,7 @@ import java.util.List;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
 import ru.kulikovman.cubes.dialog.HelpMessageDialog;
+import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.view.CubeView;
@@ -112,6 +113,10 @@ public class SettingFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Сохраняем состояние
                 settings.setBlockSleepingMode(isChecked);
+
+                DialogFragment rateDialog = new RateDialog();
+                rateDialog.setCancelable(false);
+                rateDialog.show(getActivity().getSupportFragmentManager(), "rateDialog");
             }
         });
     }

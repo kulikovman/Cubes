@@ -30,5 +30,6 @@
     // Дополнительные цвета
     <color name="blue_200">#81D4FA</color>
     <color name="blue_500">#03A9F4</color>
+    <color name="rate_star">#FDD835</color>
 
 </resources>
