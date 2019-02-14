@@ -31,7 +31,9 @@ import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
 
 
-public class CubesOnBoardFragment extends Fragment {
+public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
+
+    private static final int LIMIT_OF_ROLLS = 500; // Теоретически 500 бросков, это две-три игры
 
     private FragmentCubesOnBoardBinding binding;
     private Context context;
@@ -110,33 +112,37 @@ public class CubesOnBoardFragment extends Fragment {
 
     private void showRateDialog() {
         // Если диалог еще не показывался и было сделано достаточно бросков
-        if (!settings.isRated() && settings.getNumberOfRoll() > 5) { // Не забыть поменять на 1500
+        if (!settings.isRated() && settings.getNumberOfRoll() > LIMIT_OF_ROLLS) {
             // Показываем диалог с просьбой оценить приложение
             DialogFragment rateDialog = new RateDialog();
             rateDialog.setCancelable(false);
-            rateDialog.show(getActivity().getSupportFragmentManager(), "rateDialog");
+            rateDialog.show(this.getChildFragmentManager(), "rateDialog");
         }
     }
 
-    // Здесь добавить колбеки от диалога оценить приложение
-    // Чтобы понимать было ли оно оценено
-    // Если да, то больше никогда не показываем
-    // Если нет, то сбрасываем счетчик бросков, для повторного показа, через какое-то время
+    @Override
+    public void rateButtonPressed() {
+        // Отмечаем, что приложение оценено
+        settings.setRated(true);
+    }
 
+    @Override
+    public void cancelButtonPressed() {
+        // Сбрасываем счетчик, чтобы показать деалог позже
+        settings.setNumberOfRoll(0);
+    }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("myLog", "CubesOnBoardFragment --> onPause");
-        // Add the following line to unregister the Sensor Manager onPause
+        // Отключаем shakeDetector
         sensorManager.unregisterListener(shakeDetector);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("myLog", "CubesOnBoardFragment --> onResume");
-        // Add the following line to register the Session Manager Listener onResume
+        // Подключаем shakeDetector
         sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 

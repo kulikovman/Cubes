@@ -17,6 +17,24 @@ import ru.kulikovman.cubes.R;
 
 public class RateDialog extends DialogFragment {
 
+    private Listener listener;
+
+    public interface Listener {
+        void rateButtonPressed();
+
+        void cancelButtonPressed();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            listener = (Listener) getParentFragment();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Calling Fragment must implement RateDialogListener");
+        }
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -35,6 +53,9 @@ public class RateDialog extends DialogFragment {
                 // Закрываем диалог
                 dismiss();
 
+                // Сообщаем о нажатии
+                listener.rateButtonPressed();
+
                 // Открываем страницу приложения в маркете
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://details?id=ru.kulikovman.dices"));
@@ -47,6 +68,9 @@ public class RateDialog extends DialogFragment {
             public void onClick(View v) {
                 // Закрываем диалог
                 dismiss();
+
+                // Сообщаем о нажатии
+                listener.cancelButtonPressed();
             }
         });
 
