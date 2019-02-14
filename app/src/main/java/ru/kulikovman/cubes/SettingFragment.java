@@ -20,7 +20,6 @@ import java.util.List;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
 import ru.kulikovman.cubes.dialog.HelpMessageDialog;
-import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.view.CubeView;
@@ -29,10 +28,11 @@ import ru.kulikovman.cubes.view.CubeView;
 public class SettingFragment extends Fragment {
 
     private FragmentSettingBinding binding;
-
     private Context context;
 
+    private CubesViewModel model;
     private Settings settings;
+
     private List<CubeView> cubeViews;
 
     @Nullable
@@ -51,7 +51,7 @@ public class SettingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Получение вью модел
-        CubesViewModel model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
+        model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
         settings = model.getSettings();
 
         // Подключение звука
@@ -63,6 +63,14 @@ public class SettingFragment extends Fragment {
 
         // Обновление переменной в макете
         binding.setModel(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // Сохранение настроек в базу
+        model.saveSettings(settings);
     }
 
     private void initCubeList() {

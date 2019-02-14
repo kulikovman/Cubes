@@ -22,6 +22,8 @@ import java.util.TimerTask;
 
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
+import ru.kulikovman.cubes.database.AppDatabase;
+import ru.kulikovman.cubes.database.SettingsDao;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Calculation;
@@ -38,6 +40,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private FragmentCubesOnBoardBinding binding;
     private Context context;
 
+    private CubesViewModel model;
     private Settings settings;
     private Calculation calculation;
 
@@ -71,7 +74,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Получение вью модел
-        CubesViewModel model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
+        model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
         settings = model.getSettings();
 
         // Подключение звука
@@ -137,6 +140,9 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         super.onPause();
         // Отключаем shakeDetector
         sensorManager.unregisterListener(shakeDetector);
+
+        // Сохранение настроек в базу
+        model.saveSettings(settings);
     }
 
     @Override

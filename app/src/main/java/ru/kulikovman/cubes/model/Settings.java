@@ -1,8 +1,15 @@
 package ru.kulikovman.cubes.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import ru.kulikovman.cubes.data.Skin;
 
+@Entity
 public class Settings {
+
+    @PrimaryKey
+    public long id;
 
     private int numberOfCubes;
     private int delayAfterRoll;
@@ -13,6 +20,7 @@ public class Settings {
     private boolean isRated;
 
     public Settings() {
+        id = 0;
         numberOfCubes = 2;
         delayAfterRoll = 0;
         isBlockSleepingMode = false;
