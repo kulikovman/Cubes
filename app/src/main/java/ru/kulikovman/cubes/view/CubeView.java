@@ -2,10 +2,8 @@ package ru.kulikovman.cubes.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableBoolean;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -104,8 +102,8 @@ public class CubeView extends FrameLayout {
         skin = cube.getSkin();
         value = cube.getValue();
         angle = cube.getDegrees();
-        marginStart = cube.getCubeMarginStart();
-        marginTop = cube.getCubeMarginTop();
+        marginStart = cube.getMarginStart();
+        marginTop = cube.getMarginTop();
 
         // Отрисовка кубика
         drawCube();

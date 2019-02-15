@@ -17,7 +17,6 @@ public class Calculation {
 
     // Размеры кубика и тени
     private int cubeHalfSize;
-    private int cubeViewHalfSize;
     private int shadowHalfSize;
 
     // Радиусы кубика и кнопки настроек
@@ -46,10 +45,6 @@ public class Calculation {
         // Радиус кнопки настроек
         settingRadius = settingSize / 2 + settingMarginTop;
 
-        // Размер/полуразмер вью кубика
-        int cubeViewSize = resources.getDimensionPixelSize(R.dimen.shadow_view_size);
-        cubeViewHalfSize = cubeViewSize / 2;
-
         // Размер/полуразмер кубика
         int cubeSize = resources.getDimensionPixelSize(R.dimen.cube_size);
         cubeHalfSize = cubeSize / 2;
@@ -72,7 +67,6 @@ public class Calculation {
         Log.d("myLog", "screenHeight = " + screenHeight);
         Log.d("myLog", "----------------Sizes-----------------");
         Log.d("myLog", "cubeSize = " + cubeSize + " / 2 = " + cubeHalfSize);
-        Log.d("myLog", "cubeViewSize = " + cubeViewSize + " / 2 = " + cubeViewHalfSize);
         Log.d("myLog", "shadowSize = " + shadowSize + " / 2 = " + shadowHalfSize);
         Log.d("myLog", "----------------Radius----------------");
         Log.d("myLog", "cubeRadius = " + cubeInnerRadius + " | " + cubeOuterRadius);
@@ -99,10 +93,6 @@ public class Calculation {
 
     public int getCubeHalfSize() {
         return cubeHalfSize;
-    }
-
-    public int getCubeViewHalfSize() {
-        return cubeViewHalfSize;
     }
 
     public int getShadowHalfSize() {

@@ -17,10 +17,8 @@ public class Cube {
     private int value;
 
     // Отступы
-    private int cubeMarginStart;
-    private int cubeMarginTop;
-    private int shadowMarginStart;
-    private int shadowMarginTop;
+    private int marginStart;
+    private int marginTop;
 
     // Центр кубика
     private int x, y;
@@ -72,11 +70,8 @@ public class Cube {
     }
 
     private void calculateMargins() {
-        cubeMarginStart = x - calculation.getCubeViewHalfSize();
-        cubeMarginTop = y - calculation.getCubeViewHalfSize();
-
-        shadowMarginStart = x - calculation.getShadowHalfSize();
-        shadowMarginTop = y - calculation.getShadowHalfSize();
+        marginStart = x - calculation.getShadowHalfSize();
+        marginTop = y - calculation.getShadowHalfSize();
     }
 
     private void calculatePointLocations() {
@@ -214,20 +209,12 @@ public class Cube {
         return value;
     }
 
-    public int getCubeMarginStart() {
-        return cubeMarginStart;
+    public int getMarginStart() {
+        return marginStart;
     }
 
-    public int getCubeMarginTop() {
-        return cubeMarginTop;
-    }
-
-    public int getShadowMarginStart() {
-        return shadowMarginStart;
-    }
-
-    public int getShadowMarginTop() {
-        return shadowMarginTop;
+    public int getMarginTop() {
+        return marginTop;
     }
 
     public int getDegrees() {

@@ -65,8 +65,8 @@ public class ShadowView  extends FrameLayout {
     public void setCube(Cube cube) {
         skin = cube.getSkin();
         angle = cube.getDegrees();
-        marginStart = cube.getShadowMarginStart();
-        marginTop = cube.getShadowMarginTop();
+        marginStart = cube.getMarginStart();
+        marginTop = cube.getMarginTop();
 
         // Отрисовка кубика
         drawShadow();
