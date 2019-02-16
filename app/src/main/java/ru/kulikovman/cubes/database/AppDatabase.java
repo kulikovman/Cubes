@@ -5,6 +5,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 
 import ru.kulikovman.cubes.database.converter.CubeLiteConverter;
+import ru.kulikovman.cubes.database.dao.RollResultDao;
 import ru.kulikovman.cubes.database.dao.SettingsDao;
 import ru.kulikovman.cubes.model.RollResult;
 import ru.kulikovman.cubes.model.Settings;
@@ -16,6 +17,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract SettingsDao settingsDao();
 
-    public abstract RollResult rollHistoryDao();
+    public abstract RollResultDao rollResultDao();
 
 }

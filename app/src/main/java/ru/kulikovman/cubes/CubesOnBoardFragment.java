@@ -41,6 +41,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private Context context;
 
     private CubesViewModel model;
+    private DataRepository repository;
     private Settings settings;
     private Calculation calculation;
 
@@ -76,6 +77,9 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Получение вью модел
         model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
         settings = model.getSettings();
+
+        // Получение репозитория
+        repository = DataRepository.getInstance();
 
         // Подключение звука
         SoundManager.initialize(context);
@@ -254,11 +258,13 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Засчитываем бросок
         settings.setNumberOfRoll(settings.getNumberOfRoll() + 1);
 
-        // Сохраняем результаты текущего броска
+        // Сохраняем результаты текущего броска в базу
         RollResult rollResult = new RollResult();
         for (CubeView cubeView : cubeViews) {
             rollResult.addCubeLite(cubeView.getCubeLite());
         }
+
+        repository.saveRollResult(rollResult);
 
 
         // Задержка после броска

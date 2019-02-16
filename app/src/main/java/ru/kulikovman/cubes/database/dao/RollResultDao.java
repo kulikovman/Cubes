@@ -12,7 +12,7 @@ import java.util.List;
 import ru.kulikovman.cubes.model.RollResult;
 
 @Dao
-public interface RollHistoryDao {
+public interface RollResultDao {
 
     @Query("SELECT * FROM RollResult")
     List<RollResult> getAll();
