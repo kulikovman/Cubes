@@ -21,7 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
 import ru.kulikovman.cubes.dialog.HelpDialog;
 import ru.kulikovman.cubes.model.Settings;
-import ru.kulikovman.cubes.sweet.SweetOnSeekBarChangeListener;
+import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.view.CubeView;
 
 

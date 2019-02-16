@@ -3,7 +3,7 @@ package ru.kulikovman.cubes;
 import android.arch.lifecycle.ViewModel;
 
 import ru.kulikovman.cubes.database.AppDatabase;
-import ru.kulikovman.cubes.database.SettingsDao;
+import ru.kulikovman.cubes.database.dao.SettingsDao;
 import ru.kulikovman.cubes.model.Settings;
 
 

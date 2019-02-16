@@ -22,8 +22,6 @@ import java.util.TimerTask;
 
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
-import ru.kulikovman.cubes.database.AppDatabase;
-import ru.kulikovman.cubes.database.SettingsDao;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Calculation;

@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.database;
+package ru.kulikovman.cubes.database.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
