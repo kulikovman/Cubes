@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class RollHistory {
+public class RollResult {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
 
     private long time;
-    private List<CubeHistory> cubeHistories;
+    private List<CubeLite> cubeLites;
 
-    public RollHistory() {
+    public RollResult() {
         time = System.currentTimeMillis();
-        cubeHistories = new ArrayList<>();
+        cubeLites = new ArrayList<>();
     }
 
     public long getId() {
@@ -36,15 +36,15 @@ public class RollHistory {
         this.time = time;
     }
 
-    public List<CubeHistory> getCubeHistories() {
-        return cubeHistories;
+    public List<CubeLite> getCubeLites() {
+        return cubeLites;
     }
 
-    public void setCubeHistories(List<CubeHistory> cubeHistories) {
-        this.cubeHistories = cubeHistories;
+    public void setCubeLites(List<CubeLite> cubeLites) {
+        this.cubeLites = cubeLites;
     }
 
-    public void addCubeHistory(CubeHistory cubeHistory) {
-        cubeHistories.add(cubeHistory);
+    public void addCubeLite(CubeLite cubeLite) {
+        cubeLites.add(cubeLite);
     }
 }

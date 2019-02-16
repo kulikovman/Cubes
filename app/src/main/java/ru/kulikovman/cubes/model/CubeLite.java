@@ -1,6 +1,6 @@
 package ru.kulikovman.cubes.model;
 
-public class CubeHistory {
+public class CubeLite {
 
     private String skin;
     private int value;
@@ -8,7 +8,7 @@ public class CubeHistory {
     private int marginStart;
     private int marginTop;
 
-    public CubeHistory(String skin, int value, int angle, int marginStart, int marginTop) {
+    public CubeLite(String skin, int value, int angle, int marginStart, int marginTop) {
         this.skin = skin;
         this.value = value;
         this.angle = angle;

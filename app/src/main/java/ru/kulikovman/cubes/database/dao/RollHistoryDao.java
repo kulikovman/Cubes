@@ -9,24 +9,24 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import ru.kulikovman.cubes.model.RollHistory;
+import ru.kulikovman.cubes.model.RollResult;
 
 @Dao
 public interface RollHistoryDao {
 
-    @Query("SELECT * FROM RollHistory")
-    List<RollHistory> getAll();
+    @Query("SELECT * FROM RollResult")
+    List<RollResult> getAll();
 
-    @Query("SELECT * FROM RollHistory WHERE id = :id")
-    RollHistory getById(long id);
+    @Query("SELECT * FROM RollResult WHERE id = :id")
+    RollResult getById(long id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(RollHistory settings);
+    void insert(RollResult settings);
 
     @Update
-    void update(RollHistory settings);
+    void update(RollResult settings);
 
     @Delete
-    void delete(RollHistory settings);
+    void delete(RollResult settings);
 
 }

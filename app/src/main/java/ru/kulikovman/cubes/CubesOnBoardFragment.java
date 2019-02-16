@@ -26,6 +26,8 @@ import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
+import ru.kulikovman.cubes.model.CubeLite;
+import ru.kulikovman.cubes.model.RollResult;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
@@ -249,11 +251,15 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Воспроизводим звук броска
         SoundManager.getInstance().playDropSound();
 
-        // Сохраняем результаты текущего броска
-
-
         // Засчитываем бросок
         settings.setNumberOfRoll(settings.getNumberOfRoll() + 1);
+
+        // Сохраняем результаты текущего броска
+        RollResult rollResult = new RollResult();
+        for (CubeView cubeView : cubeViews) {
+            rollResult.addCubeLite(cubeView.getCubeLite());
+        }
+
 
         // Задержка после броска
         isReadyForRoll = false;

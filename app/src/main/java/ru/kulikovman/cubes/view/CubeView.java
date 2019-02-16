@@ -15,6 +15,7 @@ import ru.kulikovman.cubes.R;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.ViewCubeBinding;
 import ru.kulikovman.cubes.model.Cube;
+import ru.kulikovman.cubes.model.CubeLite;
 
 
 public class CubeView extends FrameLayout {
@@ -107,6 +108,10 @@ public class CubeView extends FrameLayout {
 
         // Отрисовка кубика
         drawCube();
+    }
+
+    public CubeLite getCubeLite() {
+        return new CubeLite(skin.name(), value, angle, marginStart, marginTop);
     }
 
     private void drawCube() {
