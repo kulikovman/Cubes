@@ -125,7 +125,7 @@ public class SettingFragment extends Fragment {
         });
     }
 
-    public void clickComeBackButton(View view) {
+    public void clickComeBackButton() {
         SoundManager.getInstance().playSettingButtonSound();
 
         NavHostFragment.findNavController(this).popBackStack();
