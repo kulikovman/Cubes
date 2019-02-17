@@ -1,5 +1,7 @@
 package ru.kulikovman.cubes;
 
+import java.util.List;
+
 import ru.kulikovman.cubes.database.AppDatabase;
 import ru.kulikovman.cubes.model.RollResult;
 
@@ -31,6 +33,11 @@ public class DataRepository {
 
 
         database.rollResultDao().insert(rollResult);
+        database.rollResultDao().deleteOldestRecords(10);
+    }
+
+    public List<RollResult> getRollResultList () {
+        return database.rollResultDao().getAll();
     }
 
 }

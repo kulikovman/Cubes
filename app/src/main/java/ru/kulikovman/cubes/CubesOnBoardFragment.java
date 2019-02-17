@@ -266,7 +266,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
         repository.saveRollResult(rollResult);
 
-
         // Задержка после броска
         isReadyForRoll = false;
         new Timer().schedule(new TimerTask() {

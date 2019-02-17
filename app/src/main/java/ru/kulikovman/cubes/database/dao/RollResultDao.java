@@ -14,13 +14,15 @@ import ru.kulikovman.cubes.model.RollResult;
 @Dao
 public interface RollResultDao {
 
-    @Query("SELECT * FROM RollResult")
+    // Возвращает список отсортированный по дате (по убыванию)
+    @Query("SELECT * FROM RollResult ORDER BY time DESC")
     List<RollResult> getAll();
 
-    @Query("SELECT * FROM RollResult WHERE id = :id")
-    RollResult getById(long id);
+    // Если записей больше, чем limitRecords, то удаляет самые старые по времени
+    @Query("DELETE FROM RollResult WHERE time IN (SELECT time FROM RollResult ORDER BY time DESC LIMIT -1 OFFSET :limitRecords)")
+    void deleteOldestRecords(int limitRecords);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert()
     void insert(RollResult settings);
 
     @Update
