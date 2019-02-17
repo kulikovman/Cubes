@@ -28,10 +28,7 @@ public class DataRepository {
     }
 
     public void saveRollResult(RollResult rollResult) {
-        // Перед добавлением записи в базу нужно сделать проверку на количество существующих записей
-        // Если их больше 10, то сначала удалить самую старую запись
-
-
+        // Записываем результат броска и удаляем старые записи
         database.rollResultDao().insert(rollResult);
         database.rollResultDao().deleteOldestRecords(10);
     }
@@ -39,5 +36,7 @@ public class DataRepository {
     public List<RollResult> getRollResultList () {
         return database.rollResultDao().getAll();
     }
+
+
 
 }

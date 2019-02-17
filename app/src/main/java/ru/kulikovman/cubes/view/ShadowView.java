@@ -14,6 +14,7 @@ import ru.kulikovman.cubes.R;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.ViewShadowBinding;
 import ru.kulikovman.cubes.model.Cube;
+import ru.kulikovman.cubes.model.CubeLite;
 
 public class ShadowView  extends FrameLayout {
 
@@ -41,17 +42,12 @@ public class ShadowView  extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    // Конструктор для генерации кубика через код
+    // Конструктор для генерации тени через код
     public ShadowView(@NonNull Context context, Cube cube) {
         super(context);
-        init(context, cube);
-    }
 
-    private void init(Context context, Cube cube) {
-        this.context = context;
-
-        LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.view_shadow, this);
+        // Инициализация
+        init(context);
 
         if (!isInEditMode()) {
             // Подключение биндинга
@@ -62,13 +58,46 @@ public class ShadowView  extends FrameLayout {
         }
     }
 
+    // Конструктор для генерации тени через код
+    public ShadowView(@NonNull Context context, CubeLite cubeLite) {
+        super(context);
+
+        // Инициализация
+        init(context);
+
+        if (!isInEditMode()) {
+            // Подключение биндинга
+            binding = DataBindingUtil.bind((findViewById(R.id.shadow_view_container)));
+
+            // Ставим значения
+            setCube(cubeLite);
+        }
+    }
+
+    private void init(Context context) {
+        this.context = context;
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        inflater.inflate(R.layout.view_shadow, this);
+    }
+
     public void setCube(Cube cube) {
         skin = cube.getSkin();
         angle = cube.getDegrees();
         marginStart = cube.getMarginStart();
         marginTop = cube.getMarginTop();
 
-        // Отрисовка кубика
+        // Отрисовка тени
+        drawShadow();
+    }
+
+    public void setCube(CubeLite cubeLite) {
+        skin = Skin.valueOf(cubeLite.getSkin());
+        angle = cubeLite.getAngle();
+        marginStart = cubeLite.getMarginStart();
+        marginTop = cubeLite.getMarginTop();
+
+        // Отрисовка тени
         drawShadow();
     }
 

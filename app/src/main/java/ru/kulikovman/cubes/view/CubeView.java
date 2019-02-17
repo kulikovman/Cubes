@@ -54,17 +54,7 @@ public class CubeView extends FrameLayout {
     // Конструктор для генерации кубика через код
     public CubeView(@NonNull Context context, Cube cube) {
         super(context);
-        init(context, cube);
-    }
 
-    private void init(Context context) {
-        this.context = context;
-
-        LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.view_cube, this);
-    }
-
-    private void init(Context context, Cube cube) {
         // Инициализация
         init(context);
 
@@ -75,6 +65,29 @@ public class CubeView extends FrameLayout {
             // Ставим значения
             setCube(cube);
         }
+    }
+
+    // Конструктор для генерации кубика через код
+    public CubeView(@NonNull Context context, CubeLite cubeLite) {
+        super(context);
+
+        // Инициализация
+        init(context);
+
+        if (!isInEditMode()) {
+            // Подключение биндинга
+            binding = DataBindingUtil.bind((findViewById(R.id.cube_view_container)));
+
+            // Ставим значения
+            setCube(cubeLite);
+        }
+    }
+
+    private void init(Context context) {
+        this.context = context;
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        inflater.inflate(R.layout.view_cube, this);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -105,6 +118,17 @@ public class CubeView extends FrameLayout {
         angle = cube.getDegrees();
         marginStart = cube.getMarginStart();
         marginTop = cube.getMarginTop();
+
+        // Отрисовка кубика
+        drawCube();
+    }
+
+    public void setCube(CubeLite cubeLite) {
+        skin = Skin.valueOf(cubeLite.getSkin());
+        value = cubeLite.getValue();
+        angle = cubeLite.getAngle();
+        marginStart = cubeLite.getMarginStart();
+        marginTop = cubeLite.getMarginTop();
 
         // Отрисовка кубика
         drawCube();

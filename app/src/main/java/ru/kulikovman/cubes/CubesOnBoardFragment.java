@@ -53,6 +53,8 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
     private int delayAfterRoll;
     private boolean isReadyForRoll;
+    private int currentRollOnScreen;
+    private List<RollResult> rollResults;
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -81,11 +83,20 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Получение репозитория
         repository = DataRepository.getInstance();
 
+        // Инициализация списков
+        cubes = new ArrayList<>();
+        cubeViews = new ArrayList<>();
+        shadowViews = new ArrayList<>();
+        rollResults = new ArrayList<>();
+
         // Подключение звука
         SoundManager.initialize(context);
 
         // Инициализация ShakeDetector
         initShakeDetector();
+
+        // Отрисовываем предыдущий бросок
+        loadPreviousRoll(false);
 
         // Применение настроек
         applySettings();
@@ -96,11 +107,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
 
-        // Инициализация списков
-        cubes = new ArrayList<>();
-        cubeViews = new ArrayList<>();
-        shadowViews = new ArrayList<>();
-
+        // Готовность к броску
         isReadyForRoll = true;
 
         // Обновление переменной в макете
@@ -179,15 +186,42 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
+    public void loadPreviousRoll(boolean lastRollOnScreen) {
+        // Получаем список последних бросков
+        if (currentRollOnScreen == 0) {
+            rollResults.clear();
+            rollResults = repository.getRollResultList();
+        }
+
+        if (rollResults.size() != 0) {
+            // Удаляем кубики с доски
+            clearBoards();
+
+            // Сдвигаем бросок, если текущий уже на экране
+            if (lastRollOnScreen) {
+                currentRollOnScreen++;
+            }
+
+            // Отрисовываем на доске кубики предыдущего броска
+            List<CubeLite> cubeLites = rollResults.get(currentRollOnScreen).getCubeLites();
+            for (CubeLite cubeLite : cubeLites) {
+                binding.topBoard.addView(new CubeView(context, cubeLite));
+                binding.bottomBoard.addView(new ShadowView(context, cubeLite));
+            }
+        }
+    }
+
     public void rollCubes(View view) {
         // Если время задержки не прошло, то выходим
         if (!isReadyForRoll) {
             return;
         }
 
+        // Обнуляем счетчик возвратов
+        currentRollOnScreen = 0;
+
         // Удаляем старые кубики с доски
-        binding.topBoard.removeAllViews();
-        binding.bottomBoard.removeAllViews();
+        clearBoards();
         clearLists();
 
         // Генирируем новые кубики
@@ -276,6 +310,11 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         }, delayAfterRoll);
 
         Log.d("myLog", "---------------------------");
+    }
+
+    private void clearBoards() {
+        binding.topBoard.removeAllViews();
+        binding.bottomBoard.removeAllViews();
     }
 
     private void clearLists() {
