@@ -28,7 +28,7 @@ import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
-import ru.kulikovman.cubes.model.RollResult;
+import ru.kulikovman.cubes.model.ThrowResult;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
@@ -36,7 +36,7 @@ import ru.kulikovman.cubes.view.ShadowView;
 
 public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
 
-    private static final int LIMIT_OF_ROLLS = 500; // Теоретически 500 бросков, это две-три игры
+    private static final int LIMIT_OF_THROW = 500; // Теоретически 500 бросков, это две-три игры
 
     private FragmentCubesOnBoardBinding binding;
     private Context context;
@@ -52,10 +52,10 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private List<CubeView> cubeViews;
     private List<ShadowView> shadowViews;
 
-    private int delayAfterRoll;
-    private boolean isReadyForRoll;
-    private int rollResultOnScreen;
-    private List<RollResult> rollResults;
+    private int delayAfterThrow;
+    private boolean isReadyForThrow;
+    private int throwResultOnScreen;
+    private List<ThrowResult> throwResults;
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -88,24 +88,24 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         cubes = new ArrayList<>();
         cubeViews = new ArrayList<>();
         shadowViews = new ArrayList<>();
-        rollResults = new ArrayList<>();
-        isReadyForRoll = true;
+        throwResults = new ArrayList<>();
+        isReadyForThrow = true;
 
         // Подключение звука и ShakeDetector
         SoundManager.initialize(context);
         initShakeDetector();
 
         // Отрисовываем предыдущий бросок
-        showLastRollResult();
+        showLastThrowResult();
 
         // Применение настроек
         applySettings();
 
         // Долгое нажатие по экрану
-        binding.buttonRoll.setOnLongClickListener(new View.OnLongClickListener() {
+        binding.buttonOfThrow.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                showPreviousRollResult();
+                showPreviousThrowResult();
                 return true;
             }
         });
@@ -126,13 +126,13 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         skin = Skin.valueOf(settings.getCubeColor());
 
         // Задержка после броска
-        int[] delays = getResources().getIntArray(R.array.delay_after_roll);
-        delayAfterRoll = delays[settings.getDelayAfterRoll()];
+        int[] delays = getResources().getIntArray(R.array.delay_after_throw);
+        delayAfterThrow = delays[settings.getDelayAfterThrow()];
     }
 
     private void showRateDialog() {
         // Если диалог еще не показывался и было сделано достаточно бросков
-        if (!settings.isRated() && settings.getNumberOfRoll() > LIMIT_OF_ROLLS) {
+        if (!settings.isRated() && settings.getNumberOfThrow() > LIMIT_OF_THROW) {
             // Показываем диалог с просьбой оценить приложение
             DialogFragment rateDialog = new RateDialog();
             rateDialog.setCancelable(false);
@@ -149,7 +149,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     @Override
     public void cancelButtonPressed() {
         // Сбрасываем счетчик, чтобы показать деалог позже
-        settings.setNumberOfRoll(0);
+        settings.setNumberOfThrow(0);
     }
 
     @Override
@@ -182,7 +182,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
             public void onShake(int count) {
                 // Действие при встряхивании устройства
                 Log.d("log", "Обнаружена тряска - " + count);
-                rollCubes();
+                throwCubes();
             }
         });
     }
@@ -192,32 +192,32 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
-    public void showLastRollResult() {
+    public void showLastThrowResult() {
         // Номер текущего броска
-        rollResultOnScreen = 0;
+        throwResultOnScreen = 0;
 
         // Получаем историю бросков
-        rollResults.clear();
-        rollResults = repository.getRollResultList();
+        throwResults.clear();
+        throwResults = repository.getThrowResultList();
 
-        if (rollResults.size() != 0) {
+        if (throwResults.size() != 0) {
             // Отрисовываем последний бросок
-            drawCubeFromHistory(rollResultOnScreen);
+            drawCubeFromHistory(throwResultOnScreen);
         }
     }
 
-    public void showPreviousRollResult() {
+    public void showPreviousThrowResult() {
         // Получаем список последних бросков
-        if (rollResultOnScreen == 0) {
-            rollResults.clear();
-            rollResults = repository.getRollResultList();
+        if (throwResultOnScreen == 0) {
+            throwResults.clear();
+            throwResults = repository.getThrowResultList();
         }
 
         // Номер предыдущего броска
-        rollResultOnScreen++;
+        throwResultOnScreen++;
 
         // Если в истории есть броски и текущий бросок не последний в списке
-        if (rollResults.size() != 0 && rollResultOnScreen < rollResults.size()) {
+        if (throwResults.size() != 0 && throwResultOnScreen < throwResults.size()) {
             // Показываем иконку перемотки
             binding.rewindIcon.setVisibility(View.VISIBLE);
 
@@ -236,28 +236,28 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
                     clearBoards();
 
                     // Отрисовываем кубики предыдущего броска
-                    drawCubeFromHistory(rollResultOnScreen);
+                    drawCubeFromHistory(throwResultOnScreen);
                 }
             }, 600); // 600 - длительность звука перемотки
         }
     }
 
     private void drawCubeFromHistory(int rollResultNumber) {
-        List<CubeLite> cubeLites = rollResults.get(rollResultNumber).getCubeLites();
+        List<CubeLite> cubeLites = throwResults.get(rollResultNumber).getCubeLites();
         for (CubeLite cubeLite : cubeLites) {
             binding.topBoard.addView(new CubeView(context, cubeLite));
             binding.bottomBoard.addView(new ShadowView(context, cubeLite));
         }
     }
 
-    public void rollCubes() {
+    public void throwCubes() {
         // Если время задержки не прошло, то выходим
-        if (!isReadyForRoll) {
+        if (!isReadyForThrow) {
             return;
         }
 
         // Порядок текущего броска
-        rollResultOnScreen = 0;
+        throwResultOnScreen = 0;
 
         // Удаляем старые кубики с доски
         clearBoards();
@@ -329,24 +329,24 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         SoundManager.getInstance().playDropSound();
 
         // Засчитываем бросок
-        settings.setNumberOfRoll(settings.getNumberOfRoll() + 1);
+        settings.setNumberOfThrow(settings.getNumberOfThrow() + 1);
 
         // Сохраняем результаты текущего броска в базу
-        RollResult rollResult = new RollResult();
+        ThrowResult throwResult = new ThrowResult();
         for (CubeView cubeView : cubeViews) {
-            rollResult.addCubeLite(cubeView.getCubeLite());
+            throwResult.addCubeLite(cubeView.getCubeLite());
         }
 
-        repository.saveRollResult(rollResult);
+        repository.saveThrowResult(throwResult);
 
         // Задержка после броска
-        isReadyForRoll = false;
+        isReadyForThrow = false;
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                isReadyForRoll = true;
+                isReadyForThrow = true;
             }
-        }, delayAfterRoll);
+        }, delayAfterThrow);
 
         Log.d("myLog", "---------------------------");
     }

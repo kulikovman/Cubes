@@ -12,20 +12,20 @@ public class Settings {
     public long id;
 
     private int numberOfCubes;
-    private int delayAfterRoll;
+    private int delayAfterThrow;
     private boolean isBlockSleepingMode;
     private String cubeColor;
 
-    private int numberOfRoll;
+    private int numberOfThrow;
     private boolean isRated;
 
     public Settings() {
         id = 0;
         numberOfCubes = 2;
-        delayAfterRoll = 0;
+        delayAfterThrow = 0;
         isBlockSleepingMode = false;
         cubeColor = Skin.WHITE.name();
-        numberOfRoll = 0;
+        numberOfThrow = 0;
         isRated = false;
     }
 
@@ -37,12 +37,12 @@ public class Settings {
         this.numberOfCubes = numberOfCubes;
     }
 
-    public int getDelayAfterRoll() {
-        return delayAfterRoll;
+    public int getDelayAfterThrow() {
+        return delayAfterThrow;
     }
 
-    public void setDelayAfterRoll(int delayAfterRoll) {
-        this.delayAfterRoll = delayAfterRoll;
+    public void setDelayAfterThrow(int delayAfterRoll) {
+        this.delayAfterThrow = delayAfterRoll;
     }
 
     public boolean isBlockSleepingMode() {
@@ -61,12 +61,12 @@ public class Settings {
         this.cubeColor = cubeColor;
     }
 
-    public int getNumberOfRoll() {
-        return numberOfRoll;
+    public int getNumberOfThrow() {
+        return numberOfThrow;
     }
 
-    public void setNumberOfRoll(int numberOfRoll) {
-        this.numberOfRoll = numberOfRoll;
+    public void setNumberOfThrow(int numberOfThrow) {
+        this.numberOfThrow = numberOfThrow;
     }
 
     public boolean isRated() {

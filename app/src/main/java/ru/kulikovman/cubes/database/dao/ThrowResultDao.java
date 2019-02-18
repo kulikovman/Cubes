@@ -8,26 +8,26 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import ru.kulikovman.cubes.model.RollResult;
+import ru.kulikovman.cubes.model.ThrowResult;
 
 @Dao
-public interface RollResultDao {
+public interface ThrowResultDao {
 
     // Возвращает список отсортированный по дате (по убыванию)
-    @Query("SELECT * FROM RollResult ORDER BY time DESC")
-    List<RollResult> getAll();
+    @Query("SELECT * FROM ThrowResult ORDER BY time DESC")
+    List<ThrowResult> getAll();
 
     // Если записей больше, чем limitRecords, то удаляет самые старые по времени
-    @Query("DELETE FROM RollResult WHERE time IN (SELECT time FROM RollResult ORDER BY time DESC LIMIT -1 OFFSET :limitRecords)")
+    @Query("DELETE FROM ThrowResult WHERE time IN (SELECT time FROM ThrowResult ORDER BY time DESC LIMIT -1 OFFSET :limitRecords)")
     void deleteOldestRecords(int limitRecords);
 
     @Insert()
-    void insert(RollResult settings);
+    void insert(ThrowResult settings);
 
     @Update
-    void update(RollResult settings);
+    void update(ThrowResult settings);
 
     @Delete
-    void delete(RollResult settings);
+    void delete(ThrowResult settings);
 
 }

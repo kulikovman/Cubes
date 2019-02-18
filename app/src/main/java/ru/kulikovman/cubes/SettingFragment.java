@@ -83,7 +83,7 @@ public class SettingFragment extends Fragment {
     private void restoreSettings() {
         // Востанавливаем состояние элементов на экране
         binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
-        binding.delay.setProgress(settings.getDelayAfterRoll());
+        binding.delay.setProgress(settings.getDelayAfterThrow());
         binding.blockScreen.setChecked(settings.isBlockSleepingMode());
 
         // Отмечаем сохраненный кубик
@@ -111,7 +111,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // Сохраняем состояние
-                settings.setDelayAfterRoll(progress);
+                settings.setDelayAfterThrow(progress);
             }
         });
 
@@ -154,7 +154,7 @@ public class SettingFragment extends Fragment {
             case R.id.help_number_of_cubes:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_number_of_cubes));
                 break;
-            case R.id.help_delay_after_roll:
+            case R.id.help_delay_after_throw:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_delay_after_roll));
                 break;
             case R.id.help_block_screen:

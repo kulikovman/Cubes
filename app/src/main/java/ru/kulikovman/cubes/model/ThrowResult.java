@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class RollResult {
+public class ThrowResult {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -15,7 +15,7 @@ public class RollResult {
     private long time;
     private List<CubeLite> cubeLites;
 
-    public RollResult() {
+    public ThrowResult() {
         time = System.currentTimeMillis();
         cubeLites = new ArrayList<>();
     }

@@ -142,7 +142,7 @@
                         android:text="@string/title_delay_after_roll"/>
 
                     <ImageView
-                        android:id="@+id/help_delay_after_roll"
+                        android:id="@+id/help_delay_after_throw"
                         style="@style/ButtonHelp"
                         android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 

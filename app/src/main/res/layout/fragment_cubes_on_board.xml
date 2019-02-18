@@ -45,7 +45,7 @@
             tools:visibility="visible"/>
 
         <ImageView
-            android:id="@+id/button_roll"
+            android:id="@+id/button_of_throw"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -54,7 +54,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
             android:background="@color/transparent"
-            android:onClick="@{() -> model.rollCubes()}"/>
+            android:onClick="@{() -> model.throwCubes()}"/>
 
     </FrameLayout>
 

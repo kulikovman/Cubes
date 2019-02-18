@@ -2,7 +2,7 @@
 <resources>
 
     // Значения задержек после броска (миллисекунды)
-    <integer-array name="delay_after_roll">
+    <integer-array name="delay_after_throw">
         <item>300</item> // 0.3 сек.
         <item>500</item> // 0.5 сек.
         <item>1000</item> // 1 сек.

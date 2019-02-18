@@ -3,7 +3,7 @@ package ru.kulikovman.cubes;
 import java.util.List;
 
 import ru.kulikovman.cubes.database.AppDatabase;
-import ru.kulikovman.cubes.model.RollResult;
+import ru.kulikovman.cubes.model.ThrowResult;
 
 public class DataRepository {
 
@@ -27,14 +27,14 @@ public class DataRepository {
         return instance;
     }
 
-    public void saveRollResult(RollResult rollResult) {
+    public void saveThrowResult(ThrowResult throwResult) {
         // Записываем результат броска и удаляем старые записи
-        database.rollResultDao().insert(rollResult);
-        database.rollResultDao().deleteOldestRecords(10);
+        database.throwResultDao().insert(throwResult);
+        database.throwResultDao().deleteOldestRecords(10);
     }
 
-    public List<RollResult> getRollResultList () {
-        return database.rollResultDao().getAll();
+    public List<ThrowResult> getThrowResultList() {
+        return database.throwResultDao().getAll();
     }
 
 

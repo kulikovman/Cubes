@@ -25,7 +25,7 @@ public class Calculation {
     private int settingRadius;
 
     // Зона возможного расположения кубика
-    private RollArea rollArea;
+    private ThrowArea throwArea;
 
     public Calculation(Resources resources) {
         random = new Random();
@@ -59,7 +59,7 @@ public class Calculation {
         int shadowRadius = (int) Math.sqrt((Math.pow(shadowHalfSize, 2) + Math.pow(shadowHalfSize, 2)));
 
         // Формирование области расположения кубика
-        rollArea = new RollArea(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
+        throwArea = new ThrowArea(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
 
         // Контроль полученных размеров
         Log.d("myLog", "----------------Screen----------------");
@@ -107,7 +107,7 @@ public class Calculation {
         return cubeOuterRadius;
     }
 
-    public RollArea getRollArea() {
-        return rollArea;
+    public ThrowArea getThrowArea() {
+        return throwArea;
     }
 }

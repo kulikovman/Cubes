@@ -1,13 +1,13 @@
 package ru.kulikovman.cubes.model;
 
-public class RollArea {
+public class ThrowArea {
 
     private int minX;
     private int maxX;
     private int minY;
     private int maxY;
 
-    public RollArea(int minX, int maxX, int minY, int maxY) {
+    public ThrowArea(int minX, int maxX, int minY, int maxY) {
         this.minX = minX;
         this.maxX = maxX;
         this.minY = minY;

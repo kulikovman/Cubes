@@ -1,7 +1,5 @@
 package ru.kulikovman.cubes.model;
 
-import android.util.Log;
-
 import java.util.Random;
 
 import ru.kulikovman.cubes.data.Skin;
@@ -54,10 +52,10 @@ public class Cube {
     }
 
     private void setNewCubePosition() {
-        int minX = calculation.getRollArea().getMinX();
-        int maxX = calculation.getRollArea().getMaxX();
-        int minY = calculation.getRollArea().getMinY();
-        int maxY = calculation.getRollArea().getMaxY();
+        int minX = calculation.getThrowArea().getMinX();
+        int maxX = calculation.getThrowArea().getMaxX();
+        int minY = calculation.getThrowArea().getMinY();
+        int maxY = calculation.getThrowArea().getMaxY();
 
         x = minX + random.nextInt(maxX - minX);
         y = minY + random.nextInt(maxY - minY);
