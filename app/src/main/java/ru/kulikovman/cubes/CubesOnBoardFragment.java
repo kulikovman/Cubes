@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -84,12 +85,11 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Получение репозитория
         repository = DataRepository.getInstance();
 
-        // Инициализация списков
+        // Инициализация
         cubes = new ArrayList<>();
         cubeViews = new ArrayList<>();
         shadowViews = new ArrayList<>();
         rollResults = new ArrayList<>();
-
         isEmptyBoard = true;
         isReadyForRoll = true;
 
@@ -98,7 +98,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         initShakeDetector();
 
         // Отрисовываем предыдущий бросок
-        loadPreviousRoll();
+        showPreviousRoll();
 
         // Применение настроек
         applySettings();
@@ -107,8 +107,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         binding.buttonRoll.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                // Отрисовываем предыдущий бросок
-                loadPreviousRoll();
+                backRewind();
 
                 return true;
             }
@@ -196,7 +195,28 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
-    public void loadPreviousRoll() {
+    public void backRewind() {
+        // Показываем иконку перемотки
+        binding.rewindIcon.setVisibility(View.VISIBLE);
+
+        // Звук перемотки
+        SoundManager.getInstance().playRewindSound();
+
+        // Ждем когда проиграется звук
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Скрываем иконку перемотки
+                binding.rewindIcon.setVisibility(View.INVISIBLE);
+
+                // Отрисовываем предыдущий бросок
+                showPreviousRoll();
+            }
+        }, 600); // 600 - длительность звука перемотки
+    }
+
+    public void showPreviousRoll() {
         // Получаем список последних бросков
         if (currentRollResultOnScreen == 0) {
             rollResults.clear();

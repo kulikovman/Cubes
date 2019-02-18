@@ -32,5 +32,6 @@
     <color name="blue_500">#03A9F4</color>
     <color name="rate_star">#FDD835</color>
     <color name="button_cancel">#FAFAFA</color>
+    <color name="rewind_icon">#A44D4D4D</color>
 
 </resources>

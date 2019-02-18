@@ -10,6 +10,7 @@ public class SoundManager {
 
     private int DROP_SOUND;
     private int SETTING_BUTTON_SOUND;
+    private int REWIND_SOUND;
 
     public static synchronized SoundManager getInstance(){
         if(ourInstance == null){
@@ -32,6 +33,7 @@ public class SoundManager {
         // Получаем id звуковых файлов
         DROP_SOUND = soundPool.load(context, R.raw.roll_dice, 1);
         SETTING_BUTTON_SOUND = soundPool.load(context, R.raw.button_click, 1);
+        REWIND_SOUND = soundPool.load(context, R.raw.tape_rewind, 1);
     }
 
     public void playDropSound() {
@@ -42,5 +44,10 @@ public class SoundManager {
     public void playSettingButtonSound() {
         // Воспроизводим звук нажатия кнопки
         soundPool.play(SETTING_BUTTON_SOUND, 1, 1, 1, 0, 1);
+    }
+
+    public void playRewindSound() {
+        // Воспроизводим звук перемотки
+        soundPool.play(REWIND_SOUND, 1, 1, 1, 0, 1);
     }
 }
