@@ -54,8 +54,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
     private int delayAfterRoll;
     private boolean isReadyForRoll;
-    private int currentRollResultOnScreen;
-    private boolean isEmptyBoard;
+    private int rollResultOnScreen;
     private List<RollResult> rollResults;
 
     private SensorManager sensorManager;
@@ -90,7 +89,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         cubeViews = new ArrayList<>();
         shadowViews = new ArrayList<>();
         rollResults = new ArrayList<>();
-        isEmptyBoard = true;
         isReadyForRoll = true;
 
         // Подключение звука и ShakeDetector
@@ -98,7 +96,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         initShakeDetector();
 
         // Отрисовываем предыдущий бросок
-        showPreviousRoll();
+        showLastRollResult();
 
         // Применение настроек
         applySettings();
@@ -107,8 +105,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         binding.buttonRoll.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                backRewind();
-
+                showPreviousRollResult();
                 return true;
             }
         });
@@ -195,55 +192,61 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
-    public void backRewind() {
-        // Показываем иконку перемотки
-        binding.rewindIcon.setVisibility(View.VISIBLE);
+    public void showLastRollResult() {
+        // Номер текущего броска
+        rollResultOnScreen = 0;
 
-        // Звук перемотки
-        SoundManager.getInstance().playRewindSound();
+        // Получаем историю бросков
+        rollResults.clear();
+        rollResults = repository.getRollResultList();
 
-        // Ждем когда проиграется звук
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Скрываем иконку перемотки
-                binding.rewindIcon.setVisibility(View.INVISIBLE);
-
-                // Отрисовываем предыдущий бросок
-                showPreviousRoll();
-            }
-        }, 600); // 600 - длительность звука перемотки
+        if (rollResults.size() != 0) {
+            // Отрисовываем последний бросок
+            drawCubeFromHistory(rollResultOnScreen);
+        }
     }
 
-    public void showPreviousRoll() {
+    public void showPreviousRollResult() {
         // Получаем список последних бросков
-        if (currentRollResultOnScreen == 0) {
+        if (rollResultOnScreen == 0) {
             rollResults.clear();
             rollResults = repository.getRollResultList();
         }
 
+        // Номер предыдущего броска
+        rollResultOnScreen++;
+
         // Если в истории есть броски и текущий бросок не последний в списке
-        if (rollResults.size() != 0 && currentRollResultOnScreen != rollResults.size()) {
-            // Удаляем кубики с доски
-            clearBoards();
+        if (rollResults.size() != 0 && rollResultOnScreen < rollResults.size()) {
+            // Показываем иконку перемотки
+            binding.rewindIcon.setVisibility(View.VISIBLE);
 
-            // Если доска не пустая, то сдвигаемся к пердыдущему броску
-            if (!isEmptyBoard) {
-                if (currentRollResultOnScreen + 1 < rollResults.size()) {
-                    currentRollResultOnScreen++;
+            // Звук перемотки
+            SoundManager.getInstance().playRewindSound();
+
+            // Ждем когда проиграется звук перемотки
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Скрываем иконку перемотки
+                    binding.rewindIcon.setVisibility(View.INVISIBLE);
+
+                    // Удаляем кубики с доски
+                    clearBoards();
+
+                    // Отрисовываем кубики предыдущего броска
+                    drawCubeFromHistory(rollResultOnScreen);
                 }
-            }
+            }, 600); // 600 - длительность звука перемотки
+        }
+    }
 
-            // Отрисовываем на доске кубики предыдущего броска
-            List<CubeLite> cubeLites = rollResults.get(currentRollResultOnScreen).getCubeLites();
-            for (CubeLite cubeLite : cubeLites) {
-                binding.topBoard.addView(new CubeView(context, cubeLite));
-                binding.bottomBoard.addView(new ShadowView(context, cubeLite));
-            }
-
-            // Доска не пустая
-            isEmptyBoard = false;
+    private void drawCubeFromHistory(int rollResultNumber) {
+        List<CubeLite> cubeLites = rollResults.get(rollResultNumber).getCubeLites();
+        for (CubeLite cubeLite : cubeLites) {
+            binding.topBoard.addView(new CubeView(context, cubeLite));
+            binding.bottomBoard.addView(new ShadowView(context, cubeLite));
         }
     }
 
@@ -253,8 +256,8 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
             return;
         }
 
-        // Обнуляем счетчик возвратов
-        currentRollResultOnScreen = 0;
+        // Порядок текущего броска
+        rollResultOnScreen = 0;
 
         // Удаляем старые кубики с доски
         clearBoards();
@@ -335,9 +338,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         }
 
         repository.saveRollResult(rollResult);
-
-        // Доска не пустая
-        isEmptyBoard = false;
 
         // Задержка после броска
         isReadyForRoll = false;
