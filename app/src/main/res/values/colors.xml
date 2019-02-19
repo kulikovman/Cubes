@@ -33,5 +33,7 @@
     <color name="rate_star">#FDD835</color>
     <color name="button_cancel">#FAFAFA</color>
     <color name="rewind_icon">#A44D4D4D</color>
+    <color name="info_text">#4FC3F7</color>
+    <color name="info_background">#E6FFFFFF</color>
 
 </resources>

@@ -62,15 +62,14 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    // Невидимые кнопки суммы кубиков и времени
+    // Информация о сумме кубиков и времени
     <style name="SumTimeInfo">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/gray_3</item>
-        <item name="android:textSize">19sp</item>
+        <item name="android:background">@color/info_background</item>
+        <item name="android:textColor">@color/info_text</item>
+        <item name="android:visibility">invisible</item>
     </style>
 
 </resources>

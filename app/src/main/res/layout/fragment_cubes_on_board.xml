@@ -29,6 +29,24 @@
             android:layout_height="match_parent"/>
 
 
+        <!-- Сумма кубиков -->
+        <TextView
+            android:id="@+id/sum_info"
+            style="@style/SumTimeInfo"
+            android:textSize="150sp"
+            tools:text="12"
+            tools:visibility="visible"/>
+
+
+        <!-- Время -->
+        <TextView
+            android:id="@+id/time_info"
+            style="@style/SumTimeInfo"
+            android:textSize="130sp"
+            tools:text="10:37"
+            tools:visibility="visible"/>
+
+
         <!-- Верхние кнопки -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,18 +54,14 @@
             android:layout_marginTop="@dimen/button_setting_marginTop"
             android:orientation="horizontal">
 
-            <FrameLayout
+            <ImageButton
+                android:background="@color/transparent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/sum_info"
-                    style="@style/SumTimeInfo"
-                    android:onClick="@{() -> model.showSumInfo()}"
-                    tools:text="12"/>
-
-            </FrameLayout>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> model.showSumInfo()}"/>
 
             <ImageView
                 android:id="@+id/button_setting"
@@ -57,18 +71,14 @@
                 android:onClick="@{() -> model.openSetting()}"
                 android:src="@drawable/ic_settings_gray"/>
 
-            <FrameLayout
+            <ImageButton
+                android:background="@color/transparent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/time_info"
-                    style="@style/SumTimeInfo"
-                    android:onClick="@{() -> model.showTimeInfo()}"
-                    tools:text="10:37"/>
-
-            </FrameLayout>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> model.showTimeInfo()}"/>
 
         </LinearLayout>
 
@@ -81,7 +91,7 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_fast_rewind_gray_250dp"
             android:visibility="invisible"
-            tools:visibility="visible"/>
+            tools:visibility="invisible"/>
 
 
         <!-- Кнопка сброса -->

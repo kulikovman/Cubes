@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,8 +31,8 @@ import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
-import ru.kulikovman.cubes.model.ThrowResult;
 import ru.kulikovman.cubes.model.Settings;
+import ru.kulikovman.cubes.model.ThrowResult;
 import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
 
@@ -114,6 +113,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         binding.buttonOfThrow.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                hideAllInfo();
                 showPreviousThrowResult();
                 return true;
             }
@@ -202,8 +202,12 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     }
 
     public void showSumInfo() {
+        // Скрываем время
+        binding.timeInfo.setVisibility(View.INVISIBLE);
+
         // Показываем сумму кубиков
         binding.sumInfo.setText(String.valueOf(sumOfCubes));
+        binding.sumInfo.setVisibility(View.VISIBLE);
 
         // Отменяем старый таймер
         if (sumInfoTimer != null) {
@@ -216,16 +220,20 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         sumInfoTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                binding.sumInfo.setText(null);
+                binding.sumInfo.setVisibility(View.INVISIBLE);
             }
         }, DISPLAY_TIME);
     }
 
     public void showTimeInfo() {
+        // Скрываем сумму
+        binding.sumInfo.setVisibility(View.INVISIBLE);
+
         // Показываем время
         DateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
         String time = dateFormat.format(System.currentTimeMillis());
         binding.timeInfo.setText(time);
+        binding.timeInfo.setVisibility(View.VISIBLE);
 
         // Отменяем старый таймер
         if (timeInfoTimer != null) {
@@ -238,15 +246,15 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         timeInfoTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                binding.timeInfo.setText(null);
+                binding.timeInfo.setVisibility(View.INVISIBLE);
             }
         }, DISPLAY_TIME);
     }
 
-    private void clearAllInfo() {
-        // Обнуляем поля
-        binding.sumInfo.setText(null);
-        binding.timeInfo.setText(null);
+    private void hideAllInfo() {
+        // Скрываем поля с информацией
+        binding.sumInfo.setVisibility(View.INVISIBLE);
+        binding.timeInfo.setVisibility(View.INVISIBLE);
     }
 
     public void showLastThrowResult() {
@@ -302,7 +310,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private void drawCubeFromHistory(int rollResultNumber) {
         // Сбрасываем сумму и убираем инфо
         sumOfCubes = 0;
-        clearAllInfo();
+        hideAllInfo();
 
         // Размещаем кубики на доске + подсчет их суммы
         List<CubeLite> cubeLites = throwResults.get(rollResultNumber).getCubeLites();
@@ -323,7 +331,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         throwResultOnScreen = 0;
         sumOfCubes = 0;
 
-        clearAllInfo();
+        hideAllInfo();
         clearBoards();
         clearLists();
 
