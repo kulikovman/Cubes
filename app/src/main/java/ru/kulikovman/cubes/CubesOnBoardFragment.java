@@ -192,6 +192,14 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
+    public void showSumOfCubes() {
+
+    }
+
+    public void showTime() {
+
+    }
+
     public void showLastThrowResult() {
         // Номер текущего броска
         throwResultOnScreen = 0;

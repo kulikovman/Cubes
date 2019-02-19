@@ -16,25 +16,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Доска для теней -->
         <FrameLayout
             android:id="@+id/bottom_board"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+        <!-- Доска для кубиков -->
         <FrameLayout
             android:id="@+id/top_board"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <ImageView
-            android:id="@+id/button_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/button_setting_marginTop"
-            android:onClick="@{() -> model.openSetting()}"
-            android:src="@drawable/ic_settings_gray"/>
 
+        <!-- Верхние кнопки -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/button_setting_marginTop"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/sum_of_cubes"
+                    style="@style/ButtonSumTime"
+                    android:onClick="@{() -> model.showSumOfCubes()}"
+                    android:text="12"
+                    tools:visibility="visible"/>
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/button_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:onClick="@{() -> model.openSetting()}"
+                android:src="@drawable/ic_settings_gray"/>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/time"
+                    style="@style/ButtonSumTime"
+                    android:onClick="@{() -> model.showTime()}"
+                    android:text="10:37"
+                    tools:visibility="visible"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <!-- Кнопка перемотки -->
         <ImageView
             android:id="@+id/rewind_icon"
             android:layout_width="wrap_content"
@@ -44,6 +85,8 @@
             android:visibility="invisible"
             tools:visibility="visible"/>
 
+
+        <!-- Кнопка сброса -->
         <ImageView
             android:id="@+id/button_of_throw"
             android:layout_width="match_parent"
