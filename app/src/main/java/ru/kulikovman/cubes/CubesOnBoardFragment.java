@@ -15,9 +15,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,6 +41,7 @@ import ru.kulikovman.cubes.view.ShadowView;
 public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
 
     private static final int LIMIT_OF_THROW = 500; // Теоретически 500 бросков, это две-три игры
+    private static final int DISPLAY_TIME = 3000;  // Время показа поля с суммой/временем
 
     private FragmentCubesOnBoardBinding binding;
     private Context context;
@@ -48,14 +53,18 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
     private Skin skin;
     private int numberOfCubes;
+    private int sumOfCubes;
+    private boolean isReadyForThrow;
+    private int delayAfterThrow;
+    private int throwResultOnScreen;
+
     private List<Cube> cubes;
     private List<CubeView> cubeViews;
     private List<ShadowView> shadowViews;
-
-    private int delayAfterThrow;
-    private boolean isReadyForThrow;
-    private int throwResultOnScreen;
     private List<ThrowResult> throwResults;
+
+    private Timer sumInfoTimer;
+    private Timer timeInfoTimer;
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -192,12 +201,52 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
-    public void showSumOfCubes() {
+    public void showSumInfo() {
+        // Показываем сумму кубиков
+        binding.sumInfo.setText(String.valueOf(sumOfCubes));
 
+        // Отменяем старый таймер
+        if (sumInfoTimer != null) {
+            sumInfoTimer.cancel();
+            sumInfoTimer = null;
+        }
+
+        // Убираем инфо по таймеру
+        sumInfoTimer = new Timer();
+        sumInfoTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                binding.sumInfo.setText(null);
+            }
+        }, DISPLAY_TIME);
     }
 
-    public void showTime() {
+    public void showTimeInfo() {
+        // Показываем время
+        DateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
+        String time = dateFormat.format(System.currentTimeMillis());
+        binding.timeInfo.setText(time);
 
+        // Отменяем старый таймер
+        if (timeInfoTimer != null) {
+            timeInfoTimer.cancel();
+            timeInfoTimer = null;
+        }
+
+        // Убираем инфо по таймеру
+        timeInfoTimer = new Timer();
+        timeInfoTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                binding.timeInfo.setText(null);
+            }
+        }, DISPLAY_TIME);
+    }
+
+    private void clearAllInfo() {
+        // Обнуляем поля
+        binding.sumInfo.setText(null);
+        binding.timeInfo.setText(null);
     }
 
     public void showLastThrowResult() {
@@ -251,10 +300,16 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     }
 
     private void drawCubeFromHistory(int rollResultNumber) {
+        // Сбрасываем сумму и убираем инфо
+        sumOfCubes = 0;
+        clearAllInfo();
+
+        // Размещаем кубики на доске + подсчет их суммы
         List<CubeLite> cubeLites = throwResults.get(rollResultNumber).getCubeLites();
         for (CubeLite cubeLite : cubeLites) {
             binding.topBoard.addView(new CubeView(context, cubeLite));
             binding.bottomBoard.addView(new ShadowView(context, cubeLite));
+            sumOfCubes += cubeLite.getValue();
         }
     }
 
@@ -264,10 +319,11 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
             return;
         }
 
-        // Порядок текущего броска
+        // Подготовка к броску
         throwResultOnScreen = 0;
+        sumOfCubes = 0;
 
-        // Удаляем старые кубики с доски
+        clearAllInfo();
         clearBoards();
         clearLists();
 
@@ -315,6 +371,9 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
                     }
                 }
             }
+
+            // Учитываем значение кубика
+            sumOfCubes += cube.getValue();
 
             // Создаем вью из кубика
             CubeView cubeView = new CubeView(context, cube);

@@ -42,11 +42,10 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/sum_of_cubes"
-                    style="@style/ButtonSumTime"
-                    android:onClick="@{() -> model.showSumOfCubes()}"
-                    android:text="12"
-                    tools:visibility="visible"/>
+                    android:id="@+id/sum_info"
+                    style="@style/SumTimeInfo"
+                    android:onClick="@{() -> model.showSumInfo()}"
+                    tools:text="12"/>
 
             </FrameLayout>
 
@@ -64,11 +63,10 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/time"
-                    style="@style/ButtonSumTime"
-                    android:onClick="@{() -> model.showTime()}"
-                    android:text="10:37"
-                    tools:visibility="visible"/>
+                    android:id="@+id/time_info"
+                    style="@style/SumTimeInfo"
+                    android:onClick="@{() -> model.showTimeInfo()}"
+                    tools:text="10:37"/>
 
             </FrameLayout>
 
