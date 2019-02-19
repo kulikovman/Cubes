@@ -44,7 +44,7 @@
             style="@style/SumTimeInfo"
             android:textSize="130sp"
             tools:text="10:37"
-            tools:visibility="visible"/>
+            tools:visibility="invisible"/>
 
 
         <!-- Верхние кнопки -->
@@ -55,12 +55,12 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:background="@color/transparent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_weight="1"
+                android:background="@color/transparent"
                 android:onClick="@{() -> model.showSumInfo()}"/>
 
             <ImageView
@@ -72,12 +72,12 @@
                 android:src="@drawable/ic_settings_gray"/>
 
             <ImageButton
-                android:background="@color/transparent"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_weight="1"
+                android:background="@color/transparent"
                 android:onClick="@{() -> model.showTimeInfo()}"/>
 
         </LinearLayout>
