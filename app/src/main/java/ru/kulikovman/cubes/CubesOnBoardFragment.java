@@ -210,10 +210,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
         // Показываем сумму кубиков
         binding.sumInfo.setText(String.valueOf(sumOfCubes));
-        /*Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.appearance);
-        binding.sumInfo.setVisibility(View.VISIBLE);
-        binding.sumInfo.startAnimation(animation);*/
-
         AnimHelper.appearance(binding.sumInfo);
 
         // Отменяем старый таймер
@@ -240,10 +236,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         DateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
         String time = dateFormat.format(System.currentTimeMillis());
         binding.timeInfo.setText(time);
-        /*Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.appearance);
-        binding.timeInfo.setVisibility(View.VISIBLE);
-        binding.timeInfo.startAnimation(animation);*/
-
         AnimHelper.appearance(binding.timeInfo);
 
         // Отменяем старый таймер
