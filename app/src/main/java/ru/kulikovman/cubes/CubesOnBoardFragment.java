@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,7 +30,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.Skin;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.dialog.RateDialog;
-import ru.kulikovman.cubes.helper.Animation;
+import ru.kulikovman.cubes.helper.AnimHelper;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
@@ -41,7 +43,7 @@ import ru.kulikovman.cubes.view.ShadowView;
 public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
 
     private static final int LIMIT_OF_THROW = 500; // Теоретически 500 бросков, это две-три игры
-    private static final int DISPLAY_TIME = 2500;  // Время показа поля с суммой/временем
+    private static final int DISPLAY_TIME = 1800;  // Время показа поля с суммой/временем
 
     private FragmentCubesOnBoardBinding binding;
     private Context context;
@@ -208,8 +210,11 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
         // Показываем сумму кубиков
         binding.sumInfo.setText(String.valueOf(sumOfCubes));
-        Animation.smoothAppearance(binding.sumInfo, 300);
+        /*Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.appearance);
+        binding.sumInfo.setVisibility(View.VISIBLE);
+        binding.sumInfo.startAnimation(animation);*/
 
+        AnimHelper.appearance(binding.sumInfo);
 
         // Отменяем старый таймер
         if (sumInfoTimer != null) {
@@ -235,7 +240,11 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         DateFormat dateFormat = new SimpleDateFormat("H:mm", Locale.getDefault());
         String time = dateFormat.format(System.currentTimeMillis());
         binding.timeInfo.setText(time);
-        Animation.smoothAppearance(binding.timeInfo, 300);
+        /*Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.appearance);
+        binding.timeInfo.setVisibility(View.VISIBLE);
+        binding.timeInfo.startAnimation(animation);*/
+
+        AnimHelper.appearance(binding.timeInfo);
 
         // Отменяем старый таймер
         if (timeInfoTimer != null) {

@@ -34,6 +34,6 @@
     <color name="button_cancel">#FAFAFA</color>
     <color name="rewind_icon">#A44D4D4D</color>
     <color name="info_text">#4FC3F7</color>
-    <color name="info_background">#DFFFFFFF</color>
+    <color name="info_background">#D2FFFFFF</color>
 
 </resources>
