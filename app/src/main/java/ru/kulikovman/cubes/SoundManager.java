@@ -5,49 +5,52 @@ import android.media.SoundPool;
 
 public class SoundManager {
 
-    private static SoundManager ourInstance;
+    private static SoundManager instance;
+
     private SoundPool soundPool;
 
-    private int DROP_SOUND;
-    private int SETTING_BUTTON_SOUND;
-    private int REWIND_SOUND;
-
-    public static synchronized SoundManager getInstance(){
-        if(ourInstance == null){
-            ourInstance = new SoundManager();
-        }
-
-        return ourInstance;
-    }
-
-    public static void initialize(Context context){
-        SoundManager soundManager = getInstance();
-        soundManager.loadSound(context);
-    }
+    public static int TOP_BUTTON_CLICK_SOUND;
+    public static int THROW_CUBES_SOUND;
+    public static int TAPE_REWIND_SOUND;
+    public static int SEEKBAR_CLICK_SOUND;
+    public static int SWITCH_CLICK_SOUND;
+    public static int CUBE_CLICK_SOUND;
 
     private SoundManager() {
-        soundPool = (new SoundPool.Builder()).setMaxStreams(2).build();
+        // Создание SoundPool
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(3)
+                .build();
     }
 
-    private void loadSound(Context context){
-        // Получаем id звуковых файлов
-        DROP_SOUND = soundPool.load(context, R.raw.roll_dice, 1);
-        SETTING_BUTTON_SOUND = soundPool.load(context, R.raw.button_click, 1);
-        REWIND_SOUND = soundPool.load(context, R.raw.tape_rewind, 1);
+    public static SoundManager get() {
+        if (instance == null) {
+            synchronized (SoundManager.class) {
+                if (instance == null) {
+                    instance = new SoundManager();
+                }
+            }
+        }
+
+        return instance;
     }
 
-    public void playDropSound() {
-        // Воспроизводим звук броска
-        soundPool.play(DROP_SOUND, 1, 1, 1, 0, 1);
+    public static void initialize(){
+        SoundManager soundManager = get();
+        soundManager.loadSounds(App.getContext());
     }
 
-    public void playSettingButtonSound() {
-        // Воспроизводим звук нажатия кнопки
-        soundPool.play(SETTING_BUTTON_SOUND, 1, 1, 1, 0, 1);
+    private void loadSounds(Context context) {
+        THROW_CUBES_SOUND = soundPool.load(context, R.raw.throw_cubes, 1);
+        TOP_BUTTON_CLICK_SOUND = soundPool.load(context, R.raw.top_button_click, 1);
+        TAPE_REWIND_SOUND = soundPool.load(context, R.raw.tape_rewind, 1);
+        SEEKBAR_CLICK_SOUND = soundPool.load(context, R.raw.seekbar_click, 1);
+        SWITCH_CLICK_SOUND = soundPool.load(context, R.raw.switch_click, 1);
+        CUBE_CLICK_SOUND = soundPool.load(context, R.raw.cube_click, 1);
     }
 
-    public void playRewindSound() {
-        // Воспроизводим звук перемотки
-        soundPool.play(REWIND_SOUND, 1, 1, 1, 0, 1);
+    public void playSound(int soundId) {
+        // Воспроизводим указанный звук
+        soundPool.play(soundId, 1, 1, 1, 0, 1);
     }
 }

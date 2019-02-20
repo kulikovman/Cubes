@@ -1,7 +1,6 @@
 package ru.kulikovman.cubes;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,15 +19,14 @@ import java.util.List;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
 import ru.kulikovman.cubes.dialog.HelpDialog;
-import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
+import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
 
 
 public class SettingFragment extends Fragment {
 
     private FragmentSettingBinding binding;
-    private Context context;
 
     private CubesViewModel model;
     private Settings settings;
@@ -43,19 +41,13 @@ public class SettingFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Получение вью модел
         model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
         settings = model.getSettings();
 
         // Подключение звука
-        SoundManager.initialize(context);
+        SoundManager.initialize();
 
         initCubeList();
         restoreSettings();
@@ -101,6 +93,9 @@ public class SettingFragment extends Fragment {
         binding.cubes.setOnSeekBarChangeListener(new SweetOnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SEEKBAR_CLICK_SOUND);
+
                 // Сохраняем состояние
                 settings.setNumberOfCubes(progress + 1);
             }
@@ -110,6 +105,9 @@ public class SettingFragment extends Fragment {
         binding.delay.setOnSeekBarChangeListener(new SweetOnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SEEKBAR_CLICK_SOUND);
+
                 // Сохраняем состояние
                 settings.setDelayAfterThrow(progress);
             }
@@ -119,6 +117,9 @@ public class SettingFragment extends Fragment {
         binding.blockScreen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
+
                 // Сохраняем состояние
                 settings.setBlockSleepingMode(isChecked);
             }
@@ -126,7 +127,7 @@ public class SettingFragment extends Fragment {
     }
 
     public void clickComeBackButton() {
-        SoundManager.getInstance().playSettingButtonSound();
+        SoundManager.get().playSound(SoundManager.TOP_BUTTON_CLICK_SOUND);
 
         NavHostFragment.findNavController(this).popBackStack();
     }
@@ -140,6 +141,9 @@ public class SettingFragment extends Fragment {
         // Потом ставим галку на выбранном кубике
         CubeView cubeView = (CubeView) view;
         cubeView.setChooseMarker(true);
+
+        // Воспроизводим соответствующий звук
+        SoundManager.get().playSound(SoundManager.CUBE_CLICK_SOUND);
 
         // Сохраняем выбранный цвет
         settings.setCubeColor(cubeView.getCubeColor());

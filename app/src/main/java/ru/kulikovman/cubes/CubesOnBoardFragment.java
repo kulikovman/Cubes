@@ -15,8 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -93,7 +91,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         settings = model.getSettings();
 
         // Получение репозитория
-        repository = DataRepository.getInstance();
+        repository = DataRepository.get();
 
         // Инициализация
         cubes = new ArrayList<>();
@@ -103,14 +101,14 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         isReadyForThrow = true;
 
         // Подключение звука и ShakeDetector
-        SoundManager.initialize(context);
+        SoundManager.initialize();
         initShakeDetector();
 
         // Отрисовываем предыдущий бросок
         showLastThrowResult();
 
         // Применение настроек
-        applySettings();
+        loadSettings();
 
         // Долгое нажатие по экрану
         binding.buttonOfThrow.setOnLongClickListener(new View.OnLongClickListener() {
@@ -132,7 +130,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         binding.setModel(this);
     }
 
-    private void applySettings() {
+    private void loadSettings() {
         // Количество кубиков и цвет
         numberOfCubes = settings.getNumberOfCubes();
         skin = Skin.valueOf(settings.getCubeColor());
@@ -200,7 +198,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     }
 
     public void openSetting() {
-        SoundManager.getInstance().playSettingButtonSound();
+        SoundManager.get().playSound(SoundManager.TOP_BUTTON_CLICK_SOUND);
         NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
     }
 
@@ -290,7 +288,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
             binding.rewindIcon.setVisibility(View.VISIBLE);
 
             // Звук перемотки
-            SoundManager.getInstance().playRewindSound();
+            SoundManager.get().playSound(SoundManager.TAPE_REWIND_SOUND);
 
             // Ждем когда проиграется звук перемотки
             Handler handler = new Handler();
@@ -404,7 +402,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         }
 
         // Воспроизводим звук броска
-        SoundManager.getInstance().playDropSound();
+        SoundManager.get().playSound(SoundManager.THROW_CUBES_SOUND);
 
         // Засчитываем бросок
         settings.setNumberOfThrow(settings.getNumberOfThrow() + 1);

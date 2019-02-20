@@ -15,7 +15,7 @@ public class DataRepository {
         database = App.getInstance().getDatabase();
     }
 
-    public static DataRepository getInstance() {
+    public static DataRepository get() {
         if (instance == null) {
             synchronized (DataRepository.class) {
                 if (instance == null) {
