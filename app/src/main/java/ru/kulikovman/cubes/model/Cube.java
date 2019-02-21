@@ -37,7 +37,7 @@ public class Cube {
         this.skin = skin;
 
         // Количество точек
-        value = 1 + random.nextInt(6); // от 1 до 6
+        value = skin.getMinValue() + random.nextInt(skin.getMaxValue()); // от minValue до maxValue
 
         // Угол поворота в градусах и радианах
         degrees = random.nextInt(360); // от 0 до 359
