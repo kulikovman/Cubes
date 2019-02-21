@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -138,6 +139,13 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Задержка после броска
         int[] delays = getResources().getIntArray(R.array.delay_after_throw);
         delayAfterThrow = delays[settings.getDelayAfterThrow()];
+
+        // Засыпание экрана
+        if (settings.isBlockSleepingMode()) {
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
 
     private void showRateDialog() {
