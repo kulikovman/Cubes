@@ -269,6 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
 
                     <ru.kulikovman.cubes.view.CubeView
@@ -307,9 +308,9 @@
             <Button
                 android:id="@+id/button_extended_version"
                 style="@style/ButtonNext"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
-                android:text="@string/button_extended_version"/>
+                android:text="@string/button_extended_version"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
