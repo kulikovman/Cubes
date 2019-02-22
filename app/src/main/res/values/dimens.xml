@@ -3,7 +3,7 @@
     <!-- Кубики -->
     <dimen name="cube_size">78dp</dimen>
     <dimen name="cube_view_size">100dp</dimen>
-    <dimen name="shadow_view_size">116dp</dimen>
+    <dimen name="shadow_view_size">115dp</dimen>
 
     <!-- Прочее -->
     <dimen name="screen_offset">8dp</dimen>
