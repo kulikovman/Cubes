@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cubes</string>
+    <string name="app_name">Кубики</string>
 
     // Заголовки настроек
     <string name="title_number_of_cubes">Количество кубиков</string>
@@ -8,19 +8,19 @@
     <string name="title_choice_of_cubes">Выбор кубиков</string>
 
     // Количество кубиков
-    <string name="one_cube">1</string>
-    <string name="two_cubes">2</string>
-    <string name="three_cubes">3</string>
-    <string name="four_cubes">4</string>
-    <string name="five_cubes">5</string>
-    <string name="six_cubes">6</string>
+    <string name="one_cube" translatable="false">1</string>
+    <string name="two_cubes" translatable="false">2</string>
+    <string name="three_cubes" translatable="false">3</string>
+    <string name="four_cubes" translatable="false">4</string>
+    <string name="five_cubes" translatable="false">5</string>
+    <string name="six_cubes" translatable="false">6</string>
 
     // Задержка после броска
-    <string name="delay_0_3">0.3</string>
-    <string name="delay_0_5">0.5</string>
-    <string name="delay_1">1</string>
-    <string name="delay_5">5</string>
-    <string name="delay_10">10</string>
+    <string name="delay_0_3" translatable="false">0.3</string>
+    <string name="delay_0_5" translatable="false">0.5</string>
+    <string name="delay_1" translatable="false">1</string>
+    <string name="delay_5" translatable="false">5</string>
+    <string name="delay_10" translatable="false">10</string>
 
     // Тексты подсказок
     <string name="help_number_of_cubes">Это количество кубиков будет использовано для следующего броска.</string>
@@ -30,7 +30,6 @@
     <string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска.</string>
 
     // Тексты кнопок
-    <string name="button_ok">OK</string>
     <string name="button_rate">Оценить</string>
     <string name="button_no_thanks">Нет, спасибо</string>
     <string name="button_extended_version">Расширенная версия</string>
@@ -38,5 +37,6 @@
     // Прочие тексты
     <string name="block_hibernation">Блокировать переход в спящий режим</string>
     <string name="rate_message">Если вам понравилось приложение, пожалуйста оцените его в Google Play. Это сильно поможет его дальнейшему развитию.</string>
+    <string name="button_ok">OK</string>
 
 </resources>

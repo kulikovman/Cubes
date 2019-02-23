@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Кубики</string>
+    <string name="block_hibernation">Блокувати перехід в сплячий режим</string>
+    <string name="button_extended_version">Розширена версія</string>
+    <string name="button_no_thanks">Ні, дякую</string>
+    <string name="button_rate">Оцінити</string>
+    <string name="help_block_screen">Чи не дає пристрою піти в сплячий режим. Будьте уважні, постійно включений екран, швидко витрачає заряд акумулятора.</string>
+    <string name="help_choose_cube">Обраний вид кубиків буде використовуватися для наступного кидка.</string>
+    <string name="help_delay_after_roll">Допомагає уникнути випадкового повторного кидка і нечесної гри, коли повторний кидок видають за випадковий.</string>
+    <string name="help_number_of_cubes">Це кількість кубиків буде використано для наступного кидка.</string>
+    <string name="rate_message">Якщо вам сподобалося додаток, будь ласка оціните його в Google Play. Це сильно допоможе його подальшому розвитку.</string>
+    <string name="title_choice_of_cubes">Вибір кубиків</string>
+    <string name="title_delay_after_roll">Затримка після кидка</string>
+    <string name="title_number_of_cubes">Кількість кубиків</string>
+    <string name="title_screen_off">Вимикає дисплей</string>
+    <string name="button_ok">OK</string>
+</resources>
