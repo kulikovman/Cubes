@@ -5,6 +5,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#4FC3F7</color>
 
+    <color name="ic_launcher_background">#F2F0F6</color>
+
     // Базовые цвета
     <color name="transparent">#00ffffff</color>
     <color name="white">#ffffff</color>
