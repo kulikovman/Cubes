@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">Кубики</string>
 
     // Заголовки настроек
-    <string name="title_number_of_cubes">Количество кубиков</string>
-    <string name="title_delay_after_roll">Задержка после броска</string>
-    <string name="title_screen_off">Выключение экрана</string>
-    <string name="title_choice_of_cubes">Выбор кубиков</string>
+    <string name="title_delay_after_roll">Delay after throw</string>
+    <string name="title_screen_off">Screen off</string>
+    <string name="title_choice_of_cubes">Choice of cubes</string>
 
     // Количество кубиков
     <string name="one_cube" translatable="false">1</string>
@@ -23,20 +21,22 @@
     <string name="delay_10" translatable="false">10</string>
 
     // Тексты подсказок
-    <string name="help_number_of_cubes">Это количество кубиков будет использовано для следующего броска.</string>
-    <string name="help_delay_after_roll">Помогает избежать случайного повторного броска и нечестной игры, когда повторный бросок выдают за случайный.</string>
-    <string name="help_block_screen">Не дает устройству уйти в спящий режим. Будьте внимательны, постоянно включенный экран, быстро расходует заряд аккумулятора.</string>
+    <string name="help_number_of_cubes">This number of dice will be used for the next roll.</string>
+    <string name="help_delay_after_roll">It helps to avoid accidental re-throwing and cheating, when re-throwing is given for random.</string>
+    <string name="help_block_screen">Does not allow the device to go to sleep. Be careful, constantly on screen, quickly consumes battery power.</string>
     <!--<string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска. Чтобы получить больше разных кубиков - установите расширенную версию приложения.</string>-->
-    <string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска.</string>
+    <string name="help_choose_cube">The selected cubes will be used for the next roll.</string>
 
     // Тексты кнопок
-    <string name="button_rate">Оценить</string>
-    <string name="button_no_thanks">Нет, спасибо</string>
-    <string name="button_extended_version">Расширенная версия</string>
+    <string name="button_rate">Rate</string>
+    <string name="button_no_thanks">No thanks</string>
+    <string name="button_extended_version">Extended version</string>
 
     // Прочие тексты
-    <string name="block_hibernation">Блокировать переход в спящий режим</string>
-    <string name="rate_message">Если вам понравилось приложение, пожалуйста оцените его в Google Play. Это сильно поможет его дальнейшему развитию.</string>
+    <string name="block_hibernation">Block the transition to sleep</string>
+    <string name="rate_message">If you like the app, please rate it in Google Play. This will greatly help its further development.</string>
     <string name="button_ok">OK</string>
+    <string name="title_number_of_cubes">Number of cubes</string>
+    <string name="app_name">Cubes</string>
 
 </resources>

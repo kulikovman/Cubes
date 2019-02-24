@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Кубики</string>
+    <string name="title_number_of_cubes">Количество кубиков</string>
+    <string name="title_delay_after_roll">Задержка после броска</string>
+    <string name="title_screen_off">Выключение экрана</string>
+    <string name="title_choice_of_cubes">Выбор кубиков</string>
+    <string name="help_number_of_cubes">Это количество кубиков будет использовано для следующего броска.</string>
+    <string name="help_delay_after_roll">Помогает избежать случайного повторного броска и нечестной игры, когда повторный бросок выдают за случайный.</string>
+    <string name="help_block_screen">Не дает устройству уйти в спящий режим. Будьте внимательны, постоянно включенный экран, быстро расходует заряд аккумулятора.</string>
+    <string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска.</string>
+    <string name="button_rate">Оценить</string>
+    <string name="button_no_thanks">Нет, спасибо</string>
+    <string name="button_extended_version">Расширенная версия</string>
+    <string name="block_hibernation">Блокировать переход в спящий режим</string>
+    <string name="rate_message">Если вам понравилось приложение, пожалуйста оцените его в Google Play. Это сильно поможет его дальнейшему развитию.</string>
+    <string name="button_ok">OK</string>
+</resources>
