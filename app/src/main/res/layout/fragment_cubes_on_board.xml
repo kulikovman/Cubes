@@ -2,13 +2,13 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="ru.kulikovman.dices.CubesOnBoardFragment">
+        tools:context="ru.kulikovman.cubes.CubesOnBoardFragment">
 
     <data>
 
         <variable
             name="model"
-            type="ru.kulikovman.dices.CubesOnBoardFragment"/>
+            type="ru.kulikovman.cubes.CubesOnBoardFragment"/>
 
     </data>
 
