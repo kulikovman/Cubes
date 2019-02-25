@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="ru.kulikovman.cubes.SettingFragment">
+        tools:context="ru.kulikovman.dices.SettingFragment">
 
     <data>
 
         <variable
             name="model"
-            type="ru.kulikovman.cubes.SettingFragment"/>
+            type="ru.kulikovman.dices.SettingFragment"/>
 
     </data>
 
@@ -272,7 +272,7 @@
                     android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
 
-                    <ru.kulikovman.cubes.view.CubeView
+                    <ru.kulikovman.dices.view.CubeView
                         android:id="@+id/white_cube"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -281,7 +281,7 @@
                         app:skin="white"
                         app:value="3"/>
 
-                    <ru.kulikovman.cubes.view.CubeView
+                    <ru.kulikovman.dices.view.CubeView
                         android:id="@+id/red_cube"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                         app:skin="red"
                         app:value="4"/>
 
-                    <ru.kulikovman.cubes.view.CubeView
+                    <ru.kulikovman.dices.view.CubeView
                         android:id="@+id/black_cube"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
