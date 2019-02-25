@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "ru.kulikovman.cubes"
+        applicationId "ru.kulikovman.dices"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 13
@@ -30,6 +30,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     // Дополнительные библиотеки
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha09'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
