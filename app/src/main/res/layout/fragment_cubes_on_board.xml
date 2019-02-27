@@ -29,58 +29,15 @@
             android:layout_height="match_parent"/>
 
 
-        <!-- Сумма кубиков -->
-        <TextView
-            android:id="@+id/sum_info"
-            style="@style/SumTimeInfo"
-            android:textSize="150sp"
-            tools:text="12"
-            tools:visibility="visible"/>
-
-
-        <!-- Время -->
-        <TextView
-            android:id="@+id/time_info"
-            style="@style/SumTimeInfo"
-            android:textSize="130sp"
-            tools:text="10:37"
-            tools:visibility="invisible"/>
-
-
-        <!-- Верхние кнопки -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Кнопка настроек -->
+        <ImageView
+            android:id="@+id/button_setting"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/button_setting_marginTop"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:onClick="@{() -> model.showSumInfo()}"/>
-
-            <ImageView
-                android:id="@+id/button_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:onClick="@{() -> model.openSetting()}"
-                android:src="@drawable/ic_settings_gray"/>
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:onClick="@{() -> model.showTimeInfo()}"/>
-
-        </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:onClick="@{() -> model.openSetting()}"
+            android:src="@drawable/ic_settings_gray"/>
 
 
         <!-- Кнопка перемотки -->
