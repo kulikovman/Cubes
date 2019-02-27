@@ -207,7 +207,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
     public void openSetting() {
         SoundManager.get().playSound(SoundManager.TOP_BUTTON_CLICK_SOUND);
-        NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment);
+        NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment); // 14 - Здесь происходит ошибка!
     }
 
     public void showSumInfo() {
@@ -255,7 +255,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         timeInfoTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                binding.timeInfo.setVisibility(View.INVISIBLE);
+                binding.timeInfo.setVisibility(View.INVISIBLE); // 14 - Здесь происходит ошибка!
             }
         }, DISPLAY_TIME);
     }
