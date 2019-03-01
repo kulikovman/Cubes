@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import ru.kulikovman.cubes.R;
-import ru.kulikovman.cubes.data.Skin;
+import ru.kulikovman.cubes.data.CubeType;
 import ru.kulikovman.cubes.databinding.ViewCubeBinding;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
@@ -23,7 +23,7 @@ public class CubeView extends FrameLayout {
     private ViewCubeBinding binding;
     private Context context;
 
-    private Skin skin;
+    private CubeType cubeType;
     private int value;
     public int angle;
     public boolean isShadow;
@@ -100,7 +100,7 @@ public class CubeView extends FrameLayout {
         angle = a.getInt(R.styleable.CubeView_angle, 0);
         isShadow = a.getBoolean(R.styleable.CubeView_shadow, false);
         isSelected = a.getBoolean(R.styleable.CubeView_selected, false);
-        skin = Skin.values()[a.getInt(R.styleable.CubeView_skin, 0)];
+        cubeType = CubeType.values()[a.getInt(R.styleable.CubeView_type, 0)];
         a.recycle();
 
         if (!isInEditMode()) {
@@ -113,7 +113,7 @@ public class CubeView extends FrameLayout {
     }
 
     public void setCube(Cube cube) {
-        skin = cube.getSkin();
+        cubeType = cube.getCubeType();
         value = cube.getValue();
         angle = cube.getDegrees();
         marginStart = cube.getMarginStart();
@@ -124,7 +124,7 @@ public class CubeView extends FrameLayout {
     }
 
     public void setCube(CubeLite cubeLite) {
-        skin = Skin.valueOf(cubeLite.getSkin());
+        cubeType = CubeType.valueOf(cubeLite.getSkin());
         value = cubeLite.getValue();
         angle = cubeLite.getAngle();
         marginStart = cubeLite.getMarginStart();
@@ -135,12 +135,12 @@ public class CubeView extends FrameLayout {
     }
 
     public CubeLite getCubeLite() {
-        return new CubeLite(skin.name(), value, angle, marginStart, marginTop);
+        return new CubeLite(cubeType.name(), value, angle, marginStart, marginTop);
     }
 
     private void drawCube() {
         // Назначение картинок в соответствии с цветом
-        String skinName = skin.name().toLowerCase();
+        String skinName = cubeType.name().toLowerCase();
         binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
         binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
 
@@ -172,7 +172,7 @@ public class CubeView extends FrameLayout {
     }
 
     public String getCubeColor() {
-        return skin.name();
+        return cubeType.name();
     }
 
     @BindingAdapter({"android:layout_marginStart"})

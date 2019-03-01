@@ -3,7 +3,7 @@ package ru.kulikovman.cubes.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import ru.kulikovman.cubes.data.Skin;
+import ru.kulikovman.cubes.data.CubeType;
 
 @Entity
 public class Settings {
@@ -24,7 +24,7 @@ public class Settings {
         numberOfCubes = 2;
         delayAfterThrow = 0;
         isBlockSleepingMode = false;
-        cubeColor = Skin.WHITE.name();
+        cubeColor = CubeType.WHITE.name();
         numberOfThrow = 0;
         isRated = false;
     }

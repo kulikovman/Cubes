@@ -2,7 +2,7 @@ package ru.kulikovman.cubes.model;
 
 import java.util.Random;
 
-import ru.kulikovman.cubes.data.Skin;
+import ru.kulikovman.cubes.data.CubeType;
 
 public class Cube {
 
@@ -11,7 +11,7 @@ public class Cube {
     private final Random random;
 
     // Параметры для вью
-    private Skin skin;
+    private CubeType cubeType;
     private int value;
 
     // Отступы
@@ -31,13 +31,13 @@ public class Cube {
     private int x3, y3; // нижняя правая
     private int x4, y4; // нижняя левая
 
-    public Cube(Calculation calculation, Skin skin) {
+    public Cube(Calculation calculation, CubeType cubeType) {
         this.calculation = calculation;
         this.random = calculation.getRandom();
-        this.skin = skin;
+        this.cubeType = cubeType;
 
         // Количество точек
-        value = skin.getMinValue() + random.nextInt(skin.getMaxValue()); // от minValue до maxValue
+        value = 1 + random.nextInt(cubeType.getNumberOfSides()); // от 1 до numberOfSides
 
         // Угол поворота в градусах и радианах
         degrees = random.nextInt(360); // от 0 до 359
@@ -199,8 +199,8 @@ public class Cube {
         return y;
     }
 
-    public Skin getSkin() {
-        return skin;
+    public CubeType getCubeType() {
+        return cubeType;
     }
 
     public int getValue() {

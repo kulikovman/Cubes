@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import ru.kulikovman.cubes.R;
-import ru.kulikovman.cubes.data.Skin;
+import ru.kulikovman.cubes.data.CubeType;
 import ru.kulikovman.cubes.databinding.ViewShadowBinding;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
@@ -21,7 +21,7 @@ public class ShadowView  extends FrameLayout {
     private ViewShadowBinding binding;
     private Context context;
 
-    private Skin skin;
+    private CubeType cubeType;
     public int angle;
     public int marginStart;
     public int marginTop;
@@ -82,7 +82,7 @@ public class ShadowView  extends FrameLayout {
     }
 
     public void setCube(Cube cube) {
-        skin = cube.getSkin();
+        cubeType = cube.getCubeType();
         angle = cube.getDegrees();
         marginStart = cube.getMarginStart();
         marginTop = cube.getMarginTop();
@@ -92,7 +92,7 @@ public class ShadowView  extends FrameLayout {
     }
 
     public void setCube(CubeLite cubeLite) {
-        skin = Skin.valueOf(cubeLite.getSkin());
+        cubeType = CubeType.valueOf(cubeLite.getSkin());
         angle = cubeLite.getAngle();
         marginStart = cubeLite.getMarginStart();
         marginTop = cubeLite.getMarginTop();
@@ -103,7 +103,7 @@ public class ShadowView  extends FrameLayout {
 
     private void drawShadow() {
         // Назначение тени в соответствии с цветом
-        String skinName = skin.name().toLowerCase();
+        String skinName = cubeType.name().toLowerCase();
         binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
 
         // Обновление переменной в макете

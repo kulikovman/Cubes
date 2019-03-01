@@ -17,19 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.navigation.fragment.NavHostFragment;
-import ru.kulikovman.cubes.data.Skin;
+import ru.kulikovman.cubes.data.CubeType;
 import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
 import ru.kulikovman.cubes.dialog.RateDialog;
-import ru.kulikovman.cubes.helper.AnimHelper;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
@@ -41,7 +37,7 @@ import ru.kulikovman.cubes.view.ShadowView;
 
 public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
 
-    private static final int LIMIT_OF_THROW = 500; // Теоретически 500 бросков, это две-три игры
+    private static final int LIMIT_OF_THROW = 700; // Теоретически 500 бросков, это две-три игры
 
     private FragmentCubesOnBoardBinding binding;
     private Context context;
@@ -51,7 +47,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private Settings settings;
     private Calculation calculation;
 
-    private Skin skin;
+    private CubeType cubeType;
     private int numberOfCubes;
     private int sumOfCubes;
     private boolean isReadyForThrow;
@@ -129,7 +125,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private void loadSettings() {
         // Количество кубиков и цвет
         numberOfCubes = settings.getNumberOfCubes();
-        skin = Skin.valueOf(settings.getCubeColor());
+        cubeType = CubeType.valueOf(settings.getCubeColor());
 
         // Задержка после броска
         int[] delays = getResources().getIntArray(R.array.delay_after_throw);
@@ -284,7 +280,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Генирируем новые кубики
         while (cubes.size() < numberOfCubes) {
             // Создаем кубик
-            Cube cube = new Cube(calculation, skin);
+            Cube cube = new Cube(calculation, cubeType);
 
             if (cubes.isEmpty()) {
                 cubes.add(cube);
