@@ -30,12 +30,13 @@
 
 
         <!-- Кнопка настроек -->
-        <ImageView
+        <ImageButton
             android:id="@+id/button_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/button_setting_marginTop"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/button_setting_marginTop"
+            android:background="@color/transparent"
             android:onClick="@{() -> model.openSetting()}"
             android:src="@drawable/ic_settings_gray"/>
 
