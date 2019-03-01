@@ -35,10 +35,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/button_setting_marginTop"
+            android:layout_marginTop="@dimen/button_title_marginTop"
             android:background="@color/transparent"
             android:onClick="@{() -> model.openSetting()}"
             android:src="@drawable/ic_settings_gray"/>
+
+
+        <!-- Сумма броска -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/throw_sum_marginTop"
+            android:textColor="@color/gray_5"
+            android:textSize="20sp"
+            tools:text="28"/>
 
 
         <!-- Кнопка перемотки -->

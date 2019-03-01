@@ -6,8 +6,8 @@
     <dimen name="shadow_view_size">115dp</dimen>
 
     <!-- Прочее -->
-    <dimen name="screen_offset">8dp</dimen>
     <dimen name="button_title_size">30dp</dimen>
-    <dimen name="button_setting_marginTop">20dp</dimen>
+    <dimen name="button_title_marginTop">20dp</dimen>
+    <dimen name="throw_sum_marginTop">65dp</dimen>
 
 </resources>

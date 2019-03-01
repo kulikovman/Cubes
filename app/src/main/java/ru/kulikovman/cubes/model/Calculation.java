@@ -38,7 +38,7 @@ public class Calculation {
 
         // Координаты кнопки настроек
         int settingSize = resources.getDimensionPixelSize(R.dimen.button_title_size);
-        int settingMarginTop = resources.getDimensionPixelSize(R.dimen.button_setting_marginTop);
+        int settingMarginTop = resources.getDimensionPixelSize(R.dimen.button_title_marginTop);
         sx = screenWidth / 2;
         sy = settingSize / 2 + settingMarginTop;
 
