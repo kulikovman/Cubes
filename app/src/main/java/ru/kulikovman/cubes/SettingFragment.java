@@ -76,10 +76,11 @@ public class SettingFragment extends Fragment {
         // Востанавливаем состояние элементов на экране
         binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
         binding.delay.setProgress(settings.getDelayAfterThrow());
-        binding.blockScreen.setChecked(settings.isBlockSleepingMode());
+        binding.keepScreenOn.setChecked(settings.isKeepScreenOn());
+        binding.showThrowAmount.setChecked(settings.isShownThrowAmount());
 
         // Отмечаем сохраненный кубик
-        String color = settings.getCubeColor();
+        String color = settings.getCubeType();
         for (CubeView cubeView : cubeViews) {
             if (cubeView.getCubeColor().equals(color)) {
                 cubeView.setChooseMarker(true);
@@ -113,15 +114,27 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        // Слушатель переключателя блокировки экрана
-        binding.blockScreen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // Переключатель блокировки спящего режима
+        binding.keepScreenOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Воспроизводим соответствующий звук
                 SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
 
                 // Сохраняем состояние
-                settings.setBlockSleepingMode(isChecked);
+                settings.setKeepScreenOn(isChecked);
+            }
+        });
+
+        // Переключатель отображения суммы броска
+        binding.showThrowAmount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
+
+                // Сохраняем состояние
+                settings.setShownThrowAmount(isChecked);
             }
         });
     }
@@ -146,7 +159,7 @@ public class SettingFragment extends Fragment {
         SoundManager.get().playSound(SoundManager.CUBE_CLICK_SOUND);
 
         // Сохраняем выбранный цвет
-        settings.setCubeColor(cubeView.getCubeColor());
+        settings.setCubeType(cubeView.getCubeColor());
     }
 
     public void clickHelpButton(View view) {

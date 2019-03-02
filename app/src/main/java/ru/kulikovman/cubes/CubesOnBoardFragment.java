@@ -125,14 +125,14 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private void loadSettings() {
         // Количество кубиков и цвет
         numberOfCubes = settings.getNumberOfCubes();
-        cubeType = CubeType.valueOf(settings.getCubeColor());
+        cubeType = CubeType.valueOf(settings.getCubeType());
 
         // Задержка после броска
         int[] delays = getResources().getIntArray(R.array.delay_after_throw);
         delayAfterThrow = delays[settings.getDelayAfterThrow()];
 
         // Засыпание экрана
-        if (settings.isBlockSleepingMode()) {
+        if (settings.isKeepScreenOn()) {
             getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } else {
             getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

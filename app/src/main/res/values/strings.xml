@@ -2,7 +2,7 @@
 
     // Заголовки настроек
     <string name="title_delay_after_roll">Delay after throw</string>
-    <string name="title_screen_off">Screen off</string>
+    <string name="additional_options">Additional options</string>
     <string name="title_choice_of_cubes">Choice of cubes</string>
 
     // Количество кубиков
@@ -33,7 +33,8 @@
     <string name="button_extended_version">Extended version</string>
 
     // Прочие тексты
-    <string name="block_hibernation">Block the transition to sleep</string>
+    <string name="keep_screen_on">Keep the screen on</string>
+    <string name="show_throw_amount">Show the throw amount</string>
     <string name="rate_message">If you like the app, please rate it in Google Play. This will greatly help its further development.</string>
     <string name="button_ok">OK</string>
     <string name="title_number_of_cubes">Number of cubes</string>

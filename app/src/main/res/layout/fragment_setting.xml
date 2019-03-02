@@ -221,7 +221,7 @@
 
                     <TextView
                         style="@style/SettingTitles"
-                        android:text="@string/title_screen_off"/>
+                        android:text="@string/additional_options"/>
 
                     <ImageView
                         android:id="@+id/help_block_screen"
@@ -231,11 +231,19 @@
                 </LinearLayout>
 
                 <Switch
-                    android:id="@+id/block_screen"
+                    android:id="@+id/keep_screen_on"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/keep_screen_on"/>
+
+                <Switch
+                    android:id="@+id/show_throw_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/block_hibernation"/>
+                    android:text="@string/show_throw_amount"/>
 
             </LinearLayout>
 

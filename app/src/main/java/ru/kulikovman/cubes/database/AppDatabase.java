@@ -11,7 +11,7 @@ import ru.kulikovman.cubes.model.ThrowResult;
 import ru.kulikovman.cubes.model.Settings;
 
 
-@Database(entities = {Settings.class, ThrowResult.class}, version = 1)
+@Database(entities = {Settings.class, ThrowResult.class}, version = 2)
 @TypeConverters(CubeLiteConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 

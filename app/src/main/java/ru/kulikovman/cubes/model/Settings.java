@@ -13,8 +13,9 @@ public class Settings {
 
     private int numberOfCubes;
     private int delayAfterThrow;
-    private boolean isBlockSleepingMode;
-    private String cubeColor;
+    private boolean isKeepScreenOn;
+    private boolean isShownThrowAmount;
+    private String cubeType;
 
     private int numberOfThrow;
     private boolean isRated;
@@ -23,8 +24,9 @@ public class Settings {
         id = 0;
         numberOfCubes = 2;
         delayAfterThrow = 0;
-        isBlockSleepingMode = false;
-        cubeColor = CubeType.WHITE.name();
+        isKeepScreenOn = false;
+        isShownThrowAmount = false;
+        cubeType = CubeType.WHITE.name();
         numberOfThrow = 0;
         isRated = false;
     }
@@ -45,20 +47,28 @@ public class Settings {
         this.delayAfterThrow = delayAfterRoll;
     }
 
-    public boolean isBlockSleepingMode() {
-        return isBlockSleepingMode;
+    public boolean isKeepScreenOn() {
+        return isKeepScreenOn;
     }
 
-    public void setBlockSleepingMode(boolean blockSleepingMode) {
-        isBlockSleepingMode = blockSleepingMode;
+    public void setKeepScreenOn(boolean keepScreenOn) {
+        isKeepScreenOn = keepScreenOn;
     }
 
-    public String getCubeColor() {
-        return cubeColor;
+    public boolean isShownThrowAmount() {
+        return isShownThrowAmount;
     }
 
-    public void setCubeColor(String cubeColor) {
-        this.cubeColor = cubeColor;
+    public void setShownThrowAmount(boolean shownThrowAmount) {
+        isShownThrowAmount = shownThrowAmount;
+    }
+
+    public String getCubeType() {
+        return cubeType;
+    }
+
+    public void setCubeType(String cubeType) {
+        this.cubeType = cubeType;
     }
 
     public int getNumberOfThrow() {

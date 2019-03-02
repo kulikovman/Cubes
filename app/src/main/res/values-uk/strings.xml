@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Кубики</string>
-    <string name="block_hibernation">Блокувати перехід в сплячий режим</string>
+    <string name="keep_screen_on">Блокувати перехід в сплячий режим</string>
     <string name="button_extended_version">Розширена версія</string>
     <string name="button_no_thanks">Ні, дякую</string>
     <string name="button_rate">Оцінити</string>
@@ -13,6 +13,7 @@
     <string name="title_choice_of_cubes">Вибір кубиків</string>
     <string name="title_delay_after_roll">Затримка після кидка</string>
     <string name="title_number_of_cubes">Кількість кубиків</string>
-    <string name="title_screen_off">Вимикає дисплей</string>
+    <string name="additional_options">Додаткові опції</string>
     <string name="button_ok">OK</string>
+    <string name="show_throw_amount">Показувати суму кидка</string>
 </resources>

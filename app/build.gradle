@@ -10,7 +10,7 @@ android {
         versionName '4.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        // Это нужно для хранения истории версий базы данных
+        // Хранения истории версий базы данных
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
@@ -19,7 +19,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            // Сжатие + обфусцирование кода
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
