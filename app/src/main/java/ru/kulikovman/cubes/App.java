@@ -20,7 +20,8 @@ public class App extends Application {
 
         // Подключение базы данных
         database = Room.databaseBuilder(this, AppDatabase.class, "database")
-                .allowMainThreadQueries()
+                .allowMainThreadQueries() // разрешает операции в основном потоке
+                .fallbackToDestructiveMigration() // обнуляет базу, если нет подходящей миграции
                 .build();
     }
 

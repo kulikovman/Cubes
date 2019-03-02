@@ -252,7 +252,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     }
 
     private void drawCubeFromHistory(int rollResultNumber) {
-        // Сбрасываем сумму и убираем инфо
+        // Сбрасываем сумму
         sumOfCubes = 0;
 
         // Размещаем кубики на доске + подсчет их суммы
@@ -261,6 +261,17 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
             binding.topBoard.addView(new CubeView(context, cubeLite));
             binding.bottomBoard.addView(new ShadowView(context, cubeLite));
             sumOfCubes += cubeLite.getValue();
+        }
+
+        // Отображение суммы броска
+        showThrowAmount();
+    }
+
+    private void showThrowAmount() {
+        if (settings.isShownThrowAmount() && sumOfCubes != 0) {
+            binding.throwAmount.setText(String.valueOf(sumOfCubes));
+        } else {
+            binding.throwAmount.setText(null);
         }
     }
 
@@ -273,7 +284,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Подготовка к броску
         throwResultOnScreen = 0;
         sumOfCubes = 0;
-
         clearBoards();
         clearLists();
 
@@ -344,6 +354,9 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
         // Воспроизводим звук броска
         SoundManager.get().playSound(SoundManager.THROW_CUBES_SOUND);
+
+        // Отображение суммы броска
+        showThrowAmount();
 
         // Засчитываем бросок
         settings.setNumberOfThrow(settings.getNumberOfThrow() + 1);
