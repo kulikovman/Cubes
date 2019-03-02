@@ -224,7 +224,7 @@
                         android:text="@string/additional_options"/>
 
                     <ImageView
-                        android:id="@+id/help_block_screen"
+                        android:id="@+id/help_additional_options"
                         style="@style/ButtonHelp"
                         android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 

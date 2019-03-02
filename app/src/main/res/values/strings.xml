@@ -23,7 +23,7 @@
     // Тексты подсказок
     <string name="help_number_of_cubes">This number of dice will be used for the next roll.</string>
     <string name="help_delay_after_roll">It helps to avoid accidental re-throwing and cheating, when re-throwing is given for random.</string>
-    <string name="help_block_screen">Does not allow the device to go to sleep. Be careful, constantly on screen, quickly consumes battery power.</string>
+    <string name="help_additional_options">Various user interface settings.</string>
     <!--<string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска. Чтобы получить больше разных кубиков - установите расширенную версию приложения.</string>-->
     <string name="help_choose_cube">The selected cubes will be used for the next roll.</string>
 
