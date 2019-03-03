@@ -1,5 +1,7 @@
 package ru.kulikovman.cubes.model;
 
+import android.util.Log;
+
 import java.util.Random;
 
 import ru.kulikovman.cubes.data.CubeType;
@@ -52,13 +54,16 @@ public class Cube {
     }
 
     private void setNewCubePosition() {
-        int minX = calculation.getThrowArea().getMinX();
-        int maxX = calculation.getThrowArea().getMaxX();
-        int minY = calculation.getThrowArea().getMinY();
-        int maxY = calculation.getThrowArea().getMaxY();
+        int minX = calculation.getRollArea().getMinX();
+        int maxX = calculation.getRollArea().getMaxX();
+        int minY = calculation.getRollArea().getMinY();
+        int maxY = calculation.getRollArea().getMaxY();
 
-        x = minX + random.nextInt(maxX - minX);
-        y = minY + random.nextInt(maxY - minY);
+        // Координаты кубика
+        do {
+            x = minX + random.nextInt(maxX - minX);
+            y = minY + random.nextInt(maxY - minY);
+        } while (areaIntersection(calculation.getSettingTotalArea()));
 
         // Расчет отступов
         calculateMargins();
@@ -118,34 +123,28 @@ public class Cube {
         return (int) (y + (py - y) * Math.cos(radians) + (px - x) * Math.sin(radians));
     }
 
-    public boolean intersection(Cube cube) {
-        // ЭТАП 1: проверка расстояния до кнопки настроек
-        // Если меньше суммы радиусов, то пересекается
-        int settingDistance = (int) Math.sqrt((Math.pow(Math.abs(x - calculation.getSx()), 2) + Math.pow(Math.abs(y - calculation.getSy()), 2)));
-        if (settingDistance < calculation.getCubeOuterRadius() + calculation.getSettingRadius()) {
-            //Log.d("myLog", "Stage 1: " + settingDistance + " < " + calculation.getCubeOuterRadius() + calculation.getSettingRadius());
-            return true;
-        }
+    private boolean areaIntersection(Area area) {
+        int radius = calculation.getCubeOuterRadius();
+        return x > area.getMinX() - radius && x < area.getMaxX() + radius && y > area.getMinY() - radius && y < area.getMaxY() + radius;
+    }
 
+    public boolean intersection(Cube cube) {
         // Расчет растояния между центрами кубиков
         int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
-        //Log.d("myLog", "Cube distance: " + x + ", " + y + " | " + cube.getX() + ", " + cube.getY() + " ---> " + distance);
 
-        // ЭТАП 2: упрощенная проверка пересечения
+        // ЭТАП 1: проверка по внешним радиусам
         // Если больше суммы внешних радиусов, то все ок
         if (distance > calculation.getCubeOuterRadius() + cube.getCubeOuterRadius()) {
-            //Log.d("myLog", "Stage 2: " + distance + " > " + calculation.getCubeOuterRadius() + " + " + cube.getCubeOuterRadius());
             return false;
         }
 
-        // ЭТАП 3: проверка минимально допустимого расстояния
-        // Если меньше, то кубики не могут не пересекаться
+        // ЭТАП 2: проверка по внутренним радиусам
+        // Если меньше суммы радиусов, то кубики 100% пересекаются
         if (distance < calculation.getCubeInnerRadius() + cube.getCubeInnerRadius()) {
-            //Log.d("myLog", "Stage 3: " + distance + " < " + calculation.getCubeInnerRadius() + " + " + cube.getCubeInnerRadius());
             return true;
         }
 
-        // ЭТАП 4: проверка расположения вершин кубиков
+        // ЭТАП 3: проверка пересечения вершин и кубиков
         // Если точки одного кубика находятся за пределами второго и наоборот, то все ок
         if (!pointInsideCube(cube.getX1(), cube.getY1()) && !pointInsideCube(cube.getX2(), cube.getY2()) &&
                 !pointInsideCube(cube.getX3(), cube.getY3()) && !pointInsideCube(cube.getX4(), cube.getY4()) &&

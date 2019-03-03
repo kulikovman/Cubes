@@ -37,7 +37,7 @@ import ru.kulikovman.cubes.view.ShadowView;
 
 public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
 
-    private static final int LIMIT_OF_THROW = 700; // Теоретически 500 бросков, это две-три игры
+    private static final int LIMIT_OF_THROW = 700; // Теоретически 700 бросков, это две-три игры
 
     private FragmentCubesOnBoardBinding binding;
     private Context context;
@@ -293,8 +293,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
             Cube cube = new Cube(calculation, cubeType);
 
             if (cubes.isEmpty()) {
-                cubes.add(cube);
-                Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
+                addCubeToList(cube);
             } else {
                 // Проверяем пересечение с другими кубиками
                 int count = 0;
@@ -312,7 +311,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
                     // Если есть пересечение
                     if (intersection) {
                         count++;
-                        Log.d("myLog", "intersection count = " + count);
+                        Log.d("myLog", "cube intersection: " + count);
                         if (count < 30) { // Защита от неудачного разброса кубиков
                             // Двигаем кубик
                             cube.moveCube();
@@ -321,13 +320,11 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
                             Log.d("myLog", "---------------------------");
                             // Очищаем списки и начинаем заново
                             clearLists();
-                            cubes.add(cube);
-                            Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
+                            addCubeToList(cube);
                             intersection = false;
                         }
                     } else {
-                        cubes.add(cube);
-                        Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
+                        addCubeToList(cube);
                     }
                 }
             }
@@ -379,6 +376,12 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         }, delayAfterThrow);
 
         Log.d("myLog", "---------------------------");
+    }
+
+    private void addCubeToList(Cube cube) {
+        // Добавляем кубик в список и пишем лог
+        cubes.add(cube);
+        Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
     }
 
     private void clearBoards() {

@@ -12,9 +12,6 @@ public class Calculation {
 
     private final Random random;
 
-    // Положение кнопки настроек
-    private int sx, sy;
-
     // Размеры кубика и тени
     private int cubeHalfSize;
     private int shadowHalfSize;
@@ -25,22 +22,24 @@ public class Calculation {
     private int settingRadius;
 
     // Зона возможного расположения кубика
-    private ThrowArea throwArea;
+    private Area rollArea;
+
+    // Зона элементов интерфейса
+    private Area settingTotalArea;
 
     public Calculation(Resources resources) {
         random = new Random();
 
         // Размеры экрана
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        // Размер экрана
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
 
-        // Координаты кнопки настроек
+        // Область элементов интерфейса
         int settingSize = resources.getDimensionPixelSize(R.dimen.button_title_size);
         int settingMarginTop = resources.getDimensionPixelSize(R.dimen.button_title_marginTop);
-        sx = screenWidth / 2;
-        sy = settingSize / 2 + settingMarginTop;
+        int totalMarginTop = resources.getDimensionPixelSize(R.dimen.throw_amount_marginTop);
+        settingTotalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, settingMarginTop, totalMarginTop + settingSize);
 
         // Радиус кнопки настроек
         settingRadius = settingSize / 2 + settingMarginTop;
@@ -59,7 +58,7 @@ public class Calculation {
         int shadowRadius = (int) Math.sqrt((Math.pow(shadowHalfSize, 2) + Math.pow(shadowHalfSize, 2)));
 
         // Формирование области расположения кубика
-        throwArea = new ThrowArea(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
+        rollArea = new Area(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
 
         // Контроль полученных размеров
         Log.d("myLog", "----------------Screen----------------");
@@ -77,14 +76,6 @@ public class Calculation {
 
     public Random getRandom() {
         return random;
-    }
-
-    public int getSx() {
-        return sx;
-    }
-
-    public int getSy() {
-        return sy;
     }
 
     public int getSettingRadius() {
@@ -107,7 +98,11 @@ public class Calculation {
         return cubeOuterRadius;
     }
 
-    public ThrowArea getThrowArea() {
-        return throwArea;
+    public Area getRollArea() {
+        return rollArea;
+    }
+
+    public Area getSettingTotalArea() {
+        return settingTotalArea;
     }
 }
