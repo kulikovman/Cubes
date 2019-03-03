@@ -22,7 +22,7 @@ public class Settings {
 
     public Settings() {
         id = 0;
-        numberOfCubes = 2;
+        numberOfCubes = 4;
         delayAfterThrow = 0;
         isKeepScreenOn = false;
         isShownThrowAmount = false;
