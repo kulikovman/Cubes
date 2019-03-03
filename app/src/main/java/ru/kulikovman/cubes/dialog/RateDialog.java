@@ -22,7 +22,7 @@ public class RateDialog extends DialogFragment {
     public interface Listener {
         void rateButtonPressed();
 
-        void cancelButtonPressed();
+        void remindLaterButtonPressed();
     }
 
     @Override
@@ -40,11 +40,12 @@ public class RateDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Получаем макет
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View rateMessage = inflater.inflate(R.layout.rate_message, null);
+        View rateMessage = inflater.inflate(R.layout.dialog_rate_message, null);
 
         // Подключаем кнопки
         Button buttonRate = rateMessage.findViewById(R.id.button_rate);
-        Button buttonNoThanks = rateMessage.findViewById(R.id.button_no_thanks);
+        Button buttonAlreadyRated = rateMessage.findViewById(R.id.button_already_rated);
+        Button buttonRemindLater = rateMessage.findViewById(R.id.button_remind_later);
 
         // Слушатели кнопок
         buttonRate.setOnClickListener(new View.OnClickListener() {
@@ -63,14 +64,25 @@ public class RateDialog extends DialogFragment {
             }
         });
 
-        buttonNoThanks.setOnClickListener(new View.OnClickListener() {
+        buttonAlreadyRated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Закрываем диалог
                 dismiss();
 
                 // Сообщаем о нажатии
-                listener.cancelButtonPressed();
+                listener.rateButtonPressed();
+            }
+        });
+
+        buttonRemindLater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Закрываем диалог
+                dismiss();
+
+                // Сообщаем о нажатии
+                listener.remindLaterButtonPressed();
             }
         });
 

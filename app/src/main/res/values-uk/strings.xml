@@ -3,7 +3,7 @@
     <string name="app_name">Кубики</string>
     <string name="keep_screen_on">Блокувати перехід в сплячий режим</string>
     <string name="button_extended_version">Розширена версія</string>
-    <string name="button_no_thanks">Ні, дякую</string>
+    <string name="button_remind_later">Нагадати пізніше</string>
     <string name="button_rate">Оцінити</string>
     <string name="help_choose_cube">Обраний вид кубиків буде використовуватися для наступного кидка.</string>
     <string name="help_delay_after_roll">Допомагає уникнути випадкового повторного кидка і нечесної гри, коли повторний кидок видають за випадковий.</string>
@@ -16,4 +16,5 @@
     <string name="button_ok">OK</string>
     <string name="show_throw_amount">Показувати суму кидка</string>
     <string name="help_additional_options">Різні настройки призначеного для користувача інтерфейсу.</string>
+    <string name="button_already_rated">Уже оцінив</string>
 </resources>

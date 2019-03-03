@@ -36,7 +36,4 @@ public class DataRepository {
     public List<ThrowResult> getThrowResultList() {
         return database.throwResultDao().getAll();
     }
-
-
-
 }

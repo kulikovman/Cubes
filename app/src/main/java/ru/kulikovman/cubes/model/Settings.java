@@ -76,7 +76,11 @@ public class Settings {
     }
 
     public void setNumberOfThrow(int numberOfThrow) {
-        this.numberOfThrow = numberOfThrow;
+        if (numberOfThrow == Integer.MAX_VALUE) {
+            this.numberOfThrow = 0;
+        } else {
+            this.numberOfThrow = numberOfThrow;
+        }
     }
 
     public boolean isRated() {

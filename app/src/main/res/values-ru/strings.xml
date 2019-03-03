@@ -9,11 +9,12 @@
     <string name="help_delay_after_roll">Помогает избежать случайного повторного броска и нечестной игры, когда повторный бросок выдают за случайный.</string>
     <string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска.</string>
     <string name="button_rate">Оценить</string>
-    <string name="button_no_thanks">Нет, спасибо</string>
+    <string name="button_remind_later">Напомнить позже</string>
     <string name="button_extended_version">Расширенная версия</string>
     <string name="keep_screen_on">Блокировать переход в спящий режим</string>
     <string name="rate_message">Если вам понравилось приложение, пожалуйста оцените его в Google Play. Это сильно поможет его дальнейшему развитию.</string>
     <string name="button_ok">OK</string>
     <string name="show_throw_amount">Показывать сумму броска</string>
     <string name="help_additional_options">Различные настройки пользовательского интерфейса.</string>
+    <string name="button_already_rated">Уже оценил</string>
 </resources>

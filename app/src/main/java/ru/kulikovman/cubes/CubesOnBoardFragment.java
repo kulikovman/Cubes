@@ -38,6 +38,7 @@ import ru.kulikovman.cubes.view.ShadowView;
 public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
 
     private static final int LIMIT_OF_THROW = 700; // Теоретически 700 бросков, это две-три игры
+    private static final int FAILURE_LIMIT = 30; // Лимит неудачных бросков (с пересечением кубиков)
 
     private FragmentCubesOnBoardBinding binding;
     private Context context;
@@ -156,8 +157,8 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     }
 
     @Override
-    public void cancelButtonPressed() {
-        // Сбрасываем счетчик, чтобы показать деалог позже
+    public void remindLaterButtonPressed() {
+        // Сбрасываем счетчик, чтобы показать диалог позже
         settings.setNumberOfThrow(0);
     }
 
@@ -312,7 +313,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
                     if (intersection) {
                         count++;
                         Log.d("myLog", "cube intersection: " + count);
-                        if (count < 30) { // Защита от неудачного разброса кубиков
+                        if (count < FAILURE_LIMIT) { // Защита от неудачного разброса кубиков
                             // Двигаем кубик
                             cube.moveCube();
                         } else {

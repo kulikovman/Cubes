@@ -29,7 +29,8 @@
 
     // Тексты кнопок
     <string name="button_rate">Rate</string>
-    <string name="button_no_thanks">No thanks</string>
+    <string name="button_already_rated">Already rated</string>
+    <string name="button_remind_later">Remind me later</string>
     <string name="button_extended_version">Extended version</string>
 
     // Прочие тексты
