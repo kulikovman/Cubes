@@ -26,6 +26,7 @@
     <string name="help_delay_after_roll">It helps to avoid accidental re-throwing and cheating, when re-throwing is given for random.</string>
     <string name="help_additional_options">Various user interface settings.</string>
     <string name="help_choose_cube">The selected cubes will be used for the next roll.</string>
+    <string name="help_keep_screen_on">Does not allow the device to go to sleep. Be careful, constantly on screen, quickly consumes battery power.</string>
 
     // Тексты кнопок
     <string name="button_rate">Rate</string>
@@ -40,5 +41,7 @@
     <string name="button_ok">OK</string>
     <string name="title_number_of_cubes">Number of cubes</string>
     <string name="app_name">Cubes</string>
+    <string name="add_player_names">Добавьте имена игроков!</string>
+    <string name="player_list_mode">Режим списка игроков</string>
 
 </resources>

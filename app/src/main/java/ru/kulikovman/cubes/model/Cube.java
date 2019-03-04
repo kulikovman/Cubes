@@ -1,7 +1,5 @@
 package ru.kulikovman.cubes.model;
 
-import android.util.Log;
-
 import java.util.Random;
 
 import ru.kulikovman.cubes.data.CubeType;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Кубики</string>
-    <string name="keep_screen_on">Блокувати перехід в сплячий режим</string>
+    <string name="keep_screen_on">Тримати екран включеним</string>
     <string name="button_extended_version">Розширена версія</string>
     <string name="button_remind_later">Нагадати пізніше</string>
     <string name="button_rate">Оцінити</string>
@@ -17,4 +17,7 @@
     <string name="show_throw_amount">Показувати суму кидка</string>
     <string name="help_additional_options">Різні настройки призначеного для користувача інтерфейсу.</string>
     <string name="button_already_rated">Уже оцінив</string>
+    <string name="player_list_mode">Режим списка игроков</string>
+    <string name="add_player_names">Добавьте имена игроков!</string>
+    <string name="help_keep_screen_on">Чи не дає пристрою піти в сплячий режим. Будьте уважні, постійно включений екран, швидко витрачає заряд акумулятора.</string>
 </resources>

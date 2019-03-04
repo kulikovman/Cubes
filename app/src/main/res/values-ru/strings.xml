@@ -11,10 +11,13 @@
     <string name="button_rate">Оценить</string>
     <string name="button_remind_later">Напомнить позже</string>
     <string name="button_extended_version">Расширенная версия</string>
-    <string name="keep_screen_on">Блокировать переход в спящий режим</string>
     <string name="rate_message">Если вам понравилось приложение, пожалуйста оцените его в Google Play. Это сильно поможет его дальнейшему развитию.</string>
     <string name="button_ok">OK</string>
     <string name="show_throw_amount">Показывать сумму броска</string>
     <string name="help_additional_options">Различные настройки пользовательского интерфейса.</string>
     <string name="button_already_rated">Уже оценил</string>
+    <string name="add_player_names">Добавьте имена игроков!</string>
+    <string name="player_list_mode">Режим списка игроков</string>
+    <string name="keep_screen_on">Держать экран включенным</string>
+    <string name="help_keep_screen_on">Не дает устройству уйти в спящий режим. Будьте внимательны, постоянно включенный экран, быстро расходует заряд аккумулятора.</string>
 </resources>
