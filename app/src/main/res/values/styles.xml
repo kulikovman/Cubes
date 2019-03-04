@@ -97,4 +97,12 @@
         <item name="android:visibility">invisible</item>
     </style>
 
+    // Информация о сумме кубиков и времени
+    <style name="SwitchBase">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
 </resources>

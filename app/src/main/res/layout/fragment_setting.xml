@@ -57,7 +57,7 @@
 
                     <TextView
                         style="@style/SettingTitles"
-                        android:text="@string/title_number_of_cubes"/>
+                        android:text="@string/number_of_cubes"/>
 
                 </LinearLayout>
 
@@ -145,7 +145,7 @@
 
                     <TextView
                         style="@style/SettingTitles"
-                        android:text="@string/title_delay_after_roll"/>
+                        android:text="@string/delay_after_roll"/>
 
                 </LinearLayout>
 
@@ -214,17 +214,15 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/help_multi_player_mode"
+                    android:id="@+id/help_player_list_mode"
                     style="@style/ButtonHelpTwo"
                     android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 
                 <Switch
                     android:id="@+id/player_list_mode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/player_list_mode"/>
+                    style="@style/SwitchBase"
+                    android:text="@string/player_list_mode"
+                    tools:checked="true"/>
 
             </LinearLayout>
 
@@ -235,7 +233,7 @@
                 android:layout_marginStart="30dp"
                 android:orientation="vertical"
                 android:visibility="gone"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -285,10 +283,7 @@
 
                 <Switch
                     android:id="@+id/keep_screen_on"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="sans-serif-light"
+                    style="@style/SwitchBase"
                     android:text="@string/keep_screen_on"/>
 
             </LinearLayout>
@@ -311,10 +306,7 @@
 
                 <Switch
                     android:id="@+id/show_throw_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="sans-serif-light"
+                    style="@style/SwitchBase"
                     android:text="@string/show_throw_amount"/>
 
             </LinearLayout>
@@ -343,7 +335,7 @@
 
                     <TextView
                         style="@style/SettingTitles"
-                        android:text="@string/title_choice_of_cubes"/>
+                        android:text="@string/choice_of_cubes"/>
 
                 </LinearLayout>
 

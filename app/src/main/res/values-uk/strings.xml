@@ -9,15 +9,15 @@
     <string name="help_delay_after_roll">Допомагає уникнути випадкового повторного кидка і нечесної гри, коли повторний кидок видають за випадковий.</string>
     <string name="help_number_of_cubes">Це кількість кубиків буде використано для наступного кидка.</string>
     <string name="rate_message">Якщо вам сподобалося додаток, будь ласка оціните його в Google Play. Це сильно допоможе його подальшому розвитку.</string>
-    <string name="title_choice_of_cubes">Вибір кубиків</string>
-    <string name="title_delay_after_roll">Затримка після кидка</string>
-    <string name="title_number_of_cubes">Кількість кубиків</string>
+    <string name="choice_of_cubes">Вибір кубиків</string>
+    <string name="delay_after_roll">Затримка після кидка</string>
+    <string name="number_of_cubes">Кількість кубиків</string>
     <string name="additional_options">Додаткові опції</string>
-    <string name="button_ok">OK</string>
     <string name="show_throw_amount">Показувати суму кидка</string>
-    <string name="help_additional_options">Різні настройки призначеного для користувача інтерфейсу.</string>
     <string name="button_already_rated">Уже оцінив</string>
-    <string name="player_list_mode">Режим списка игроков</string>
+    <string name="player_list_mode">Режим списку гравців</string>
     <string name="add_player_names">Добавьте имена игроков!</string>
     <string name="help_keep_screen_on">Чи не дає пристрою піти в сплячий режим. Будьте уважні, постійно включений екран, швидко витрачає заряд акумулятора.</string>
+    <string name="help_show_throw_amount">Показує загальну суму кубиків після кидка.</string>
+    <string name="help_player_list_mode">Дозволяє створити список гравців для відстеження гравця, якому належить поточний хід.</string>
 </resources>

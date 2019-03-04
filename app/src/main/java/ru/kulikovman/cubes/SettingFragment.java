@@ -174,8 +174,14 @@ public class SettingFragment extends Fragment {
             case R.id.help_delay_after_throw:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_delay_after_roll));
                 break;
-            case R.id.help_additional_options:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_additional_options));
+            case R.id.help_player_list_mode:
+                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_player_list_mode));
+                break;
+            case R.id.help_keep_screen_on:
+                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_keep_screen_on));
+                break;
+            case R.id.help_show_throw_amount:
+                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_show_throw_amount));
                 break;
             case R.id.help_choose_cube:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_choose_cube));
