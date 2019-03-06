@@ -3,6 +3,9 @@ package ru.kulikovman.cubes.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ru.kulikovman.cubes.data.CubeType;
 
 @Entity
@@ -20,6 +23,9 @@ public class Settings {
     private int numberOfThrow;
     private boolean isRated;
 
+    private boolean isPlayerListMode;
+    private List<Player> players;
+
     public Settings() {
         id = 0;
         numberOfCubes = 4;
@@ -29,6 +35,8 @@ public class Settings {
         cubeType = CubeType.WHITE.name();
         numberOfThrow = 0;
         isRated = false;
+        isPlayerListMode = false;
+        players = new ArrayList<>();
     }
 
     public int getNumberOfCubes() {
@@ -89,5 +97,25 @@ public class Settings {
 
     public void setRated(boolean rated) {
         isRated = rated;
+    }
+
+    public boolean isPlayerListMode() {
+        return isPlayerListMode;
+    }
+
+    public void setPlayerListMode(boolean playerListMode) {
+        isPlayerListMode = playerListMode;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 }

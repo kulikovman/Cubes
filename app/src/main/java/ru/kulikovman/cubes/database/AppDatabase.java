@@ -5,14 +5,15 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 
 import ru.kulikovman.cubes.database.converter.CubeLiteConverter;
+import ru.kulikovman.cubes.database.converter.PlayerConverter;
 import ru.kulikovman.cubes.database.dao.SettingsDao;
 import ru.kulikovman.cubes.database.dao.ThrowResultDao;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.model.ThrowResult;
 
 
-@Database(entities = {Settings.class, ThrowResult.class}, version = 2)
-@TypeConverters(CubeLiteConverter.class)
+@Database(entities = {Settings.class, ThrowResult.class}, version = 3)
+@TypeConverters({CubeLiteConverter.class, PlayerConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract SettingsDao settingsDao();
