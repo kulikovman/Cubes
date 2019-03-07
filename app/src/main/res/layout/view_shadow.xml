@@ -21,13 +21,13 @@
 
         <ImageView
             android:id="@+id/shadow"
-            android:layout_width="@dimen/shadow_view_size"
-            android:layout_height="@dimen/shadow_view_size"
+            android:layout_width="@dimen/cube_view_size"
+            android:layout_height="@dimen/cube_view_size"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
             tools:rotation="0"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/red_shadow"/>
+            app:srcCompat="@drawable/white_shadow"/>
 
     </FrameLayout>
 

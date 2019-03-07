@@ -23,13 +23,14 @@
 
         <ImageView
             android:id="@+id/shadow"
-            android:layout_width="@dimen/shadow_view_size"
-            android:layout_height="@dimen/shadow_view_size"
+            android:layout_width="@dimen/cube_view_size"
+            android:layout_height="@dimen/cube_view_size"
             android:layout_gravity="center"
             android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
             android:visibility="invisible"
-            app:srcCompat="@drawable/black_shadow"/>
+            app:srcCompat="@drawable/white_shadow"
+            tools:visibility="visible"/>
 
         <ImageView
             android:id="@+id/cube"
@@ -39,17 +40,7 @@
             android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
             android:visibility="visible"
-            app:srcCompat="@drawable/black_cube"
-            tools:rotation="0"/>
-
-        <ImageView
-            android:id="@+id/dots"
-            android:layout_width="@dimen/cube_view_size"
-            android:layout_height="@dimen/cube_view_size"
-            android:layout_gravity="center"
-            android:rotation="@{model.angle}"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/black_dot_5"
+            app:srcCompat="@drawable/white_5"
             tools:rotation="0"/>
 
         <ImageView
@@ -59,12 +50,12 @@
             android:layout_gravity="bottom"
             android:layout_margin="8dp"
             android:visibility="invisible"
-            app:srcCompat="@drawable/ic_check_circle_blue_30dp"/>
+            app:srcCompat="@drawable/ic_check_circle_blue_30dp"
+            tools:visibility="visible"/>
 
         <!--
         Это вью нужно для визуального определения размера кубика.
-        Черный кубик самый крупный и это вью соответствует его размеру.
-        Новые скины должны визуально вписываться в этот размер!
+        Все новые скины должны визуально точно вписываться в этот размер!
         -->
         <ImageView
             android:layout_width="@dimen/cube_size"

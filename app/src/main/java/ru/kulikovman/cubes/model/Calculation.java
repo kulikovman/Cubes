@@ -12,19 +12,12 @@ public class Calculation {
 
     private final Random random;
 
-    // Размеры кубика и тени
     private int cubeHalfSize;
-    private int shadowHalfSize;
-
-    // Радиусы кубика и кнопки настроек
+    private int cubeViewHalfSize;
     private int cubeInnerRadius;
     private int cubeOuterRadius;
-    private int settingRadius;
 
-    // Зона возможного расположения кубика
     private Area rollArea;
-
-    // Зона элементов интерфейса
     private Area settingTotalArea;
 
     public Calculation(Resources resources) {
@@ -41,21 +34,18 @@ public class Calculation {
         int totalMarginTop = resources.getDimensionPixelSize(R.dimen.throw_amount_marginTop);
         settingTotalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, settingMarginTop, totalMarginTop + settingSize);
 
-        // Радиус кнопки настроек
-        settingRadius = settingSize / 2 + settingMarginTop;
-
         // Размер/полуразмер кубика
         int cubeSize = resources.getDimensionPixelSize(R.dimen.cube_size);
         cubeHalfSize = cubeSize / 2;
 
-        // Размер/полуразмер вью тени
-        int shadowSize = resources.getDimensionPixelSize(R.dimen.shadow_view_size);
-        shadowHalfSize = shadowSize / 2;
+        // Размер/полуразмер вью кубика
+        int cubeViewSize = resources.getDimensionPixelSize(R.dimen.cube_view_size);
+        cubeViewHalfSize = cubeViewSize / 2;
 
         // Радиусы кубика и тени
         cubeInnerRadius = cubeHalfSize;
         cubeOuterRadius = (int) Math.sqrt((Math.pow(cubeHalfSize, 2) + Math.pow(cubeHalfSize, 2)));
-        int shadowRadius = (int) Math.sqrt((Math.pow(shadowHalfSize, 2) + Math.pow(shadowHalfSize, 2)));
+        int shadowRadius = (int) Math.sqrt((Math.pow(cubeViewHalfSize, 2) + Math.pow(cubeViewHalfSize, 2)));
 
         // Формирование области расположения кубика
         rollArea = new Area(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
@@ -66,11 +56,10 @@ public class Calculation {
         Log.d("myLog", "screenHeight = " + screenHeight);
         Log.d("myLog", "----------------Sizes-----------------");
         Log.d("myLog", "cubeSize = " + cubeSize + " / 2 = " + cubeHalfSize);
-        Log.d("myLog", "shadowSize = " + shadowSize + " / 2 = " + shadowHalfSize);
+        Log.d("myLog", "cubeViewSize = " + cubeViewSize + " / 2 = " + cubeViewHalfSize);
         Log.d("myLog", "----------------Radius----------------");
         Log.d("myLog", "cubeRadius = " + cubeInnerRadius + " | " + cubeOuterRadius);
         Log.d("myLog", "shadowRadius = " + shadowRadius);
-        Log.d("myLog", "settingRadius = " + settingRadius);
         Log.d("myLog", "--------------------------------------");
     }
 
@@ -78,16 +67,12 @@ public class Calculation {
         return random;
     }
 
-    public int getSettingRadius() {
-        return settingRadius;
-    }
-
     public int getCubeHalfSize() {
         return cubeHalfSize;
     }
 
-    public int getShadowHalfSize() {
-        return shadowHalfSize;
+    public int getCubeViewHalfSize() {
+        return cubeViewHalfSize;
     }
 
     public int getCubeInnerRadius() {

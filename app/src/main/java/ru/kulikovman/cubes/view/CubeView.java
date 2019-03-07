@@ -141,8 +141,7 @@ public class CubeView extends FrameLayout {
     private void drawCube() {
         // Назначение картинок в соответствии с цветом
         String skinName = cubeType.name().toLowerCase();
-        binding.cube.setImageResource(getDrawableIdByName(skinName + "_cube"));
-        binding.dots.setImageResource(getDrawableIdByName(skinName + "_dot_" + String.valueOf(value)));
+        binding.cube.setImageResource(getDrawableIdByName(skinName + "_" + String.valueOf(value)));
 
         // Показываем тень, если указана
         // Это собственная тень кубика, для отображения через макет

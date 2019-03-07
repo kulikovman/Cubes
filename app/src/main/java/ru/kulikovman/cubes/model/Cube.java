@@ -6,15 +6,12 @@ import ru.kulikovman.cubes.data.CubeType;
 
 public class Cube {
 
-    // Базовые значения
-    private Calculation calculation;
     private final Random random;
+    private Calculation calculation;
 
     // Параметры для вью
     private CubeType cubeType;
     private int value;
-
-    // Отступы
     private int marginStart;
     private int marginTop;
 
@@ -71,8 +68,8 @@ public class Cube {
     }
 
     private void calculateMargins() {
-        marginStart = x - calculation.getShadowHalfSize();
-        marginTop = y - calculation.getShadowHalfSize();
+        marginStart = x - calculation.getCubeViewHalfSize();
+        marginTop = y - calculation.getCubeViewHalfSize();
     }
 
     private void calculatePointLocations() {
