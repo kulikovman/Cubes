@@ -29,7 +29,7 @@
             android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
             android:visibility="invisible"
-            app:srcCompat="@drawable/red_shadow"
+            app:srcCompat="@drawable/white_shadow"
             tools:visibility="visible"/>
 
         <ImageView
@@ -40,7 +40,7 @@
             android:rotation="@{model.angle}"
             android:scaleType="fitCenter"
             android:visibility="visible"
-            app:srcCompat="@drawable/red_5"
+            app:srcCompat="@drawable/white_5"
             tools:rotation="0"/>
 
         <ImageView
