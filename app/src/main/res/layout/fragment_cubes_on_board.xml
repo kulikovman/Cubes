@@ -6,6 +6,9 @@
 
     <data>
 
+        <import type="android.view.View"/>
+        <import type="ru.kulikovman.cubes.helper.Utils"/>
+
         <variable
             name="model"
             type="ru.kulikovman.cubes.CubesOnBoardFragment"/>
@@ -15,6 +18,35 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <!-- Разделительные линии -->
+        <FrameLayout
+            android:id="@+id/divider_line_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{model.settings.divideScreen ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone">
+
+            <ImageView
+                android:id="@+id/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/gray_2"/>
+
+            <ImageView
+                android:id="@+id/vertical_line"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@{model.settings.shownThrowAmount ? Utils.convertDpToPx(110) : Utils.convertDpToPx(70)}"
+                android:layout_marginBottom="20dp"
+                android:background="@color/gray_2"/>
+
+        </FrameLayout>
+
 
         <!-- Доска для теней -->
         <FrameLayout

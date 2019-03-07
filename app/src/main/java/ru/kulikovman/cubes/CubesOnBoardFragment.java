@@ -45,7 +45,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
     private CubesViewModel model;
     private DataRepository repository;
-    private Settings settings;
+    public Settings settings;
     private Calculation calculation;
 
     private CubeType cubeType;
@@ -63,7 +63,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private ShakeDetector shakeDetector;
-
 
     @Nullable
     @Override

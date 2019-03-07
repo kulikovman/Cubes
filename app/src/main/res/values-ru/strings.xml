@@ -17,4 +17,6 @@
     <string name="keep_screen_on">Держать экран включенным</string>
     <string name="help_keep_screen_on">Не дает устройству уйти в спящий режим. Будьте внимательны, постоянно включенный экран, быстро расходует заряд аккумулятора.</string>
     <string name="help_show_throw_amount">Показывает общую сумму кубиков после броска.</string>
+    <string name="divide_screen">Разделить экран на части</string>
+    <string name="help_divide_screen">Делит экран на четыре равные части.</string>
 </resources>

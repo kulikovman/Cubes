@@ -20,6 +20,8 @@ public class Settings {
     private int numberOfThrow;
     private boolean isRated;
 
+    private boolean isDivideScreen;
+
     public Settings() {
         id = 0;
         numberOfCubes = 4;
@@ -29,6 +31,7 @@ public class Settings {
         cubeType = CubeType.WHITE.name();
         numberOfThrow = 0;
         isRated = false;
+        isDivideScreen = false;
     }
 
     public int getNumberOfCubes() {
@@ -89,5 +92,13 @@ public class Settings {
 
     public void setRated(boolean rated) {
         isRated = rated;
+    }
+
+    public boolean isDivideScreen() {
+        return isDivideScreen;
+    }
+
+    public void setDivideScreen(boolean divideScreen) {
+        isDivideScreen = divideScreen;
     }
 }

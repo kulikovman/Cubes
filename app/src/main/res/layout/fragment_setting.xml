@@ -250,6 +250,29 @@
 
 
             <ImageView
+                style="@style/DividerSpace"/>
+
+
+            <!-- Показываь сумму броска -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/help_divide_screen"
+                    style="@style/ButtonHelpTwo"
+                    android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
+
+                <Switch
+                    android:id="@+id/divide_screen"
+                    style="@style/SwitchBase"
+                    android:text="@string/divide_screen"/>
+
+            </LinearLayout>
+
+
+            <ImageView
                 style="@style/DividerLine"/>
 
 

@@ -78,6 +78,7 @@ public class SettingFragment extends Fragment {
         binding.delay.setProgress(settings.getDelayAfterThrow());
         binding.keepScreenOn.setChecked(settings.isKeepScreenOn());
         binding.showThrowAmount.setChecked(settings.isShownThrowAmount());
+        binding.divideScreen.setChecked(settings.isDivideScreen());
 
         // Отмечаем сохраненный кубик
         String color = settings.getCubeType();
@@ -137,6 +138,18 @@ public class SettingFragment extends Fragment {
                 settings.setShownThrowAmount(isChecked);
             }
         });
+
+        // Переключатель деления экрана
+        binding.divideScreen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
+
+                // Сохраняем состояние
+                settings.setDivideScreen(isChecked);
+            }
+        });
     }
 
     public void clickComeBackButton() {
@@ -179,6 +192,9 @@ public class SettingFragment extends Fragment {
                 break;
             case R.id.help_show_throw_amount:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_show_throw_amount));
+                break;
+            case R.id.help_divide_screen:
+                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_divide_screen));
                 break;
             case R.id.help_choose_cube:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_choose_cube));
