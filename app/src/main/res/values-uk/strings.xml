@@ -15,9 +15,6 @@
     <string name="additional_options">Додаткові опції</string>
     <string name="show_throw_amount">Показувати суму кидка</string>
     <string name="button_already_rated">Уже оцінив</string>
-    <string name="player_list_mode">Режим списку гравців</string>
-    <string name="add_player_names">Добавьте имена игроков!</string>
     <string name="help_keep_screen_on">Чи не дає пристрою піти в сплячий режим. Будьте уважні, постійно включений екран, швидко витрачає заряд акумулятора.</string>
     <string name="help_show_throw_amount">Показує загальну суму кубиків після кидка.</string>
-    <string name="help_player_list_mode">Дозволяє створити список гравців для відстеження гравця, якому належить поточний хід.</string>
 </resources>

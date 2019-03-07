@@ -20,7 +20,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
 import ru.kulikovman.cubes.dialog.HelpDialog;
 import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
-import ru.kulikovman.cubes.model.Player;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
 
@@ -79,25 +78,6 @@ public class SettingFragment extends Fragment {
         binding.delay.setProgress(settings.getDelayAfterThrow());
         binding.keepScreenOn.setChecked(settings.isKeepScreenOn());
         binding.showThrowAmount.setChecked(settings.isShownThrowAmount());
-        binding.playerListMode.setChecked(settings.isPlayerListMode());
-
-        // Заполнение списка имен игроков
-        List<Player> players = settings.getPlayers();
-        if (players.size() != 0) {
-            StringBuilder names = new StringBuilder();
-            for (int i = 0; i < players.size(); i++) {
-                names.append(players.get(i).getName());
-
-                // Если не последний элемент
-                if (i != players.size() - 1) {
-                    names.append(", ");
-                }
-            }
-
-            binding.names.setText(names.toString());
-        } else {
-            binding.names.setText(getString(R.string.add_player_names));
-        }
 
         // Отмечаем сохраненный кубик
         String color = settings.getCubeType();
@@ -157,21 +137,6 @@ public class SettingFragment extends Fragment {
                 settings.setShownThrowAmount(isChecked);
             }
         });
-
-        // Переключатель списка игроков
-        binding.playerListMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Воспроизводим соответствующий звук
-                SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
-
-                // Видимость дополнительных опций
-                binding.playerNameContainer.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-
-                // Сохраняем состояние
-                settings.setPlayerListMode(isChecked);
-            }
-        });
     }
 
     public void clickComeBackButton() {
@@ -208,9 +173,6 @@ public class SettingFragment extends Fragment {
                 break;
             case R.id.help_delay_after_throw:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_delay_after_roll));
-                break;
-            case R.id.help_player_list_mode:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_player_list_mode));
                 break;
             case R.id.help_keep_screen_on:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_keep_screen_on));

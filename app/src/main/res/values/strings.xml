@@ -19,7 +19,6 @@
     <string name="number_of_cubes">Number of cubes</string>
     <string name="delay_after_roll">Delay after throw</string>
     <string name="additional_options">Additional options</string>
-    <string name="player_list_mode">Player list mode</string>
     <string name="keep_screen_on">Keep the screen on</string>
     <string name="show_throw_amount">Show the throw amount</string>
     <string name="choice_of_cubes">Choice of cubes</string>
@@ -27,7 +26,6 @@
     // Тексты подсказок
     <string name="help_number_of_cubes">This number of dice will be used for the next roll.</string>
     <string name="help_delay_after_roll">It helps to avoid accidental re-throwing and cheating, when re-throwing is given for random.</string>
-    <string name="help_player_list_mode">Allows you to create a list of players to track the player who owns the current move.</string>
     <string name="help_keep_screen_on">Does not allow the device to go to sleep. Be careful, constantly on screen, quickly consumes battery power.</string>
     <string name="help_show_throw_amount">Shows the total amount of cubes after the roll.</string>
     <string name="help_choose_cube">The selected cubes will be used for the next roll.</string>
@@ -42,7 +40,6 @@
     // Прочие тексты
     <string name="app_name">Cubes</string>
     <string name="rate_message">If you like the app, please rate it in Google Play. This will greatly help its further development.</string>
-    <string name="add_player_names">Добавьте имена игроков!</string>
 
 
 </resources>

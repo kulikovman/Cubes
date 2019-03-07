@@ -14,10 +14,7 @@
     <string name="rate_message">Если вам понравилось приложение, пожалуйста оцените его в Google Play. Это сильно поможет его дальнейшему развитию.</string>
     <string name="show_throw_amount">Показывать сумму броска</string>
     <string name="button_already_rated">Уже оценил</string>
-    <string name="add_player_names">Добавьте имена игроков!</string>
-    <string name="player_list_mode">Режим списка игроков</string>
     <string name="keep_screen_on">Держать экран включенным</string>
     <string name="help_keep_screen_on">Не дает устройству уйти в спящий режим. Будьте внимательны, постоянно включенный экран, быстро расходует заряд аккумулятора.</string>
     <string name="help_show_throw_amount">Показывает общую сумму кубиков после броска.</string>
-    <string name="help_player_list_mode">Позволяет создать список игроков для отслеживания игрока, которому принадлежит текущий ход.</string>
 </resources>
