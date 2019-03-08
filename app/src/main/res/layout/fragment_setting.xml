@@ -52,7 +52,7 @@
 
                     <ImageView
                         android:id="@+id/help_number_of_cubes"
-                        style="@style/ButtonHelpTwo"
+                        style="@style/ButtonHelp"
                         android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 
                     <TextView
@@ -140,7 +140,7 @@
 
                     <ImageView
                         android:id="@+id/help_delay_after_throw"
-                        style="@style/ButtonHelpTwo"
+                        style="@style/ButtonHelp"
                         android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 
                     <TextView
@@ -215,7 +215,7 @@
 
                 <ImageView
                     android:id="@+id/help_keep_screen_on"
-                    style="@style/ButtonHelpTwo"
+                    style="@style/ButtonHelp"
                     android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 
                 <Switch
@@ -238,7 +238,7 @@
 
                 <ImageView
                     android:id="@+id/help_show_throw_amount"
-                    style="@style/ButtonHelpTwo"
+                    style="@style/ButtonHelp"
                     android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 
                 <Switch
@@ -253,7 +253,30 @@
                 style="@style/DividerSpace"/>
 
 
-            <!-- Показываь сумму броска -->
+            <!-- Включить темную тему -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/help_enable_dark_theme"
+                    style="@style/ButtonHelp"
+                    android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
+
+                <Switch
+                    android:id="@+id/enable_dark_theme"
+                    style="@style/SwitchBase"
+                    android:text="@string/enable_dark_theme"/>
+
+            </LinearLayout>
+
+
+            <ImageView
+                style="@style/DividerSpace"/>
+
+
+            <!-- Деление экрана на части -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -261,7 +284,7 @@
 
                 <ImageView
                     android:id="@+id/help_divide_screen"
-                    style="@style/ButtonHelpTwo"
+                    style="@style/ButtonHelp"
                     android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 
                 <Switch
@@ -290,7 +313,7 @@
 
                     <ImageView
                         android:id="@+id/help_choose_cube"
-                        style="@style/ButtonHelpTwo"
+                        style="@style/ButtonHelp"
                         android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
 
                     <TextView

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,6 +151,21 @@ public class SettingFragment extends Fragment {
                 settings.setDivideScreen(isChecked);
             }
         });
+
+        // Переключатель темной темы
+        binding.enableDarkTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
+
+                // Сохраняем состояние
+                //settings.setDivideScreen(isChecked);
+
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.getDelegate().setLocalNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
     }
 
     public void clickComeBackButton() {
@@ -195,6 +211,9 @@ public class SettingFragment extends Fragment {
                 break;
             case R.id.help_divide_screen:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_divide_screen));
+                break;
+            case R.id.help_enable_dark_theme:
+                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_enable_dark_theme));
                 break;
             case R.id.help_choose_cube:
                 args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_choose_cube));

@@ -23,6 +23,7 @@
     <string name="show_throw_amount">Show the throw amount</string>
     <string name="choice_of_cubes">Choice of cubes</string>
     <string name="divide_screen">Divide the screen into parts</string>
+    <string name="enable_dark_theme">Enable dark theme</string>
 
     // Тексты подсказок
     <string name="help_number_of_cubes">This number of dice will be used for the next roll.</string>
@@ -31,6 +32,7 @@
     <string name="help_show_throw_amount">Shows the total amount of cubes after the roll.</string>
     <string name="help_choose_cube">The selected cubes will be used for the next roll.</string>
     <string name="help_divide_screen">Divides the screen into four equal parts.</string>
+    <string name="help_enable_dark_theme">Activates the dark theme of the application.</string>
 
     // Тексты кнопок
     <string name="button_ok" translatable="false">OK</string>

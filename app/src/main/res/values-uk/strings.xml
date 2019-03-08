@@ -19,4 +19,6 @@
     <string name="help_show_throw_amount">Показує загальну суму кубиків після кидка.</string>
     <string name="divide_screen">Розділити екран на частини</string>
     <string name="help_divide_screen">Ділить екран на чотири рівні частини.</string>
+    <string name="enable_dark_theme">Включити темну тему</string>
+    <string name="help_enable_dark_theme">Активує темну тему програми.</string>
 </resources>

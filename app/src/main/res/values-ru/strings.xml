@@ -19,4 +19,6 @@
     <string name="help_show_throw_amount">Показывает общую сумму кубиков после броска.</string>
     <string name="divide_screen">Разделить экран на части</string>
     <string name="help_divide_screen">Делит экран на четыре равные части.</string>
+    <string name="enable_dark_theme">Включить темную тему</string>
+    <string name="help_enable_dark_theme">Активирует темную тему приложения.</string>
 </resources>
