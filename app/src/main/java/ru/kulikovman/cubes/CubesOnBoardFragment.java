@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,6 +124,12 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     }
 
     private void loadSettings() {
+        // Применение темы оформления
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            activity.getDelegate().setLocalNightMode(settings.isDarkTheme() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         // Количество кубиков и цвет
         numberOfCubes = settings.getNumberOfCubes();
         cubeType = CubeType.valueOf(settings.getCubeType());

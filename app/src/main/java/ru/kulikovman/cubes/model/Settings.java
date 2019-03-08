@@ -21,6 +21,7 @@ public class Settings {
     private boolean isRated;
 
     private boolean isDivideScreen;
+    private boolean isDarkTheme;
 
     public Settings() {
         id = 0;
@@ -32,6 +33,7 @@ public class Settings {
         numberOfThrow = 0;
         isRated = false;
         isDivideScreen = false;
+        isDarkTheme = false;
     }
 
     public int getNumberOfCubes() {
@@ -100,5 +102,13 @@ public class Settings {
 
     public void setDivideScreen(boolean divideScreen) {
         isDivideScreen = divideScreen;
+    }
+
+    public boolean isDarkTheme() {
+        return isDarkTheme;
+    }
+
+    public void setDarkTheme(boolean darkTheme) {
+        isDarkTheme = darkTheme;
     }
 }

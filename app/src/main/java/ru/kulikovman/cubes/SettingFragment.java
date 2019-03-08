@@ -79,6 +79,7 @@ public class SettingFragment extends Fragment {
         binding.delay.setProgress(settings.getDelayAfterThrow());
         binding.keepScreenOn.setChecked(settings.isKeepScreenOn());
         binding.showThrowAmount.setChecked(settings.isShownThrowAmount());
+        binding.enableDarkTheme.setChecked(settings.isDarkTheme());
         binding.divideScreen.setChecked(settings.isDivideScreen());
 
         // Отмечаем сохраненный кубик
@@ -160,10 +161,12 @@ public class SettingFragment extends Fragment {
                 SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
 
                 // Сохраняем состояние
-                //settings.setDivideScreen(isChecked);
+                settings.setDarkTheme(isChecked);
 
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.getDelegate().setLocalNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+                MainActivity activity = (MainActivity) getActivity();
+                if (activity != null) {
+                    activity.getDelegate().setLocalNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+                }
             }
         });
     }

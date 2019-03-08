@@ -22,6 +22,7 @@ public class App extends Application {
         database = Room.databaseBuilder(this, AppDatabase.class, "database")
                 .allowMainThreadQueries() // разрешает операции в основном потоке
                 .fallbackToDestructiveMigration() // обнуляет базу, если нет подходящей миграции
+                .addMigrations(AppDatabase.MIGRATION_4_5)
                 .build();
     }
 
