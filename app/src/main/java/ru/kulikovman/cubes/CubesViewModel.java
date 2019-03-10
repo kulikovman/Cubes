@@ -2,10 +2,7 @@ package ru.kulikovman.cubes;
 
 import android.arch.lifecycle.ViewModel;
 
-import java.util.List;
-
 import ru.kulikovman.cubes.model.Settings;
-import ru.kulikovman.cubes.model.ThrowResult;
 
 
 public class CubesViewModel extends ViewModel {

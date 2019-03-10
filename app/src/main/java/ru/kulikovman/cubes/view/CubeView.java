@@ -147,7 +147,6 @@ public class CubeView extends FrameLayout {
         CubesViewModel model = ViewModelProviders.of((MainActivity) context).get(CubesViewModel.class);
 
         String theme = model.getSettings().isDarkTheme() ? "dark" : "lite";
-        Log.d("myLog", "Theme: " + theme);
         String skinName = cubeType.name().toLowerCase();
         binding.cube.setImageResource(getDrawableIdByName(skinName + "_" + theme + "_" + String.valueOf(value)));
 

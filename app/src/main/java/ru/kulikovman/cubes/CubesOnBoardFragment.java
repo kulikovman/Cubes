@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +44,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private Context context;
 
     private CubesViewModel model;
-    //private DataRepository repository;
     public Settings settings;
     private Calculation calculation;
 
@@ -83,9 +81,6 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Получение вью модел
         model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
         settings = model.getSettings();
-
-        // Получение репозитория
-        //repository = model.getRepository();
 
         // Инициализация
         cubes = new ArrayList<>();

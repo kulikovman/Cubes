@@ -30,8 +30,6 @@ public class ShadowView  extends FrameLayout {
     public int marginStart;
     public int marginTop;
 
-    private boolean isDark;
-
     public ShadowView(@NonNull Context context) {
         super(context);
     }
@@ -112,7 +110,6 @@ public class ShadowView  extends FrameLayout {
         CubesViewModel model = ViewModelProviders.of((MainActivity) context).get(CubesViewModel.class);
 
         String theme = model.getSettings().isDarkTheme() ? "dark" : "lite";
-        Log.d("myLog", "Theme: " + theme);
         String skinName = cubeType.name().toLowerCase();
         binding.shadow.setImageResource(getDrawableIdByName(skinName + "_" + theme + "_0")); // 0 - тень
 
