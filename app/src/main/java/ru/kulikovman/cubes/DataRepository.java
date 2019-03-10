@@ -3,6 +3,7 @@ package ru.kulikovman.cubes;
 import java.util.List;
 
 import ru.kulikovman.cubes.database.AppDatabase;
+import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.model.ThrowResult;
 
 public class DataRepository {
@@ -25,6 +26,21 @@ public class DataRepository {
         }
 
         return instance;
+    }
+
+    public Settings getSettings() {
+        // Получение настроек
+        Settings settings = database.settingsDao().getById(0);
+        if (settings == null) {
+            settings = new Settings();
+            database.settingsDao().insert(settings);
+        }
+
+        return settings;
+    }
+
+    public void saveSettings(Settings settings) {
+        database.settingsDao().update(settings);
     }
 
     public void saveThrowResult(ThrowResult throwResult) {

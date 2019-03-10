@@ -1,15 +1,19 @@
 package ru.kulikovman.cubes.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import ru.kulikovman.cubes.CubesViewModel;
+import ru.kulikovman.cubes.MainActivity;
 import ru.kulikovman.cubes.R;
 import ru.kulikovman.cubes.data.CubeType;
 import ru.kulikovman.cubes.databinding.ViewShadowBinding;
@@ -25,6 +29,8 @@ public class ShadowView  extends FrameLayout {
     public int angle;
     public int marginStart;
     public int marginTop;
+
+    private boolean isDark;
 
     public ShadowView(@NonNull Context context) {
         super(context);
@@ -103,8 +109,12 @@ public class ShadowView  extends FrameLayout {
 
     private void drawShadow() {
         // Назначение тени в соответствии с цветом
+        CubesViewModel model = ViewModelProviders.of((MainActivity) context).get(CubesViewModel.class);
+
+        String theme = model.getSettings().isDarkTheme() ? "dark" : "lite";
+        Log.d("myLog", "Theme: " + theme);
         String skinName = cubeType.name().toLowerCase();
-        binding.shadow.setImageResource(getDrawableIdByName(skinName + "_shadow"));
+        binding.shadow.setImageResource(getDrawableIdByName(skinName + "_" + theme + "_0")); // 0 - тень
 
         // Обновление переменной в макете
         binding.setModel(this);

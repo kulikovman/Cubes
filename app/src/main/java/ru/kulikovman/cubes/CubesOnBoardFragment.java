@@ -45,7 +45,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     private Context context;
 
     private CubesViewModel model;
-    private DataRepository repository;
+    //private DataRepository repository;
     public Settings settings;
     private Calculation calculation;
 
@@ -85,7 +85,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         settings = model.getSettings();
 
         // Получение репозитория
-        repository = DataRepository.get();
+        //repository = model.getRepository();
 
         // Инициализация
         cubes = new ArrayList<>();
@@ -127,7 +127,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Применение темы оформления
         MainActivity activity = (MainActivity) getActivity();
         if (activity != null) {
-            activity.getDelegate().setLocalNightMode(settings.isDarkTheme() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+            activity.setDarkTheme(settings.isDarkTheme());
         }
 
         // Количество кубиков и цвет
@@ -174,8 +174,8 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Отключаем shakeDetector
         sensorManager.unregisterListener(shakeDetector);
 
-        // Сохранение настроек в базу
-        model.saveSettings(settings);
+        // Сохранение настроек
+        model.saveSettings();
     }
 
     @Override
@@ -205,7 +205,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
     public void openSetting() {
         SoundManager.get().playSound(SoundManager.TOP_BUTTON_CLICK_SOUND);
-        NavHostFragment.findNavController(this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment); // 14 - Здесь происходит ошибка!
+        NavHostFragment.findNavController(CubesOnBoardFragment.this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment); // 14 - Здесь происходит ошибка!
     }
 
     public void showLastThrowResult() {
@@ -214,7 +214,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
         // Получаем историю бросков
         throwResults.clear();
-        throwResults = repository.getThrowResultList();
+        throwResults = model.getRepository().getThrowResultList();
 
         if (throwResults.size() != 0) {
             // Отрисовываем последний бросок
@@ -226,7 +226,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
         // Получаем список последних бросков
         if (throwResultOnScreen == 0) {
             throwResults.clear();
-            throwResults = repository.getThrowResultList();
+            throwResults = model.getRepository().getThrowResultList();
         }
 
         // Номер предыдущего броска
@@ -371,7 +371,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
             throwResult.addCubeLite(cubeView.getCubeLite());
         }
 
-        repository.saveThrowResult(throwResult);
+        model.getRepository().saveThrowResult(throwResult);
 
         // Задержка после броска
         isReadyForThrow = false;

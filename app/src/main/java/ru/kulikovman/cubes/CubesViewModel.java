@@ -2,43 +2,37 @@ package ru.kulikovman.cubes;
 
 import android.arch.lifecycle.ViewModel;
 
-import ru.kulikovman.cubes.database.AppDatabase;
-import ru.kulikovman.cubes.database.dao.SettingsDao;
+import java.util.List;
+
 import ru.kulikovman.cubes.model.Settings;
+import ru.kulikovman.cubes.model.ThrowResult;
 
 
 public class CubesViewModel extends ViewModel {
 
-    private SettingsDao settingsDao;
-
+    private DataRepository repository;
     private Settings settings;
 
     public CubesViewModel() {
         super();
 
-        // Получение базы данных
-        AppDatabase db = App.getInstance().getDatabase();
-        settingsDao = db.settingsDao();
+        // Получение репозитория
+        repository = DataRepository.get();
     }
 
-    Settings getSettings() {
+    public DataRepository getRepository() {
+        return repository;
+    }
+
+    public Settings getSettings() {
         if (settings == null) {
-            // Получение настроек, если есть
-            if (settingsDao.getById(0) != null) {
-                settings = settingsDao.getById(0);
-            } else {
-                settings = new Settings();
-                settingsDao.insert(settings);
-            }
+            settings = repository.getSettings();
         }
 
         return settings;
     }
 
-    void saveSettings(Settings settings) {
-        settingsDao.update(settings);
+    void saveSettings() {
+        repository.saveSettings(settings);
     }
-
-
-
 }

@@ -62,8 +62,8 @@ public class SettingFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        // Сохранение настроек в базу
-        model.saveSettings(settings);
+        // Сохранение настроек
+        model.saveSettings();
     }
 
     private void initCubeList() {
@@ -165,7 +165,7 @@ public class SettingFragment extends Fragment {
 
                 MainActivity activity = (MainActivity) getActivity();
                 if (activity != null) {
-                    activity.getDelegate().setLocalNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+                    activity.setDarkTheme(settings.isDarkTheme());
                 }
             }
         });
