@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,8 +40,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
     private static final int FAILURE_LIMIT = 30; // Лимит неудачных бросков (с пересечением кубиков)
 
     private FragmentBoardBinding binding;
-    private Context context;
-
+    private MainActivity activity;
     private CubesViewModel model;
     public Settings settings;
     private Calculation calculation;
@@ -73,13 +71,13 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
+        this.activity = (MainActivity) context;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Получение вью модел
-        model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
+        model = ViewModelProviders.of(activity).get(CubesViewModel.class);
         settings = model.getSettings();
 
         // Инициализация
@@ -120,10 +118,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
 
     private void loadSettings() {
         // Применение темы оформления
-        MainActivity activity = (MainActivity) getActivity();
-        if (activity != null) {
-            activity.setDarkTheme(settings.isDarkTheme());
-        }
+        activity.changeTheme();
 
         // Количество кубиков и цвет
         numberOfCubes = settings.getNumberOfCubes();
@@ -135,9 +130,9 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
 
         // Засыпание экрана
         if (settings.isKeepScreenOn()) {
-            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } else {
-            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
@@ -145,7 +140,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         // Если диалог еще не показывался и было сделано достаточно бросков
         if (!settings.isRated() && settings.getNumberOfThrow() > LIMIT_OF_THROW) {
             // Показываем диалог с просьбой оценить приложение
-            DialogFragment rateDialog = new RateDialog();
+            RateDialog rateDialog = new RateDialog();
             rateDialog.setCancelable(false);
             rateDialog.show(this.getChildFragmentManager(), "rateDialog");
         }
@@ -181,7 +176,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
     }
 
     private void initShakeDetector() {
-        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager != null) {
             accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }
@@ -200,7 +195,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
 
     public void openSetting() {
         SoundManager.get().playSound(SoundManager.TOP_BUTTON_CLICK_SOUND);
-        NavHostFragment.findNavController(BoardFragment.this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment); // 14 - Здесь происходит ошибка!
+        NavHostFragment.findNavController(BoardFragment.this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment); // Здесь происходит ошибка!
     }
 
     public void showLastThrowResult() {
@@ -260,8 +255,8 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         // Размещаем кубики на доске + подсчет их суммы
         List<CubeLite> cubeLites = throwResults.get(rollResultNumber).getCubeLites();
         for (CubeLite cubeLite : cubeLites) {
-            binding.topBoard.addView(new CubeView(context, cubeLite));
-            binding.bottomBoard.addView(new ShadowView(context, cubeLite));
+            binding.topBoard.addView(new CubeView(activity, cubeLite));
+            binding.bottomBoard.addView(new ShadowView(activity, cubeLite));
             sumOfCubes += cubeLite.getValue();
         }
 
@@ -335,8 +330,8 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
             sumOfCubes += cube.getValue();
 
             // Создаем вью из кубика
-            CubeView cubeView = new CubeView(context, cube);
-            ShadowView shadowView = new ShadowView(context, cube);
+            CubeView cubeView = new CubeView(activity, cube);
+            ShadowView shadowView = new ShadowView(activity, cube);
 
             cubeViews.add(cubeView);
             shadowViews.add(shadowView);

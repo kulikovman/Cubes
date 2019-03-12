@@ -28,6 +28,8 @@ public class RateDialog extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Подключаем слушатель
         try {
             listener = (Listener) getParentFragment();
         } catch (ClassCastException e) {

@@ -1,11 +1,11 @@
 package ru.kulikovman.cubes;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
-import ru.kulikovman.cubes.dialog.MessageDialog;
 import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
@@ -27,7 +26,7 @@ import ru.kulikovman.cubes.view.CubeView;
 public class SettingFragment extends Fragment {
 
     private FragmentSettingBinding binding;
-
+    private MainActivity activity;
     private CubesViewModel model;
     private Settings settings;
 
@@ -41,17 +40,23 @@ public class SettingFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.activity = (MainActivity) context;
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Получение вью модел
-        model = ViewModelProviders.of(getActivity()).get(CubesViewModel.class);
+        model = ViewModelProviders.of(activity).get(CubesViewModel.class);
         settings = model.getSettings();
 
         // Подключение звука
         SoundManager.initialize();
 
         initCubeList();
-        initUI();
         restoreSettings();
+        initUI();
 
         // Обновление переменной в макете
         binding.setModel(this);
@@ -162,10 +167,8 @@ public class SettingFragment extends Fragment {
                 // Сохраняем состояние
                 settings.setDarkTheme(isChecked);
 
-                MainActivity activity = (MainActivity) getActivity();
-                if (activity != null) {
-                    activity.setDarkTheme(settings.isDarkTheme());
-                }
+                // Применение темной/светлой темы
+                activity.changeTheme();
             }
         });
     }
