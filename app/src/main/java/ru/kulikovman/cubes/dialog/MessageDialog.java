@@ -11,7 +11,7 @@ import android.support.v7.app.AlertDialog;
 import ru.kulikovman.cubes.R;
 
 
-public class HelpDialog extends DialogFragment {
+public class MessageDialog extends DialogFragment {
 
     public static final String KEY_MESSAGE = "message";
 

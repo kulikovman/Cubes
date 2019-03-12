@@ -25,14 +25,14 @@
     <string name="divide_screen">Divide the screen into parts</string>
     <string name="enable_dark_theme">Enable dark theme</string>
 
-    // Тексты подсказок
-    <string name="help_number_of_cubes">This number of dice will be used for the next roll.</string>
-    <string name="help_delay_after_roll">It helps to avoid accidental re-throwing and cheating, when re-throwing is given for random.</string>
-    <string name="help_keep_screen_on">Does not allow the device to go to sleep. Be careful, constantly on screen, quickly consumes battery power.</string>
-    <string name="help_show_throw_amount">Shows the total amount of cubes after the roll.</string>
-    <string name="help_choose_cube">The selected cubes will be used for the next roll.</string>
-    <string name="help_divide_screen">Divides the screen into four equal parts.</string>
-    <string name="help_enable_dark_theme">Activates the dark theme of the application.</string>
+    // Тексты подсказок для заголовков и переключателей
+    <string name="description_number_of_cubes">This number of dice will be used for the next roll.</string>
+    <string name="description_delay_after_roll">Helps to avoid accidental throw.</string>
+    <string name="description_keep_screen_on">Does not allow the device to go to sleep.</string>
+    <string name="description_show_throw_amount">Shows the total amount of cubes after the roll.</string>
+    <string name="description_choose_cube">The selected cubes will be used for the next roll.</string>
+    <string name="description_divide_screen">Divides the screen into four equal parts.</string>
+    <string name="description_enable_dark_theme">On modern devices, a dark theme saves battery power.</string>
 
     // Тексты кнопок
     <string name="button_ok" translatable="false">OK</string>

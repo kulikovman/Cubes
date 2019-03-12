@@ -5,9 +5,9 @@
     <string name="button_extended_version">Розширена версія</string>
     <string name="button_remind_later">Нагадати пізніше</string>
     <string name="button_rate">Оцінити</string>
-    <string name="help_choose_cube">Обраний вид кубиків буде використовуватися для наступного кидка.</string>
-    <string name="help_delay_after_roll">Допомагає уникнути випадкового повторного кидка і нечесної гри, коли повторний кидок видають за випадковий.</string>
-    <string name="help_number_of_cubes">Це кількість кубиків буде використано для наступного кидка.</string>
+    <string name="description_choose_cube">Обраний вид кубиків буде використовуватися для наступного кидка.</string>
+    <string name="description_delay_after_roll">Допомагає уникнути випадкового кидка.</string>
+    <string name="description_number_of_cubes">Це кількість кубиків буде використано для наступного кидка.</string>
     <string name="rate_message">Якщо вам сподобалося додаток, будь ласка оціните його в Google Play. Це сильно допоможе його подальшому розвитку.</string>
     <string name="choice_of_cubes">Вибір кубиків</string>
     <string name="delay_after_roll">Затримка після кидка</string>
@@ -15,10 +15,10 @@
     <string name="additional_options">Додаткові опції</string>
     <string name="show_throw_amount">Показувати суму кидка</string>
     <string name="button_already_rated">Уже оцінив</string>
-    <string name="help_keep_screen_on">Чи не дає пристрою піти в сплячий режим. Будьте уважні, постійно включений екран, швидко витрачає заряд акумулятора.</string>
-    <string name="help_show_throw_amount">Показує загальну суму кубиків після кидка.</string>
+    <string name="description_keep_screen_on">Чи не дає пристрою піти в сплячий режим.</string>
+    <string name="description_show_throw_amount">Показує загальну суму кубиків після кидка.</string>
     <string name="divide_screen">Розділити екран на частини</string>
-    <string name="help_divide_screen">Ділить екран на чотири рівні частини.</string>
+    <string name="description_divide_screen">Ділить екран на чотири рівні частини.</string>
     <string name="enable_dark_theme">Включити темну тему</string>
-    <string name="help_enable_dark_theme">Активує темну тему програми.</string>
+    <string name="description_enable_dark_theme">На сучасних пристроях, темна тема дозволяє економити заряд акумулятора.</string>
 </resources>

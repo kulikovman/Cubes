@@ -18,7 +18,7 @@ import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
-import ru.kulikovman.cubes.dialog.HelpDialog;
+import ru.kulikovman.cubes.dialog.MessageDialog;
 import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
@@ -191,39 +191,5 @@ public class SettingFragment extends Fragment {
 
         // Сохраняем выбранный цвет
         settings.setCubeType(cubeView.getCubeColor());
-    }
-
-    public void clickHelpButton(View view) {
-        Bundle args = new Bundle();
-        DialogFragment helpMessageDialog = new HelpDialog();
-
-        // Выбираем сообщение
-        switch (view.getId()) {
-            case R.id.help_number_of_cubes:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_number_of_cubes));
-                break;
-            case R.id.help_delay_after_throw:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_delay_after_roll));
-                break;
-            case R.id.help_keep_screen_on:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_keep_screen_on));
-                break;
-            case R.id.help_show_throw_amount:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_show_throw_amount));
-                break;
-            case R.id.help_divide_screen:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_divide_screen));
-                break;
-            case R.id.help_enable_dark_theme:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_enable_dark_theme));
-                break;
-            case R.id.help_choose_cube:
-                args.putString(HelpDialog.KEY_MESSAGE, getString(R.string.help_choose_cube));
-                break;
-        }
-
-        // Показываем диалог
-        helpMessageDialog.setArguments(args);
-        helpMessageDialog.show(getActivity().getSupportFragmentManager(), "helpMessageDialog");
     }
 }

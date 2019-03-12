@@ -44,22 +44,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:orientation="horizontal">
+                <TextView
+                    style="@style/SettingTitles"
+                    android:text="@string/number_of_cubes"/>
 
-                    <ImageView
-                        android:id="@+id/help_number_of_cubes"
-                        style="@style/ButtonHelp"
-                        android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
-
-                    <TextView
-                        style="@style/SettingTitles"
-                        android:text="@string/number_of_cubes"/>
-
-                </LinearLayout>
+                <TextView
+                    style="@style/TitleDescriptionStyle"
+                    android:text="@string/description_number_of_cubes"/>
 
                 <SeekBar
                     android:id="@+id/cubes"
@@ -132,22 +123,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:orientation="horizontal">
+                <TextView
+                    style="@style/SettingTitles"
+                    android:text="@string/delay_after_roll"/>
 
-                    <ImageView
-                        android:id="@+id/help_delay_after_throw"
-                        style="@style/ButtonHelp"
-                        android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
-
-                    <TextView
-                        style="@style/SettingTitles"
-                        android:text="@string/delay_after_roll"/>
-
-                </LinearLayout>
+                <TextView
+                    style="@style/TitleDescriptionStyle"
+                    android:text="@string/description_delay_after_roll"/>
 
                 <SeekBar
                     android:id="@+id/delay"
@@ -207,117 +189,19 @@
                 style="@style/DividerLine"/>
 
 
-            <!-- Держать экран включенным -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/help_keep_screen_on"
-                    style="@style/ButtonHelp"
-                    android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
-
-                <Switch
-                    android:id="@+id/keep_screen_on"
-                    style="@style/SwitchBase"
-                    android:text="@string/keep_screen_on"/>
-
-            </LinearLayout>
-
-
-            <ImageView
-                style="@style/DividerSpace"/>
-
-
-            <!-- Показываь сумму броска -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/help_show_throw_amount"
-                    style="@style/ButtonHelp"
-                    android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
-
-                <Switch
-                    android:id="@+id/show_throw_amount"
-                    style="@style/SwitchBase"
-                    android:text="@string/show_throw_amount"/>
-
-            </LinearLayout>
-
-            <ImageView
-                style="@style/DividerSpace"/>
-
-
-            <!-- Деление экрана на части -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/help_divide_screen"
-                    style="@style/ButtonHelp"
-                    android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
-
-                <Switch
-                    android:id="@+id/divide_screen"
-                    style="@style/SwitchBase"
-                    android:text="@string/divide_screen"/>
-
-            </LinearLayout>
-
-            <ImageView
-                style="@style/DividerSpace"/>
-
-
-            <!-- Включить темную тему -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/help_enable_dark_theme"
-                    style="@style/ButtonHelp"
-                    android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
-
-                <Switch
-                    android:id="@+id/enable_dark_theme"
-                    style="@style/SwitchBase"
-                    android:text="@string/enable_dark_theme"/>
-
-            </LinearLayout>
-
-            <ImageView
-                style="@style/DividerLine"/>
-
-
             <!-- Выбор кубиков -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
+                <TextView
+                    style="@style/SettingTitles"
+                    android:text="@string/choice_of_cubes"/>
 
-                    <ImageView
-                        android:id="@+id/help_choose_cube"
-                        style="@style/ButtonHelp"
-                        android:onClick="@{(view) -> model.clickHelpButton(view)}"/>
-
-                    <TextView
-                        style="@style/SettingTitles"
-                        android:text="@string/choice_of_cubes"/>
-
-                </LinearLayout>
+                <TextView
+                    style="@style/TitleDescriptionStyle"
+                    android:text="@string/description_choose_cube"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -357,14 +241,91 @@
 
             </LinearLayout>
 
+            <ImageView
+                style="@style/DividerLine"/>
 
-            <!-- Кнопка -->
-            <Button
-                android:id="@+id/button_extended_version"
-                style="@style/ButtonNext"
-                android:layout_marginBottom="30dp"
-                android:text="@string/button_extended_version"
-                android:visibility="gone"/>
+
+            <!-- Держать экран включенным -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/keep_screen_on"
+                    style="@style/SwitchBase"
+                    android:text="@string/keep_screen_on"/>
+
+                <TextView
+                    style="@style/SwitchDescriptionStyle"
+                    android:text="@string/description_keep_screen_on"/>
+
+            </LinearLayout>
+
+            <ImageView
+                style="@style/DividerSpace"/>
+
+
+            <!-- Включить темную тему -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/enable_dark_theme"
+                    style="@style/SwitchBase"
+                    android:text="@string/enable_dark_theme"/>
+
+                <TextView
+                    style="@style/SwitchDescriptionStyle"
+                    android:text="@string/description_enable_dark_theme"/>
+
+            </LinearLayout>
+
+            <ImageView
+                style="@style/DividerSpace"/>
+
+
+            <!-- Показываь сумму броска -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/show_throw_amount"
+                    style="@style/SwitchBase"
+                    android:text="@string/show_throw_amount"/>
+
+            </LinearLayout>
+
+            <ImageView
+                style="@style/DividerSpace"/>
+
+
+            <!-- Деление экрана на части -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/divide_screen"
+                    style="@style/SwitchBase"
+                    android:text="@string/divide_screen"/>
+
+                <TextView
+                    style="@style/SwitchDescriptionStyle"
+                    android:text="@string/description_divide_screen"/>
+
+            </LinearLayout>
+
+
+            <!-- Пустое пространство в конце экрана -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
 
         </LinearLayout>
 

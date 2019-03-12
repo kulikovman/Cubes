@@ -69,12 +69,30 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    // Информация о сумме кубиков и времени
+    // Переключатели
     <style name="SwitchBase">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    // Подсказки переключателей
+    <style name="SwitchDescriptionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">55dp</item>
+    </style>
+
+    // Подсказки заголовков
+    <style name="TitleDescriptionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:layout_marginBottom">18dp</item>
+        <item name="android:layout_marginStart">5dp</item>
     </style>
 
 </resources>

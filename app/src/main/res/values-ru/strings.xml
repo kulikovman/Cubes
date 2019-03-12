@@ -5,9 +5,9 @@
     <string name="delay_after_roll">Задержка после броска</string>
     <string name="additional_options">Дополнительные опции</string>
     <string name="choice_of_cubes">Выбор кубиков</string>
-    <string name="help_number_of_cubes">Это количество кубиков будет использовано для следующего броска.</string>
-    <string name="help_delay_after_roll">Помогает избежать случайного повторного броска и нечестной игры, когда повторный бросок выдают за случайный.</string>
-    <string name="help_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска.</string>
+    <string name="description_number_of_cubes">Это количество кубиков будет использовано для следующего броска.</string>
+    <string name="description_delay_after_roll">Помогает избежать случайного броска.</string>
+    <string name="description_choose_cube">Выбранный вид кубиков будет использоваться для следующего броска.</string>
     <string name="button_rate">Оценить</string>
     <string name="button_remind_later">Напомнить позже</string>
     <string name="button_extended_version">Расширенная версия</string>
@@ -15,10 +15,10 @@
     <string name="show_throw_amount">Показывать сумму броска</string>
     <string name="button_already_rated">Уже оценил</string>
     <string name="keep_screen_on">Держать экран включенным</string>
-    <string name="help_keep_screen_on">Не дает устройству уйти в спящий режим. Будьте внимательны, постоянно включенный экран, быстро расходует заряд аккумулятора.</string>
-    <string name="help_show_throw_amount">Показывает общую сумму кубиков после броска.</string>
+    <string name="description_keep_screen_on">Не дает устройству уйти в спящий режим.</string>
+    <string name="description_show_throw_amount">Показывает общую сумму кубиков после броска.</string>
     <string name="divide_screen">Разделить экран на части</string>
-    <string name="help_divide_screen">Делит экран на четыре равные части.</string>
+    <string name="description_divide_screen">Делит экран на четыре равные части.</string>
     <string name="enable_dark_theme">Включить темную тему</string>
-    <string name="help_enable_dark_theme">Активирует темную тему приложения.</string>
+    <string name="description_enable_dark_theme">На современных устройствах, темная тема позволяет экономить заряд аккумулятора.</string>
 </resources>

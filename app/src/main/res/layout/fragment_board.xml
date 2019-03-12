@@ -73,7 +73,7 @@
                         android:layout_width="2dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
-                        android:background="@color/gray_2"
+                        android:background="@color/gray_3"
                         android:visibility="@{model.settings.divideScreen ? View.VISIBLE : View.GONE}"
                         tools:visibility="visible"/>
 
@@ -89,7 +89,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/gray_2"
+                android:background="@color/gray_3"
                 android:visibility="@{model.settings.divideScreen ? View.VISIBLE : View.GONE}"
                 tools:visibility="visible"/>
 
