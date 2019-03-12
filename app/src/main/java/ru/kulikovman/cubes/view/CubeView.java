@@ -138,10 +138,6 @@ public class CubeView extends FrameLayout {
         drawCube();
     }
 
-    public CubeLite getCubeLite() {
-        return new CubeLite(cubeType.name(), value, angle, marginStart, marginTop);
-    }
-
     private void drawCube() {
         // Назначение картинок в соответствии с цветом
         CubesViewModel model = ViewModelProviders.of((MainActivity) context).get(CubesViewModel.class);

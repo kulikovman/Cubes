@@ -22,9 +22,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.navigation.fragment.NavHostFragment;
-import ru.kulikovman.cubes.data.CubeType;
 import ru.kulikovman.cubes.databinding.FragmentBoardBinding;
 import ru.kulikovman.cubes.dialog.RateDialog;
+import ru.kulikovman.cubes.helper.CubeGenerator;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
@@ -37,7 +37,6 @@ import ru.kulikovman.cubes.view.ShadowView;
 public class BoardFragment extends Fragment implements RateDialog.Listener {
 
     private static final int LIMIT_OF_THROW = 500; // Теоретически 500 бросков, это две-три игры
-    private static final int FAILURE_LIMIT = 30; // Лимит неудачных бросков (с пересечением кубиков)
 
     private FragmentBoardBinding binding;
     private MainActivity activity;
@@ -45,21 +44,15 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
     public Settings settings;
     private Calculation calculation;
 
-    private CubeType cubeType;
-    private int numberOfCubes;
-    private int sumOfCubes;
-    private boolean isReadyForThrow;
-    private int delayAfterThrow;
-    private int throwResultOnScreen;
-
-    private List<Cube> cubes;
-    private List<CubeView> cubeViews;
-    private List<ShadowView> shadowViews;
-    private List<ThrowResult> throwResults;
-
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private ShakeDetector shakeDetector;
+
+    private List<ThrowResult> throwResults;
+    private boolean isReadyForThrow;
+    private int delayAfterThrow;
+    private int resultOnScreen;
+    public int sumOfCubes;
 
     @Nullable
     @Override
@@ -81,9 +74,6 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         settings = model.getSettings();
 
         // Инициализация
-        cubes = new ArrayList<>();
-        cubeViews = new ArrayList<>();
-        shadowViews = new ArrayList<>();
         throwResults = new ArrayList<>();
         isReadyForThrow = true;
 
@@ -120,10 +110,6 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         // Применение темы оформления
         activity.changeTheme();
 
-        // Количество кубиков и цвет
-        numberOfCubes = settings.getNumberOfCubes();
-        cubeType = CubeType.valueOf(settings.getCubeType());
-
         // Задержка после броска
         int[] delays = getResources().getIntArray(R.array.delay_after_throw);
         delayAfterThrow = delays[settings.getDelayAfterThrow()];
@@ -139,7 +125,6 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
     private void showRateDialog() {
         // Если диалог еще не показывался и было сделано достаточно бросков
         if (!settings.isRated() && settings.getNumberOfThrow() > LIMIT_OF_THROW) {
-            // Показываем диалог с просьбой оценить приложение
             RateDialog rateDialog = new RateDialog();
             rateDialog.setCancelable(false);
             rateDialog.show(this.getChildFragmentManager(), "rateDialog");
@@ -200,7 +185,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
 
     public void showLastThrowResult() {
         // Номер текущего броска
-        throwResultOnScreen = 0;
+        resultOnScreen = 0;
 
         // Получаем историю бросков
         throwResults.clear();
@@ -208,22 +193,22 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
 
         if (throwResults.size() != 0) {
             // Отрисовываем последний бросок
-            drawCubeFromHistory(throwResultOnScreen);
+            drawCubeFromHistory(resultOnScreen);
         }
     }
 
     public void showPreviousThrowResult() {
         // Получаем список последних бросков
-        if (throwResultOnScreen == 0) {
+        if (resultOnScreen == 0) {
             throwResults.clear();
             throwResults = model.getRepository().getThrowResultList();
         }
 
         // Номер предыдущего броска
-        throwResultOnScreen++;
+        resultOnScreen++;
 
         // Если в истории есть броски и текущий бросок не последний в списке
-        if (throwResults.size() != 0 && throwResultOnScreen < throwResults.size()) {
+        if (throwResults.size() != 0 && resultOnScreen < throwResults.size()) {
             // Показываем иконку перемотки
             binding.rewindIcon.setVisibility(View.VISIBLE);
 
@@ -242,7 +227,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
                     clearBoards();
 
                     // Отрисовываем кубики предыдущего броска
-                    drawCubeFromHistory(throwResultOnScreen);
+                    drawCubeFromHistory(resultOnScreen);
                 }
             }, 600); // 600 - длительность звука перемотки
         }
@@ -279,77 +264,28 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         }
 
         // Подготовка к броску
-        throwResultOnScreen = 0;
-        sumOfCubes = 0;
         clearBoards();
-        clearLists();
+        resultOnScreen = 0;
+        sumOfCubes = 0;
 
         // Генирируем новые кубики
-        while (cubes.size() < numberOfCubes) {
-            // Создаем кубик
-            Cube cube = new Cube(calculation, cubeType);
+        List<Cube> cubes = CubeGenerator.getCubes(calculation, settings);
 
-            if (cubes.isEmpty()) {
-                addCubeToList(cube);
-            } else {
-                // Проверяем пересечение с другими кубиками
-                int count = 0;
-                boolean intersection = true;
-                while (intersection) {
-                    for (Cube c : cubes) {
-                        if (cube.intersection(c)) {
-                            intersection = true;
-                            break;
-                        } else {
-                            intersection = false;
-                        }
-                    }
-
-                    // Если есть пересечение
-                    if (intersection) {
-                        count++;
-                        Log.d("myLog", "cube intersection: " + count);
-                        if (count < FAILURE_LIMIT) { // Защита от неудачного разброса кубиков
-                            // Двигаем кубик
-                            cube.moveCube();
-                        } else {
-                            Log.d("myLog", "Сработала защита от неудачного разброса!");
-                            Log.d("myLog", "---------------------------");
-                            // Очищаем списки и начинаем заново
-                            clearLists();
-                            addCubeToList(cube);
-                            intersection = false;
-                        }
-                    } else {
-                        addCubeToList(cube);
-                    }
-                }
-            }
-
-            // Учитываем значение кубика
+        for (Cube cube : cubes) {
+            // Считаем сумму кубиков
             sumOfCubes += cube.getValue();
 
-            // Создаем вью из кубика
+            // Создаем вью кубика + тень
             CubeView cubeView = new CubeView(activity, cube);
             ShadowView shadowView = new ShadowView(activity, cube);
 
-            cubeViews.add(cubeView);
-            shadowViews.add(shadowView);
-        }
-
-        // Размещаем созданные вью на экране
-        for (CubeView cubeView : cubeViews) {
+            // Размещаем вью на экране
             binding.topBoard.addView(cubeView);
-        }
-
-        for (ShadowView shadowView : shadowViews) {
             binding.bottomBoard.addView(shadowView);
         }
 
-        // Воспроизводим звук броска
+        // Воспроизводим звук броска + отображение суммы
         SoundManager.get().playSound(SoundManager.THROW_CUBES_SOUND);
-
-        // Отображение суммы броска
         showThrowAmount();
 
         // Засчитываем бросок
@@ -357,8 +293,8 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
 
         // Сохраняем результаты текущего броска в базу
         ThrowResult throwResult = new ThrowResult();
-        for (CubeView cubeView : cubeViews) {
-            throwResult.addCubeLite(cubeView.getCubeLite());
+        for (Cube cube : cubes) {
+            throwResult.addCubeLite(cube.getCubeLite());
         }
 
         model.getRepository().saveThrowResult(throwResult);
@@ -375,20 +311,8 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         Log.d("myLog", "---------------------------");
     }
 
-    private void addCubeToList(Cube cube) {
-        // Добавляем кубик в список и пишем лог
-        cubes.add(cube);
-        Log.d("myLog", "Add cube " + cubes.size() + ": " + cube.getX() + ", " + cube.getY());
-    }
-
     private void clearBoards() {
         binding.topBoard.removeAllViews();
         binding.bottomBoard.removeAllViews();
-    }
-
-    private void clearLists() {
-        shadowViews.clear();
-        cubeViews.clear();
-        cubes.clear();
     }
 }

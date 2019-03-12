@@ -185,6 +185,10 @@ public class Cube {
         return false;
     }
 
+    public CubeLite getCubeLite() {
+        return new CubeLite(cubeType.name(), value, degrees, marginStart, marginTop);
+    }
+
     public int getX() {
         return x;
     }
