@@ -24,7 +24,7 @@ import java.util.TimerTask;
 
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.data.CubeType;
-import ru.kulikovman.cubes.databinding.FragmentCubesOnBoardBinding;
+import ru.kulikovman.cubes.databinding.FragmentBoardBinding;
 import ru.kulikovman.cubes.dialog.RateDialog;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
@@ -35,12 +35,12 @@ import ru.kulikovman.cubes.view.CubeView;
 import ru.kulikovman.cubes.view.ShadowView;
 
 
-public class CubesOnBoardFragment extends Fragment implements RateDialog.Listener {
+public class BoardFragment extends Fragment implements RateDialog.Listener {
 
     private static final int LIMIT_OF_THROW = 700; // Теоретически 700 бросков, это две-три игры
     private static final int FAILURE_LIMIT = 30; // Лимит неудачных бросков (с пересечением кубиков)
 
-    private FragmentCubesOnBoardBinding binding;
+    private FragmentBoardBinding binding;
     private Context context;
 
     private CubesViewModel model;
@@ -66,7 +66,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cubes_on_board, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_board, container, false);
         return binding.getRoot();
     }
 
@@ -200,7 +200,7 @@ public class CubesOnBoardFragment extends Fragment implements RateDialog.Listene
 
     public void openSetting() {
         SoundManager.get().playSound(SoundManager.TOP_BUTTON_CLICK_SOUND);
-        NavHostFragment.findNavController(CubesOnBoardFragment.this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment); // 14 - Здесь происходит ошибка!
+        NavHostFragment.findNavController(BoardFragment.this).navigate(R.id.action_cubesOnBoardFragment_to_settingFragment); // 14 - Здесь происходит ошибка!
     }
 
     public void showLastThrowResult() {

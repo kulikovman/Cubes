@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/cubesOnBoardFragment"
-        android:name="ru.kulikovman.cubes.CubesOnBoardFragment"
+        android:name="ru.kulikovman.cubes.BoardFragment"
         android:label="fragment_cubes_on_board"
-        tools:layout="@layout/fragment_cubes_on_board">
+        tools:layout="@layout/fragment_board">
         <action
             android:id="@+id/action_cubesOnBoardFragment_to_settingFragment"
             app:destination="@id/settingFragment"
