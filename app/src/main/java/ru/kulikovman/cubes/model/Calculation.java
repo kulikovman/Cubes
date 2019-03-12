@@ -18,7 +18,7 @@ public class Calculation {
     private int cubeOuterRadius;
 
     private Area rollArea;
-    private Area settingTotalArea;
+    private Area totalArea;
 
     public Calculation(Resources resources) {
         random = new Random();
@@ -32,7 +32,7 @@ public class Calculation {
         int settingSize = resources.getDimensionPixelSize(R.dimen.button_title_size);
         int settingMarginTop = resources.getDimensionPixelSize(R.dimen.button_title_marginTop);
         int totalMarginTop = resources.getDimensionPixelSize(R.dimen.throw_amount_marginTop);
-        settingTotalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, settingMarginTop, totalMarginTop + settingSize);
+        totalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, settingMarginTop, totalMarginTop + settingSize);
 
         // Размер/полуразмер кубика
         int cubeSize = resources.getDimensionPixelSize(R.dimen.cube_size);
@@ -87,7 +87,7 @@ public class Calculation {
         return rollArea;
     }
 
-    public Area getSettingTotalArea() {
-        return settingTotalArea;
+    public Area getTotalArea() {
+        return totalArea;
     }
 }

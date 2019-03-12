@@ -32,8 +32,8 @@ public class CubeGenerator {
                 int count = 0;
                 boolean intersection = true;
                 while (intersection) {
-                    for (Cube c : cubes) {
-                        if (cube.intersection(c)) {
+                    for (Cube currentCube : cubes) {
+                        if (Intersection.withCube(calculation, cube, currentCube)) {
                             intersection = true;
                             break;
                         } else {

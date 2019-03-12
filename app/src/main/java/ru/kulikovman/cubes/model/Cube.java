@@ -3,6 +3,7 @@ package ru.kulikovman.cubes.model;
 import java.util.Random;
 
 import ru.kulikovman.cubes.data.CubeType;
+import ru.kulikovman.cubes.helper.Intersection;
 
 public class Cube {
 
@@ -15,14 +16,12 @@ public class Cube {
     private int marginStart;
     private int marginTop;
 
-    // Центр кубика
-    private int x, y;
-
     // Угол поворота
     private int degrees;
     private double radians;
 
-    // Вершины прямоугольника
+    // Точки прямоугольника
+    private int x, y; // центр
     private int x1, y1; // верхняя левая
     private int x2, y2; // верхняя правая
     private int x3, y3; // нижняя правая
@@ -58,7 +57,7 @@ public class Cube {
         do {
             x = minX + random.nextInt(maxX - minX);
             y = minY + random.nextInt(maxY - minY);
-        } while (areaIntersection(calculation.getSettingTotalArea()));
+        } while (Intersection.withTotalArea(this));
 
         // Расчет отступов
         calculateMargins();
@@ -118,75 +117,12 @@ public class Cube {
         return (int) (y + (py - y) * Math.cos(radians) + (px - x) * Math.sin(radians));
     }
 
-    private boolean areaIntersection(Area area) {
-        int radius = calculation.getCubeOuterRadius();
-        return x > area.getMinX() - radius && x < area.getMaxX() + radius && y > area.getMinY() - radius && y < area.getMaxY() + radius;
-    }
-
-    public boolean intersection(Cube cube) {
-        // Расчет растояния между центрами кубиков
-        int distance = (int) Math.sqrt((Math.pow(Math.abs(x - cube.getX()), 2) + Math.pow(Math.abs(y - cube.getY()), 2)));
-
-        // ЭТАП 1: проверка по внешним радиусам
-        // Если больше суммы внешних радиусов, то все ок
-        if (distance > calculation.getCubeOuterRadius() + cube.getCubeOuterRadius()) {
-            return false;
-        }
-
-        // ЭТАП 2: проверка по внутренним радиусам
-        // Если меньше суммы радиусов, то кубики 100% пересекаются
-        if (distance < calculation.getCubeInnerRadius() + cube.getCubeInnerRadius()) {
-            return true;
-        }
-
-        // ЭТАП 3: проверка пересечения вершин и кубиков
-        // Если точки одного кубика находятся за пределами второго и наоборот, то все ок
-        if (!pointInsideCube(cube.getX1(), cube.getY1()) && !pointInsideCube(cube.getX2(), cube.getY2()) &&
-                !pointInsideCube(cube.getX3(), cube.getY3()) && !pointInsideCube(cube.getX4(), cube.getY4()) &&
-                !cube.pointInsideCube(x1, y1) && !cube.pointInsideCube(x2, y2) &&
-                !cube.pointInsideCube(x3, y3) && !cube.pointInsideCube(x4, y4)) {
-            return false;
-        }
-
-        // Одна или несколько точек пересекаются со вторым кубиком
-        return true;
-    }
-
-    public boolean pointInsideCube(int px, int py) {
-        // Делим куб на два треугольника и проверяем принадлежность
-        // точек одного куба к треугольникам другого
-
-        // Обозначение вершин куба
-        // a - b
-        // | \ |
-        // d - c
-
-        // Треугольник ABC
-        int ab = (x1 - px) * (y2 - y1) - (x2 - x1) * (y1 - py);
-        int bc = (x2 - px) * (y3 - y2) - (x3 - x2) * (y2 - py);
-        int ca = (x3 - px) * (y1 - y3) - (x1 - x3) * (y3 - py);
-
-        if ((ab >= 0 && bc >= 0 && ca >= 0) || (ab <= 0 && bc <= 0 && ca <= 0)) {
-            //Log.d("myLog", "Точка внутри ABC!");
-            return true;
-        }
-
-        // Треугольник ACD
-        int ac = (x1 - px) * (y3 - y1) - (x3 - x1) * (y1 - py);
-        int cd = (x3 - px) * (y4 - y3) - (x4 - x3) * (y3 - py);
-        int da = (x4 - px) * (y1 - y4) - (x1 - x4) * (y4 - py);
-
-        if ((ac >= 0 && cd >= 0 && da >= 0) || (ac <= 0 && cd <= 0 && da <= 0)) {
-            //Log.d("myLog", "Точка внутри ACD!");
-            return true;
-        }
-
-        // Точка находится вне куба
-        return false;
-    }
-
     public CubeLite getCubeLite() {
         return new CubeLite(cubeType.name(), value, degrees, marginStart, marginTop);
+    }
+
+    public Calculation getCalculation() {
+        return calculation;
     }
 
     public int getX() {
@@ -247,13 +183,5 @@ public class Cube {
 
     public int getY4() {
         return y4;
-    }
-
-    public int getCubeInnerRadius() {
-        return calculation.getCubeInnerRadius();
-    }
-
-    public int getCubeOuterRadius() {
-        return calculation.getCubeOuterRadius();
     }
 }
