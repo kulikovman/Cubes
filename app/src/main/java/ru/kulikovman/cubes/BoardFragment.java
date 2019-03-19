@@ -36,7 +36,7 @@ import ru.kulikovman.cubes.view.ShadowView;
 
 public class BoardFragment extends Fragment implements RateDialog.Listener {
 
-    private static final int LIMIT_OF_THROW = 500; // Теоретически 500 бросков, это две-три игры
+    private static final int LIMIT_OF_THROW = 100; // После 100 бросков будут запрошен отзыв
 
     private FragmentBoardBinding binding;
     private MainActivity activity;
