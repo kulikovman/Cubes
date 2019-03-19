@@ -30,10 +30,9 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="@dimen/title_container_height">
 
                     <!-- Кнопка настроек -->
                     <ImageButton
@@ -51,15 +50,14 @@
                         android:id="@+id/throw_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/button_title_marginTop"
+                        android:layout_gravity="center_horizontal|bottom"
                         android:textColor="@color/gray_5"
                         android:textSize="20sp"
                         android:visibility="@{model.settings.shownThrowAmount ? View.VISIBLE : View.GONE}"
                         tools:text="28"
                         tools:visibility="visible"/>
 
-                </LinearLayout>
+                </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"

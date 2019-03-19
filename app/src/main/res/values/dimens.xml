@@ -6,8 +6,8 @@
     <dimen name="cube_view_size">116dp</dimen>
 
     <!-- Прочее -->
+    <dimen name="title_container_height">95dp</dimen>
     <dimen name="button_title_size">30dp</dimen>
     <dimen name="button_title_marginTop">20dp</dimen>
-    <dimen name="throw_amount_marginTop">65dp</dimen>
 
 </resources>

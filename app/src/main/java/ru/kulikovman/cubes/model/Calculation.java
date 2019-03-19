@@ -20,6 +20,8 @@ public class Calculation {
     private Area rollArea;
     private Area totalArea;
 
+
+
     public Calculation(Resources resources) {
         random = new Random();
 
@@ -31,8 +33,8 @@ public class Calculation {
         // Область элементов интерфейса
         int settingSize = resources.getDimensionPixelSize(R.dimen.button_title_size);
         int settingMarginTop = resources.getDimensionPixelSize(R.dimen.button_title_marginTop);
-        int totalMarginTop = resources.getDimensionPixelSize(R.dimen.throw_amount_marginTop);
-        totalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, settingMarginTop, totalMarginTop + settingSize);
+        int titleContainerHeight = resources.getDimensionPixelSize(R.dimen.title_container_height);
+        totalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, 0, titleContainerHeight + settingMarginTop);
 
         // Размер/полуразмер кубика
         int cubeSize = resources.getDimensionPixelSize(R.dimen.cube_size);

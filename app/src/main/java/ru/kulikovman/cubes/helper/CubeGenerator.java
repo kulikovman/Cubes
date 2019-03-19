@@ -15,6 +15,10 @@ public class CubeGenerator {
     private static final int FAILURE_LIMIT = 30; // Лимит неудачных бросков (с пересечением кубиков)
 
     public static List<Cube> getCubes(Calculation calculation, Settings settings) {
+        return settings.isNotRolling() ? getRowCubes(calculation, settings) : getRollCubes(calculation, settings);
+    }
+
+    public static List<Cube> getRollCubes(Calculation calculation, Settings settings) {
         CubeType cubeType = CubeType.valueOf(settings.getCubeType());
         int numberOfCubes = settings.getNumberOfCubes();
 
@@ -70,5 +74,11 @@ public class CubeGenerator {
         }
 
         return cubes;
+    }
+
+    public static List<Cube> getRowCubes(Calculation calculation, Settings settings) {
+
+
+        return null;
     }
 }
