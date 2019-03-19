@@ -13,7 +13,7 @@ import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.model.ThrowResult;
 
 
-@Database(entities = {Settings.class, ThrowResult.class}, version = 5)
+@Database(entities = {Settings.class, ThrowResult.class}, version = 6)
 @TypeConverters(CubeLiteConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -35,6 +35,14 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE settings ADD COLUMN isDarkTheme INTEGER NOT NULL DEFAULT 0");
+        }
+    };
+
+    // Добавление поля с информацией о разбросе кубиков по полю
+    public static final Migration MIGRATION_5_6 = new Migration(5, 6) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE settings ADD COLUMN isNotRolling INTEGER NOT NULL DEFAULT 0");
         }
     };
 }

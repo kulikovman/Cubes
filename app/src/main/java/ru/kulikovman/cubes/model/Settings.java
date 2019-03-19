@@ -22,7 +22,7 @@ public class Settings {
 
     private boolean isDivideScreen;
     private boolean isDarkTheme;
-    private boolean isRolling;
+    private boolean isNotRolling;
 
     public Settings() {
         id = 0;
@@ -35,7 +35,7 @@ public class Settings {
         isRated = false;
         isDivideScreen = false;
         isDarkTheme = false;
-        isRolling = true;
+        isNotRolling = false;
     }
 
     public int getNumberOfCubes() {
@@ -114,11 +114,11 @@ public class Settings {
         isDarkTheme = darkTheme;
     }
 
-    public boolean isRolling() {
-        return isRolling;
+    public boolean isNotRolling() {
+        return isNotRolling;
     }
 
-    public void setRolling(boolean rolling) {
-        isRolling = rolling;
+    public void setNotRolling(boolean notRolling) {
+        isNotRolling = notRolling;
     }
 }
