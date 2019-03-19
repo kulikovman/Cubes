@@ -245,6 +245,27 @@
                 style="@style/DividerLine"/>
 
 
+            <!-- Не катать кубики по полю -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/do_not_roll_cubes"
+                    style="@style/SwitchBase"
+                    android:text="@string/do_not_roll_cubes"/>
+
+                <TextView
+                    style="@style/SwitchDescriptionStyle"
+                    android:text="@string/description_do_not_roll_cubes"/>
+
+            </LinearLayout>
+
+            <ImageView
+                style="@style/DividerSpace"/>
+
+
             <!-- Держать экран включенным -->
             <LinearLayout
                 android:layout_width="match_parent"

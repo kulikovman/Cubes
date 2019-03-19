@@ -21,4 +21,6 @@
     <string name="description_divide_screen">Делит экран на четыре равные части.</string>
     <string name="enable_dark_theme">Включить темную тему</string>
     <string name="description_enable_dark_theme">На современных устройствах, темная тема позволяет экономить заряд аккумулятора.</string>
+    <string name="do_not_roll_cubes">Не разбрасывать кубики</string>
+    <string name="description_do_not_roll_cubes">Кубики будут падать рядами в центре экрана.</string>
 </resources>

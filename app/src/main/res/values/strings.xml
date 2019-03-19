@@ -24,6 +24,7 @@
     <string name="choice_of_cubes">Choice of cubes</string>
     <string name="divide_screen">Divide the screen into parts</string>
     <string name="enable_dark_theme">Enable dark theme</string>
+    <string name="do_not_roll_cubes">Don\'t roll cubes</string>
 
     // Тексты подсказок для заголовков и переключателей
     <string name="description_number_of_cubes">This number of dice will be used for the next roll.</string>
@@ -33,6 +34,7 @@
     <string name="description_choose_cube">The selected cubes will be used for the next roll.</string>
     <string name="description_divide_screen">Divides the screen into four equal parts.</string>
     <string name="description_enable_dark_theme">On modern devices, a dark theme saves battery power.</string>
+    <string name="description_do_not_roll_cubes">The cubes will fall in rows in the center of the screen.</string>
 
     // Тексты кнопок
     <string name="button_ok" translatable="false">OK</string>

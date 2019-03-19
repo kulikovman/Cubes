@@ -81,6 +81,7 @@ public class SettingFragment extends Fragment {
         // Востанавливаем состояние элементов на экране
         binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
         binding.delay.setProgress(settings.getDelayAfterThrow());
+        binding.doNotRollCubes.setChecked(!settings.isRolling());
         binding.keepScreenOn.setChecked(settings.isKeepScreenOn());
         binding.showThrowAmount.setChecked(settings.isShownThrowAmount());
         binding.enableDarkTheme.setChecked(settings.isDarkTheme());
@@ -118,6 +119,18 @@ public class SettingFragment extends Fragment {
 
                 // Сохраняем состояние
                 settings.setDelayAfterThrow(progress);
+            }
+        });
+
+        // Переключатель разбрасывания кубиков
+        binding.keepScreenOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SWITCH_CLICK_SOUND);
+
+                // Сохраняем состояние
+                settings.setRolling(!isChecked);
             }
         });
 
