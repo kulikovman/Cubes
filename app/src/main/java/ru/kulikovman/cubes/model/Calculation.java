@@ -20,7 +20,9 @@ public class Calculation {
     private Area rollArea;
     private Area totalArea;
 
-
+    private int maxCubesPerWidth;
+    private int maxCubesPerHeight;
+    private int maxCubes;
 
     public Calculation(Resources resources) {
         random = new Random();
@@ -52,6 +54,11 @@ public class Calculation {
         // Формирование области расположения кубика
         rollArea = new Area(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
 
+        // Максимальное количество упорядоченных кубиков
+        maxCubesPerWidth = screenWidth / cubeViewSize;
+        maxCubesPerHeight = screenHeight / cubeViewSize;
+        maxCubes = maxCubesPerWidth * maxCubesPerHeight;
+
         // Контроль полученных размеров
         Log.d("myLog", "----------------Screen----------------");
         Log.d("myLog", "screenWidth = " + screenWidth);
@@ -62,6 +69,9 @@ public class Calculation {
         Log.d("myLog", "----------------Radius----------------");
         Log.d("myLog", "cubeRadius = " + cubeInnerRadius + " | " + cubeOuterRadius);
         Log.d("myLog", "shadowRadius = " + shadowRadius);
+        Log.d("myLog", "------------Number of cubes-----------");
+        Log.d("myLog", "maxCubesPerWidthHeight = " + maxCubesPerWidth + " | " + maxCubesPerHeight);
+        Log.d("myLog", "maxCubes = " + maxCubes);
         Log.d("myLog", "--------------------------------------");
     }
 
