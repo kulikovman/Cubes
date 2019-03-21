@@ -102,8 +102,6 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         // Предварительные расчеты всего, что можно подсчитать заранее
         calculation = new Calculation(getResources());
 
-        settings.setNumberOfCubes(11);
-
         // Обновление переменной в макете
         binding.setModel(this);
     }

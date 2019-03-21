@@ -6,8 +6,8 @@ android {
         applicationId "ru.kulikovman.dices"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 20
-        versionName 'v4.6'
+        versionCode 21
+        versionName 'Ginger (r7)'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // Хранения истории версий базы данных
