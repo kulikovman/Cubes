@@ -123,7 +123,7 @@ public class SettingFragment extends Fragment {
         });
 
         // Переключатель разбрасывания кубиков
-        binding.keepScreenOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.doNotRollCubes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Воспроизводим соответствующий звук

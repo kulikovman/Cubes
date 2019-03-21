@@ -34,14 +34,14 @@ public class Intersection {
 
         // ЭТАП 3: проверка пересечения вершин и кубиков
         // Первый кубик и точки второго кубика
-        if (isPointInsideCube(c1, c2.getX1(), c2.getY1()) || isPointInsideCube(c1, c2.getX2(), c2.getY2()) ||
-                isPointInsideCube(c1, c2.getX3(), c2.getY3()) || isPointInsideCube(c1, c2.getX4(), c2.getY4())) {
+        if (isPointInsideCube(c1, c2.getA().x, c2.getA().y) || isPointInsideCube(c1, c2.getB().x, c2.getB().y) ||
+                isPointInsideCube(c1, c2.getC().x, c2.getC().y) || isPointInsideCube(c1, c2.getD().x, c2.getD().y)) {
             return true;
         }
 
         // Второй кубик и точки первого кубика
-        if (isPointInsideCube(c2, c1.getX1(), c1.getY1()) || isPointInsideCube(c2, c1.getX2(), c1.getY2()) ||
-                isPointInsideCube(c2, c1.getX3(), c1.getY3()) || isPointInsideCube(c2, c1.getX4(), c1.getY4())) {
+        if (isPointInsideCube(c2, c1.getA().x, c1.getA().y) || isPointInsideCube(c2, c1.getB().x, c1.getB().y) ||
+                isPointInsideCube(c2, c1.getC().x, c1.getC().y) || isPointInsideCube(c2, c1.getD().x, c1.getD().y)) {
             return true;
         }
 
@@ -49,7 +49,7 @@ public class Intersection {
         return false;
     }
 
-    private static boolean isPointInsideCube(Cube cube, int px, int py) {
+    private static boolean isPointInsideCube(Cube cube, int pX, int pY) {
         // Делим куб на два треугольника и проверяем принадлежность
         // точек одного куба к треугольникам другого
 
@@ -58,20 +58,20 @@ public class Intersection {
         // | \ |
         // d - c
 
-        int x1 = cube.getX1();
-        int x2 = cube.getX2();
-        int x3 = cube.getX3();
-        int x4 = cube.getX4();
+        int ax = cube.getA().x;
+        int bx = cube.getB().x;
+        int cx = cube.getC().x;
+        int dx = cube.getD().x;
 
-        int y1 = cube.getY1();
-        int y2 = cube.getY2();
-        int y3 = cube.getY3();
-        int y4 = cube.getY4();
+        int ay = cube.getA().y;
+        int by = cube.getB().y;
+        int cy = cube.getC().y;
+        int dy = cube.getD().y;
 
         // Треугольник ABC
-        int ab = (x1 - px) * (y2 - y1) - (x2 - x1) * (y1 - py);
-        int bc = (x2 - px) * (y3 - y2) - (x3 - x2) * (y2 - py);
-        int ca = (x3 - px) * (y1 - y3) - (x1 - x3) * (y3 - py);
+        int ab = (ax - pX) * (by - ay) - (bx - ax) * (ay - pY);
+        int bc = (bx - pX) * (cy - by) - (cx - bx) * (by - pY);
+        int ca = (cx - pX) * (ay - cy) - (ax - cx) * (cy - pY);
 
         if ((ab >= 0 && bc >= 0 && ca >= 0) || (ab <= 0 && bc <= 0 && ca <= 0)) {
             //Log.d("myLog", "Точка внутри ABC!");
@@ -79,9 +79,9 @@ public class Intersection {
         }
 
         // Треугольник ACD
-        int ac = (x1 - px) * (y3 - y1) - (x3 - x1) * (y1 - py);
-        int cd = (x3 - px) * (y4 - y3) - (x4 - x3) * (y3 - py);
-        int da = (x4 - px) * (y1 - y4) - (x1 - x4) * (y4 - py);
+        int ac = (ax - pX) * (cy - ay) - (cx - ax) * (ay - pY);
+        int cd = (cx - pX) * (dy - cy) - (dx - cx) * (cy - pY);
+        int da = (dx - pX) * (ay - dy) - (ax - dx) * (dy - pY);
 
         if ((ac >= 0 && cd >= 0 && da >= 0) || (ac <= 0 && cd <= 0 && da <= 0)) {
             //Log.d("myLog", "Точка внутри ACD!");

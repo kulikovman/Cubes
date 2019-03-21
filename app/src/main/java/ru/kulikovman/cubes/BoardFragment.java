@@ -269,7 +269,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         sumOfCubes = 0;
 
         // Генирируем новые кубики
-        List<Cube> cubes = CubeGenerator.getCubes(calculation, settings);
+        List<Cube> cubes = CubeGenerator.get().getCubes(calculation, settings);
 
         for (Cube cube : cubes) {
             // Считаем сумму кубиков

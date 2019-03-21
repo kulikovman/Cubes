@@ -12,6 +12,9 @@ public class Calculation {
 
     private final Random random;
 
+    private final int screenWidth;
+    private final int screenHeight;
+
     private int cubeHalfSize;
     private int cubeViewHalfSize;
     private int cubeInnerRadius;
@@ -29,8 +32,8 @@ public class Calculation {
 
         // Размеры экрана
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
+        screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
 
         // Область элементов интерфейса
         int settingSize = resources.getDimensionPixelSize(R.dimen.button_title_size);
@@ -75,6 +78,14 @@ public class Calculation {
         Log.d("myLog", "--------------------------------------");
     }
 
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
     public Random getRandom() {
         return random;
     }
@@ -101,5 +112,17 @@ public class Calculation {
 
     public Area getTotalArea() {
         return totalArea;
+    }
+
+    public int getMaxCubesPerWidth() {
+        return maxCubesPerWidth;
+    }
+
+    public int getMaxCubesPerHeight() {
+        return maxCubesPerHeight;
+    }
+
+    public int getMaxCubes() {
+        return maxCubes;
     }
 }

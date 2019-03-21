@@ -1,5 +1,7 @@
 package ru.kulikovman.cubes.model;
 
+import android.graphics.Point;
+
 import java.util.Random;
 
 import ru.kulikovman.cubes.data.CubeType;
@@ -21,12 +23,30 @@ public class Cube {
     private double radians;
 
     // Точки прямоугольника
-    private int x, y; // центр
-    private int x1, y1; // верхняя левая
-    private int x2, y2; // верхняя правая
-    private int x3, y3; // нижняя правая
-    private int x4, y4; // нижняя левая
+    private Point center = new Point(); // центр
+    private Point a = new Point(); // верхняя левая
+    private Point b = new Point(); // верхняя правая
+    private Point c = new Point(); // нижняя правая
+    private Point d = new Point(); // нижняя левая
 
+    // Создание кубика с указание координат
+    public Cube(Calculation calculation, CubeType cubeType, Point center) {
+        this.calculation = calculation;
+        this.random = calculation.getRandom();
+        this.cubeType = cubeType;
+        this.center = center;
+
+        // Количество точек
+        value = 1 + random.nextInt(cubeType.getNumberOfSides()); // от 1 до numberOfSides
+
+        // Угол поворота в градусах и радианах
+        degrees = 0;
+
+        // Расчет отступов
+        calculateMargins();
+    }
+
+    // Создание кубика с генерацией случайных координат
     public Cube(Calculation calculation, CubeType cubeType) {
         this.calculation = calculation;
         this.random = calculation.getRandom();
@@ -55,66 +75,66 @@ public class Cube {
 
         // Координаты кубика
         do {
-            x = minX + random.nextInt(maxX - minX);
-            y = minY + random.nextInt(maxY - minY);
+            center.x = minX + random.nextInt(maxX - minX);
+            center.y = minY + random.nextInt(maxY - minY);
         } while (Intersection.withTotalArea(this));
 
         // Расчет отступов
         calculateMargins();
 
-        // Расет положения вершин после поворота
+        // Расчет положения вершин после поворота
         calculatePointLocations();
     }
 
     private void calculateMargins() {
-        marginStart = x - calculation.getCubeViewHalfSize();
-        marginTop = y - calculation.getCubeViewHalfSize();
+        marginStart = center.x - calculation.getCubeViewHalfSize();
+        marginTop = center.y - calculation.getCubeViewHalfSize();
     }
 
     private void calculatePointLocations() {
         // Макс./мин. координаты вершин
-        int minX = x - calculation.getCubeHalfSize();
-        int maxX = x + calculation.getCubeHalfSize();
-        int minY = y - calculation.getCubeHalfSize();
-        int maxY = y + calculation.getCubeHalfSize();
+        int minX = center.x - calculation.getCubeHalfSize();
+        int maxX = center.x + calculation.getCubeHalfSize();
+        int minY = center.y - calculation.getCubeHalfSize();
+        int maxY = center.y + calculation.getCubeHalfSize();
 
         // Положение вершин до поворота
-        x1 = minX;
-        y1 = minY;
-        x2 = maxX;
-        y2 = minY;
-        x3 = maxX;
-        y3 = maxY;
-        x4 = minX;
-        y4 = maxY;
+        a.x = minX;
+        a.y = minY;
+        b.x = maxX;
+        b.y = minY;
+        c.x = maxX;
+        c.y = maxY;
+        d.x = minX;
+        d.y = maxY;
 
         // Расчет положения вершин после поворота
-        int tx1 = getXRotation(x1, y1);
-        int ty1 = getYRotation(x1, y1);
-        int tx2 = getXRotation(x2, y2);
-        int ty2 = getYRotation(x2, y2);
-        int tx3 = getXRotation(x3, y3);
-        int ty3 = getYRotation(x3, y3);
-        int tx4 = getXRotation(x4, y4);
-        int ty4 = getYRotation(x4, y4);
+        int tx1 = getXRotation(a.x, a.y);
+        int ty1 = getYRotation(a.x, a.y);
+        int tx2 = getXRotation(b.x, b.y);
+        int ty2 = getYRotation(b.x, b.y);
+        int tx3 = getXRotation(c.x, c.y);
+        int ty3 = getYRotation(c.x, c.y);
+        int tx4 = getXRotation(d.x, d.y);
+        int ty4 = getYRotation(d.x, d.y);
 
         // Сохраняем новые координаты
-        x1 = tx1;
-        y1 = ty1;
-        x2 = tx2;
-        y2 = ty2;
-        x3 = tx3;
-        y3 = ty3;
-        x4 = tx4;
-        y4 = ty4;
+        a.x = tx1;
+        a.y = ty1;
+        b.x = tx2;
+        b.y = ty2;
+        c.x = tx3;
+        c.y = ty3;
+        d.x = tx4;
+        d.y = ty4;
     }
 
     private int getXRotation(int px, int py) {
-        return (int) (x + (px - x) * Math.cos(radians) - (py - y) * Math.sin(radians));
+        return (int) (center.x + (px - center.x) * Math.cos(radians) - (py - center.y) * Math.sin(radians));
     }
 
     private int getYRotation(int px, int py) {
-        return (int) (y + (py - y) * Math.cos(radians) + (px - x) * Math.sin(radians));
+        return (int) (center.y + (py - center.y) * Math.cos(radians) + (px - center.x) * Math.sin(radians));
     }
 
     public CubeLite getCubeLite() {
@@ -126,11 +146,11 @@ public class Cube {
     }
 
     public int getX() {
-        return x;
+        return center.x;
     }
 
     public int getY() {
-        return y;
+        return center.y;
     }
 
     public CubeType getCubeType() {
@@ -153,35 +173,19 @@ public class Cube {
         return degrees;
     }
 
-    public int getX1() {
-        return x1;
+    public Point getA() {
+        return a;
     }
 
-    public int getY1() {
-        return y1;
+    public Point getB() {
+        return b;
     }
 
-    public int getX2() {
-        return x2;
+    public Point getC() {
+        return c;
     }
 
-    public int getY2() {
-        return y2;
-    }
-
-    public int getX3() {
-        return x3;
-    }
-
-    public int getY3() {
-        return y3;
-    }
-
-    public int getX4() {
-        return x4;
-    }
-
-    public int getY4() {
-        return y4;
+    public Point getD() {
+        return d;
     }
 }
