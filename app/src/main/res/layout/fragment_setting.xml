@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/button_title_marginTop"
+                android:layout_margin="@dimen/margin_20"
                 android:background="@color/transparent"
                 android:onClick="@{() -> model.clickComeBackButton()}"
                 android:src="@drawable/ic_arrow_back_gray"/>

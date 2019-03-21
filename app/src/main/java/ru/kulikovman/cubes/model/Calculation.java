@@ -14,6 +14,7 @@ public class Calculation {
 
     private final int screenWidth;
     private final int screenHeight;
+    private int titleHeight;
 
     private int cubeHalfSize;
     private int cubeViewHalfSize;
@@ -26,6 +27,7 @@ public class Calculation {
     private int maxCubesPerWidth;
     private int maxCubesPerHeight;
     private int maxCubes;
+    private int spaceBetweenCentersOfCubes;
 
     public Calculation(Resources resources) {
         random = new Random();
@@ -37,9 +39,9 @@ public class Calculation {
 
         // Область элементов интерфейса
         int settingSize = resources.getDimensionPixelSize(R.dimen.button_title_size);
-        int settingMarginTop = resources.getDimensionPixelSize(R.dimen.button_title_marginTop);
-        int titleContainerHeight = resources.getDimensionPixelSize(R.dimen.title_container_height);
-        totalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, 0, titleContainerHeight + settingMarginTop);
+        int marginTop = resources.getDimensionPixelSize(R.dimen.margin_20);
+        titleHeight = resources.getDimensionPixelSize(R.dimen.title_container_height);
+        totalArea = new Area(screenWidth / 2 - settingSize / 2, screenWidth / 2 + settingSize / 2, 0, titleHeight + marginTop);
 
         // Размер/полуразмер кубика
         int cubeSize = resources.getDimensionPixelSize(R.dimen.cube_size);
@@ -59,8 +61,11 @@ public class Calculation {
 
         // Максимальное количество упорядоченных кубиков
         maxCubesPerWidth = screenWidth / cubeViewSize;
-        maxCubesPerHeight = screenHeight / cubeViewSize;
+        maxCubesPerHeight = (screenHeight - titleHeight * 2) / cubeViewSize;
         maxCubes = maxCubesPerWidth * maxCubesPerHeight;
+
+        // Расстояние между центрами кубиков
+        spaceBetweenCentersOfCubes = cubeSize + cubeSize / 3;
 
         // Контроль полученных размеров
         Log.d("myLog", "----------------Screen----------------");
@@ -84,6 +89,10 @@ public class Calculation {
 
     public int getScreenHeight() {
         return screenHeight;
+    }
+
+    public int getTitleHeight() {
+        return titleHeight;
     }
 
     public Random getRandom() {
@@ -124,5 +133,9 @@ public class Calculation {
 
     public int getMaxCubes() {
         return maxCubes;
+    }
+
+    public int getSpaceBetweenCentersOfCubes() {
+        return spaceBetweenCentersOfCubes;
     }
 }

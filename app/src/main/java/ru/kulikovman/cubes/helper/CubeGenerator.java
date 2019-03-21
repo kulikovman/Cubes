@@ -133,7 +133,7 @@ public class CubeGenerator {
             // 1 / 2 = 0 + (1) = 1
 
             // Получаем Y последнего ряда и размер кубика
-            int space = calculation.getCubeHalfSize() * 2 + calculation.getCubeHalfSize();
+            int space = calculation.getSpaceBetweenCentersOfCubes();
             int y = points.size() != 0 ? points.get(points.size() - 1).get(0).y + space : 0;
 
             // Создаем линию точек и добавляем в общий список
@@ -153,8 +153,9 @@ public class CubeGenerator {
         // Вычисляем отступы для центрирования массива точек
         int width = points.get(0).get(points.get(0).size() - 1).x;
         int height = points.get(points.size() - 1).get(0).y;
+        int title = calculation.getTitleHeight();
         int offsetX = (calculation.getScreenWidth() - width) / 2;
-        int offsetY = (calculation.getScreenHeight() - height) / 2;
+        int offsetY = title + (calculation.getScreenHeight() - title * 2 - height) / 2;
 
         // Центрируем массив точек
         for (List<Point> line : points) {
