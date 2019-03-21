@@ -59,13 +59,14 @@ public class Calculation {
         // Формирование области расположения кубика
         rollArea = new Area(shadowRadius, screenWidth - shadowRadius, shadowRadius, screenHeight - shadowRadius);
 
+        // Расстояние между центрами кубиков (при разбросе рядами)
+        spaceBetweenCentersOfCubes = cubeSize + cubeSize / 3;
+
         // Максимальное количество упорядоченных кубиков
-        maxCubesPerWidth = screenWidth / cubeViewSize;
-        maxCubesPerHeight = (screenHeight - titleHeight * 2) / cubeViewSize;
+        maxCubesPerWidth = (screenWidth - cubeViewSize) / spaceBetweenCentersOfCubes + 1;
+        maxCubesPerHeight = (screenHeight - cubeViewSize - titleHeight * 2) / spaceBetweenCentersOfCubes + 1;
         maxCubes = maxCubesPerWidth * maxCubesPerHeight;
 
-        // Расстояние между центрами кубиков
-        spaceBetweenCentersOfCubes = cubeSize + cubeSize / 3;
 
         // Контроль полученных размеров
         Log.d("myLog", "----------------Screen----------------");
@@ -78,7 +79,7 @@ public class Calculation {
         Log.d("myLog", "cubeRadius = " + cubeInnerRadius + " | " + cubeOuterRadius);
         Log.d("myLog", "shadowRadius = " + shadowRadius);
         Log.d("myLog", "------------Number of cubes-----------");
-        Log.d("myLog", "maxCubesPerWidthHeight = " + maxCubesPerWidth + " | " + maxCubesPerHeight);
+        Log.d("myLog", "maxCubesPer = Width | Height = " + maxCubesPerWidth + " | " + maxCubesPerHeight);
         Log.d("myLog", "maxCubes = " + maxCubes);
         Log.d("myLog", "--------------------------------------");
     }
