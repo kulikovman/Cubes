@@ -52,62 +52,31 @@
                     style="@style/TitleDescriptionStyle"
                     android:text="@string/description_number_of_cubes"/>
 
-                <SeekBar
-                    android:id="@+id/cubes"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:max="5"
-                    android:progress="3"/>
-
                 <LinearLayout
-                    android:layout_width="260dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <SeekBar
+                        android:id="@+id/cubes"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/one_cube"/>
+                        android:layout_marginTop="2dp"
+                        android:max="11"
+                        android:progress="3"/>
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/number_of_cubes"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/two_cubes"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/three_cubes"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/four_cubes"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/five_cubes"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/six_cubes"/>
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        tools:text="12"
+                        android:textSize="22sp"/>
 
                 </LinearLayout>
 
@@ -133,6 +102,7 @@
 
                 <SeekBar
                     android:id="@+id/delay"
+                    android:layout_marginTop="18dp"
                     style="@style/Widget.AppCompat.SeekBar.Discrete"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"

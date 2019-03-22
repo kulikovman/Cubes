@@ -79,6 +79,7 @@ public class SettingFragment extends Fragment {
 
     private void restoreSettings() {
         // Востанавливаем состояние элементов на экране
+        binding.numberOfCubes.setText(String.valueOf(settings.getNumberOfCubes()));
         binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
         binding.delay.setProgress(settings.getDelayAfterThrow());
         binding.doNotRollCubes.setChecked(settings.isNotRolling());
@@ -99,6 +100,18 @@ public class SettingFragment extends Fragment {
 
     private void initUI() {
         // Слушатель выбора количества кубиков
+        /*binding.cubes.setOnSeekBarChangeListener(new SweetOnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // Воспроизводим соответствующий звук
+                SoundManager.get().playSound(SoundManager.SEEKBAR_CLICK_SOUND);
+
+                // Сохраняем состояние
+                settings.setNumberOfCubes(progress + 1);
+            }
+        });*/
+
+        // Слушатель выбора количества кубиков
         binding.cubes.setOnSeekBarChangeListener(new SweetOnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -106,6 +119,7 @@ public class SettingFragment extends Fragment {
                 SoundManager.get().playSound(SoundManager.SEEKBAR_CLICK_SOUND);
 
                 // Сохраняем состояние
+                binding.numberOfCubes.setText(String.valueOf(progress + 1));
                 settings.setNumberOfCubes(progress + 1);
             }
         });
