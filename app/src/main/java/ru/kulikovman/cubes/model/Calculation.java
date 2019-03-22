@@ -16,21 +16,20 @@ public class Calculation {
 
     private final int screenWidth;
     private final int screenHeight;
-    private int titleHeight;
+    private final int titleHeight;
 
-    private int cubeHalfSize;
-    private int cubeViewHalfSize;
-    private int cubeInnerRadius;
-    private int cubeOuterRadius;
+    private final int cubeHalfSize;
+    private final int cubeViewHalfSize;
+    private final int cubeInnerRadius;
+    private final int cubeOuterRadius;
 
-    private Area rollArea;
-    private Area totalArea;
+    private final Area rollArea;
+    private final Area totalArea;
 
-    private int spaceBetweenCentersOfCubes;
-    private int maxCubesPerWidth;
-    private int maxCubesPerHeight;
-    private int maxOrderedCubes;
-    private int maxRolledCubes;
+    private final int spaceBetweenCentersOfCubes;
+    private final int maxCubesPerHeight;
+    private final int maxOrderedCubes;
+    private final int maxRolledCubes;
 
     public Calculation(Resources resources) {
         random = new Random();
@@ -66,7 +65,7 @@ public class Calculation {
         spaceBetweenCentersOfCubes = cubeSize + cubeSize / 3;
 
         // Максимальное количество упорядоченных кубиков
-        maxCubesPerWidth = (screenWidth - cubeViewSize) / spaceBetweenCentersOfCubes + 1;
+        int maxCubesPerWidth = (screenWidth - cubeViewSize) / spaceBetweenCentersOfCubes + 1;
         maxCubesPerHeight = (screenHeight - cubeViewSize - titleHeight * 2) / spaceBetweenCentersOfCubes + 1;
         maxOrderedCubes = maxCubesPerWidth * maxCubesPerHeight;
 
@@ -134,10 +133,6 @@ public class Calculation {
 
     public Area getTotalArea() {
         return totalArea;
-    }
-
-    public int getMaxCubesPerWidth() {
-        return maxCubesPerWidth;
     }
 
     public int getMaxCubesPerHeight() {
