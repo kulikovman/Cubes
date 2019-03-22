@@ -45,6 +45,7 @@
 
     // Прочие тексты
     <string name="app_name">Cubes</string>
+    <string name="label_number_of_cubes" translatable="false">%d / %d</string>
     <string name="rate_message">If you like the app, please rate it in Google Play. This will greatly help its further development.</string>
 
 

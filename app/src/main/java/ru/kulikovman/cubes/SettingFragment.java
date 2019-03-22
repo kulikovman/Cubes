@@ -33,6 +33,7 @@ public class SettingFragment extends Fragment {
     private Calculation calculation;
 
     private List<CubeView> cubeViews;
+    private int maxCubes;
 
     @Nullable
     @Override
@@ -85,8 +86,6 @@ public class SettingFragment extends Fragment {
         updateNumberOfCubes();
 
         // Востанавливаем состояние элементов на экране
-        //binding.numberOfCubes.setText(String.valueOf(settings.getNumberOfCubes()));
-        //binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
         binding.delay.setProgress(settings.getDelayAfterThrow());
         binding.doNotRollCubes.setChecked(settings.isNotRolling());
         binding.keepScreenOn.setChecked(settings.isKeepScreenOn());
@@ -113,7 +112,8 @@ public class SettingFragment extends Fragment {
                 SoundManager.get().playSound(SoundManager.SEEKBAR_CLICK_SOUND);
 
                 // Сохраняем состояние
-                binding.numberOfCubes.setText(String.valueOf(progress + 1));
+                String numberOfCubes = getString(R.string.label_number_of_cubes, progress + 1, maxCubes);
+                binding.numberOfCubes.setText(numberOfCubes);
                 settings.setNumberOfCubes(progress + 1);
             }
         });
@@ -199,7 +199,7 @@ public class SettingFragment extends Fragment {
 
     private void updateNumberOfCubes() {
         // Максимальное количество кубиков в зависимости от режима разброса
-        int maxCubes = settings.isNotRolling() ? calculation.getMaxOrderedCubes() : calculation.getMaxRolledCubes();
+        maxCubes = settings.isNotRolling() ? calculation.getMaxOrderedCubes() : calculation.getMaxRolledCubes();
 
         // Устанавливаем максимум
         binding.cubes.setMax(maxCubes - 1);
@@ -211,7 +211,8 @@ public class SettingFragment extends Fragment {
 
         // Устанавливаем текущий прогресс
         binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
-        binding.numberOfCubes.setText(String.valueOf(settings.getNumberOfCubes()));
+        String numberOfCubes = getString(R.string.label_number_of_cubes, settings.getNumberOfCubes(), maxCubes);
+        binding.numberOfCubes.setText(numberOfCubes);
     }
 
     public void clickComeBackButton() {

@@ -85,11 +85,8 @@ public class Calculation {
         Log.d("myLog", "----------------Radius----------------");
         Log.d("myLog", "cubeRadius = " + cubeInnerRadius + " | " + cubeOuterRadius);
         Log.d("myLog", "shadowRadius = " + shadowRadius);
-        Log.d("myLog", "-----------------Areas----------------");
-        Log.d("myLog", "pureScreenArea = " + pureScreenArea);
-        Log.d("myLog", "cubeViewArea = " + cubeViewArea);
         Log.d("myLog", "------------Number of cubes-----------");
-        Log.d("myLog", "maxCubesPerWidthHeight = " + maxCubesPerWidth + " | " + maxCubesPerHeight);
+        Log.d("myLog", "maxCubesPerWidth = " + maxCubesPerWidth + " | " + maxCubesPerHeight);
         Log.d("myLog", "maxOrderedCubes = " + maxOrderedCubes);
         Log.d("myLog", "maxRolledCubes = " + maxRolledCubes);
         Log.d("myLog", "--------------------------------------");

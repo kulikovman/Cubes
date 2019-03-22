@@ -100,9 +100,6 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         // Показ диалога с оценкой
         showRateDialog();
 
-        // Предварительные расчеты всего, что можно подсчитать заранее
-        //calculation = new Calculation(getResources());
-
         // Обновление переменной в макете
         binding.setModel(this);
     }
