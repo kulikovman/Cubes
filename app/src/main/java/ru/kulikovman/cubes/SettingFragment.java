@@ -19,6 +19,7 @@ import java.util.List;
 import androidx.navigation.fragment.NavHostFragment;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
 import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
+import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.view.CubeView;
 
@@ -29,6 +30,7 @@ public class SettingFragment extends Fragment {
     private MainActivity activity;
     private CubesViewModel model;
     private Settings settings;
+    private Calculation calculation;
 
     private List<CubeView> cubeViews;
 
@@ -50,6 +52,7 @@ public class SettingFragment extends Fragment {
         // Получение вью модел
         model = ViewModelProviders.of(activity).get(CubesViewModel.class);
         settings = model.getSettings();
+        calculation = model.getCalculation();
 
         // Подключение звука
         SoundManager.initialize();
@@ -78,9 +81,12 @@ public class SettingFragment extends Fragment {
     }
 
     private void restoreSettings() {
+        // Обновление шкалы выбора количества кубиков
+        updateNumberOfCubes();
+
         // Востанавливаем состояние элементов на экране
-        binding.numberOfCubes.setText(String.valueOf(settings.getNumberOfCubes()));
-        binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
+        //binding.numberOfCubes.setText(String.valueOf(settings.getNumberOfCubes()));
+        //binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
         binding.delay.setProgress(settings.getDelayAfterThrow());
         binding.doNotRollCubes.setChecked(settings.isNotRolling());
         binding.keepScreenOn.setChecked(settings.isKeepScreenOn());
@@ -99,19 +105,7 @@ public class SettingFragment extends Fragment {
     }
 
     private void initUI() {
-        // Слушатель выбора количества кубиков
-        /*binding.cubes.setOnSeekBarChangeListener(new SweetOnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // Воспроизводим соответствующий звук
-                SoundManager.get().playSound(SoundManager.SEEKBAR_CLICK_SOUND);
-
-                // Сохраняем состояние
-                settings.setNumberOfCubes(progress + 1);
-            }
-        });*/
-
-        // Слушатель выбора количества кубиков
+        // Выбор количества кубиков
         binding.cubes.setOnSeekBarChangeListener(new SweetOnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -124,7 +118,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        // Слушатель выбора задержки
+        // Выбор задержки
         binding.delay.setOnSeekBarChangeListener(new SweetOnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -136,7 +130,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        // Переключатель разбрасывания кубиков
+        // Отключение разбрасывания кубиков
         binding.doNotRollCubes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -145,10 +139,13 @@ public class SettingFragment extends Fragment {
 
                 // Сохраняем состояние
                 settings.setNotRolling(isChecked);
+
+                // Обновление шкалы выбора количества кубиков
+                updateNumberOfCubes();
             }
         });
 
-        // Переключатель блокировки спящего режима
+        // Блокировка спящего режима
         binding.keepScreenOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -160,7 +157,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        // Переключатель отображения суммы броска
+        // Отображения суммы броска
         binding.showThrowAmount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -172,7 +169,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        // Переключатель деления экрана
+        // Деления экрана
         binding.divideScreen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -184,7 +181,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        // Переключатель темной темы
+        // Темная тема
         binding.enableDarkTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -198,6 +195,23 @@ public class SettingFragment extends Fragment {
                 activity.changeTheme();
             }
         });
+    }
+
+    private void updateNumberOfCubes() {
+        // Максимальное количество кубиков в зависимости от режима разброса
+        int maxCubes = settings.isNotRolling() ? calculation.getMaxOrderedCubes() : calculation.getMaxRolledCubes();
+
+        // Устанавливаем максимум
+        binding.cubes.setMax(maxCubes - 1);
+
+        // Если сохраненное начение больше максимального
+        if (settings.getNumberOfCubes() > maxCubes - 1) {
+            settings.setNumberOfCubes(maxCubes);
+        }
+
+        // Устанавливаем текущий прогресс
+        binding.cubes.setProgress(settings.getNumberOfCubes() - 1);
+        binding.numberOfCubes.setText(String.valueOf(settings.getNumberOfCubes()));
     }
 
     public void clickComeBackButton() {

@@ -72,6 +72,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         // Получение вью модел
         model = ViewModelProviders.of(activity).get(CubesViewModel.class);
         settings = model.getSettings();
+        calculation = model.getCalculation();
 
         // Инициализация
         throwResults = new ArrayList<>();
@@ -100,7 +101,7 @@ public class BoardFragment extends Fragment implements RateDialog.Listener {
         showRateDialog();
 
         // Предварительные расчеты всего, что можно подсчитать заранее
-        calculation = new Calculation(getResources());
+        //calculation = new Calculation(getResources());
 
         // Обновление переменной в макете
         binding.setModel(this);

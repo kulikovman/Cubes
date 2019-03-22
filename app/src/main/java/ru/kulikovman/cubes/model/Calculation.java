@@ -10,6 +10,8 @@ import ru.kulikovman.cubes.R;
 
 public class Calculation {
 
+    private final int AVAILABLE_SCREEN_AREA = 40; // При раскидывании кубики не должны занимать более 40% площади экрана
+
     private final Random random;
 
     private final int screenWidth;
@@ -24,10 +26,11 @@ public class Calculation {
     private Area rollArea;
     private Area totalArea;
 
+    private int spaceBetweenCentersOfCubes;
     private int maxCubesPerWidth;
     private int maxCubesPerHeight;
-    private int maxCubes;
-    private int spaceBetweenCentersOfCubes;
+    private int maxOrderedCubes;
+    private int maxRolledCubes;
 
     public Calculation(Resources resources) {
         random = new Random();
@@ -65,8 +68,13 @@ public class Calculation {
         // Максимальное количество упорядоченных кубиков
         maxCubesPerWidth = (screenWidth - cubeViewSize) / spaceBetweenCentersOfCubes + 1;
         maxCubesPerHeight = (screenHeight - cubeViewSize - titleHeight * 2) / spaceBetweenCentersOfCubes + 1;
-        maxCubes = maxCubesPerWidth * maxCubesPerHeight;
+        maxOrderedCubes = maxCubesPerWidth * maxCubesPerHeight;
 
+        // Максимальное количество разбросанных кубиков
+        int uiArea = settingSize * (titleHeight + marginTop);
+        int pureScreenArea = screenWidth * screenHeight - uiArea;
+        int cubeViewArea = cubeViewSize * cubeViewSize;
+        maxRolledCubes = (pureScreenArea / 100 * AVAILABLE_SCREEN_AREA) / cubeViewArea;
 
         // Контроль полученных размеров
         Log.d("myLog", "----------------Screen----------------");
@@ -78,9 +86,13 @@ public class Calculation {
         Log.d("myLog", "----------------Radius----------------");
         Log.d("myLog", "cubeRadius = " + cubeInnerRadius + " | " + cubeOuterRadius);
         Log.d("myLog", "shadowRadius = " + shadowRadius);
+        Log.d("myLog", "-----------------Areas----------------");
+        Log.d("myLog", "pureScreenArea = " + pureScreenArea);
+        Log.d("myLog", "cubeViewArea = " + cubeViewArea);
         Log.d("myLog", "------------Number of cubes-----------");
-        Log.d("myLog", "maxCubesPer = Width | Height = " + maxCubesPerWidth + " | " + maxCubesPerHeight);
-        Log.d("myLog", "maxCubes = " + maxCubes);
+        Log.d("myLog", "maxCubesPerWidthHeight = " + maxCubesPerWidth + " | " + maxCubesPerHeight);
+        Log.d("myLog", "maxOrderedCubes = " + maxOrderedCubes);
+        Log.d("myLog", "maxRolledCubes = " + maxRolledCubes);
         Log.d("myLog", "--------------------------------------");
     }
 
@@ -132,8 +144,12 @@ public class Calculation {
         return maxCubesPerHeight;
     }
 
-    public int getMaxCubes() {
-        return maxCubes;
+    public int getMaxOrderedCubes() {
+        return maxOrderedCubes;
+    }
+
+    public int getMaxRolledCubes() {
+        return maxRolledCubes;
     }
 
     public int getSpaceBetweenCentersOfCubes() {
