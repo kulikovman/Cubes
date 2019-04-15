@@ -33,7 +33,7 @@ public class RateDialog extends DialogFragment {
         try {
             listener = (Listener) getParentFragment();
         } catch (ClassCastException e) {
-            throw new ClassCastException("Calling Fragment must implement RateDialogListener");
+            throw new ClassCastException("Calling Fragment must implement RateDialog.Listener");
         }
     }
 
