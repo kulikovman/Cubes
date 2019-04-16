@@ -4,8 +4,7 @@ import android.graphics.Point;
 
 import java.util.Random;
 
-import ru.kulikovman.cubes.data.CubeType;
-import ru.kulikovman.cubes.helper.Intersection;
+import ru.kulikovman.cubes.util.Intersection;
 
 public class Cube {
 

@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.helper;
+package ru.kulikovman.cubes.util;
 
 import ru.kulikovman.cubes.model.Area;
 import ru.kulikovman.cubes.model.Calculation;

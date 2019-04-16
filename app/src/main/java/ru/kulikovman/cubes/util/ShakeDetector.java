@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes;
+package ru.kulikovman.cubes.util;
 
 
 import android.hardware.Sensor;

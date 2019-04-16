@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.helper;
+package ru.kulikovman.cubes.util;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

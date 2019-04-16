@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import ru.kulikovman.cubes.ui.CubesViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes;
+package ru.kulikovman.cubes.ui;
 
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -17,11 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
+import ru.kulikovman.cubes.MainActivity;
+import ru.kulikovman.cubes.R;
+import ru.kulikovman.cubes.util.SoundManager;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
-import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
+import ru.kulikovman.cubes.util.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Settings;
-import ru.kulikovman.cubes.view.CubeView;
+import ru.kulikovman.cubes.ui.view.CubeView;
 
 
 public class SettingFragment extends Fragment {

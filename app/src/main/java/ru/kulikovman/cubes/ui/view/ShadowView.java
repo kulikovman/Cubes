@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.view;
+package ru.kulikovman.cubes.ui.view;
 
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import ru.kulikovman.cubes.CubesViewModel;
+import ru.kulikovman.cubes.ui.CubesViewModel;
 import ru.kulikovman.cubes.MainActivity;
 import ru.kulikovman.cubes.R;
-import ru.kulikovman.cubes.data.CubeType;
+import ru.kulikovman.cubes.model.CubeType;
 import ru.kulikovman.cubes.databinding.ViewShadowBinding;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;

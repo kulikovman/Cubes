@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.dialog;
+package ru.kulikovman.cubes.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Intent;

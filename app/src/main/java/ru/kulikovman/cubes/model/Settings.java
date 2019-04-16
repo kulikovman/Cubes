@@ -3,8 +3,6 @@ package ru.kulikovman.cubes.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import ru.kulikovman.cubes.data.CubeType;
-
 @Entity
 public class Settings {
 

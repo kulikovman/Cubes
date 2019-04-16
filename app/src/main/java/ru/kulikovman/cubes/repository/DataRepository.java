@@ -1,7 +1,8 @@
-package ru.kulikovman.cubes;
+package ru.kulikovman.cubes.repository;
 
 import java.util.List;
 
+import ru.kulikovman.cubes.CubeApp;
 import ru.kulikovman.cubes.database.AppDatabase;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.model.ThrowResult;
@@ -13,7 +14,7 @@ public class DataRepository {
     private final AppDatabase database;
 
     private DataRepository() {
-        database = App.getInstance().getDatabase();
+        database = CubeApp.getInstance().getDatabase();
     }
 
     public static DataRepository get() {

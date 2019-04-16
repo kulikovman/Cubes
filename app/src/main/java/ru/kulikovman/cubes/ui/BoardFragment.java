@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes;
+package ru.kulikovman.cubes.ui;
 
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -22,16 +22,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.navigation.fragment.NavHostFragment;
+import ru.kulikovman.cubes.MainActivity;
+import ru.kulikovman.cubes.R;
+import ru.kulikovman.cubes.util.ShakeDetector;
+import ru.kulikovman.cubes.util.SoundManager;
 import ru.kulikovman.cubes.databinding.FragmentBoardBinding;
-import ru.kulikovman.cubes.dialog.RateDialog;
-import ru.kulikovman.cubes.helper.CubeGenerator;
+import ru.kulikovman.cubes.ui.dialog.RateDialog;
+import ru.kulikovman.cubes.util.CubeGenerator;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.CubeLite;
 import ru.kulikovman.cubes.model.Settings;
 import ru.kulikovman.cubes.model.ThrowResult;
-import ru.kulikovman.cubes.view.CubeView;
-import ru.kulikovman.cubes.view.ShadowView;
+import ru.kulikovman.cubes.ui.view.CubeView;
+import ru.kulikovman.cubes.ui.view.ShadowView;
 
 
 public class BoardFragment extends Fragment implements RateDialog.Listener {
