@@ -1,10 +1,10 @@
 package ru.kulikovman.cubes;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends AppCompatActivity {
 

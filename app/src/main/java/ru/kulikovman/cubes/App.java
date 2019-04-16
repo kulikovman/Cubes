@@ -1,7 +1,7 @@
 package ru.kulikovman.cubes;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 
 import ru.kulikovman.cubes.database.AppDatabase;

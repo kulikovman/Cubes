@@ -1,6 +1,6 @@
 package ru.kulikovman.cubes;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Settings;

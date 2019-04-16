@@ -1,10 +1,10 @@
 package ru.kulikovman.cubes.database;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverters;
-import android.arch.persistence.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
 
 import ru.kulikovman.cubes.database.converter.CubeLiteConverter;
 import ru.kulikovman.cubes.database.dao.SettingsDao;
