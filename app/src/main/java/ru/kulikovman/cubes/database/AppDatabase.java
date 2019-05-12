@@ -30,6 +30,8 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };*/
 
+    // Тестим откаты к предыдущему состоянию...
+
     // Добавление в настройки маркера темной/светлой темы
     public static final Migration MIGRATION_4_5 = new Migration(4, 5) {
         @Override
