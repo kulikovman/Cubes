@@ -1,8 +1,11 @@
-package ru.kulikovman.cubes;
+package ru.kulikovman.cubes.util;
 
 import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
+
+import ru.kulikovman.cubes.CubeApp;
+import ru.kulikovman.cubes.R;
 
 public class SoundManager {
 
@@ -44,7 +47,7 @@ public class SoundManager {
 
     public static void initialize(){
         SoundManager soundManager = get();
-        soundManager.loadSounds(App.getContext());
+        soundManager.loadSounds(CubeApp.getContext());
     }
 
     private void loadSounds(Context context) {

@@ -1,12 +1,12 @@
-package ru.kulikovman.cubes;
+package ru.kulikovman.cubes.ui;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
+import ru.kulikovman.cubes.MainActivity;
+import ru.kulikovman.cubes.R;
+import ru.kulikovman.cubes.util.SoundManager;
 import ru.kulikovman.cubes.databinding.FragmentSettingBinding;
-import ru.kulikovman.cubes.helper.sweet.SweetOnSeekBarChangeListener;
+import ru.kulikovman.cubes.util.sweet.SweetOnSeekBarChangeListener;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Settings;
-import ru.kulikovman.cubes.view.CubeView;
+import ru.kulikovman.cubes.ui.view.CubeView;
 
 
 public class SettingFragment extends Fragment {

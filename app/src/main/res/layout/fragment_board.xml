@@ -2,17 +2,17 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="ru.kulikovman.cubes.BoardFragment">
+        tools:context="ru.kulikovman.cubes.ui.BoardFragment">
 
     <data>
 
         <import type="android.view.View"/>
 
-        <import type="ru.kulikovman.cubes.helper.Utils"/>
+        <import type="ru.kulikovman.cubes.util.Utils"/>
 
         <variable
             name="model"
-            type="ru.kulikovman.cubes.BoardFragment"/>
+            type="ru.kulikovman.cubes.ui.BoardFragment"/>
 
     </data>
 

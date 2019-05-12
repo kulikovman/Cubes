@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.data;
+package ru.kulikovman.cubes.model;
 
 public enum CubeType {
 

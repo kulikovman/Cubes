@@ -1,7 +1,9 @@
-package ru.kulikovman.cubes;
+package ru.kulikovman.cubes.ui;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
+import ru.kulikovman.cubes.CubeApp;
+import ru.kulikovman.cubes.repository.DataRepository;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Settings;
 
@@ -33,7 +35,7 @@ public class CubesViewModel extends ViewModel {
 
     public Calculation getCalculation() {
         if (calculation == null) {
-            calculation = new Calculation(App.getContext().getResources());
+            calculation = new Calculation(CubeApp.getContext().getResources());
         }
 
         return calculation;

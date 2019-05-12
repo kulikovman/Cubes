@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.helper.sweet;
+package ru.kulikovman.cubes.util.sweet;
 
 import android.widget.SeekBar;
 

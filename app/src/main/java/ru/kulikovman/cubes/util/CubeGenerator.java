@@ -1,4 +1,4 @@
-package ru.kulikovman.cubes.helper;
+package ru.kulikovman.cubes.util;
 
 import android.graphics.Point;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.kulikovman.cubes.data.CubeType;
+import ru.kulikovman.cubes.model.CubeType;
 import ru.kulikovman.cubes.model.Calculation;
 import ru.kulikovman.cubes.model.Cube;
 import ru.kulikovman.cubes.model.Settings;

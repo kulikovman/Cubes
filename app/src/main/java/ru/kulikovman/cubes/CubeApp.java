@@ -1,15 +1,15 @@
 package ru.kulikovman.cubes;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 
 import ru.kulikovman.cubes.database.AppDatabase;
 
 
-public class App extends Application {
+public class CubeApp extends Application {
 
-    private static App instance;
+    private static CubeApp instance;
 
     private AppDatabase database;
 
@@ -26,7 +26,7 @@ public class App extends Application {
                 .build();
     }
 
-    public static App getInstance() {
+    public static CubeApp getInstance() {
         return instance;
     }
 
